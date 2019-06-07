@@ -160,4 +160,31 @@ export const SCREEN_PARAMS = {
       ],
     },
   },
+  [SCREENS.STORYBOOK_SCREEN]: {
+    stack: {
+      children: [
+        {
+          component: {
+            name: SCREENS.STORYBOOK_SCREEN,
+            id: SCREENS.STORYBOOK_SCREEN,
+            passProps: {},
+            options: {
+              topBar: {
+                title: {
+                  text: 'Storybook',
+                  color: TEXT_COLORS.DARK_GREY,
+                  fontFamily: FONTS.PT_SANS_REGULAR,
+                  fontWeight: 'bold',
+                  fontSize: 15,
+                },
+              },
+              layout: {
+                orientation: ['portrait'],
+              },
+            },
+          },
+        },
+      ],
+    },
+  },
 };

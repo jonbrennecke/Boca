@@ -10,9 +10,3 @@ export const showLoginModal = async () => {
 export const dismissLoginModal = async () => {
   await Navigation.dismissModal(SCREENS.LOGIN_MODAL);
 };
-
-export function setRoot() {
-  Navigation.setRoot({
-    root: SCREEN_PARAMS[SCREENS.HOME_SCREEN],
-  });
-}
