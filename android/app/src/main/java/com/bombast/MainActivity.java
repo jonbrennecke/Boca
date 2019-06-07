@@ -1,4 +1,4 @@
-package com.templateapp;
+package com.bombast;
 
 import com.reactnativenavigation.NavigationActivity;
 import com.facebook.react.ReactActivity;

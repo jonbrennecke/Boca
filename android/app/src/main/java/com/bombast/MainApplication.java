@@ -1,4 +1,4 @@
-package com.templateapp;
+package com.bombast;
 
 import android.app.Application;
 

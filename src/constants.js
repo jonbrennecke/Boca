@@ -98,6 +98,7 @@ export const FONT_STYLES = {
 
 export const SCREENS = {
   HOME_SCREEN: `${APP_BUNDLE_ID}.HomeScreen`,
+  STORYBOOK_SCREEN: `${APP_BUNDLE_ID}.StorybookScreen`,
   LOGIN_MODAL: `${APP_BUNDLE_ID}.LoginModal`,
 };
 
