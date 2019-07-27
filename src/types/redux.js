@@ -1,28 +1,35 @@
-/* @flow */
-import typeof { LOADING_STATE } from '../constants';
-
-export type State = {};
-
-export type Action<T> = {
-  type: string,
-  payload?: T,
+// @flow
+export type Action<Payload> = {
+  +type: string,
+  payload?: Payload,
 };
 
-export type Dispatch = any => any;
+export type Reducer<State, Payload> = (
+  state: State,
+  action: Action<Payload>
+) => State;
 
-export type GetState = () => State;
+export type ReducerMap<State, Payload> =
+  | { next: Reducer<State, Payload> }
+  | { throw: Reducer<State, Payload> }
+  | { next: Reducer<State, Payload>, throw: Reducer<State, Payload> };
 
-export type AuthState = {
-  token: ?string,
-  authLoadingState: $Keys<LOADING_STATE>,
-};
+export type GetState<State> = () => State;
 
-export type AppState = {
-  auth: AuthState,
-};
+export type ThunkAction<Payload, State> = (
+  dispatch: Dispatch<Payload>,
+  getState: GetState<State>
+) => any;
 
-export type ReceiveLoginPayload = {
-  token: string,
-};
+export type PromiseAction<Payload> = Promise<Action<Payload>>;
 
-export type ReceiveAuthPayload = ReceiveLoginPayload;
+export type DispatchAction<Payload> = Action<Payload> | PromiseAction<Payload>;
+
+export type Dispatch<Payload> = (
+  action: DispatchAction<Payload> | ((Dispatch<Payload>) => mixed)
+) => DispatchAction<Payload>;
+
+export type ActionCreator<State, Payload> = (
+  dispatch: Dispatch<Payload>,
+  getState: GetState<State>
+) => any;
