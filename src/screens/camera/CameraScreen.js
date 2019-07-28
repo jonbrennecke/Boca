@@ -2,9 +2,16 @@
 import React from 'react';
 import { View } from 'react-native';
 
-import { Camera } from '@jonbrennecke/react-native-camera';
+import {
+  Camera,
+  createCameraStateHOC,
+} from '@jonbrennecke/react-native-camera';
 
-import type { SFC, Style } from '../../types';
+import { CameraScreenOnboarding } from './CameraScreenOnboarding';
+
+import type { ComponentType } from 'react';
+
+import type { Style } from '../../types';
 
 export type CameraScreenProps = {
   style?: ?Style,
@@ -16,10 +23,16 @@ const styles = {
   },
 };
 
-export const CameraScreen: SFC<CameraScreenProps> = ({
-  style,
-}: CameraScreenProps) => (
-  <View style={[styles.flex, style]}>
-    <Camera style={styles.flex} />
-  </View>
+const Container = createCameraStateHOC(state => state.camera);
+
+export const CameraScreen: ComponentType<CameraScreenProps> = Container(
+  ({ style }) => (
+    <View style={[styles.flex, style]}>
+      <CameraScreenOnboarding
+        hasCameraPermissions={/* TODO: connect to redux */ true}
+      >
+        <Camera style={styles.flex} />
+      </CameraScreenOnboarding>
+    </View>
+  )
 );

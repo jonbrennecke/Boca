@@ -308,6 +308,13 @@
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = HSReactNativeMedia;
 		};
+		FC5BAE1422EE11DF0077855E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FC5BAE1022EE11DF0077855E /* HSCameraUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FC664F3022CADBF800FD8AE7;
+			remoteInfo = HSCameraUtils;
+		};
 		FC75410022AAE8D400F10CE4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EDF9D805004747F996337EDF /* ReactNativeConfig.xcodeproj */;
@@ -389,6 +396,7 @@
 		FC5BADC322ECC22C0077855E /* HSCameraUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = HSCameraUtils.xcodeproj; path = "../../backflip-camera-utils/HSCameraUtils.xcodeproj"; sourceTree = "<group>"; };
 		FC5BADC922ECC3D00077855E /* Bombast-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bombast-Bridging-Header.h"; sourceTree = "<group>"; };
 		FC5BADCA22ECC3D10077855E /* Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
+		FC5BAE1022EE11DF0077855E /* HSCameraUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = HSCameraUtils.xcodeproj; path = "../../backflip-camera-utils/HSCameraUtils.xcodeproj"; sourceTree = "<group>"; };
 		FC6EA7AC21CEA44D007C3B3E /* PassionOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PassionOne-Regular.ttf"; path = "../assets/fonts/PassionOne-Regular.ttf"; sourceTree = "<group>"; };
 		FC6EA7D421CEA44D007C3B3E /* PT_Sans-Web-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PT_Sans-Web-Bold.ttf"; path = "../assets/fonts/PT_Sans-Web-Bold.ttf"; sourceTree = "<group>"; };
 		FC6EA7D521CEA44D007C3B3E /* PT_Sans-Web-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PT_Sans-Web-Regular.ttf"; path = "../assets/fonts/PT_Sans-Web-Regular.ttf"; sourceTree = "<group>"; };
@@ -572,6 +580,7 @@
 			isa = PBXGroup;
 			children = (
 				FC5BADC322ECC22C0077855E /* HSCameraUtils.xcodeproj */,
+				FC5BAE1022EE11DF0077855E /* HSCameraUtils.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -659,6 +668,14 @@
 			isa = PBXGroup;
 			children = (
 				FC5BAE0F22ECC4750077855E /* libHSReactNativeMedia.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FC5BAE1122EE11DF0077855E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FC5BAE1522EE11DF0077855E /* libHSCameraUtils.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -759,6 +776,10 @@
 				{
 					ProductGroup = FC90C9A322ECBE2B0071A8C6 /* Products */;
 					ProjectRef = FC90C9A222ECBE2B0071A8C6 /* HSCameraUtils.xcodeproj */;
+				},
+				{
+					ProductGroup = FC5BAE1122EE11DF0077855E /* Products */;
+					ProjectRef = FC5BAE1022EE11DF0077855E /* HSCameraUtils.xcodeproj */;
 				},
 				{
 					ProductGroup = FC5BADC422ECC22C0077855E /* Products */;
@@ -1108,6 +1129,13 @@
 			fileType = archive.ar;
 			path = libHSReactNativeMedia.a;
 			remoteRef = FC5BAE0E22ECC4750077855E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FC5BAE1522EE11DF0077855E /* libHSCameraUtils.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libHSCameraUtils.a;
+			remoteRef = FC5BAE1422EE11DF0077855E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		FC75410122AAE8D400F10CE4 /* libReactNativeConfig.a */ = {
