@@ -20,7 +20,7 @@ export const ScreenParams = {
               },
               topBar: {
                 visible: false,
-              }
+              },
             },
           },
         },

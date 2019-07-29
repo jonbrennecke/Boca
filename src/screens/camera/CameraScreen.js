@@ -24,8 +24,8 @@ const styles = {
   },
   container: {
     flex: 1,
-    backgroundColor: '#000'
-  }
+    backgroundColor: '#000',
+  },
 };
 
 // eslint-disable-next-line flowtype/generic-spacing
@@ -87,10 +87,9 @@ export const CameraScreen: ComponentType<
             })
           }
           onRequestFocus={point => {
-            // const { cameraRef } = getState();
-            // if (cameraRef.current) {
-            //   cameraRef.current.focusOnPoint(point);
-            // }
+            if (cameraRef.current) {
+              cameraRef.current.focusOnPoint(point);
+            }
           }}
           onRequestChangeISO={iso => updateISO(iso)}
           onRequestChangeExposure={exposure => updateExposure(exposure)}
