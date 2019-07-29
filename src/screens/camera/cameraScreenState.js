@@ -4,6 +4,7 @@ import React, { PureComponent, createRef } from 'react';
 import {
   createCameraStateHOC,
   CameraSettingIdentifiers,
+  startCameraPreview
 } from '@jonbrennecke/react-native-camera';
 import { autobind } from 'core-decorators';
 
@@ -47,7 +48,7 @@ export function wrapWithCameraScreenState<
     async componentDidMount() {
       await this.props.loadCameraPermissions();
       if (this.props.hasCameraPermissions) {
-        await this.props.loadSupportedFeatures();
+        await this.startPreview();
       }
     }
 
@@ -57,12 +58,17 @@ export function wrapWithCameraScreenState<
         PassThroughProps
     ) {
       if (this.props.hasCameraPermissions && !prevProps.hasCameraPermissions) {
-        await this.props.loadSupportedFeatures();
+        await this.startPreview();
       }
     }
 
+    async startPreview() {
+      startCameraPreview();
+        await this.props.loadSupportedFeatures();
+    }
+
     // $FlowFixMe
-    setActiveCameraSetting = s => this.setState({ activeCameraSetting: s });
+    setActiveCameraSetting = setting => this.setState({ activeCameraSetting: setting });
 
     render() {
       return (

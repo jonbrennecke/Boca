@@ -2,8 +2,6 @@
 import React from 'react';
 import { View, Button } from 'react-native';
 
-import { startCameraPreview } from '@jonbrennecke/react-native-camera';
-
 import type { SFC, Style, Children } from '../../types';
 
 export type CameraScreenOnboardingProps = {
@@ -33,7 +31,6 @@ export const CameraScreenOnboarding: SFC<CameraScreenOnboardingProps> = ({
 }: CameraScreenOnboardingProps) => {
   const enableCamera = async () => {
     await onRequestCameraPermissions();
-    startCameraPreview();
   };
   return (
     <View style={[styles.container, style]}>
