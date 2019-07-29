@@ -18,6 +18,9 @@ export const ScreenParams = {
               layout: {
                 orientation: ['portrait'],
               },
+              topBar: {
+                visible: false,
+              }
             },
           },
         },

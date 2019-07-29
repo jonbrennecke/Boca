@@ -2,10 +2,7 @@
 import React from 'react';
 import { View, Button } from 'react-native';
 
-import {
-  requestCameraPermissions,
-  startCameraPreview,
-} from '@jonbrennecke/react-native-camera';
+import { startCameraPreview } from '@jonbrennecke/react-native-camera';
 
 import type { SFC, Style, Children } from '../../types';
 
@@ -13,11 +10,13 @@ export type CameraScreenOnboardingProps = {
   style?: ?Style,
   children?: ?Children,
   hasCameraPermissions: boolean,
+  onRequestCameraPermissions: () => Promise<void>,
 };
 
 const styles = {
-  flex: {
+  container: {
     flex: 1,
+    backgroundColor: '#fff',
   },
   centerContent: {
     flex: 1,
@@ -30,13 +29,14 @@ export const CameraScreenOnboarding: SFC<CameraScreenOnboardingProps> = ({
   style,
   children,
   hasCameraPermissions,
+  onRequestCameraPermissions,
 }: CameraScreenOnboardingProps) => {
   const enableCamera = async () => {
-    await requestCameraPermissions();
+    await onRequestCameraPermissions();
     startCameraPreview();
   };
   return (
-    <View style={[styles.flex, style]}>
+    <View style={[styles.container, style]}>
       {hasCameraPermissions ? (
         children
       ) : (

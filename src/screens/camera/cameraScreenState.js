@@ -45,7 +45,8 @@ export function wrapWithCameraScreenState<
     };
 
     async componentDidMount() {
-      
+      await this.props.loadCameraPermissions();
+      // await this.props.loadSupportedFeatures();
     }
 
     // $FlowFixMe

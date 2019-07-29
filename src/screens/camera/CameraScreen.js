@@ -22,6 +22,10 @@ const styles = {
   flex: {
     flex: 1,
   },
+  container: {
+    flex: 1,
+    backgroundColor: '#000'
+  }
 };
 
 // eslint-disable-next-line flowtype/generic-spacing
@@ -40,11 +44,14 @@ export const CameraScreen: ComponentType<
     exposure,
     updateExposure,
     activeCameraSetting,
-    setActiveCameraSetting
+    setActiveCameraSetting,
+    hasCameraPermissions,
+    requestCameraPermissions,
   }) => (
-    <SafeAreaView style={[styles.flex, style]}>
+    <SafeAreaView style={[styles.container, style]}>
       <CameraScreenOnboarding
-        hasCameraPermissions={/* TODO: connect to redux */ true}
+        hasCameraPermissions={hasCameraPermissions}
+        onRequestCameraPermissions={requestCameraPermissions}
       >
         <CameraCapture
           style={styles.flex}
