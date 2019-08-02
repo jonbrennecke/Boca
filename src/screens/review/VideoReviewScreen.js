@@ -20,7 +20,7 @@ import {
   HeartIcon,
   SelectableButton,
 } from '../../components';
-import { Units, Colors, Screens, ScreenParams } from '../../constants';
+import { Units, Colors } from '../../constants';
 import { wrapWithVideoReviewScreenState } from './videoReviewScreenState';
 
 import type { ComponentType } from 'react';
@@ -88,7 +88,7 @@ const styles = {
 };
 
 const pushCameraScreen = currentComponentId => {
-  Navigation.push(currentComponentId, ScreenParams[Screens.CameraScreen]);
+  Navigation.pop(currentComponentId);
 };
 
 // eslint-disable-next-line flowtype/generic-spacing
