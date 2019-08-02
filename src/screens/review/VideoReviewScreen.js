@@ -3,7 +3,15 @@ import React from 'react';
 import { SafeAreaView, StatusBar, StyleSheet, View } from 'react-native';
 import noop from 'lodash/noop';
 
-import { IconButton, TrashIcon, ExportIcon, HeartIcon, SelectableButton } from '../../components';
+import { VideoComposition } from '@jonbrennecke/react-native-camera';
+
+import {
+  IconButton,
+  TrashIcon,
+  ExportIcon,
+  HeartIcon,
+  SelectableButton,
+} from '../../components';
 import { Units, Colors } from '../../constants';
 import { wrapWithVideoReviewScreenState } from './videoReviewScreenState';
 
@@ -31,7 +39,7 @@ const styles = {
     justifyContent: 'space-between',
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopStyle: 'solid',
-    borderTopColor: Colors.borders.gray
+    borderTopColor: Colors.borders.gray,
   },
   toolbarCentered: {
     paddingVertical: Units.small,
@@ -43,9 +51,14 @@ const styles = {
     borderTopStyle: 'solid',
     borderTopColor: Colors.borders.gray,
   },
-  video: {
+  videoWrap: {
     flex: 1,
     backgroundColor: Colors.backgrounds.black,
+    borderRadius: Units.small,
+    overflow: 'hidden',
+  },
+  video: {
+    flex: 1,
   },
   iconButton: {
     height: Units.large,
@@ -55,18 +68,29 @@ const styles = {
 };
 
 // eslint-disable-next-line flowtype/generic-spacing
-export const VideoReviewScreen: ComponentType<VideoReviewScreenProps> = wrapWithVideoReviewScreenState(
+export const VideoReviewScreen: ComponentType<
+  VideoReviewScreenProps
+> = wrapWithVideoReviewScreenState(
   ({
     style,
+    selectedAssetID,
     isPortraitModeEnabled,
     isDepthPreviewEnabled,
     togglePortraitMode,
-    toggleDepthPreview
+    toggleDepthPreview,
   }) => (
     <SafeAreaView style={[styles.container, style]}>
       <StatusBar barStyle="light-content" />
       <View style={styles.flex}>
-        <View style={styles.video} />
+        <View style={styles.videoWrap}>
+          <VideoComposition
+            style={styles.video}
+            assetID={selectedAssetID}
+            enableDepthPreview={isDepthPreviewEnabled}
+            enablePortraitMode={isPortraitModeEnabled}
+            shouldLoopVideo
+          />
+        </View>
         <View style={styles.toolbarCentered}>
           <SelectableButton
             text="Depth"

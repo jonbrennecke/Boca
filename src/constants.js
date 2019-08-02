@@ -62,10 +62,10 @@ export const Colors = {
     gray: '#111',
   },
   borders: {
-    gray: '#222'
+    gray: '#222',
   },
   buttons: {
     selectedTextColor: '#fff',
-    textColor: '#999'
-  }
+    textColor: '#999',
+  },
 };

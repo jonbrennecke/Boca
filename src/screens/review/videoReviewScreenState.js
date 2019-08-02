@@ -8,6 +8,7 @@ import type { ComponentType } from 'react';
 import type { MediaStateHOCProps } from '@jonbrennecke/react-native-media';
 
 export type VideoReviewScreenState = {
+  selectedAssetID: ?string,
   exportProgress: number,
   playbackTime: number,
   isPortraitModeEnabled: boolean,
@@ -24,9 +25,7 @@ export function wrapWithVideoReviewScreenState<
   C: ComponentType<
     VideoReviewScreenStateExtraProps & MediaStateHOCProps & PassThroughProps
   >
->(
-  WrappedComponent: C
-): ComponentType<PassThroughProps> {
+>(WrappedComponent: C): ComponentType<PassThroughProps> {
   // $FlowFixMe
   @autobind
   class VideoReviewScreenStateContainer extends PureComponent<
@@ -34,6 +33,7 @@ export function wrapWithVideoReviewScreenState<
     VideoReviewScreenState
   > {
     state = {
+      selectedAssetID: null,
       exportProgress: 0,
       playbackTime: 0,
       isPortraitModeEnabled: true,
@@ -42,6 +42,16 @@ export function wrapWithVideoReviewScreenState<
     // exportListener: ?ReturnType<
     //   typeof addVideoCompositionExportProgressListener
     // >;
+
+    async componentDidMount() {
+      await this.props.queryMedia({
+        mediaType: 'video',
+        limit: 1,
+      });
+      this.setState({
+        selectedAssetID: this.props.assets.toArray()[0]?.assetID,
+      });
+    }
 
     togglePortraitMode() {
       this.setState({
