@@ -5,6 +5,7 @@ import {
   createCameraStateHOC,
   CameraSettingIdentifiers,
   startCameraPreview,
+  startCameraEffects
 } from '@jonbrennecke/react-native-camera';
 import { autobind } from 'core-decorators';
 
@@ -69,6 +70,7 @@ export function wrapWithCameraScreenState<
 
     async startPreview() {
       startCameraPreview();
+      startCameraEffects();
       await this.props.loadSupportedFeatures();
     }
 
