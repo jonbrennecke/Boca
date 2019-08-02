@@ -102,6 +102,7 @@ export const VideoReviewScreen: ComponentType<
   ({
     style,
     selectedAssetID,
+    isExporting,
     isPortraitModeEnabled,
     isDepthPreviewEnabled,
     togglePortraitMode,
@@ -150,12 +151,14 @@ export const VideoReviewScreen: ComponentType<
         </View>
         <View style={styles.toolbar}>
           <IconButton
+            disabled={isExporting}
             style={styles.iconButton}
             fillColor={Colors.icons.toolbar}
             onPress={exportComposition}
             icon={ExportIcon}
           />
           <IconButton
+            disabled={isExporting}
             style={styles.iconButton}
             fillColor={Colors.icons.toolbar}
             onPress={exportComposition}

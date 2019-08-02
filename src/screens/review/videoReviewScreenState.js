@@ -6,6 +6,8 @@ import { autobind } from 'core-decorators';
 
 import {
   addVideoCompositionExportProgressListener,
+  addVideoCompositionExportFinishedListener,
+  addVideoCompositionExportFailedListener,
   exportComposition,
 } from '@jonbrennecke/react-native-camera';
 
@@ -21,6 +23,7 @@ export type VideoReviewScreenState = {
   isPortraitModeEnabled: boolean,
   isDepthPreviewEnabled: boolean,
   isFullScreenVideo: boolean,
+  isExporting: boolean,
 };
 
 export type VideoReviewScreenStateExtraProps = {
@@ -49,9 +52,16 @@ export function wrapWithVideoReviewScreenState<
       isPortraitModeEnabled: true,
       isDepthPreviewEnabled: false,
       isFullScreenVideo: false,
+      isExporting: false
     };
-    exportListener: ?ReturnType<
+    exportProgressListener: ?ReturnType<
       typeof addVideoCompositionExportProgressListener
+    >;
+    exportFinishedListener: ?ReturnType<
+      typeof addVideoCompositionExportFinishedListener
+    >;
+    exportFailedListener: ?ReturnType<
+      typeof addVideoCompositionExportFailedListener
     >;
 
     async componentDidMount() {
@@ -88,14 +98,33 @@ export function wrapWithVideoReviewScreenState<
       if (!selectedAssetID) {
         return;
       }
-      this.exportListener = addVideoCompositionExportProgressListener(
+      this.setState({ isExporting: true });
+      this.exportProgressListener = addVideoCompositionExportProgressListener(
         this.onExportProgress
+      );
+      this.exportFinishedListener = addVideoCompositionExportFinishedListener(
+        this.onExportFinished
+      );
+      this.exportFailedListener = addVideoCompositionExportFailedListener(
+        this.onExportFailed
       );
       await exportComposition(selectedAssetID);
     }
 
     onExportProgress(progress: number) {
       this.setState({ exportProgress: progress });
+    }
+
+    onExportFinished(url: string) {
+      console.log('exported url', url);
+      this.setState({
+        exportProgress: 0,
+        isExporting: false
+      });
+    }
+
+    onExportFailed(error: Error) {
+      console.warn(error);
     }
 
     render() {
