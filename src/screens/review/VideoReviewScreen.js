@@ -5,8 +5,11 @@ import noop from 'lodash/noop';
 
 import { IconButton, TrashIcon, ExportIcon, HeartIcon, SelectableButton } from '../../components';
 import { Units, Colors } from '../../constants';
+import { wrapWithVideoReviewScreenState } from './videoReviewScreenState';
 
-import type { SFC, Style } from '../../types';
+import type { ComponentType } from 'react';
+
+import type { Style } from '../../types';
 
 export type VideoReviewScreenProps = {
   style?: ?Style,
@@ -52,51 +55,53 @@ const styles = {
 };
 
 // eslint-disable-next-line flowtype/generic-spacing
-export const VideoReviewScreen: SFC<VideoReviewScreenProps> = ({
-  style,
-}: VideoReviewScreenProps) => (
-  <SafeAreaView style={[styles.container, style]}>
-    <StatusBar barStyle="light-content" />
-    <View style={styles.flex}>
-      <View style={styles.video} />
-      <View style={styles.toolbarCentered}>
-        <SelectableButton
-          text="Depth"
-          isSelected
-          onPress={noop}
-        />
-        <SelectableButton
-          text="Portrait"
-          isSelected={false}
-          onPress={noop}
-        />
+export const VideoReviewScreen: ComponentType<VideoReviewScreenProps> = wrapWithVideoReviewScreenState(
+  ({
+    style,
+  }: VideoReviewScreenProps) => (
+    <SafeAreaView style={[styles.container, style]}>
+      <StatusBar barStyle="light-content" />
+      <View style={styles.flex}>
+        <View style={styles.video} />
+        <View style={styles.toolbarCentered}>
+          <SelectableButton
+            text="Depth"
+            isSelected
+            onPress={noop}
+          />
+          <SelectableButton
+            text="Portrait"
+            isSelected={false}
+            onPress={noop}
+          />
+        </View>
+        <View style={styles.toolbar}>
+          <IconButton
+            style={styles.iconButton}
+            fillColor={Colors.icons.toolbar}
+            onPress={noop}
+            icon={ExportIcon}
+          />
+          <IconButton
+            style={styles.iconButton}
+            fillColor={Colors.icons.toolbar}
+            onPress={noop}
+            icon={ExportIcon}
+          />
+          <IconButton
+            style={styles.iconButton}
+            fillColor={Colors.icons.toolbar}
+            onPress={noop}
+            icon={HeartIcon}
+          />
+          <IconButton
+            style={styles.iconButton}
+            fillColor={Colors.icons.toolbar}
+            onPress={noop}
+            icon={TrashIcon}
+          />
+        </View>
       </View>
-      <View style={styles.toolbar}>
-        <IconButton
-          style={styles.iconButton}
-          fillColor={Colors.icons.toolbar}
-          onPress={noop}
-          icon={ExportIcon}
-        />
-        <IconButton
-          style={styles.iconButton}
-          fillColor={Colors.icons.toolbar}
-          onPress={noop}
-          icon={ExportIcon}
-        />
-        <IconButton
-          style={styles.iconButton}
-          fillColor={Colors.icons.toolbar}
-          onPress={noop}
-          icon={HeartIcon}
-        />
-        <IconButton
-          style={styles.iconButton}
-          fillColor={Colors.icons.toolbar}
-          onPress={noop}
-          icon={TrashIcon}
-        />
-      </View>
-    </View>
-  </SafeAreaView>
+    </SafeAreaView>
+  )
 );
