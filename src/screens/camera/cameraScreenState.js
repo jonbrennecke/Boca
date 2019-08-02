@@ -4,7 +4,7 @@ import React, { PureComponent, createRef } from 'react';
 import {
   createCameraStateHOC,
   CameraSettingIdentifiers,
-  startCameraPreview
+  startCameraPreview,
 } from '@jonbrennecke/react-native-camera';
 import { autobind } from 'core-decorators';
 
@@ -15,14 +15,18 @@ import type { ReturnType } from '../../types';
 
 export type CameraScreenStateExtraProps = {
   cameraRef: ReturnType<typeof createRef>,
+  showFormatModal: boolean,
   activeCameraSetting: $Keys<typeof CameraSettingIdentifiers>,
   setActiveCameraSetting: ($Keys<typeof CameraSettingIdentifiers>) => void,
+  showCameraFormatModal: () => void,
+  hideCameraFormatModal: () => void,
 };
 
 export type CameraScreenStateOwnProps = {};
 
 export type CameraScreenState = {
-  setActiveCameraSetting: $Keys<typeof CameraSettingIdentifiers>,
+  activeCameraSetting: $Keys<typeof CameraSettingIdentifiers>,
+  showFormatModal: boolean,
 };
 
 export function wrapWithCameraScreenState<
@@ -43,6 +47,7 @@ export function wrapWithCameraScreenState<
 
     state = {
       activeCameraSetting: CameraSettingIdentifiers.Exposure,
+      showFormatModal: false,
     };
 
     async componentDidMount() {
@@ -64,19 +69,23 @@ export function wrapWithCameraScreenState<
 
     async startPreview() {
       startCameraPreview();
-        await this.props.loadSupportedFeatures();
+      await this.props.loadSupportedFeatures();
     }
 
-    // $FlowFixMe
-    setActiveCameraSetting = setting => this.setState({ activeCameraSetting: setting });
+    setActiveCameraSetting = setting =>
+      this.setState({ activeCameraSetting: setting });
+    showCameraFormatModal = () => this.setState({ showFormatModal: true });
+    hideCameraFormatModal = () => this.setState({ showFormatModal: false });
 
     render() {
       return (
         <WrappedComponent
           {...this.props}
           {...this.state}
-          setActiveCameraSetting={this.setActiveCameraSetting}
           cameraRef={this.cameraRef}
+          setActiveCameraSetting={this.setActiveCameraSetting}
+          showCameraFormatModal={this.showCameraFormatModal}
+          hideCameraFormatModal={this.hideCameraFormatModal}
         />
       );
     }

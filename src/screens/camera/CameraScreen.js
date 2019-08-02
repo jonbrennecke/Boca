@@ -9,6 +9,7 @@ import {
 
 import { wrapWithCameraScreenState } from './cameraScreenState';
 import { CameraScreenOnboarding } from './CameraScreenOnboarding';
+import { CameraFormatModal } from '../../components';
 
 import type { ComponentType } from 'react';
 
@@ -35,6 +36,7 @@ export const CameraScreen: ComponentType<
   ({
     style,
     cameraRef,
+    showFormatModal,
     stopCapture,
     startCapture,
     iso,
@@ -47,6 +49,8 @@ export const CameraScreen: ComponentType<
     setActiveCameraSetting,
     hasCameraPermissions,
     requestCameraPermissions,
+    showCameraFormatModal,
+    hideCameraFormatModal,
   }) => (
     <SafeAreaView style={[styles.container, style]}>
       <CameraScreenOnboarding
@@ -78,6 +82,7 @@ export const CameraScreen: ComponentType<
               supportedRange: supportedExposureRange,
             }, // TODO
           }}
+          cameraLayoutStyle="fullscreen"
           supportedISORange={supportedISORange}
           activeCameraSetting={activeCameraSetting}
           onRequestBeginCapture={startCapture}
@@ -94,8 +99,16 @@ export const CameraScreen: ComponentType<
           onRequestChangeISO={iso => updateISO(iso)}
           onRequestChangeExposure={exposure => updateExposure(exposure)}
           onRequestSelectActiveCameraSetting={setActiveCameraSetting}
+          onRequestShowFormatDialog={showCameraFormatModal}
+          onRequestToggleDepthPreview={() => {
+            /* TODO */
+          }}
         />
       </CameraScreenOnboarding>
+      <CameraFormatModal
+        isVisible={showFormatModal}
+        onRequestDismissModal={hideCameraFormatModal}
+      />
     </SafeAreaView>
   )
 );
