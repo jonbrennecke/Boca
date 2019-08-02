@@ -7,7 +7,9 @@ import type {
   StatelessFunctionalComponent,
 } from 'react';
 
-export type Style = $Shape<____DangerouslyImpreciseStyle_Internal>;
+export type Style =
+  | $Shape<____DangerouslyImpreciseStyle_Internal>
+  | Array<$Shape<____DangerouslyImpreciseStyle_Internal>>;
 
 export type SFC<P> = StatelessFunctionalComponent<P>;
 

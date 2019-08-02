@@ -34,7 +34,7 @@
 		FC6EA7D621CEA44D007C3B3E /* PassionOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC6EA7AC21CEA44D007C3B3E /* PassionOne-Regular.ttf */; };
 		FC6EA7D721CEA44D007C3B3E /* PT_Sans-Web-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC6EA7D421CEA44D007C3B3E /* PT_Sans-Web-Bold.ttf */; };
 		FC6EA7D821CEA44D007C3B3E /* PT_Sans-Web-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC6EA7D521CEA44D007C3B3E /* PT_Sans-Web-Regular.ttf */; };
-		FCE4714F22F3ADFB004F4A4C /* libHSReactNativeCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC90C9A122ECB9AA0071A8C6 /* libHSReactNativeCamera.a */; };
+		FC8DB47C22F4B8E30070704A /* libHSReactNativeCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FCCA731E22F4B6FB00163C4E /* libHSReactNativeCamera.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -353,13 +353,6 @@
 			remoteGlobalIDString = 3DF7F6AC203AA09B00D0EAB7;
 			remoteInfo = "ReactNativeConfig-tvOS";
 		};
-		FC90C9A022ECB9AA0071A8C6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BBE8322EE6BA4ADCABBCC8A2 /* HSReactNativeCamera.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = FC75EB2B22CAE84A003AB14E;
-			remoteInfo = HSReactNativeCamera;
-		};
 		FC983DD421CDAF6800063476 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D1A322132CEB40238AD3A6FC /* ReactNativeNavigation.xcodeproj */;
@@ -373,6 +366,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 7B49FEBB1E95090800DEB3EA;
 			remoteInfo = ReactNativeNavigationTests;
+		};
+		FCCA731D22F4B6FB00163C4E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C3B89F93805948A9ABA5AA0B /* HSReactNativeCamera.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FC75EB2B22CAE84A003AB14E;
+			remoteInfo = HSReactNativeCamera;
 		};
 		FCE4719222F3B09A004F4A4C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -433,9 +433,9 @@
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		B5DB943A4E9F44E6BE1F603D /* libHSReactNativeMedia.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libHSReactNativeMedia.a; sourceTree = "<group>"; };
 		B6A30EE290B04007B3E617EB /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
-		BBE8322EE6BA4ADCABBCC8A2 /* HSReactNativeCamera.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = HSReactNativeCamera.xcodeproj; path = "../node_modules/@jonbrennecke/react-native-camera/ios/HSReactNativeCamera.xcodeproj"; sourceTree = "<group>"; };
 		BD50A92D35494C8A876C6C03 /* libReactNativeNavigation.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeNavigation.a; sourceTree = "<group>"; };
 		BFEB39AE8F984633A0CF9F6D /* libHSAnimatedUI.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libHSAnimatedUI.a; sourceTree = "<group>"; };
+		C3B89F93805948A9ABA5AA0B /* HSReactNativeCamera.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = HSReactNativeCamera.xcodeproj; path = "../node_modules/@jonbrennecke/react-native-camera/ios/HSReactNativeCamera.xcodeproj"; sourceTree = "<group>"; };
 		C58E7DD208D94D92847F0B1B /* libReactNativeConfig-tvOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libReactNativeConfig-tvOS.a"; sourceTree = "<group>"; };
 		D1A322132CEB40238AD3A6FC /* ReactNativeNavigation.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeNavigation.xcodeproj; path = "../node_modules/react-native-navigation/lib/ios/ReactNativeNavigation.xcodeproj"; sourceTree = "<group>"; };
 		EDF9D805004747F996337EDF /* ReactNativeConfig.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeConfig.xcodeproj; path = "../node_modules/react-native-config/ios/ReactNativeConfig.xcodeproj"; sourceTree = "<group>"; };
@@ -452,7 +452,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FCE4714F22F3ADFB004F4A4C /* libHSReactNativeCamera.a in Frameworks */,
+				FC8DB47C22F4B8E30070704A /* libHSReactNativeCamera.a in Frameworks */,
 				FC254DFF21CDB03800A9C901 /* libReactNativeNavigation.a in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				11D1A2F320CAFA9E000508D9 /* libRCTAnimation.a in Frameworks */,
@@ -641,12 +641,12 @@
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				D1A322132CEB40238AD3A6FC /* ReactNativeNavigation.xcodeproj */,
 				EDF9D805004747F996337EDF /* ReactNativeConfig.xcodeproj */,
-				BBE8322EE6BA4ADCABBCC8A2 /* HSReactNativeCamera.xcodeproj */,
 				AA5E4B57AB6846A1841EA16E /* HSReactNativeMedia.xcodeproj */,
 				AA86142A1C7E44C5935048E9 /* HSAnimatedUI.xcodeproj */,
 				A1C7874AC0B84A41956EE877 /* RNBlur.xcodeproj */,
 				11BC89623304422BA45F228B /* RNSVG.xcodeproj */,
 				B6A30EE290B04007B3E617EB /* BVLinearGradient.xcodeproj */,
+				C3B89F93805948A9ABA5AA0B /* HSReactNativeCamera.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -762,19 +762,19 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		FC90C99D22ECB9AA0071A8C6 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				FC90C9A122ECB9AA0071A8C6 /* libHSReactNativeCamera.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		FC983DD021CDAF6800063476 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				FC983DD521CDAF6800063476 /* libReactNativeNavigation.a */,
 				FC983DD721CDAF6800063476 /* ReactNativeNavigationTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FCCA731622F4B6FB00163C4E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FCCA731E22F4B6FB00163C4E /* libHSReactNativeCamera.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -858,8 +858,8 @@
 					ProjectRef = FC5BAE1022EE11DF0077855E /* HSCameraUtils.xcodeproj */;
 				},
 				{
-					ProductGroup = FC90C99D22ECB9AA0071A8C6 /* Products */;
-					ProjectRef = BBE8322EE6BA4ADCABBCC8A2 /* HSReactNativeCamera.xcodeproj */;
+					ProductGroup = FCCA731622F4B6FB00163C4E /* Products */;
+					ProjectRef = C3B89F93805948A9ABA5AA0B /* HSReactNativeCamera.xcodeproj */;
 				},
 				{
 					ProductGroup = FC5BAE0B22ECC4750077855E /* Products */;
@@ -1253,13 +1253,6 @@
 			remoteRef = FC75410222AAE8D400F10CE4 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		FC90C9A122ECB9AA0071A8C6 /* libHSReactNativeCamera.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libHSReactNativeCamera.a;
-			remoteRef = FC90C9A022ECB9AA0071A8C6 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		FC983DD521CDAF6800063476 /* libReactNativeNavigation.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1272,6 +1265,13 @@
 			fileType = wrapper.cfbundle;
 			path = ReactNativeNavigationTests.xctest;
 			remoteRef = FC983DD621CDAF6800063476 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FCCA731E22F4B6FB00163C4E /* libHSReactNativeCamera.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libHSReactNativeCamera.a;
+			remoteRef = FCCA731D22F4B6FB00163C4E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		FCE4719322F3B09A004F4A4C /* libHSAnimatedUI.a */ = {
@@ -1374,6 +1374,7 @@
 					"$(SRCROOT)/../node_modules/react-native-blur/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+					"$(SRCROOT)/../node_modules/@jonbrennecke/react-native-camera/ios/**",
 				);
 				INFOPLIST_FILE = Bombast/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
@@ -1418,6 +1419,7 @@
 					"$(SRCROOT)/../node_modules/react-native-blur/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+					"$(SRCROOT)/../node_modules/@jonbrennecke/react-native-camera/ios/**",
 				);
 				INFOPLIST_FILE = Bombast/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;

@@ -4,8 +4,15 @@ import React, { PureComponent } from 'react';
 import { createMediaStateHOC } from '@jonbrennecke/react-native-media';
 import { autobind } from 'core-decorators';
 
+import {
+  addVideoCompositionExportProgressListener,
+  exportComposition,
+} from '@jonbrennecke/react-native-camera';
+
 import type { ComponentType } from 'react';
 import type { MediaStateHOCProps } from '@jonbrennecke/react-native-media';
+
+import type { ReturnType } from '../../types';
 
 export type VideoReviewScreenState = {
   selectedAssetID: ?string,
@@ -20,6 +27,7 @@ export type VideoReviewScreenStateExtraProps = {
   togglePortraitMode: () => void,
   toggleDepthPreview: () => void,
   toggleFullScreenVideo: () => void,
+  exportComposition: () => void
 } & VideoReviewScreenState;
 
 export function wrapWithVideoReviewScreenState<
@@ -42,9 +50,12 @@ export function wrapWithVideoReviewScreenState<
       isDepthPreviewEnabled: false,
       isFullScreenVideo: false,
     };
+    exportListener: ?ReturnType<
+      typeof addVideoCompositionExportProgressListener
+    >;
 
     async componentDidMount() {
-      // TODO: load videos in the app's hidden folder
+      // TODO: query videos in the app's hidden folder
       await this.props.queryMedia({
         mediaType: 'video',
         limit: 1,
@@ -72,6 +83,21 @@ export function wrapWithVideoReviewScreenState<
       });
     }
 
+    async exportComposition() {
+      const { selectedAssetID } = this.state;
+      if (!selectedAssetID) {
+        return;
+      }
+      this.exportListener = addVideoCompositionExportProgressListener(
+        this.onExportProgress
+      );
+      await exportComposition(selectedAssetID);
+    }
+
+    onExportProgress(progress: number) {
+      this.setState({ exportProgress: progress });
+    }
+
     render() {
       return (
         <WrappedComponent
@@ -80,6 +106,7 @@ export function wrapWithVideoReviewScreenState<
           togglePortraitMode={this.togglePortraitMode}
           toggleDepthPreview={this.toggleDepthPreview}
           toggleFullScreenVideo={this.toggleFullScreenVideo}
+          exportComposition={this.exportComposition}
         />
       );
     }

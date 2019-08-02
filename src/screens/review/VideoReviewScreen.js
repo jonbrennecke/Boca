@@ -20,6 +20,7 @@ import {
   HeartIcon,
   SelectableButton,
 } from '../../components';
+import { ExportProgressIndicator } from './ExportProgressIndicator';
 import { Units, Colors } from '../../constants';
 import { wrapWithVideoReviewScreenState } from './videoReviewScreenState';
 
@@ -70,6 +71,9 @@ const styles = {
     borderBottomStyle: 'solid',
     borderBottomColor: Colors.borders.gray,
   },
+  navigationBarWrap: {
+    flexDirection: 'column'
+  },
   videoWrap: {
     flex: 1,
     paddingVertical: Units.small,
@@ -104,17 +108,22 @@ export const VideoReviewScreen: ComponentType<
     toggleDepthPreview,
     toggleFullScreenVideo,
     componentId,
+    exportProgress,
+    exportComposition
   }) => (
     <SafeAreaView style={[styles.container, style]}>
       <StatusBar barStyle="light-content" />
       <View style={styles.flex}>
-        <View style={styles.navigationBar}>
-          <IconButton
-            style={styles.iconButton}
-            fillColor={Colors.icons.toolbar}
-            onPress={() => pushCameraScreen(componentId)}
-            icon={CameraIcon}
-          />
+        <View style={styles.navigationBarWrap}>
+          <View style={styles.navigationBar}>
+            <IconButton
+              style={styles.iconButton}
+              fillColor={Colors.icons.toolbar}
+              onPress={() => pushCameraScreen(componentId)}
+              icon={CameraIcon}
+            />
+          </View>
+          <ExportProgressIndicator progress={exportProgress} />
         </View>
         <TouchableWithoutFeedback onPress={toggleFullScreenVideo}>
           <View style={styles.videoWrap}>
@@ -143,13 +152,13 @@ export const VideoReviewScreen: ComponentType<
           <IconButton
             style={styles.iconButton}
             fillColor={Colors.icons.toolbar}
-            onPress={noop}
+            onPress={exportComposition}
             icon={ExportIcon}
           />
           <IconButton
             style={styles.iconButton}
             fillColor={Colors.icons.toolbar}
-            onPress={noop}
+            onPress={exportComposition}
             icon={ExportIcon}
           />
           <IconButton
