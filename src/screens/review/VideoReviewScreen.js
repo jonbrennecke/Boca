@@ -58,7 +58,11 @@ const styles = {
 export const VideoReviewScreen: ComponentType<VideoReviewScreenProps> = wrapWithVideoReviewScreenState(
   ({
     style,
-  }: VideoReviewScreenProps) => (
+    isPortraitModeEnabled,
+    isDepthPreviewEnabled,
+    togglePortraitMode,
+    toggleDepthPreview
+  }) => (
     <SafeAreaView style={[styles.container, style]}>
       <StatusBar barStyle="light-content" />
       <View style={styles.flex}>
@@ -66,13 +70,13 @@ export const VideoReviewScreen: ComponentType<VideoReviewScreenProps> = wrapWith
         <View style={styles.toolbarCentered}>
           <SelectableButton
             text="Depth"
-            isSelected
-            onPress={noop}
+            isSelected={isDepthPreviewEnabled}
+            onPress={toggleDepthPreview}
           />
           <SelectableButton
             text="Portrait"
-            isSelected={false}
-            onPress={noop}
+            isSelected={isPortraitModeEnabled}
+            onPress={togglePortraitMode}
           />
         </View>
         <View style={styles.toolbar}>
