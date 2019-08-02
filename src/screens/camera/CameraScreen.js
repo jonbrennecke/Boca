@@ -41,6 +41,9 @@ export const CameraScreen: ComponentType<
     stopCapture,
     startCapture,
     iso,
+    format,
+    updateFormat,
+    supportedFormats,
     supportedISORange,
     updateISO,
     supportedExposureRange,
@@ -96,12 +99,12 @@ export const CameraScreen: ComponentType<
             })
           }
           onRequestFocus={point => {
-            if (cameraRef.current) {
+            if (cameraRef && cameraRef.current) {
               cameraRef.current.focusOnPoint(point);
             }
           }}
-          onRequestChangeISO={iso => updateISO(iso)}
-          onRequestChangeExposure={exposure => updateExposure(exposure)}
+          onRequestChangeISO={updateISO}
+          onRequestChangeExposure={updateExposure}
           onRequestSelectActiveCameraSetting={setActiveCameraSetting}
           onRequestShowFormatDialog={presentCameraFormatModal}
           onRequestToggleDepthPreview={
@@ -110,8 +113,11 @@ export const CameraScreen: ComponentType<
         />
       </CameraScreenOnboarding>
       <CameraFormatModal
+        activeFormat={format}
+        supportedFormats={supportedFormats}
         isVisible={isFormatModalVisible}
         onRequestDismissModal={dismissCameraFormatModal}
+        onRequestUpdateFormat={updateFormat}
       />
     </SafeAreaView>
   )
