@@ -5,7 +5,7 @@ import {
   createCameraStateHOC,
   CameraSettingIdentifiers,
   startCameraPreview,
-  startCameraEffects
+  startCameraEffects,
 } from '@jonbrennecke/react-native-camera';
 import { autobind } from 'core-decorators';
 
@@ -16,18 +16,22 @@ import type { ReturnType } from '../../types';
 
 export type CameraScreenStateExtraProps = {
   cameraRef: ReturnType<typeof createRef>,
-  showFormatModal: boolean,
+  isFormatModalVisible: boolean,
+  isDepthPreviewEnabled: boolean,
   activeCameraSetting: $Keys<typeof CameraSettingIdentifiers>,
   setActiveCameraSetting: ($Keys<typeof CameraSettingIdentifiers>) => void,
-  showCameraFormatModal: () => void,
-  hideCameraFormatModal: () => void,
+  presentCameraFormatModal: () => void,
+  dismissCameraFormatModal: () => void,
+  enableDepthPreview: () => void,
+  disableDepthPreview: () => void,
 };
 
 export type CameraScreenStateOwnProps = {};
 
 export type CameraScreenState = {
   activeCameraSetting: $Keys<typeof CameraSettingIdentifiers>,
-  showFormatModal: boolean,
+  isFormatModalVisible: boolean,
+  isDepthPreviewEnabled: boolean,
 };
 
 export function wrapWithCameraScreenState<
@@ -49,6 +53,7 @@ export function wrapWithCameraScreenState<
     state = {
       activeCameraSetting: CameraSettingIdentifiers.Exposure,
       showFormatModal: false,
+      showDepthPreview: false,
     };
 
     async componentDidMount() {
@@ -76,8 +81,14 @@ export function wrapWithCameraScreenState<
 
     setActiveCameraSetting = setting =>
       this.setState({ activeCameraSetting: setting });
-    showCameraFormatModal = () => this.setState({ showFormatModal: true });
-    hideCameraFormatModal = () => this.setState({ showFormatModal: false });
+
+    presentCameraFormatModal = () =>
+      this.setState({ isFormatModalVisible: true });
+    dismissCameraFormatModal = () =>
+      this.setState({ isFormatModalVisible: false });
+
+    enableDepthPreview = () => this.setState({ isDepthPreviewEnabled: true });
+    disableDepthPreview = () => this.setState({ isDepthPreviewEnabled: false });
 
     render() {
       return (
@@ -86,8 +97,10 @@ export function wrapWithCameraScreenState<
           {...this.state}
           cameraRef={this.cameraRef}
           setActiveCameraSetting={this.setActiveCameraSetting}
-          showCameraFormatModal={this.showCameraFormatModal}
-          hideCameraFormatModal={this.hideCameraFormatModal}
+          presentCameraFormatModal={this.presentCameraFormatModal}
+          dismissCameraFormatModal={this.dismissCameraFormatModal}
+          enableDepthPreview={this.enableDepthPreview}
+          disableDepthPreview={this.disableDepthPreview}
         />
       );
     }

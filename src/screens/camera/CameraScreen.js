@@ -36,7 +36,8 @@ export const CameraScreen: ComponentType<
   ({
     style,
     cameraRef,
-    showFormatModal,
+    isFormatModalVisible,
+    isDepthPreviewEnabled,
     stopCapture,
     startCapture,
     iso,
@@ -49,8 +50,10 @@ export const CameraScreen: ComponentType<
     setActiveCameraSetting,
     hasCameraPermissions,
     requestCameraPermissions,
-    showCameraFormatModal,
-    hideCameraFormatModal,
+    presentCameraFormatModal,
+    dismissCameraFormatModal,
+    enableDepthPreview,
+    disableDepthPreview,
   }) => (
     <SafeAreaView style={[styles.container, style]}>
       <CameraScreenOnboarding
@@ -83,6 +86,7 @@ export const CameraScreen: ComponentType<
             }, // TODO
           }}
           cameraLayoutStyle="fullscreen"
+          enableDepthPreview={isDepthPreviewEnabled}
           supportedISORange={supportedISORange}
           activeCameraSetting={activeCameraSetting}
           onRequestBeginCapture={startCapture}
@@ -99,15 +103,15 @@ export const CameraScreen: ComponentType<
           onRequestChangeISO={iso => updateISO(iso)}
           onRequestChangeExposure={exposure => updateExposure(exposure)}
           onRequestSelectActiveCameraSetting={setActiveCameraSetting}
-          onRequestShowFormatDialog={showCameraFormatModal}
-          onRequestToggleDepthPreview={() => {
-            /* TODO */
-          }}
+          onRequestShowFormatDialog={presentCameraFormatModal}
+          onRequestToggleDepthPreview={
+            isDepthPreviewEnabled ? disableDepthPreview : enableDepthPreview
+          }
         />
       </CameraScreenOnboarding>
       <CameraFormatModal
-        isVisible={showFormatModal}
-        onRequestDismissModal={hideCameraFormatModal}
+        isVisible={isFormatModalVisible}
+        onRequestDismissModal={dismissCameraFormatModal}
       />
     </SafeAreaView>
   )
