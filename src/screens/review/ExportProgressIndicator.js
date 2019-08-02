@@ -14,7 +14,7 @@ export type ExportProgressIndicatorProps = {
 
 const styles = {
   container: {
-    width: '100%'
+    width: '100%',
   },
   progressBar: {
     backgroundColor: '#fff',
@@ -22,7 +22,9 @@ const styles = {
   },
 };
 
-export class ExportProgressIndicator extends Component<ExportProgressIndicatorProps> {
+export class ExportProgressIndicator extends Component<
+  ExportProgressIndicatorProps
+> {
   progressAnim: Animated.Value;
 
   constructor(props: ExportProgressIndicatorProps) {

@@ -72,7 +72,7 @@ const styles = {
     borderBottomColor: Colors.borders.gray,
   },
   navigationBarWrap: {
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   videoWrap: {
     flex: 1,
@@ -109,7 +109,7 @@ export const VideoReviewScreen: ComponentType<
     toggleFullScreenVideo,
     componentId,
     exportProgress,
-    exportComposition
+    exportComposition,
   }) => (
     <SafeAreaView style={[styles.container, style]}>
       <StatusBar barStyle="light-content" />

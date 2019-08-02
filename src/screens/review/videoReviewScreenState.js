@@ -27,7 +27,7 @@ export type VideoReviewScreenStateExtraProps = {
   togglePortraitMode: () => void,
   toggleDepthPreview: () => void,
   toggleFullScreenVideo: () => void,
-  exportComposition: () => void
+  exportComposition: () => void,
 } & VideoReviewScreenState;
 
 export function wrapWithVideoReviewScreenState<
