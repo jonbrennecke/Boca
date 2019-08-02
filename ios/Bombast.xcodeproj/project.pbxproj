@@ -23,6 +23,7 @@
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		280D9AF368274EB5BD6D1A74 /* libRNBlur.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 265AC1ED3D1E41B2A6D0A308 /* libRNBlur.a */; };
 		4F8355BBACD74452BF972DE7 /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A22375545D454A2599361EEB /* libReactNativeConfig.a */; };
+		6162BF639C454225B3292EA3 /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 30628CDE7DC846A981EE0F0D /* libRNSVG.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		85BB55A0FE2D4A619258098E /* libHSAnimatedUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFEB39AE8F984633A0CF9F6D /* libHSAnimatedUI.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
@@ -295,6 +296,20 @@
 			remoteGlobalIDString = 358F4ED71D1E81A9004DF814;
 			remoteInfo = RCTBlob;
 		};
+		FC07FCCA22F3FCC400CB1E2C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 11BC89623304422BA45F228B /* RNSVG.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0CF68AC11AF0540F00FF9E5C;
+			remoteInfo = RNSVG;
+		};
+		FC07FCCC22F3FCC400CB1E2C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 11BC89623304422BA45F228B /* RNSVG.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 94DDAC5C1F3D024300EED511;
+			remoteInfo = "RNSVG-tvOS";
+		};
 		FC5BAE0E22ECC4750077855E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AA5E4B57AB6846A1841EA16E /* HSReactNativeMedia.xcodeproj */;
@@ -376,6 +391,7 @@
 		00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTVibration.xcodeproj; path = "../node_modules/react-native/Libraries/Vibration/RCTVibration.xcodeproj"; sourceTree = "<group>"; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* BombastTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BombastTests.m; sourceTree = "<group>"; };
+		11BC89623304422BA45F228B /* RNSVG.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSVG.xcodeproj; path = "../node_modules/react-native-svg/ios/RNSVG.xcodeproj"; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* Bombast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bombast.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -388,6 +404,7 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		265AC1ED3D1E41B2A6D0A308 /* libRNBlur.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNBlur.a; sourceTree = "<group>"; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		30628CDE7DC846A981EE0F0D /* libRNSVG.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSVG.a; sourceTree = "<group>"; };
 		3238105B577147C59D3EDB5F /* libHSReactNativeCamera.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libHSReactNativeCamera.a; sourceTree = "<group>"; };
 		5AC3AC84D4E24EDA91E08877 /* ReactNativeNavigationTests.xctest */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = ReactNativeNavigationTests.xctest; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
@@ -436,6 +453,7 @@
 				B7101DC27E5E45079C535488 /* libHSReactNativeMedia.a in Frameworks */,
 				85BB55A0FE2D4A619258098E /* libHSAnimatedUI.a in Frameworks */,
 				280D9AF368274EB5BD6D1A74 /* libRNBlur.a in Frameworks */,
+				6162BF639C454225B3292EA3 /* libRNSVG.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -609,6 +627,7 @@
 				AA5E4B57AB6846A1841EA16E /* HSReactNativeMedia.xcodeproj */,
 				AA86142A1C7E44C5935048E9 /* HSAnimatedUI.xcodeproj */,
 				A1C7874AC0B84A41956EE877 /* RNBlur.xcodeproj */,
+				11BC89623304422BA45F228B /* RNSVG.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -654,6 +673,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		FC07FCC622F3FCC300CB1E2C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FC07FCCB22F3FCC400CB1E2C /* libRNSVG.a */,
+				FC07FCCD22F3FCC400CB1E2C /* libRNSVG-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		FC54605921CDAB6600A46BB1 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -665,6 +693,7 @@
 				B5DB943A4E9F44E6BE1F603D /* libHSReactNativeMedia.a */,
 				BFEB39AE8F984633A0CF9F6D /* libHSAnimatedUI.a */,
 				265AC1ED3D1E41B2A6D0A308 /* libRNBlur.a */,
+				30628CDE7DC846A981EE0F0D /* libRNSVG.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -862,6 +891,10 @@
 				{
 					ProductGroup = FCE471D322F3B430004F4A4C /* Products */;
 					ProjectRef = A1C7874AC0B84A41956EE877 /* RNBlur.xcodeproj */;
+				},
+				{
+					ProductGroup = FC07FCC622F3FCC300CB1E2C /* Products */;
+					ProjectRef = 11BC89623304422BA45F228B /* RNSVG.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -1131,6 +1164,20 @@
 			remoteRef = ADBDB9261DFEBF0700ED6528 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		FC07FCCB22F3FCC400CB1E2C /* libRNSVG.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNSVG.a;
+			remoteRef = FC07FCCA22F3FCC400CB1E2C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FC07FCCD22F3FCC400CB1E2C /* libRNSVG-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libRNSVG-tvOS.a";
+			remoteRef = FC07FCCC22F3FCC400CB1E2C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		FC5BAE0F22ECC4750077855E /* libHSReactNativeMedia.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1278,12 +1325,14 @@
 					"$(SRCROOT)/../node_modules/@jonbrennecke/react-native-media/ios/**",
 					"$(SRCROOT)/../node_modules/@jonbrennecke/react-native-animated-ui/ios",
 					"$(SRCROOT)/../node_modules/react-native-blur/ios",
+					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 				);
 				INFOPLIST_FILE = Bombast/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/Bombast\"",
 					"\"$(SRCROOT)/Bombast\"",
 					"\"$(SRCROOT)/Bombast\"",
 					"\"$(SRCROOT)/Bombast\"",
@@ -1318,12 +1367,14 @@
 					"$(SRCROOT)/../node_modules/@jonbrennecke/react-native-media/ios/**",
 					"$(SRCROOT)/../node_modules/@jonbrennecke/react-native-animated-ui/ios",
 					"$(SRCROOT)/../node_modules/react-native-blur/ios",
+					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 				);
 				INFOPLIST_FILE = Bombast/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/Bombast\"",
 					"\"$(SRCROOT)/Bombast\"",
 					"\"$(SRCROOT)/Bombast\"",
 					"\"$(SRCROOT)/Bombast\"",

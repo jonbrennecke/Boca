@@ -2,6 +2,7 @@
 import { Navigation } from 'react-native-navigation';
 
 import { CameraScreen } from './camera';
+import { VideoReviewScreen } from './review';
 import { Screens, ScreenParams } from '../constants';
 
 import type { Element } from 'react';
@@ -13,10 +14,17 @@ export const registerScreens = (reduxStore: any, ReduxProvider: Element<*>) => {
     ReduxProvider,
     reduxStore
   );
+  Navigation.registerComponentWithRedux(
+    Screens.VideoReviewScreen,
+    () => VideoReviewScreen,
+    ReduxProvider,
+    reduxStore
+  );
 };
 
 export const setRoot = () => {
   Navigation.setRoot({
-    root: ScreenParams[Screens.CameraScreen],
+    // root: ScreenParams[Screens.CameraScreen],
+    root: ScreenParams[Screens.VideoReviewScreen],
   });
 };
