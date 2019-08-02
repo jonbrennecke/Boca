@@ -17,31 +17,19 @@ const defaultScreenOptions = {
 
 export const ScreenParams = {
   [Screens.CameraScreen]: {
-    stack: {
-      children: [
-        {
-          component: {
-            name: Screens.CameraScreen,
-            id: Screens.CameraScreen,
-            passProps: {},
-            options: defaultScreenOptions,
-          },
-        },
-      ],
+    component: {
+      name: Screens.CameraScreen,
+      id: Screens.CameraScreen,
+      passProps: {},
+      options: defaultScreenOptions,
     },
   },
   [Screens.VideoReviewScreen]: {
-    stack: {
-      children: [
-        {
-          component: {
-            name: Screens.VideoReviewScreen,
-            id: Screens.VideoReviewScreen,
-            passProps: {},
-            options: defaultScreenOptions,
-          },
-        },
-      ],
+    component: {
+      name: Screens.VideoReviewScreen,
+      id: Screens.VideoReviewScreen,
+      passProps: {},
+      options: defaultScreenOptions,
     },
   },
 };

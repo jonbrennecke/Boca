@@ -24,7 +24,10 @@ export const registerScreens = (reduxStore: any, ReduxProvider: Element<*>) => {
 
 export const setRoot = () => {
   Navigation.setRoot({
-    // root: ScreenParams[Screens.CameraScreen],
-    root: ScreenParams[Screens.VideoReviewScreen],
+    root: {
+      stack: {
+        children: [ScreenParams[Screens.CameraScreen]],
+      },
+    },
   });
 };

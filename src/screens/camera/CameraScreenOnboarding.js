@@ -14,12 +14,12 @@ export type CameraScreenOnboardingProps = {
 const styles = {
   container: {
     flex: 1,
-    backgroundColor: '#fff',
   },
   centerContent: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#fff',
   },
 };
 

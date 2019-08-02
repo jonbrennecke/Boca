@@ -1,15 +1,18 @@
 // @flow
 import React from 'react';
-import { SafeAreaView } from 'react-native';
+import { View, SafeAreaView, StyleSheet, StatusBar } from 'react-native';
 
 import {
-  CameraCapture,
-  CameraSettingIdentifiers,
+  CaptureButton,
+  CameraEffect,
+  CameraFocusArea,
+  ThumbnailButton,
 } from '@jonbrennecke/react-native-camera';
 
 import { wrapWithCameraScreenState } from './cameraScreenState';
 import { CameraScreenOnboarding } from './CameraScreenOnboarding';
 import { CameraFormatModal } from '../../components';
+import { Units } from '../../constants';
 
 import type { ComponentType } from 'react';
 
@@ -27,6 +30,35 @@ const styles = {
     flex: 1,
     backgroundColor: '#000',
   },
+  absoluteFill: StyleSheet.absoluteFillObject,
+  bottomControls: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    flexDirection: 'column',
+  },
+  cameraWrap: {
+    flex: 1,
+    borderRadius: Units.small,
+    overflow: 'hidden',
+  },
+  cameraControlsRow: {
+    paddingVertical: Units.small,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  captureRowItem: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  thumbnail: {
+    flex: 1,
+    backgroundColor: '#fff',
+    borderRadius: Units.extraSmall,
+  },
 };
 
 // eslint-disable-next-line flowtype/generic-spacing
@@ -40,15 +72,9 @@ export const CameraScreen: ComponentType<
     isDepthPreviewEnabled,
     stopCapture,
     startCapture,
-    iso,
     format,
     updateFormat,
     supportedFormats,
-    supportedISORange,
-    updateISO,
-    supportedExposureRange,
-    exposure,
-    updateExposure,
     activeCameraSetting,
     setActiveCameraSetting,
     hasCameraPermissions,
@@ -59,58 +85,49 @@ export const CameraScreen: ComponentType<
     disableDepthPreview,
   }) => (
     <SafeAreaView style={[styles.container, style]}>
+      <StatusBar barStyle="light-content" />
       <CameraScreenOnboarding
         hasCameraPermissions={hasCameraPermissions}
         onRequestCameraPermissions={requestCameraPermissions}
       >
-        <CameraCapture
-          style={styles.flex}
-          cameraRef={cameraRef}
-          cameraSettings={{
-            [CameraSettingIdentifiers.ISO]: {
-              currentValue: iso,
-              supportedRange: supportedISORange,
-            },
-            [CameraSettingIdentifiers.Exposure]: {
-              currentValue: exposure,
-              supportedRange: supportedExposureRange,
-            },
-            [CameraSettingIdentifiers.ShutterSpeed]: {
-              currentValue: exposure,
-              supportedRange: supportedExposureRange,
-            }, // TODO
-            [CameraSettingIdentifiers.Focus]: {
-              currentValue: exposure,
-              supportedRange: supportedExposureRange,
-            }, // TODO
-            [CameraSettingIdentifiers.WhiteBalance]: {
-              currentValue: exposure,
-              supportedRange: supportedExposureRange,
-            }, // TODO
-          }}
-          cameraLayoutStyle="fullscreen"
-          enableDepthPreview={isDepthPreviewEnabled}
-          supportedISORange={supportedISORange}
-          activeCameraSetting={activeCameraSetting}
-          onRequestBeginCapture={startCapture}
-          onRequestEndCapture={() =>
-            stopCapture({
-              saveToCameraRoll: true,
-            })
-          }
-          onRequestFocus={point => {
-            if (cameraRef && cameraRef.current) {
-              cameraRef.current.focusOnPoint(point);
-            }
-          }}
-          onRequestChangeISO={updateISO}
-          onRequestChangeExposure={updateExposure}
-          onRequestSelectActiveCameraSetting={setActiveCameraSetting}
-          onRequestShowFormatDialog={presentCameraFormatModal}
-          onRequestToggleDepthPreview={
-            isDepthPreviewEnabled ? disableDepthPreview : enableDepthPreview
-          }
-        />
+        <View style={styles.cameraWrap}>
+          <CameraEffect
+            style={styles.flex}
+            isDepthPreviewEnabled={isDepthPreviewEnabled}
+          />
+          <CameraFocusArea
+            style={styles.absoluteFill}
+            onRequestFocus={point => {
+              if (cameraRef && cameraRef.current) {
+                cameraRef.current.focusOnPoint(point);
+              }
+            }}
+          />
+        </View>
+        <View style={styles.bottomControls}>
+          <View style={styles.cameraControlsRow}>
+            <View style={styles.captureRowItem}>
+              <ThumbnailButton
+                onPress={() => {
+                  /* TODO */
+                }}
+              >
+                <View style={styles.thumbnail} />
+              </ThumbnailButton>
+            </View>
+            <View style={styles.captureRowItem}>
+              <CaptureButton
+                onRequestBeginCapture={startCapture}
+                onRequestEndCapture={() =>
+                  stopCapture({
+                    saveToCameraRoll: true,
+                  })
+                }
+              />
+            </View>
+            <View style={styles.captureRowItem} />
+          </View>
+        </View>
       </CameraScreenOnboarding>
       <CameraFormatModal
         activeFormat={format}

@@ -13,11 +13,13 @@ export type VideoReviewScreenState = {
   playbackTime: number,
   isPortraitModeEnabled: boolean,
   isDepthPreviewEnabled: boolean,
+  isFullScreenVideo: boolean,
 };
 
 export type VideoReviewScreenStateExtraProps = {
   togglePortraitMode: () => void,
   toggleDepthPreview: () => void,
+  toggleFullScreenVideo: () => void,
 } & VideoReviewScreenState;
 
 export function wrapWithVideoReviewScreenState<
@@ -38,12 +40,11 @@ export function wrapWithVideoReviewScreenState<
       playbackTime: 0,
       isPortraitModeEnabled: true,
       isDepthPreviewEnabled: false,
+      isFullScreenVideo: false,
     };
-    // exportListener: ?ReturnType<
-    //   typeof addVideoCompositionExportProgressListener
-    // >;
 
     async componentDidMount() {
+      // TODO: load videos in the app's hidden folder
       await this.props.queryMedia({
         mediaType: 'video',
         limit: 1,
@@ -65,6 +66,12 @@ export function wrapWithVideoReviewScreenState<
       });
     }
 
+    toggleFullScreenVideo() {
+      this.setState({
+        isFullScreenVideo: !this.state.isFullScreenVideo,
+      });
+    }
+
     render() {
       return (
         <WrappedComponent
@@ -72,6 +79,7 @@ export function wrapWithVideoReviewScreenState<
           {...this.state}
           togglePortraitMode={this.togglePortraitMode}
           toggleDepthPreview={this.toggleDepthPreview}
+          toggleFullScreenVideo={this.toggleFullScreenVideo}
         />
       );
     }
