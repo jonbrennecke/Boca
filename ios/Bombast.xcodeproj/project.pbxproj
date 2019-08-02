@@ -24,6 +24,7 @@
 		280D9AF368274EB5BD6D1A74 /* libRNBlur.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 265AC1ED3D1E41B2A6D0A308 /* libRNBlur.a */; };
 		4F8355BBACD74452BF972DE7 /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A22375545D454A2599361EEB /* libReactNativeConfig.a */; };
 		6162BF639C454225B3292EA3 /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 30628CDE7DC846A981EE0F0D /* libRNSVG.a */; };
+		7F6FAEAC8FD64ACF9028F3B2 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B303F65E6CA4EE7B72368C8 /* libBVLinearGradient.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		85BB55A0FE2D4A619258098E /* libHSAnimatedUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFEB39AE8F984633A0CF9F6D /* libHSAnimatedUI.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
@@ -310,6 +311,20 @@
 			remoteGlobalIDString = 94DDAC5C1F3D024300EED511;
 			remoteInfo = "RNSVG-tvOS";
 		};
+		FC07FD1922F49F8D00CB1E2C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B6A30EE290B04007B3E617EB /* BVLinearGradient.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = BVLinearGradient;
+		};
+		FC07FD1B22F49F8D00CB1E2C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B6A30EE290B04007B3E617EB /* BVLinearGradient.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 64AA15081EF7F30100718508;
+			remoteInfo = "BVLinearGradient-tvOS";
+		};
 		FC5BAE0E22ECC4750077855E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AA5E4B57AB6846A1841EA16E /* HSReactNativeMedia.xcodeproj */;
@@ -410,12 +425,14 @@
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		8B303F65E6CA4EE7B72368C8 /* libBVLinearGradient.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libBVLinearGradient.a; sourceTree = "<group>"; };
 		A1C7874AC0B84A41956EE877 /* RNBlur.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNBlur.xcodeproj; path = "../node_modules/react-native-blur/ios/RNBlur.xcodeproj"; sourceTree = "<group>"; };
 		A22375545D454A2599361EEB /* libReactNativeConfig.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeConfig.a; sourceTree = "<group>"; };
 		AA5E4B57AB6846A1841EA16E /* HSReactNativeMedia.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = HSReactNativeMedia.xcodeproj; path = "../node_modules/@jonbrennecke/react-native-media/ios/HSReactNativeMedia.xcodeproj"; sourceTree = "<group>"; };
 		AA86142A1C7E44C5935048E9 /* HSAnimatedUI.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = HSAnimatedUI.xcodeproj; path = "../node_modules/@jonbrennecke/react-native-animated-ui/ios/HSAnimatedUI.xcodeproj"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		B5DB943A4E9F44E6BE1F603D /* libHSReactNativeMedia.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libHSReactNativeMedia.a; sourceTree = "<group>"; };
+		B6A30EE290B04007B3E617EB /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
 		BBE8322EE6BA4ADCABBCC8A2 /* HSReactNativeCamera.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = HSReactNativeCamera.xcodeproj; path = "../node_modules/@jonbrennecke/react-native-camera/ios/HSReactNativeCamera.xcodeproj"; sourceTree = "<group>"; };
 		BD50A92D35494C8A876C6C03 /* libReactNativeNavigation.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeNavigation.a; sourceTree = "<group>"; };
 		BFEB39AE8F984633A0CF9F6D /* libHSAnimatedUI.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libHSAnimatedUI.a; sourceTree = "<group>"; };
@@ -454,6 +471,7 @@
 				85BB55A0FE2D4A619258098E /* libHSAnimatedUI.a in Frameworks */,
 				280D9AF368274EB5BD6D1A74 /* libRNBlur.a in Frameworks */,
 				6162BF639C454225B3292EA3 /* libRNSVG.a in Frameworks */,
+				7F6FAEAC8FD64ACF9028F3B2 /* libBVLinearGradient.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -628,6 +646,7 @@
 				AA86142A1C7E44C5935048E9 /* HSAnimatedUI.xcodeproj */,
 				A1C7874AC0B84A41956EE877 /* RNBlur.xcodeproj */,
 				11BC89623304422BA45F228B /* RNSVG.xcodeproj */,
+				B6A30EE290B04007B3E617EB /* BVLinearGradient.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -682,6 +701,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		FC07FD1522F49F8C00CB1E2C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FC07FD1A22F49F8D00CB1E2C /* libBVLinearGradient.a */,
+				FC07FD1C22F49F8D00CB1E2C /* libBVLinearGradient.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		FC54605921CDAB6600A46BB1 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -694,6 +722,7 @@
 				BFEB39AE8F984633A0CF9F6D /* libHSAnimatedUI.a */,
 				265AC1ED3D1E41B2A6D0A308 /* libRNBlur.a */,
 				30628CDE7DC846A981EE0F0D /* libRNSVG.a */,
+				8B303F65E6CA4EE7B72368C8 /* libBVLinearGradient.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -816,6 +845,10 @@
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = FC07FD1522F49F8C00CB1E2C /* Products */;
+					ProjectRef = B6A30EE290B04007B3E617EB /* BVLinearGradient.xcodeproj */;
+				},
 				{
 					ProductGroup = FCE4718F22F3B09A004F4A4C /* Products */;
 					ProjectRef = AA86142A1C7E44C5935048E9 /* HSAnimatedUI.xcodeproj */;
@@ -1178,6 +1211,20 @@
 			remoteRef = FC07FCCC22F3FCC400CB1E2C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		FC07FD1A22F49F8D00CB1E2C /* libBVLinearGradient.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libBVLinearGradient.a;
+			remoteRef = FC07FD1922F49F8D00CB1E2C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FC07FD1C22F49F8D00CB1E2C /* libBVLinearGradient.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libBVLinearGradient.a;
+			remoteRef = FC07FD1B22F49F8D00CB1E2C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		FC5BAE0F22ECC4750077855E /* libHSReactNativeMedia.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1326,12 +1373,14 @@
 					"$(SRCROOT)/../node_modules/@jonbrennecke/react-native-animated-ui/ios",
 					"$(SRCROOT)/../node_modules/react-native-blur/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 				);
 				INFOPLIST_FILE = Bombast/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/Bombast\"",
 					"\"$(SRCROOT)/Bombast\"",
 					"\"$(SRCROOT)/Bombast\"",
 					"\"$(SRCROOT)/Bombast\"",
@@ -1368,12 +1417,14 @@
 					"$(SRCROOT)/../node_modules/@jonbrennecke/react-native-animated-ui/ios",
 					"$(SRCROOT)/../node_modules/react-native-blur/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 				);
 				INFOPLIST_FILE = Bombast/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/Bombast\"",
 					"\"$(SRCROOT)/Bombast\"",
 					"\"$(SRCROOT)/Bombast\"",
 					"\"$(SRCROOT)/Bombast\"",

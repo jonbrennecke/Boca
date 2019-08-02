@@ -3,6 +3,7 @@ package com.bombast;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.BV.LinearGradient.LinearGradientPackage;
 import com.horcrux.svg.SvgPackage;
 import com.cmcewen.blurview.BlurViewPackage;
 import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;

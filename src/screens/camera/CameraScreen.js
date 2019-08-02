@@ -12,7 +12,7 @@ import {
 import { wrapWithCameraScreenState } from './cameraScreenState';
 import { CameraScreenOnboarding } from './CameraScreenOnboarding';
 import { TopCameraControlsToolbar } from './TopCameraControlsToolbar';
-import { CameraFormatModal } from '../../components';
+import { CameraFormatModal, ScreenGradients } from '../../components';
 import { Units } from '../../constants';
 
 import type { ComponentType } from 'react';
@@ -69,7 +69,7 @@ const styles = {
     top: 0,
     width: '100%',
     zIndex: 2,
-  }
+  },
 };
 
 // eslint-disable-next-line flowtype/generic-spacing
@@ -86,8 +86,6 @@ export const CameraScreen: ComponentType<
     format,
     updateFormat,
     supportedFormats,
-    activeCameraSetting,
-    setActiveCameraSetting,
     hasCameraPermissions,
     requestCameraPermissions,
     presentCameraFormatModal,
@@ -113,6 +111,7 @@ export const CameraScreen: ComponentType<
             style={styles.flex}
             isDepthPreviewEnabled={isDepthPreviewEnabled}
           />
+          <ScreenGradients />
           <CameraFocusArea
             style={styles.absoluteFill}
             onRequestFocus={point => {
