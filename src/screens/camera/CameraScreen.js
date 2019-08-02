@@ -11,6 +11,7 @@ import {
 
 import { wrapWithCameraScreenState } from './cameraScreenState';
 import { CameraScreenOnboarding } from './CameraScreenOnboarding';
+import { TopCameraControlsToolbar } from './TopCameraControlsToolbar';
 import { CameraFormatModal } from '../../components';
 import { Units } from '../../constants';
 
@@ -59,6 +60,16 @@ const styles = {
     backgroundColor: '#fff',
     borderRadius: Units.extraSmall,
   },
+  topToolbar: {
+    paddingVertical: Units.small,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    top: 0,
+    width: '100%',
+    zIndex: 2,
+  }
 };
 
 // eslint-disable-next-line flowtype/generic-spacing
@@ -90,6 +101,13 @@ export const CameraScreen: ComponentType<
         hasCameraPermissions={hasCameraPermissions}
         onRequestCameraPermissions={requestCameraPermissions}
       >
+        <TopCameraControlsToolbar
+          style={styles.topToolbar}
+          onRequestShowFormatDialog={presentCameraFormatModal}
+          onRequestToggleDepthPreview={
+            isDepthPreviewEnabled ? disableDepthPreview : enableDepthPreview
+          }
+        />
         <View style={styles.cameraWrap}>
           <CameraEffect
             style={styles.flex}
