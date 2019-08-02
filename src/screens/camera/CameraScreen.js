@@ -8,12 +8,13 @@ import {
   CameraFocusArea,
   ThumbnailButton,
 } from '@jonbrennecke/react-native-camera';
+import { Navigation } from 'react-native-navigation';
 
 import { wrapWithCameraScreenState } from './cameraScreenState';
 import { CameraScreenOnboarding } from './CameraScreenOnboarding';
 import { TopCameraControlsToolbar } from './TopCameraControlsToolbar';
 import { CameraFormatModal, ScreenGradients } from '../../components';
-import { Units } from '../../constants';
+import { Units, ScreenParams, Screens } from '../../constants';
 
 import type { ComponentType } from 'react';
 
@@ -21,6 +22,7 @@ import type { Style } from '../../types';
 
 export type CameraScreenProps = {
   style?: ?Style,
+  componentId?: ?string,
 };
 
 const styles = {
@@ -72,12 +74,17 @@ const styles = {
   },
 };
 
+const pushReviewScreen = currentComponentId => {
+  Navigation.push(currentComponentId, ScreenParams[Screens.VideoReviewScreen]);
+};
+
 // eslint-disable-next-line flowtype/generic-spacing
 export const CameraScreen: ComponentType<
   CameraScreenProps
 > = wrapWithCameraScreenState(
   ({
     style,
+    componentId,
     cameraRef,
     isFormatModalVisible,
     isDepthPreviewEnabled,
@@ -124,11 +131,7 @@ export const CameraScreen: ComponentType<
         <View style={styles.bottomControls}>
           <View style={styles.cameraControlsRow}>
             <View style={styles.captureRowItem}>
-              <ThumbnailButton
-                onPress={() => {
-                  /* TODO */
-                }}
-              >
+              <ThumbnailButton onPress={() => pushReviewScreen(componentId)}>
                 <View style={styles.thumbnail} />
               </ThumbnailButton>
             </View>
