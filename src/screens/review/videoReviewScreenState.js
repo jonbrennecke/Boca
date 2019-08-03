@@ -1,8 +1,10 @@
 // @flow
 /* eslint flowtype/generic-spacing: 0 */
 import React, { PureComponent } from 'react';
+import { Linking } from 'react-native';
 import { createMediaStateHOC } from '@jonbrennecke/react-native-media';
 import { autobind } from 'core-decorators';
+import noop from 'lodash/noop';
 
 import {
   addVideoCompositionExportProgressListener,
@@ -24,6 +26,11 @@ export type VideoReviewScreenState = {
   isDepthPreviewEnabled: boolean,
   isFullScreenVideo: boolean,
   isExporting: boolean,
+  toast: {
+    isVisible: boolean,
+    message: string,
+    onPress: () => any,
+  },
 };
 
 export type VideoReviewScreenStateExtraProps = {
@@ -52,7 +59,12 @@ export function wrapWithVideoReviewScreenState<
       isPortraitModeEnabled: true,
       isDepthPreviewEnabled: false,
       isFullScreenVideo: false,
-      isExporting: false
+      isExporting: false,
+      toast: {
+        isVisible: false,
+        text: '',
+        onPress: noop,
+      },
     };
     exportProgressListener: ?ReturnType<
       typeof addVideoCompositionExportProgressListener
@@ -116,10 +128,19 @@ export function wrapWithVideoReviewScreenState<
     }
 
     onExportFinished(url: string) {
-      console.log('exported url', url);
       this.setState({
         exportProgress: 0,
-        isExporting: false
+        isExporting: false,
+        toast: {
+          isVisible: true,
+          message: 'Exporting complete',
+          onPress: async () => {
+            const canOpen = await Linking.canOpenURL(url);
+            if (canOpen) {
+              Linking.openURL(url);
+            }
+          },
+        },
       });
     }
 

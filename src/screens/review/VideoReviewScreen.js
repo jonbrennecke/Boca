@@ -19,6 +19,7 @@ import {
   CameraIcon,
   HeartIcon,
   SelectableButton,
+  Toast,
 } from '../../components';
 import { ExportProgressIndicator } from './ExportProgressIndicator';
 import { Units, Colors } from '../../constants';
@@ -101,6 +102,7 @@ export const VideoReviewScreen: ComponentType<
 > = wrapWithVideoReviewScreenState(
   ({
     style,
+    toast,
     selectedAssetID,
     isExporting,
     isPortraitModeEnabled,
@@ -158,13 +160,6 @@ export const VideoReviewScreen: ComponentType<
             icon={ExportIcon}
           />
           <IconButton
-            disabled={isExporting}
-            style={styles.iconButton}
-            fillColor={Colors.icons.toolbar}
-            onPress={exportComposition}
-            icon={ExportIcon}
-          />
-          <IconButton
             style={styles.iconButton}
             fillColor={Colors.icons.toolbar}
             onPress={noop}
@@ -177,6 +172,11 @@ export const VideoReviewScreen: ComponentType<
             icon={TrashIcon}
           />
         </View>
+        <Toast
+          isVisible={toast.isVisible}
+          text={toast.message}
+          onPress={toast.onPress}
+        />
       </View>
     </SafeAreaView>
   )
