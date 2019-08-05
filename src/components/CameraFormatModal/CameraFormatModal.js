@@ -1,15 +1,15 @@
 // @flow
 import React from 'react';
-import { Dimensions, View } from 'react-native';
+import { View, ScrollView, Text } from 'react-native';
 
 import { BottomSheetModal } from '@jonbrennecke/react-native-animated-ui';
 import {
-  Units,
   areFormatsEqual,
   filterBestAvailableFormats,
   uniqueKeyForFormat,
 } from '@jonbrennecke/react-native-camera';
 
+import { Units, ColorTheme } from '../../constants';
 import { CameraFormatList } from './CameraFormatList';
 import { CameraFormatListItem } from './CameraFormatListItem';
 
@@ -17,19 +17,36 @@ import type { CameraFormat } from '@jonbrennecke/react-native-camera';
 
 import type { SFC, Style } from '../../types';
 
-const { height: SCREEN_HEIGHT } = Dimensions.get('window');
-
 const styles = {
   flex: {
     flex: 1,
   },
   modalContents: {
     flex: 1,
-    height: SCREEN_HEIGHT * 0.5,
+    overflow: 'visible',
+  },
+  scrollViewContents: {
     backgroundColor: '#fff',
-    borderRadius: 35,
+    borderRadius: 30,
     paddingHorizontal: Units.medium,
     paddingVertical: Units.medium,
+  },
+  scrollViewIndicatorWrap: {
+    alignItems: 'center',
+    marginBottom: Units.small,
+  },
+  scrollViewIndicator: {
+    height: 5,
+    backgroundColor: '#ccc',
+    borderRadius: 6,
+    width: 134, // TODO: use 148px for the iPhone XS Max
+  },
+  heading: {
+    color: ColorTheme.dark.modal.heading.h1Text,
+    fontSize: 22,
+    textAlign: 'left',
+    fontWeight: 'bold',
+    marginVertical: Units.small,
   },
 };
 
@@ -56,25 +73,34 @@ export const CameraFormatModal: SFC<CameraFormatModalProps> = ({
     isVisible={isVisible}
     onRequestDismissModal={onRequestDismissModal}
   >
-    <View style={styles.modalContents}>
-      <CameraFormatList
-        style={styles.flex}
-        items={filterBestAvailableFormats(supportedFormats)}
-        keyForItem={({ format, depthFormat }) =>
-          uniqueKeyForFormat(format, depthFormat)
-        }
-        renderItem={({ format, depthFormat }) => (
-          <CameraFormatListItem
-            isActive={!!activeFormat && areFormatsEqual(format, activeFormat)}
-            format={format}
-            depthFormat={depthFormat}
-            onPress={() => {
-              onRequestUpdateFormat(format, depthFormat);
-              onRequestDismissModal();
-            }}
-          />
-        )}
-      />
-    </View>
+    <ScrollView
+      style={styles.modalContents}
+      showsVerticalScrollIndicator={false}
+    >
+      <View style={styles.scrollViewContents}>
+        <View style={styles.scrollViewIndicatorWrap}>
+          <View style={styles.scrollViewIndicator} />
+        </View>
+        <Text style={styles.heading}>Video Resolution</Text>
+        <CameraFormatList
+          style={styles.flex}
+          items={filterBestAvailableFormats(supportedFormats)}
+          keyForItem={({ format, depthFormat }) =>
+            uniqueKeyForFormat(format, depthFormat)
+          }
+          renderItem={({ format, depthFormat }) => (
+            <CameraFormatListItem
+              isActive={!!activeFormat && areFormatsEqual(format, activeFormat)}
+              format={format}
+              depthFormat={depthFormat}
+              onPress={() => {
+                onRequestUpdateFormat(format, depthFormat);
+                onRequestDismissModal();
+              }}
+            />
+          )}
+        />
+      </View>
+    </ScrollView>
   </BottomSheetModal>
 );

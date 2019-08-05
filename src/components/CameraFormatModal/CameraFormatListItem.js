@@ -23,7 +23,7 @@ const styles = {
       ? ColorTheme.dark.modal.select.option.background.selected
       : ColorTheme.dark.modal.select.option.background.default,
     marginVertical: Units.small,
-    borderRadius: Units.small,
+    borderRadius: Units.extraSmall,
   }),
   formatText: (isActive: boolean) => ({
     color: isActive

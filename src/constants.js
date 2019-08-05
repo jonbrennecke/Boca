@@ -84,6 +84,7 @@ export type ColorByPresentation = {
 };
 
 export type ColorByComponent = {
+  heading: ColorByHeadingType,
   select: ColorBySelectSubComponent,
   // actionButton: ColorByButtonState,
 };
@@ -95,9 +96,14 @@ export type ColorBySelectSubComponent = {
   },
 };
 
+export type ColorByHeadingType = {
+  h1Text: string,
+};
+
 export type ColorByRole = {
   primary: ColorByButtonState,
   secondary: ColorByButtonState,
+  neutral: ColorByButtonState,
 };
 
 export type ColorByButtonState = {
@@ -109,6 +115,9 @@ export type ColorByButtonState = {
 export const ColorTheme: ColorByTheme = {
   light: {
     default: {
+      heading: {
+        h1Text: Colors.text.mediumDark,
+      },
       select: {
         option: {
           background: {
@@ -125,6 +134,9 @@ export const ColorTheme: ColorByTheme = {
       },
     },
     modal: {
+      heading: {
+        h1Text: Colors.text.mediumDark,
+      },
       select: {
         option: {
           background: {
@@ -143,6 +155,9 @@ export const ColorTheme: ColorByTheme = {
   },
   dark: {
     default: {
+      heading: {
+        h1Text: Colors.text.mediumDark,
+      },
       select: {
         option: {
           background: {
@@ -159,6 +174,9 @@ export const ColorTheme: ColorByTheme = {
       },
     },
     modal: {
+      heading: {
+        h1Text: Colors.text.dark,
+      },
       select: {
         option: {
           background: {
