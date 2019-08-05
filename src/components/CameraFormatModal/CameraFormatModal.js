@@ -5,12 +5,13 @@ import { Dimensions, View } from 'react-native';
 import { BottomSheetModal } from '@jonbrennecke/react-native-animated-ui';
 import {
   Units,
-  CameraFormatList,
-  CameraFormatListItem,
   areFormatsEqual,
   filterBestAvailableFormats,
   uniqueKeyForFormat,
 } from '@jonbrennecke/react-native-camera';
+
+import { CameraFormatList } from './CameraFormatList';
+import { CameraFormatListItem } from './CameraFormatListItem';
 
 import type { CameraFormat } from '@jonbrennecke/react-native-camera';
 
@@ -27,7 +28,8 @@ const styles = {
     height: SCREEN_HEIGHT * 0.5,
     backgroundColor: '#fff',
     borderRadius: 35,
-    padding: Units.small,
+    paddingHorizontal: Units.medium,
+    paddingVertical: Units.medium,
   },
 };
 
