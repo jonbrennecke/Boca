@@ -16,12 +16,12 @@ import {
   IconButton,
   TrashIcon,
   ExportIcon,
-  CameraIcon,
   HeartIcon,
   SelectableButton,
   Toast,
 } from '../../components';
-import { ExportProgressIndicator } from './ExportProgressIndicator';
+import { VideoReviewScreenToolbar } from './VideoReviewScreenToolbar';
+import { VideoReviewScreenNavbar } from './VideoReviewScreenNavbar';
 import { Units, Colors } from '../../constants';
 import { wrapWithVideoReviewScreenState } from './videoReviewScreenState';
 
@@ -40,7 +40,7 @@ const styles = {
   },
   container: {
     flex: 1,
-    backgroundColor: Colors.backgrounds.gray,
+    backgroundColor: Colors.backgrounds.black,
   },
   toolbar: {
     paddingVertical: Units.small,
@@ -61,19 +61,6 @@ const styles = {
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopStyle: 'solid',
     borderTopColor: Colors.borders.gray,
-  },
-  navigationBar: {
-    paddingVertical: Units.small,
-    paddingHorizontal: Units.small,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomStyle: 'solid',
-    borderBottomColor: Colors.borders.gray,
-  },
-  navigationBarWrap: {
-    flexDirection: 'column',
   },
   videoWrap: {
     flex: 1,
@@ -107,6 +94,7 @@ export const VideoReviewScreen: ComponentType<
     isExporting,
     isPortraitModeEnabled,
     isDepthPreviewEnabled,
+    isFullScreenVideo,
     togglePortraitMode,
     toggleDepthPreview,
     toggleFullScreenVideo,
@@ -117,17 +105,11 @@ export const VideoReviewScreen: ComponentType<
     <SafeAreaView style={[styles.container, style]}>
       <StatusBar barStyle="light-content" />
       <View style={styles.flex}>
-        <View style={styles.navigationBarWrap}>
-          <View style={styles.navigationBar}>
-            <IconButton
-              style={styles.iconButton}
-              fillColor={Colors.icons.toolbar}
-              onPress={() => pushCameraScreen(componentId)}
-              icon={CameraIcon}
-            />
-          </View>
-          <ExportProgressIndicator progress={exportProgress} />
-        </View>
+        <VideoReviewScreenNavbar
+          isVisible={isFullScreenVideo}
+          exportProgress={exportProgress}
+          onRequestPushCameraScreen={() => pushCameraScreen(componentId)}
+        />
         <TouchableWithoutFeedback onPress={toggleFullScreenVideo}>
           <View style={styles.videoWrap}>
             <VideoComposition
@@ -139,44 +121,46 @@ export const VideoReviewScreen: ComponentType<
             />
           </View>
         </TouchableWithoutFeedback>
-        <View style={styles.toolbarCentered}>
-          <SelectableButton
-            text="Depth"
-            isSelected={isDepthPreviewEnabled}
-            onPress={toggleDepthPreview}
+        <VideoReviewScreenToolbar isVisible={isFullScreenVideo}>
+          <View style={styles.toolbarCentered}>
+            <SelectableButton
+              text="Depth"
+              isSelected={isDepthPreviewEnabled}
+              onPress={toggleDepthPreview}
+            />
+            <SelectableButton
+              text="Portrait"
+              isSelected={isPortraitModeEnabled}
+              onPress={togglePortraitMode}
+            />
+          </View>
+          <View style={styles.toolbar}>
+            <IconButton
+              disabled={isExporting}
+              style={styles.iconButton}
+              fillColor={Colors.icons.toolbar}
+              onPress={exportComposition}
+              icon={ExportIcon}
+            />
+            <IconButton
+              style={styles.iconButton}
+              fillColor={Colors.icons.toolbar}
+              onPress={noop}
+              icon={HeartIcon}
+            />
+            <IconButton
+              style={styles.iconButton}
+              fillColor={Colors.icons.toolbar}
+              onPress={noop}
+              icon={TrashIcon}
+            />
+          </View>
+          <Toast
+            isVisible={toast.isVisible}
+            text={toast.message}
+            onPress={toast.onPress}
           />
-          <SelectableButton
-            text="Portrait"
-            isSelected={isPortraitModeEnabled}
-            onPress={togglePortraitMode}
-          />
-        </View>
-        <View style={styles.toolbar}>
-          <IconButton
-            disabled={isExporting}
-            style={styles.iconButton}
-            fillColor={Colors.icons.toolbar}
-            onPress={exportComposition}
-            icon={ExportIcon}
-          />
-          <IconButton
-            style={styles.iconButton}
-            fillColor={Colors.icons.toolbar}
-            onPress={noop}
-            icon={HeartIcon}
-          />
-          <IconButton
-            style={styles.iconButton}
-            fillColor={Colors.icons.toolbar}
-            onPress={noop}
-            icon={TrashIcon}
-          />
-        </View>
-        <Toast
-          isVisible={toast.isVisible}
-          text={toast.message}
-          onPress={toast.onPress}
-        />
+        </VideoReviewScreenToolbar>
       </View>
     </SafeAreaView>
   )
