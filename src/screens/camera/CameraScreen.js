@@ -4,7 +4,7 @@ import { View, SafeAreaView, StyleSheet, StatusBar } from 'react-native';
 
 import {
   CaptureButton,
-  CameraEffect,
+  Camera,
   CameraFocusArea,
   ThumbnailButton,
 } from '@jonbrennecke/react-native-camera';
@@ -114,9 +114,13 @@ export const CameraScreen: ComponentType<
           }
         />
         <View style={styles.cameraWrap}>
-          <CameraEffect
+          <Camera
             style={styles.flex}
-            isDepthPreviewEnabled={isDepthPreviewEnabled}
+            ref={cameraRef}
+            cameraPosition="front"
+            previewMode={isDepthPreviewEnabled ? 'depth' : 'portraitMode'}
+            resizeMode="scaleAspectWidth"
+            blurAperture={0}
           />
           <ScreenGradients />
           <CameraFocusArea
