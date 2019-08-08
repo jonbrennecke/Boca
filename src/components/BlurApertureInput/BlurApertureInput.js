@@ -4,8 +4,10 @@ import { ScrollView, View, Text, Dimensions } from 'react-native';
 import times from 'lodash/times';
 import clamp from 'lodash/clamp';
 import round from 'lodash/round';
+import LinearGradient from 'react-native-linear-gradient';
 
 import { Units } from '../../constants';
+import { hexToRgbaString } from '../../utils/Color';
 
 import type { SFC, Style } from '../../types';
 
@@ -34,6 +36,7 @@ export const makeNormalizedValueFormatter = (
     .toLocaleUpperCase()}`;
 
 const styles = {
+  container: {},
   scrollView: {
     flexDirection: 'row',
   },
@@ -41,7 +44,7 @@ const styles = {
     alignItems: 'center',
     paddingBottom: 15,
   },
-  isoText: {
+  text: {
     color: '#fff',
     textAlign: 'center',
     position: 'absolute',
@@ -54,12 +57,26 @@ const styles = {
     width: 2,
     height: index % 5 === 0 ? 30 : 10,
     borderRadius: 2,
-    backgroundColor: '#fff',
+    backgroundColor: hexToRgbaString('#fff', 0.8),
     marginHorizontal: Units.extraSmall,
   }),
   padding: (width: number) => ({
     width,
   }),
+  leftGradient: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    width: SCREEN_WIDTH * 0.35,
+  },
+  rightGradient: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    right: 0,
+    width: SCREEN_WIDTH * 0.35,
+  },
 };
 
 export type BlurApertureInputProps = {
@@ -94,28 +111,52 @@ export const BlurApertureInput: SFC<BlurApertureInputProps> = ({
   };
   const tickWidth = 2 + Units.extraSmall * 2;
   const contentOffset = SCREEN_WIDTH / 2 - tickWidth * 0.5;
+  const colorHex = '#000'; // TODO: gradientColorHex
+  const startOpacity = 1; // TODO: gradientStartOpacity
   return (
-    <ScrollView
-      style={[style, styles.scrollView]}
-      contentContainerStyle={styles.scrollViewContent}
-      horizontal
-      showsHorizontalScrollIndicator={false}
-      onScroll={onScroll}
-      scrollEventThrottle={16}
-    >
-      <View style={{ width: contentOffset }} />
-      {times(numberOfTicks).map((n, i) => {
-        const value = n / numberOfTicks * (max - min) + min;
-        return (
-          <View key={`${n}`}>
-            <View style={styles.tick(i)} />
-            {i % 5 === 0 && (
-              <Text style={styles.isoText}>{formatValue(value)}</Text>
-            )}
-          </View>
-        );
-      })}
-      <View style={{ width: contentOffset }} />
-    </ScrollView>
+    <View style={[styles.container, style]}>
+      <ScrollView
+        style={styles.scrollView}
+        contentContainerStyle={styles.scrollViewContent}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        onScroll={onScroll}
+        scrollEventThrottle={16}
+      >
+        <View style={{ width: contentOffset }} />
+        {times(numberOfTicks).map((n, i) => {
+          const value = n / numberOfTicks * (max - min) + min;
+          return (
+            <View key={`${n}`}>
+              <View style={styles.tick(i)} />
+              {i % 5 === 0 && (
+                <Text style={styles.text}>{formatValue(value)}</Text>
+              )}
+            </View>
+          );
+        })}
+        <View style={{ width: contentOffset }} />
+      </ScrollView>
+      <LinearGradient
+        pointerEvents="none"
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+        colors={[
+          hexToRgbaString(colorHex, startOpacity),
+          hexToRgbaString(colorHex, 0.0),
+        ]}
+        style={styles.leftGradient}
+      />
+      <LinearGradient
+        pointerEvents="none"
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+        colors={[
+          hexToRgbaString(colorHex, 0.0),
+          hexToRgbaString(colorHex, startOpacity),
+        ]}
+        style={styles.rightGradient}
+      />
+    </View>
   );
 };
