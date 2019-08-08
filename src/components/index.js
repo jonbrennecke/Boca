@@ -7,3 +7,4 @@ export * from './MeasureContentsView';
 export * from './ScreenGradients';
 export * from './LinearProgressIndicator';
 export * from './Toast';
+export * from './BlurApertureInput';

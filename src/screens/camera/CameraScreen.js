@@ -13,8 +13,8 @@ import { Navigation } from 'react-native-navigation';
 import { wrapWithCameraScreenState } from './cameraScreenState';
 import { CameraScreenOnboarding } from './CameraScreenOnboarding';
 import { TopCameraControlsToolbar } from './TopCameraControlsToolbar';
-import { CameraFormatModal, ScreenGradients } from '../../components';
-import { Units, ScreenParams, Screens } from '../../constants';
+import { CameraFormatModal, ScreenGradients, BlurApertureInput } from '../../components';
+import { Units, ScreenParams, Screens, BlurApertureRange } from '../../constants';
 
 import type { ComponentType } from 'react';
 
@@ -99,6 +99,8 @@ export const CameraScreen: ComponentType<
     dismissCameraFormatModal,
     enableDepthPreview,
     disableDepthPreview,
+    setBlurAperture,
+    blurAperture
   }) => (
     <SafeAreaView style={[styles.container, style]}>
       <StatusBar barStyle="light-content" />
@@ -120,7 +122,7 @@ export const CameraScreen: ComponentType<
             cameraPosition="front"
             previewMode={isDepthPreviewEnabled ? 'depth' : 'portraitMode'}
             resizeMode="scaleAspectWidth"
-            blurAperture={0}
+            blurAperture={blurAperture}
           />
           <ScreenGradients />
           <CameraFocusArea
@@ -133,6 +135,14 @@ export const CameraScreen: ComponentType<
           />
         </View>
         <View style={styles.bottomControls}>
+          <View style={styles.cameraControlsRow}>
+            <BlurApertureInput
+              min={BlurApertureRange.lowerBound}
+              max={BlurApertureRange.upperBound}
+              numberOfTicks={51}
+              onSelectValue={blurAperture => setBlurAperture(blurAperture * 100)}
+            />
+          </View>
           <View style={styles.cameraControlsRow}>
             <View style={styles.captureRowItem}>
               <ThumbnailButton onPress={() => pushReviewScreen(componentId)}>

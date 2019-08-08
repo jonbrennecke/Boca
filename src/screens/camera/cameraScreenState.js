@@ -8,6 +8,8 @@ import {
 } from '@jonbrennecke/react-native-camera';
 import { autobind } from 'core-decorators';
 
+import { BlurApertureRange } from '../../constants';
+
 import type { ComponentType } from 'react';
 import type { CameraStateHOCProps } from '@jonbrennecke/react-native-camera';
 
@@ -59,6 +61,7 @@ export function wrapWithCameraScreenState<
       await this.props.loadCameraPermissions();
       if (this.props.hasCameraPermissions) {
         await this.startPreview();
+        await this.props.setBlurAperture(BlurApertureRange.lowerBound);
       }
     }
 
