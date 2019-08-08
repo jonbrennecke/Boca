@@ -24,6 +24,15 @@ export const makeDefaultValueFormatter = (isIntegerValued: boolean) => (
     .toFixed(isIntegerValued ? 0 : 1)
     .toLocaleUpperCase()}`;
 
+export const makeNormalizedValueFormatter = (
+  min: number,
+  max: number,
+  isIntegerValued?: boolean = false
+) => (value: number) =>
+  `${((value - min) / (max - min))
+    .toFixed(isIntegerValued ? 0 : 1)
+    .toLocaleUpperCase()}`;
+
 const styles = {
   scrollView: {
     flexDirection: 'row',

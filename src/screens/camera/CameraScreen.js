@@ -13,8 +13,18 @@ import { Navigation } from 'react-native-navigation';
 import { wrapWithCameraScreenState } from './cameraScreenState';
 import { CameraScreenOnboarding } from './CameraScreenOnboarding';
 import { TopCameraControlsToolbar } from './TopCameraControlsToolbar';
-import { CameraFormatModal, ScreenGradients, BlurApertureInput } from '../../components';
-import { Units, ScreenParams, Screens, BlurApertureRange } from '../../constants';
+import {
+  CameraFormatModal,
+  ScreenGradients,
+  BlurApertureInput,
+  makeNormalizedValueFormatter,
+} from '../../components';
+import {
+  Units,
+  ScreenParams,
+  Screens,
+  BlurApertureRange,
+} from '../../constants';
 
 import type { ComponentType } from 'react';
 
@@ -100,7 +110,7 @@ export const CameraScreen: ComponentType<
     enableDepthPreview,
     disableDepthPreview,
     setBlurAperture,
-    blurAperture
+    blurAperture,
   }) => (
     <SafeAreaView style={[styles.container, style]}>
       <StatusBar barStyle="light-content" />
@@ -140,7 +150,13 @@ export const CameraScreen: ComponentType<
               min={BlurApertureRange.lowerBound}
               max={BlurApertureRange.upperBound}
               numberOfTicks={51}
-              onSelectValue={blurAperture => setBlurAperture(blurAperture * 100)}
+              onSelectValue={blurAperture =>
+                setBlurAperture(blurAperture * 100)
+              }
+              formatValue={makeNormalizedValueFormatter(
+                BlurApertureRange.lowerBound,
+                BlurApertureRange.upperBound
+              )}
             />
           </View>
           <View style={styles.cameraControlsRow}>
