@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { ScrollView, View, Text, Dimensions } from 'react-native';
+import { ScrollView, View, Dimensions } from 'react-native';
 import times from 'lodash/times';
 import clamp from 'lodash/clamp';
 import round from 'lodash/round';
@@ -8,10 +8,25 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import { Units } from '../../constants';
 import { hexToRgbaString } from '../../utils/Color';
+import { BlurApertureInputTick } from './BlurApertureInputTick';
+import { BlurApertureInputTickLabel } from './BlurApertureInputTickLabel';
 
 import type { SFC, Style } from '../../types';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
+
+export type BlurApertureInputProps = {
+  style?: ?Style,
+  value: number,
+  gradientColorHex?: string,
+  gradientStartOpacity?: number,
+  min: number,
+  max: number,
+  numberOfTicks?: number,
+  isIntegerValued?: boolean,
+  formatValue?: number => string,
+  onSelectValue: number => void,
+};
 
 export const shouldDisplayIntegerValues = (
   min: number,
@@ -42,24 +57,9 @@ const styles = {
   },
   scrollViewContent: {
     alignItems: 'center',
-    paddingBottom: 15,
+    paddingBottom: 25,
+    paddingTop: 15,
   },
-  text: {
-    color: '#fff',
-    textAlign: 'center',
-    position: 'absolute',
-    fontSize: 10,
-    bottom: -15,
-    left: -10,
-    width: 30,
-  },
-  tick: (index: number) => ({
-    width: 2,
-    height: index % 5 === 0 ? 30 : 10,
-    borderRadius: 2,
-    backgroundColor: hexToRgbaString('#fff', 0.8),
-    marginHorizontal: Units.extraSmall,
-  }),
   padding: (width: number) => ({
     width,
   }),
@@ -79,18 +79,11 @@ const styles = {
   },
 };
 
-export type BlurApertureInputProps = {
-  style?: ?Style,
-  min: number,
-  max: number,
-  numberOfTicks?: number,
-  isIntegerValued?: boolean,
-  formatValue?: number => string,
-  onSelectValue: number => void,
-};
-
 export const BlurApertureInput: SFC<BlurApertureInputProps> = ({
   style,
+  value,
+  gradientColorHex = '#000',
+  gradientStartOpacity = 1,
   min,
   max,
   numberOfTicks = 101,
@@ -111,8 +104,6 @@ export const BlurApertureInput: SFC<BlurApertureInputProps> = ({
   };
   const tickWidth = 2 + Units.extraSmall * 2;
   const contentOffset = SCREEN_WIDTH / 2 - tickWidth * 0.5;
-  const colorHex = '#000'; // TODO: gradientColorHex
-  const startOpacity = 1; // TODO: gradientStartOpacity
   return (
     <View style={[styles.container, style]}>
       <ScrollView
@@ -125,12 +116,26 @@ export const BlurApertureInput: SFC<BlurApertureInputProps> = ({
       >
         <View style={{ width: contentOffset }} />
         {times(numberOfTicks).map((n, i) => {
-          const value = n / numberOfTicks * (max - min) + min;
+          const tickValue = n / numberOfTicks * (max - min) + min;
+          const tickPercent = (value - min) / (max - min);
+          const valuePercent = (tickValue - min) / (max - min);
+          const valueDelta = Math.abs(tickPercent - valuePercent);
+          const selectedIndex = Math.floor(
+            (value - min) * numberOfTicks / (max - min)
+          );
           return (
             <View key={`${n}`}>
-              <View style={styles.tick(i)} />
+              <BlurApertureInputTick
+                tickIndex={i}
+                isCenter={i === selectedIndex}
+                valueDelta={valueDelta}
+              />
               {i % 5 === 0 && (
-                <Text style={styles.text}>{formatValue(value)}</Text>
+                <BlurApertureInputTickLabel
+                  text={formatValue(tickValue)}
+                  isCenter={i === selectedIndex}
+                  valueDelta={valueDelta}
+                />
               )}
             </View>
           );
@@ -142,8 +147,8 @@ export const BlurApertureInput: SFC<BlurApertureInputProps> = ({
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
         colors={[
-          hexToRgbaString(colorHex, startOpacity),
-          hexToRgbaString(colorHex, 0.0),
+          hexToRgbaString(gradientColorHex, gradientStartOpacity),
+          hexToRgbaString(gradientColorHex, 0.0),
         ]}
         style={styles.leftGradient}
       />
@@ -152,8 +157,8 @@ export const BlurApertureInput: SFC<BlurApertureInputProps> = ({
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
         colors={[
-          hexToRgbaString(colorHex, 0.0),
-          hexToRgbaString(colorHex, startOpacity),
+          hexToRgbaString(gradientColorHex, 0.0),
+          hexToRgbaString(gradientColorHex, gradientStartOpacity),
         ]}
         style={styles.rightGradient}
       />

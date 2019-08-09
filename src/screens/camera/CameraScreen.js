@@ -147,12 +147,11 @@ export const CameraScreen: ComponentType<
         <View style={styles.bottomControls}>
           <View style={styles.cameraControlsRow}>
             <BlurApertureInput
+              value={blurAperture}
               min={BlurApertureRange.lowerBound}
               max={BlurApertureRange.upperBound}
               numberOfTicks={51}
-              onSelectValue={blurAperture =>
-                setBlurAperture(blurAperture * 100)
-              }
+              onSelectValue={setBlurAperture}
               formatValue={makeNormalizedValueFormatter(
                 BlurApertureRange.lowerBound,
                 BlurApertureRange.upperBound

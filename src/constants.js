@@ -196,6 +196,6 @@ export const ColorTheme: ColorByTheme = {
 };
 
 export const BlurApertureRange = {
-  lowerBound: 0.015,
-  upperBound: 0.2,
+  lowerBound: 1.5,
+  upperBound: 20,
 };
