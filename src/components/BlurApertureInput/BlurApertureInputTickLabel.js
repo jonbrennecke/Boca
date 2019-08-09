@@ -30,6 +30,7 @@ const styles = {
   }),
 };
 
+// eslint-disable-next-line flowtype/generic-spacing
 export const BlurApertureInputTickLabel: SFC<
   BlurApertureInputTickLabelProps
 > = ({ isCenter, text, valueDelta }: BlurApertureInputTickLabelProps) => (

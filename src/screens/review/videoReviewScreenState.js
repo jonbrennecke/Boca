@@ -1,6 +1,6 @@
 // @flow
 /* eslint flowtype/generic-spacing: 0 */
-import React, { PureComponent } from 'react';
+import React, { PureComponent, createRef } from 'react';
 import { Linking } from 'react-native';
 import { createMediaStateHOC } from '@jonbrennecke/react-native-media';
 import { autobind } from 'core-decorators';
@@ -34,6 +34,10 @@ export type VideoReviewScreenState = {
 };
 
 export type VideoReviewScreenStateExtraProps = {
+  videoCompositionRef: ReturnType<typeof createRef>,
+  play: () => void,
+  pause: () => void,
+  seekToProgress: (progress: number) => void,
   togglePortraitMode: () => void,
   toggleDepthPreview: () => void,
   toggleFullScreenVideo: () => void,
@@ -75,6 +79,7 @@ export function wrapWithVideoReviewScreenState<
     exportFailedListener: ?ReturnType<
       typeof addVideoCompositionExportFailedListener
     >;
+    videoCompositionRef = createRef();
 
     async componentDidMount() {
       // TODO: query videos in the app's hidden folder
@@ -148,11 +153,33 @@ export function wrapWithVideoReviewScreenState<
       console.warn(error);
     }
 
+    play() {
+      if (this.videoCompositionRef.current) {
+        this.videoCompositionRef.current.play();
+      }
+    }
+
+    pause() {
+      if (this.videoCompositionRef.current) {
+        this.videoCompositionRef.current.pause();
+      }
+    }
+
+    seekToProgress(progress: number) {
+      if (this.videoCompositionRef.current) {
+        this.videoCompositionRef.current.seekToProgress(progress);
+      }
+    }
+
     render() {
       return (
         <WrappedComponent
           {...this.props}
           {...this.state}
+          videoCompositionRef={this.videoCompositionRef}
+          play={this.play}
+          pause={this.pause}
+          seekToProgress={this.seekToProgress}
           togglePortraitMode={this.togglePortraitMode}
           toggleDepthPreview={this.toggleDepthPreview}
           toggleFullScreenVideo={this.toggleFullScreenVideo}

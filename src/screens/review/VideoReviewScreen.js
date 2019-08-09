@@ -19,6 +19,7 @@ import {
   HeartIcon,
   SelectableButton,
   Toast,
+  PlaybackToolbar,
 } from '../../components';
 import { VideoReviewScreenToolbar } from './VideoReviewScreenToolbar';
 import { VideoReviewScreenNavbar } from './VideoReviewScreenNavbar';
@@ -90,6 +91,8 @@ export const VideoReviewScreen: ComponentType<
   ({
     style,
     toast,
+    videoCompositionRef,
+    play,
     selectedAssetID,
     isExporting,
     isPortraitModeEnabled,
@@ -113,15 +116,18 @@ export const VideoReviewScreen: ComponentType<
         <TouchableWithoutFeedback onPress={toggleFullScreenVideo}>
           <View style={styles.videoWrap}>
             <VideoComposition
+              ref={videoCompositionRef}
               style={styles.video}
               assetID={selectedAssetID}
               enableDepthPreview={isDepthPreviewEnabled}
               enablePortraitMode={isPortraitModeEnabled}
-              shouldLoopVideo
             />
           </View>
         </TouchableWithoutFeedback>
         <VideoReviewScreenToolbar isVisible={isFullScreenVideo}>
+          <View style={styles.toolbarCentered}>
+            <PlaybackToolbar onRequestPlay={play} />
+          </View>
           <View style={styles.toolbarCentered}>
             <SelectableButton
               text="Depth"
