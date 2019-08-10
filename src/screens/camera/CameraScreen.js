@@ -48,10 +48,6 @@ const styles = {
   },
   absoluteFill: StyleSheet.absoluteFillObject,
   bottomControls: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
     flexDirection: 'column',
   },
   cameraWrap: {
@@ -81,10 +77,7 @@ const styles = {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'absolute',
-    top: 0,
     width: '100%',
-    zIndex: 2,
   },
   iconButton: {
     height: Units.large,
