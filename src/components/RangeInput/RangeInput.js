@@ -47,7 +47,7 @@ const styles = {
     height: HEIGHT - OUTSIDE_BORDER_WIDTH * 2 - 2 * 2,
     borderRadius: (HEIGHT - OUTSIDE_BORDER_WIDTH * 2 - 2 * 2) / 2,
     backgroundColor: Colors.solid.white,
-  }
+  },
 };
 
 export const RangeInput: SFC<RangeInputProps> = ({

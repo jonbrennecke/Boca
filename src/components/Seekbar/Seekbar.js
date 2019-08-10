@@ -83,13 +83,13 @@ export class Seekbar extends Component<Props, State> {
           onDragStart={this.dragDidStart}
           onDragEnd={this.dragDidEnd}
           onDragMove={this.dragDidMove}
-          renderChildren={props => (
+          renderChildren={props =>
             createElement(this.props.handleComponent || View, {
               style: [styles.handle, this.props.handleStyle],
               pointerEvents: 'none',
-              ...props
+              ...props,
             })
-          )}
+          }
         />
       </View>
     );

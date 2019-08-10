@@ -6,6 +6,7 @@ import {
   CameraSettingIdentifiers,
   startCameraPreview,
 } from '@jonbrennecke/react-native-camera';
+import { createMediaStateHOC } from '@jonbrennecke/react-native-media';
 import { autobind } from 'core-decorators';
 
 import { BlurApertureRange } from '../../constants';
@@ -15,6 +16,7 @@ import type {
   CameraStateHOCProps,
   CameraPosition,
 } from '@jonbrennecke/react-native-camera';
+import type { MediaStateHOCProps } from '@jonbrennecke/react-native-media';
 
 import type { ReturnType } from '../../types';
 
@@ -25,6 +27,7 @@ export type CameraScreenStateExtraProps = {
   activeCameraSetting: $Keys<typeof CameraSettingIdentifiers>,
   setActiveCameraSetting: ($Keys<typeof CameraSettingIdentifiers>) => void,
   cameraPosition: CameraPosition,
+  thumbnailAssetID: ?string,
   presentCameraFormatModal: () => void,
   dismissCameraFormatModal: () => void,
   enableDepthPreview: () => void,
@@ -39,12 +42,16 @@ export type CameraScreenState = {
   isFormatModalVisible: boolean,
   isDepthPreviewEnabled: boolean,
   cameraPosition: CameraPosition,
+  thumbnailAssetID: ?string,
 };
 
 export function wrapWithCameraScreenState<
   PassThroughProps: Object,
   C: ComponentType<
-    CameraScreenStateExtraProps & CameraStateHOCProps & PassThroughProps
+    CameraScreenStateExtraProps &
+      CameraStateHOCProps &
+      MediaStateHOCProps &
+      PassThroughProps
   >
 >(
   WrappedComponent: C
@@ -52,7 +59,10 @@ export function wrapWithCameraScreenState<
   // $FlowFixMe
   @autobind
   class CameraScreenStateContainer extends PureComponent<
-    CameraScreenStateOwnProps & CameraStateHOCProps & PassThroughProps,
+    CameraScreenStateOwnProps &
+      CameraStateHOCProps &
+      MediaStateHOCProps &
+      PassThroughProps,
     CameraScreenState
   > {
     cameraRef = createRef();
@@ -62,6 +72,7 @@ export function wrapWithCameraScreenState<
       isFormatModalVisible: false,
       isDepthPreviewEnabled: false,
       cameraPosition: 'front',
+      thumbnailAssetID: null,
     };
 
     async componentDidMount() {
@@ -69,6 +80,14 @@ export function wrapWithCameraScreenState<
       if (this.props.hasCameraPermissions) {
         await this.startPreview();
         await this.props.setBlurAperture(BlurApertureRange.lowerBound);
+        // TODO: query videos in the app's hidden folder
+        await this.props.queryMedia({
+          mediaType: 'video',
+          limit: 1,
+        });
+        this.setState({
+          thumbnailAssetID: this.props.assets.toArray()[0]?.assetID,
+        });
       }
     }
 
@@ -121,8 +140,9 @@ export function wrapWithCameraScreenState<
     }
   }
 
+  const withMediaState = createMediaStateHOC(state => state.media);
   const withCameraState = createCameraStateHOC(state => state.camera);
-  const Component = withCameraState(CameraScreenStateContainer);
+  const Component = withMediaState(withCameraState(CameraScreenStateContainer));
   const WrappedWithCameraState = props => <Component {...props} />;
   return WrappedWithCameraState;
 }

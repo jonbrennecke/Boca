@@ -72,7 +72,7 @@ export const Colors = {
     light: '#bbb',
     medium: '#999',
     dark: '#333',
-    black: '#000'
+    black: '#000',
   },
 };
 

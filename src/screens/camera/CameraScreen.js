@@ -2,11 +2,7 @@
 import React from 'react';
 import { View, SafeAreaView, StyleSheet, StatusBar } from 'react-native';
 
-import {
-  Camera,
-  CameraFocusArea,
-  ThumbnailButton,
-} from '@jonbrennecke/react-native-camera';
+import { Camera, CameraFocusArea } from '@jonbrennecke/react-native-camera';
 import { Navigation } from 'react-native-navigation';
 
 import { wrapWithCameraScreenState } from './cameraScreenState';
@@ -14,6 +10,7 @@ import { CameraScreenOnboarding } from './CameraScreenOnboarding';
 import { CameraPreviewDimensions } from './CameraPreviewDimensions';
 import { CameraCaptureButton } from './CameraCaptureButton';
 import { TopCameraControlsToolbar } from './TopCameraControlsToolbar';
+import { ThumbnailButton } from './ThumbnailButton';
 import {
   CameraFormatModal,
   BlurApertureInput,
@@ -67,11 +64,6 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
   },
-  thumbnail: {
-    flex: 1,
-    backgroundColor: '#fff',
-    borderRadius: Units.extraSmall,
-  },
   topToolbar: {
     paddingVertical: Units.small,
     flexDirection: 'row',
@@ -96,6 +88,7 @@ export const CameraScreen: ComponentType<
   ({
     style,
     componentId,
+    thumbnailAssetID,
     cameraRef,
     isFormatModalVisible,
     isDepthPreviewEnabled,
@@ -165,9 +158,10 @@ export const CameraScreen: ComponentType<
           </View>
           <View style={styles.cameraControlsRow}>
             <View style={styles.captureRowItem}>
-              <ThumbnailButton onPress={() => pushReviewScreen(componentId)}>
-                <View style={styles.thumbnail} />
-              </ThumbnailButton>
+              <ThumbnailButton
+                assetID={thumbnailAssetID}
+                onPress={() => pushReviewScreen(componentId)}
+              />
             </View>
             <View style={styles.captureRowItem}>
               <CameraCaptureButton
