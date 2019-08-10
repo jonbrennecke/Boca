@@ -35,8 +35,8 @@ export const ScreenParams = {
 };
 
 export const Units = {
-  extraSmall: 4,
-  small: 10,
+  extraSmall: 3,
+  small: 8,
   medium: 16,
   large: 30,
 };
@@ -67,8 +67,9 @@ export const Colors = {
     light: '#fff',
   },
   solid: {
+    white: '#fff',
     extraLight: '#eee',
-    light: '#ccc',
+    light: '#bbb',
     dark: '#333',
   },
 };

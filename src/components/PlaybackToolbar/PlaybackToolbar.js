@@ -6,15 +6,25 @@ import { IconButton } from '../';
 import { PlayIcon } from '../icons';
 import { Units, Colors } from '../../constants';
 
+import { PlaybackSeekbar } from './PlaybackSeekbar';
+
 import type { Style, SFC } from '../../types';
 
 export type PlaybackToolbarProps = {
   style?: ?Style,
+  assetID: ?string,
   onRequestPlay: () => void,
+  onSeekToProgress: number => void,
 };
 
 const styles = {
-  container: {},
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  seekbar: {
+    flex: 1,
+  },
   playIcon: {
     height: Units.large,
     width: Units.large,
@@ -24,7 +34,9 @@ const styles = {
 
 export const PlaybackToolbar: SFC<PlaybackToolbarProps> = ({
   style,
+  assetID,
   onRequestPlay,
+  onSeekToProgress,
 }: PlaybackToolbarProps) => (
   <View style={[styles.container, style]}>
     <IconButton
@@ -32,6 +44,11 @@ export const PlaybackToolbar: SFC<PlaybackToolbarProps> = ({
       fillColor={Colors.icons.toolbar}
       onPress={onRequestPlay}
       icon={PlayIcon}
+    />
+    <PlaybackSeekbar
+      style={styles.seekbar}
+      assetID={assetID}
+      onSeekToProgress={onSeekToProgress}
     />
   </View>
 );

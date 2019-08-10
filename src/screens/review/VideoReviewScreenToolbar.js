@@ -53,7 +53,6 @@ export class VideoReviewScreenToolbar extends Component<
     Animated.timing(this.anim, {
       duration: 500,
       toValue: 0,
-      // easing: Easing.inOut(Easing.quad),
       easing: Easing.linear,
       useNativeDriver: true,
     }).start();
@@ -63,7 +62,6 @@ export class VideoReviewScreenToolbar extends Component<
     Animated.timing(this.anim, {
       duration: 500,
       toValue: 1,
-      // easing: Easing.inOut(Easing.quad),
       easing: Easing.linear,
       useNativeDriver: true,
     }).start();

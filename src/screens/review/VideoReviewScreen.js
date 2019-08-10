@@ -93,6 +93,7 @@ export const VideoReviewScreen: ComponentType<
     toast,
     videoCompositionRef,
     play,
+    seekToProgress,
     selectedAssetID,
     isExporting,
     isPortraitModeEnabled,
@@ -126,7 +127,11 @@ export const VideoReviewScreen: ComponentType<
         </TouchableWithoutFeedback>
         <VideoReviewScreenToolbar isVisible={isFullScreenVideo}>
           <View style={styles.toolbarCentered}>
-            <PlaybackToolbar onRequestPlay={play} />
+            <PlaybackToolbar
+              assetID={selectedAssetID}
+              onRequestPlay={play}
+              onSeekToProgress={seekToProgress}
+            />
           </View>
           <View style={styles.toolbarCentered}>
             <SelectableButton
