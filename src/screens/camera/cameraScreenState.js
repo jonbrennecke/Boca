@@ -11,7 +11,10 @@ import { autobind } from 'core-decorators';
 import { BlurApertureRange } from '../../constants';
 
 import type { ComponentType } from 'react';
-import type { CameraStateHOCProps } from '@jonbrennecke/react-native-camera';
+import type {
+  CameraStateHOCProps,
+  CameraPosition,
+} from '@jonbrennecke/react-native-camera';
 
 import type { ReturnType } from '../../types';
 
@@ -21,10 +24,12 @@ export type CameraScreenStateExtraProps = {
   isDepthPreviewEnabled: boolean,
   activeCameraSetting: $Keys<typeof CameraSettingIdentifiers>,
   setActiveCameraSetting: ($Keys<typeof CameraSettingIdentifiers>) => void,
+  cameraPosition: CameraPosition,
   presentCameraFormatModal: () => void,
   dismissCameraFormatModal: () => void,
   enableDepthPreview: () => void,
   disableDepthPreview: () => void,
+  switchCameraPosition: () => void,
 };
 
 export type CameraScreenStateOwnProps = {};
@@ -33,6 +38,7 @@ export type CameraScreenState = {
   activeCameraSetting: $Keys<typeof CameraSettingIdentifiers>,
   isFormatModalVisible: boolean,
   isDepthPreviewEnabled: boolean,
+  cameraPosition: CameraPosition,
 };
 
 export function wrapWithCameraScreenState<
@@ -51,10 +57,11 @@ export function wrapWithCameraScreenState<
   > {
     cameraRef = createRef();
 
-    state = {
+    state: $Exact<CameraScreenState> = {
       activeCameraSetting: CameraSettingIdentifiers.Exposure,
-      showFormatModal: false,
-      showDepthPreview: false,
+      isFormatModalVisible: false,
+      isDepthPreviewEnabled: false,
+      cameraPosition: 'front',
     };
 
     async componentDidMount() {
@@ -91,6 +98,12 @@ export function wrapWithCameraScreenState<
     enableDepthPreview = () => this.setState({ isDepthPreviewEnabled: true });
     disableDepthPreview = () => this.setState({ isDepthPreviewEnabled: false });
 
+    switchCameraPosition = () =>
+      this.setState({
+        cameraPosition:
+          this.state.cameraPosition === 'front' ? 'back' : 'front',
+      });
+
     render() {
       return (
         <WrappedComponent
@@ -102,6 +115,7 @@ export function wrapWithCameraScreenState<
           dismissCameraFormatModal={this.dismissCameraFormatModal}
           enableDepthPreview={this.enableDepthPreview}
           disableDepthPreview={this.disableDepthPreview}
+          switchCameraPosition={this.switchCameraPosition}
         />
       );
     }

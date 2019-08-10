@@ -18,12 +18,15 @@ import {
   ScreenGradients,
   BlurApertureInput,
   makeNormalizedValueFormatter,
+  IconButton,
 } from '../../components';
+import { SwitchCameraIcon } from '../../components/icons';
 import {
   Units,
   ScreenParams,
   Screens,
   BlurApertureRange,
+  Colors,
 } from '../../constants';
 
 import type { ComponentType } from 'react';
@@ -82,6 +85,10 @@ const styles = {
     width: '100%',
     zIndex: 2,
   },
+  iconButton: {
+    height: Units.large,
+    width: Units.large,
+  },
 };
 
 const pushReviewScreen = currentComponentId => {
@@ -111,6 +118,8 @@ export const CameraScreen: ComponentType<
     disableDepthPreview,
     setBlurAperture,
     blurAperture,
+    cameraPosition,
+    switchCameraPosition,
   }) => (
     <SafeAreaView style={[styles.container, style]}>
       <StatusBar barStyle="light-content" />
@@ -129,7 +138,7 @@ export const CameraScreen: ComponentType<
           <Camera
             style={styles.flex}
             ref={cameraRef}
-            cameraPosition="front"
+            cameraPosition={cameraPosition}
             previewMode={isDepthPreviewEnabled ? 'depth' : 'portraitMode'}
             resizeMode="scaleAspectWidth"
             blurAperture={blurAperture}
@@ -174,7 +183,14 @@ export const CameraScreen: ComponentType<
                 }
               />
             </View>
-            <View style={styles.captureRowItem} />
+            <View style={styles.captureRowItem}>
+              <IconButton
+                style={styles.iconButton}
+                fillColor={Colors.icons.toolbar}
+                onPress={switchCameraPosition}
+                icon={SwitchCameraIcon}
+              />
+            </View>
           </View>
         </View>
       </CameraScreenOnboarding>
