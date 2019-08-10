@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { PureComponent, createRef } from 'react';
 import { ScrollView, View, Dimensions } from 'react-native';
 import times from 'lodash/times';
 import clamp from 'lodash/clamp';
@@ -11,13 +11,14 @@ import { hexToRgbaString } from '../../utils/Color';
 import { BlurApertureInputTick } from './BlurApertureInputTick';
 import { BlurApertureInputTickLabel } from './BlurApertureInputTickLabel';
 
-import type { SFC, Style } from '../../types';
+import type { Style } from '../../types';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 export type BlurApertureInputProps = {
   style?: ?Style,
   value: number,
+  initialValue?: number,
   gradientColorHex?: string,
   gradientStartOpacity?: number,
   min: number,
@@ -79,89 +80,116 @@ const styles = {
   },
 };
 
-export const BlurApertureInput: SFC<BlurApertureInputProps> = ({
-  style,
-  value,
-  gradientColorHex = '#000',
-  gradientStartOpacity = 1,
-  min,
-  max,
-  numberOfTicks = 101,
-  isIntegerValued = shouldDisplayIntegerValues(min, max, numberOfTicks),
-  formatValue = makeDefaultValueFormatter(isIntegerValued),
-  onSelectValue,
-}: BlurApertureInputProps) => {
-  const onScroll = ({ nativeEvent }) => {
+export class BlurApertureInput extends PureComponent<BlurApertureInputProps> {
+  scrollViewRef = createRef();
+
+  componentDidMount() {
+    if (!this.scrollViewRef.current) {
+      return;
+    }
+    const scrollView: ScrollView = this.scrollViewRef.current;
+    const { value, min, max } = this.props;
+    const valuePercent = (value - min) / (max - min);
+    scrollView.scrollTo({ x: SCREEN_WIDTH * valuePercent, y: 0, animated: true });
+  }
+
+  onScroll = ({ nativeEvent }: any) => {
     if (!nativeEvent) {
       return;
     }
+    const { min, max, isIntegerValued, onSelectValue } = this.props;
     const { contentOffset, contentSize, layoutMeasurement } = nativeEvent;
     const percent =
       contentOffset.x / (contentSize.width - layoutMeasurement.width);
     const scaled = percent * (max - min) + min;
     const value = clamp(isIntegerValued ? round(scaled) : scaled, min, max);
     onSelectValue(value);
-  };
-  const tickWidth = 2 + Units.extraSmall * 2;
-  const contentOffset = SCREEN_WIDTH / 2 - tickWidth * 0.5;
-  return (
-    <View style={[styles.container, style]}>
-      <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.scrollViewContent}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        onScroll={onScroll}
-        scrollEventThrottle={16}
-      >
-        <View style={{ width: contentOffset }} />
-        {times(numberOfTicks).map((n, i) => {
-          const tickValue = n / numberOfTicks * (max - min) + min;
-          const tickPercent = (value - min) / (max - min);
-          const valuePercent = (tickValue - min) / (max - min);
-          const valueDelta = Math.abs(tickPercent - valuePercent);
-          const selectedIndex = Math.floor(
-            (value - min) * numberOfTicks / (max - min)
-          );
-          return (
-            <View key={`${n}`}>
-              <BlurApertureInputTick
-                tickIndex={i}
-                isCenter={i === selectedIndex}
-                valueDelta={valueDelta}
-              />
-              {i % 5 === 0 && (
-                <BlurApertureInputTickLabel
-                  text={formatValue(tickValue)}
+  }
+
+  viewDidLayout = ({ nativeEvent: { layout } }: any) => {
+    if (!this.scrollViewRef.current) {
+      return;
+    }
+    const scrollView: ScrollView = this.scrollViewRef.current;
+    const { value, min, max } = this.props;
+    const valuePercent = (value - min) / (max - min);
+    scrollView.scrollTo({ x: layout.width * valuePercent, y: 0, animated: true });
+  }
+
+  render() {
+    const {
+      style,
+      value,
+      gradientColorHex = '#000',
+      gradientStartOpacity = 1,
+      min,
+      max,
+      numberOfTicks = 101,
+      isIntegerValued = shouldDisplayIntegerValues(min, max, numberOfTicks),
+      formatValue = makeDefaultValueFormatter(isIntegerValued),
+    } = this.props;
+    const tickWidth = 2 + Units.extraSmall * 2;
+    const contentOffset = SCREEN_WIDTH / 2 - tickWidth * 0.5;
+    return (
+      <View style={[styles.container, style]} onLayout={this.viewDidLayout}>
+        <ScrollView
+          ref={this.scrollViewRef}
+          style={styles.scrollView}
+          contentContainerStyle={styles.scrollViewContent}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          onScroll={this.onScroll}
+          scrollEventThrottle={16}
+        >
+          <View style={{ width: contentOffset }} />
+          {times(numberOfTicks).map((n, i) => {
+            const tickValue = n / numberOfTicks * (max - min) + min;
+            const valuePercent = (value - min) / (max - min);
+            const tickValuePercent = (tickValue - min) / (max - min);
+            const valueDelta = Math.abs(tickValuePercent - valuePercent);
+            const selectedIndex = Math.floor(
+              (value - min) * numberOfTicks / (max - min)
+            );
+            return (
+              <View key={`${n}`}>
+                <BlurApertureInputTick
+                  tickIndex={i}
                   isCenter={i === selectedIndex}
                   valueDelta={valueDelta}
                 />
-              )}
-            </View>
-          );
-        })}
-        <View style={{ width: contentOffset }} />
-      </ScrollView>
-      <LinearGradient
-        pointerEvents="none"
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 0 }}
-        colors={[
-          hexToRgbaString(gradientColorHex, gradientStartOpacity),
-          hexToRgbaString(gradientColorHex, 0.0),
-        ]}
-        style={styles.leftGradient}
-      />
-      <LinearGradient
-        pointerEvents="none"
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 0 }}
-        colors={[
-          hexToRgbaString(gradientColorHex, 0.0),
-          hexToRgbaString(gradientColorHex, gradientStartOpacity),
-        ]}
-        style={styles.rightGradient}
-      />
-    </View>
-  );
-};
+                {i % 5 === 0 && (
+                  <BlurApertureInputTickLabel
+                    text={formatValue(tickValue)}
+                    isCenter={i === selectedIndex}
+                    valueDelta={valueDelta}
+                  />
+                )}
+              </View>
+            );
+          })}
+          <View style={{ width: contentOffset }} />
+        </ScrollView>
+        <LinearGradient
+          pointerEvents="none"
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+          colors={[
+            hexToRgbaString(gradientColorHex, gradientStartOpacity),
+            hexToRgbaString(gradientColorHex, 0.0),
+          ]}
+          style={styles.leftGradient}
+        />
+        <LinearGradient
+          pointerEvents="none"
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+          colors={[
+            hexToRgbaString(gradientColorHex, 0.0),
+            hexToRgbaString(gradientColorHex, gradientStartOpacity),
+          ]}
+          style={styles.rightGradient}
+        />
+      </View>
+    );
+  }
+}
