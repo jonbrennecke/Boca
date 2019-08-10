@@ -9,3 +9,4 @@ export * from './LinearProgressIndicator';
 export * from './Toast';
 export * from './BlurApertureInput';
 export * from './PlaybackToolbar';
+export * from './RangeInput';

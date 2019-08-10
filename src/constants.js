@@ -70,7 +70,9 @@ export const Colors = {
     white: '#fff',
     extraLight: '#eee',
     light: '#bbb',
+    medium: '#999',
     dark: '#333',
+    black: '#000'
   },
 };
 

@@ -17,7 +17,6 @@ import type { Element } from 'react';
 
 type Props = {
   returnToOriginalPosition?: boolean,
-  additionalOffset?: { x: number, y: number },
   canDrag?: boolean,
   vertical?: boolean,
   horizontal?: boolean,
@@ -70,23 +69,16 @@ export class DragInteraction extends Component<Props, State> {
     this.pan.addListener(this.panListener);
     this.panResponder = PanResponder.create({
       onStartShouldSetPanResponder: stubTrue,
+      onStartShouldSetPanResponderCapture: stubTrue,
       onMoveShouldSetPanResponder: stubTrue,
       onPanResponderMove: this.handleMove,
       onPanResponderGrant: this.handleGrant,
-      onPanResponderRelease: this.handleRelease, // TODO: check that handleRelease is NOT called twice
+      onPanResponderRelease: this.handleRelease,
     });
   }
 
   componentWillUnmount() {
     this.pan.removeAllListeners();
-  }
-
-  componentDidUpdate() {
-    if (this.props.additionalOffset && !this.state.isDragging) {
-      // const { x, y } = this.props.additionalOffset;
-      // this.pan.setOffset({ x, y });
-      // this.pan.setValue({ x: 0, y: 0 });
-    }
   }
 
   panListener(value: { x: number, y: number }) {

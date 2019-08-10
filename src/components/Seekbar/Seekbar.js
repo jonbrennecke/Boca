@@ -1,10 +1,12 @@
 // @flow
-import React, { Component } from 'react';
+import React, { Component, createElement } from 'react';
 import { View, StyleSheet } from 'react-native';
 import noop from 'lodash/noop';
 import clamp from 'lodash/clamp';
 
 import { DragInteraction } from '../DragInteraction';
+
+import type { ComponentType } from 'react';
 
 import type { Style, Children } from '../../types/react';
 
@@ -12,6 +14,7 @@ type Props = {
   style?: ?(Style | Array<Style>),
   children?: ?Children,
   handleStyle?: ?Style,
+  handleComponent?: ComponentType<*>,
   onSeekToProgress: (progress: number) => void,
   onDidBeginDrag?: () => void,
   onDidEndDrag?: (progress: number) => void,
@@ -80,12 +83,12 @@ export class Seekbar extends Component<Props, State> {
           onDragStart={this.dragDidStart}
           onDragEnd={this.dragDidEnd}
           onDragMove={this.dragDidMove}
-          additionalOffset={{
-            x: -5,
-            y: 0,
-          }}
           renderChildren={props => (
-            <View style={[styles.handle, this.props.handleStyle]} {...props} />
+            createElement(this.props.handleComponent || View, {
+              style: [styles.handle, this.props.handleStyle],
+              pointerEvents: 'none',
+              ...props
+            })
           )}
         />
       </View>
