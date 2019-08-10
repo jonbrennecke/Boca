@@ -11,16 +11,12 @@ type Size = {
 };
 
 type Props = {
-  style?: ?Style,
+  style?: ?(Style | Array<Style>),
   renderChildren: Size => Children,
 };
 
 type State = {
   viewSize: Size,
-};
-
-const styles = {
-  container: {},
 };
 
 // $FlowFixMe
@@ -38,10 +34,7 @@ export class MeasureContentsView extends Component<Props, State> {
 
   render() {
     return (
-      <View
-        onLayout={this.viewDidLayout}
-        style={[styles.container, this.props.style]}
-      >
+      <View onLayout={this.viewDidLayout} style={this.props.style}>
         {this.props.renderChildren(this.state.viewSize)}
       </View>
     );

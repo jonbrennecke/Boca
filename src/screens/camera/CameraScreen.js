@@ -12,10 +12,10 @@ import { Navigation } from 'react-native-navigation';
 
 import { wrapWithCameraScreenState } from './cameraScreenState';
 import { CameraScreenOnboarding } from './CameraScreenOnboarding';
+import { CameraPreviewDimensions } from './CameraPreviewDimensions';
 import { TopCameraControlsToolbar } from './TopCameraControlsToolbar';
 import {
   CameraFormatModal,
-  ScreenGradients,
   BlurApertureInput,
   makeNormalizedValueFormatter,
   IconButton,
@@ -55,9 +55,10 @@ const styles = {
     flexDirection: 'column',
   },
   cameraWrap: {
-    flex: 1,
-    borderRadius: Units.small,
+    width: '100%',
+    borderRadius: Units.extraSmall,
     overflow: 'hidden',
+    borderWidth: 1,
   },
   cameraControlsRow: {
     paddingVertical: Units.small,
@@ -134,7 +135,10 @@ export const CameraScreen: ComponentType<
             isDepthPreviewEnabled ? disableDepthPreview : enableDepthPreview
           }
         />
-        <View style={styles.cameraWrap}>
+        <CameraPreviewDimensions
+          style={styles.cameraWrap}
+          cameraFormat={format}
+        >
           <Camera
             style={styles.flex}
             ref={cameraRef}
@@ -143,7 +147,6 @@ export const CameraScreen: ComponentType<
             resizeMode="scaleAspectWidth"
             blurAperture={blurAperture}
           />
-          <ScreenGradients />
           <CameraFocusArea
             style={styles.absoluteFill}
             onRequestFocus={point => {
@@ -152,7 +155,7 @@ export const CameraScreen: ComponentType<
               }
             }}
           />
-        </View>
+        </CameraPreviewDimensions>
         <View style={styles.bottomControls}>
           <View style={styles.cameraControlsRow}>
             <BlurApertureInput

@@ -70,7 +70,7 @@ const styles = {
   },
   video: {
     flex: 1,
-    borderRadius: Units.small,
+    borderRadius: Units.extraSmall,
     overflow: 'hidden',
   },
   iconButton: {
