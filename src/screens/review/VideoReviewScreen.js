@@ -93,6 +93,7 @@ export const VideoReviewScreen: ComponentType<
     toast,
     videoCompositionRef,
     play,
+    selectedAsset,
     seekToProgress,
     selectedAssetID,
     isExporting,
@@ -129,6 +130,7 @@ export const VideoReviewScreen: ComponentType<
           <View style={styles.toolbarCentered}>
             <PlaybackToolbar
               assetID={selectedAssetID}
+              assetDuration={selectedAsset?.duration}
               onRequestPlay={play}
               onSeekToProgress={seekToProgress}
             />

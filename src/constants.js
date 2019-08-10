@@ -36,9 +36,9 @@ export const ScreenParams = {
 
 export const Units = {
   extraSmall: 3,
-  small: 8,
+  small: 10,
   medium: 16,
-  large: 30,
+  large: 33,
 };
 
 export const Colors = {

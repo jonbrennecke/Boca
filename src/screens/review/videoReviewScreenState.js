@@ -14,7 +14,10 @@ import {
 } from '@jonbrennecke/react-native-camera';
 
 import type { ComponentType } from 'react';
-import type { MediaStateHOCProps } from '@jonbrennecke/react-native-media';
+import type {
+  MediaObject,
+  MediaStateHOCProps,
+} from '@jonbrennecke/react-native-media';
 
 import type { ReturnType } from '../../types';
 
@@ -35,6 +38,7 @@ export type VideoReviewScreenState = {
 
 export type VideoReviewScreenStateExtraProps = {
   videoCompositionRef: ReturnType<typeof createRef>,
+  selectedAsset: ?MediaObject,
   play: () => void,
   pause: () => void,
   seekToProgress: (progress: number) => void,
@@ -176,6 +180,9 @@ export function wrapWithVideoReviewScreenState<
         <WrappedComponent
           {...this.props}
           {...this.state}
+          selectedAsset={this.props.assets.find(
+            a => a.assetID === this.state.selectedAssetID
+          )}
           videoCompositionRef={this.videoCompositionRef}
           play={this.play}
           pause={this.pause}

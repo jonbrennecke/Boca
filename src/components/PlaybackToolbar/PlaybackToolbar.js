@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 
 import { IconButton } from '../';
 import { PlayIcon } from '../icons';
@@ -13,6 +13,8 @@ import type { Style, SFC } from '../../types';
 export type PlaybackToolbarProps = {
   style?: ?Style,
   assetID: ?string,
+  assetDuration: ?number,
+  duration: ?number,
   onRequestPlay: () => void,
   onSeekToProgress: number => void,
 };
@@ -30,11 +32,22 @@ const styles = {
     width: Units.large,
     marginHorizontal: Units.small,
   },
+  durationWrap: {
+    width: Units.large,
+    marginHorizontal: Units.small,
+  },
+  durationText: {
+    color: Colors.solid.white,
+    fontSize: 10,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
 };
 
 export const PlaybackToolbar: SFC<PlaybackToolbarProps> = ({
   style,
   assetID,
+  assetDuration,
   onRequestPlay,
   onSeekToProgress,
 }: PlaybackToolbarProps) => (
@@ -50,5 +63,18 @@ export const PlaybackToolbar: SFC<PlaybackToolbarProps> = ({
       assetID={assetID}
       onSeekToProgress={onSeekToProgress}
     />
+    <View style={styles.durationWrap}>
+      <Text style={styles.durationText} numberOfLines={1}>
+        {formatDuration(assetDuration || 0)}
+      </Text>
+    </View>
   </View>
 );
+
+const formatDuration = (duration: number): string => {
+  const seconds = duration % 60;
+  const minutes = Math.round(duration / 60);
+  const minutesString = minutes.toFixed(0).padStart(2, '0');
+  const secondsString = seconds.toFixed(0).padStart(2, '0');
+  return `${minutesString}:${secondsString}`;
+};

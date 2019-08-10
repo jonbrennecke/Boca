@@ -17,7 +17,7 @@ export type PlaybackSeekbarProps = {
 const styles = {
   container: {
     height: 35,
-    borderWidth: 1.25,
+    borderWidth: 0.5,
     borderColor: Colors.solid.light,
     borderRadius: Units.extraSmall,
   },
@@ -37,7 +37,6 @@ const styles = {
     flex: 1,
   },
   background: {
-    opacity: 0.5,
     borderRadius: Units.extraSmall,
     ...StyleSheet.absoluteFillObject,
   },
