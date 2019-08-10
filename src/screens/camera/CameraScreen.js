@@ -3,7 +3,6 @@ import React from 'react';
 import { View, SafeAreaView, StyleSheet, StatusBar } from 'react-native';
 
 import {
-  CaptureButton,
   Camera,
   CameraFocusArea,
   ThumbnailButton,
@@ -13,6 +12,7 @@ import { Navigation } from 'react-native-navigation';
 import { wrapWithCameraScreenState } from './cameraScreenState';
 import { CameraScreenOnboarding } from './CameraScreenOnboarding';
 import { CameraPreviewDimensions } from './CameraPreviewDimensions';
+import { CameraCaptureButton } from './CameraCaptureButton';
 import { TopCameraControlsToolbar } from './TopCameraControlsToolbar';
 import {
   CameraFormatModal,
@@ -170,7 +170,7 @@ export const CameraScreen: ComponentType<
               </ThumbnailButton>
             </View>
             <View style={styles.captureRowItem}>
-              <CaptureButton
+              <CameraCaptureButton
                 onRequestBeginCapture={startCapture}
                 onRequestEndCapture={() =>
                   stopCapture({
