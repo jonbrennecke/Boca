@@ -14,7 +14,6 @@ export type PlaybackToolbarProps = {
   style?: ?Style,
   assetID: ?string,
   assetDuration: ?number,
-  duration: ?number,
   onRequestPlay: () => void,
   onSeekToProgress: number => void,
 };

@@ -51,7 +51,7 @@ export class VideoReviewScreenToolbar extends Component<
 
   animateIn() {
     Animated.timing(this.anim, {
-      duration: 500,
+      duration: 150,
       toValue: 0,
       easing: Easing.linear,
       useNativeDriver: true,
@@ -60,7 +60,7 @@ export class VideoReviewScreenToolbar extends Component<
 
   animateOut() {
     Animated.timing(this.anim, {
-      duration: 500,
+      duration: 150,
       toValue: 1,
       easing: Easing.linear,
       useNativeDriver: true,

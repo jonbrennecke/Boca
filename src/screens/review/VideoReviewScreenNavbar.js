@@ -70,7 +70,7 @@ export class VideoReviewScreenNavbar extends Component<
   animateIn() {
     StatusBar.setHidden(false, 'slide');
     Animated.timing(this.anim, {
-      duration: 500,
+      duration: 150,
       toValue: 0,
       easing: Easing.linear,
       // easing: Easing.inOut(Easing.quad),
@@ -81,7 +81,7 @@ export class VideoReviewScreenNavbar extends Component<
   animateOut() {
     StatusBar.setHidden(true, 'slide');
     Animated.timing(this.anim, {
-      duration: 500,
+      duration: 150,
       toValue: 1,
       easing: Easing.linear, //inOut(Easing.quad),
       useNativeDriver: true,
