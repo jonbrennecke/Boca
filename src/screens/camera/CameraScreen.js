@@ -146,7 +146,6 @@ export const CameraScreen: ComponentType<
           />
           <View style={styles.overCameraToolbar}>
             <BlurredSelectableButton
-              style={styles.depthButton}
               text="Depth"
               isSelected={isDepthPreviewEnabled}
               onPress={

@@ -1,8 +1,6 @@
 // @flow
 import React from 'react';
-import { View } from 'react-native';
-
-import { MeasureContentsView } from '../../components';
+import { View, Dimensions } from 'react-native';
 
 import type { CameraFormat } from '@jonbrennecke/react-native-camera';
 
@@ -14,10 +12,11 @@ export type CameraPreviewDimensionsProps = {
   cameraFormat: ?CameraFormat,
 };
 
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
+
 const styles = {
   aspectRatio: (
     cameraFormat: ?CameraFormat,
-    size: { height: number, width: number }
   ) => {
     if (!cameraFormat) {
       return {};
@@ -25,8 +24,8 @@ const styles = {
     const aspectRatio =
       cameraFormat.dimensions.width / cameraFormat.dimensions.height;
     return {
-      width: size.width,
-      height: size.width * aspectRatio,
+      width: SCREEN_WIDTH,
+      height: SCREEN_WIDTH * aspectRatio,
     };
   },
 };
@@ -36,10 +35,7 @@ export const CameraPreviewDimensions: SFC<CameraPreviewDimensionsProps> = ({
   children,
   cameraFormat,
 }: CameraPreviewDimensionsProps) => (
-  <MeasureContentsView
-    style={style}
-    renderChildren={size => (
-      <View style={styles.aspectRatio(cameraFormat, size)}>{children}</View>
-    )}
-  />
+  <View style={[styles.aspectRatio(cameraFormat), style]}>
+    {children}
+  </View>
 );
