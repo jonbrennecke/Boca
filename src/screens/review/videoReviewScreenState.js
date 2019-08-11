@@ -5,6 +5,7 @@ import { Linking } from 'react-native';
 import { createMediaStateHOC } from '@jonbrennecke/react-native-media';
 import { autobind } from 'core-decorators';
 import noop from 'lodash/noop';
+import uniqBy from 'lodash/uniqBy';
 
 import {
   addVideoCompositionExportProgressListener,
@@ -39,6 +40,7 @@ export type VideoReviewScreenState = {
 export type VideoReviewScreenStateExtraProps = {
   videoCompositionRef: ReturnType<typeof createRef>,
   selectedAsset: ?MediaObject,
+  assetsArray: Array<MediaObject>,
   play: () => void,
   pause: () => void,
   seekToProgress: (progress: number) => void,
@@ -177,11 +179,35 @@ export function wrapWithVideoReviewScreenState<
       }
     }
 
+    getAssetsAsArray() {
+      const assetsSorted = this.getSortedAssets();
+      return uniqBy(assetsSorted.toJSON(), 'assetID');
+    }
+
+    getSortedAssets() {
+      return this.getAssets()
+        .sortBy(assets => assets.creationDate)
+        .reverse();
+    }
+
+    getAssets() {
+      if (this.props.albumID) {
+        const albumAssets = this.props.albumAssets.get(this.props.albumID);
+        if (albumAssets) {
+          return this.props.assets.filter(a =>
+            albumAssets.assetIDs.includes(a.assetID)
+          );
+        }
+      }
+      return this.props.assets;
+    }
+
     render() {
       return (
         <WrappedComponent
           {...this.props}
           {...this.state}
+          assetsArray={this.getAssetsAsArray()}
           selectVideo={this.selectVideo}
           selectedAsset={this.props.assets.find(
             a => a.assetID === this.state.selectedAssetID

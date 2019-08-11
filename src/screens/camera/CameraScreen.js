@@ -16,7 +16,7 @@ import {
   BlurApertureInput,
   makeNormalizedValueFormatter,
   IconButton,
-  BlurredSelectableButton
+  BlurredSelectableButton,
 } from '../../components';
 import { SwitchCameraIcon } from '../../components/icons';
 import {
@@ -84,11 +84,11 @@ const styles = {
     alignItems: 'flex-end',
     justifyContent: 'center',
     paddingHorizontal: Units.small,
-    paddingVertical: 2 * Units.extraSmall
+    paddingVertical: 2 * Units.extraSmall,
   },
   depthButton: {
     backgroundColor: Colors.solid.white,
-  }
+  },
 };
 
 const pushReviewScreen = currentComponentId => {
@@ -152,7 +152,9 @@ export const CameraScreen: ComponentType<
               style={styles.depthButton}
               text="Depth"
               isSelected={isDepthPreviewEnabled}
-              onPress={isDepthPreviewEnabled ? disableDepthPreview : enableDepthPreview}
+              onPress={
+                isDepthPreviewEnabled ? disableDepthPreview : enableDepthPreview
+              }
             />
           </View>
         </CameraPreviewDimensions>

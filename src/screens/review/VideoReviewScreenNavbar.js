@@ -1,6 +1,13 @@
 // @flow
 import React, { Component } from 'react';
-import { Animated, View, Text, StyleSheet, Easing, StatusBar } from 'react-native';
+import {
+  Animated,
+  View,
+  Text,
+  StyleSheet,
+  Easing,
+  StatusBar,
+} from 'react-native';
 
 import { IconButton, CameraIcon, GridIcon } from '../../components';
 import { ExportProgressIndicator } from './ExportProgressIndicator';
@@ -59,8 +66,8 @@ const styles = {
     fontSize: 17,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: ColorTheme.dark.default.heading.h1Text
-  }
+    color: ColorTheme.dark.default.heading.h1Text,
+  },
 };
 
 export class VideoReviewScreenNavbar extends Component<
@@ -105,9 +112,7 @@ export class VideoReviewScreenNavbar extends Component<
             onPress={this.props.onRequestPushCameraScreen}
             icon={CameraIcon}
           />
-          <Text style={styles.titleText}>
-            Today
-          </Text>
+          <Text style={styles.titleText}>Today</Text>
           <IconButton
             style={styles.iconButton}
             fillColor={Colors.icons.toolbar}

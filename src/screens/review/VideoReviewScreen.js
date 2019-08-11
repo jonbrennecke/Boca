@@ -6,6 +6,8 @@ import {
   StatusBar,
   StyleSheet,
   View,
+  FlatList,
+  Dimensions,
 } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import noop from 'lodash/noop';
@@ -35,6 +37,8 @@ export type VideoReviewScreenProps = {
   style?: ?Style,
   componentId?: string,
 };
+
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 const styles = {
   flex: {
@@ -68,6 +72,8 @@ const styles = {
     flex: 1,
     paddingVertical: Units.small,
     backgroundColor: Colors.backgrounds.black,
+    width: SCREEN_WIDTH,
+    height: '100%',
   },
   video: {
     flex: 1,
@@ -78,6 +84,9 @@ const styles = {
     height: Units.large,
     width: Units.large,
     marginHorizontal: Units.small,
+  },
+  scrollView: {
+    flex: 1,
   },
 };
 
@@ -108,6 +117,7 @@ export const VideoReviewScreen: ComponentType<
   ({
     style,
     toast,
+    assetsArray,
     videoCompositionRef,
     play,
     selectedAsset,
@@ -139,17 +149,30 @@ export const VideoReviewScreen: ComponentType<
             })
           }
         />
-        <TouchableWithoutFeedback onPress={toggleFullScreenVideo}>
-          <View style={styles.videoWrap}>
-            <VideoComposition
-              ref={videoCompositionRef}
-              style={styles.video}
-              assetID={selectedAssetID}
-              enableDepthPreview={isDepthPreviewEnabled}
-              enablePortraitMode={isPortraitModeEnabled}
-            />
-          </View>
-        </TouchableWithoutFeedback>
+        {/* <TouchableWithoutFeedback onPress={toggleFullScreenVideo}> */}
+        <FlatList
+          style={styles.scrollView}
+          pagingEnabled
+          horizontal={true}
+          data={assetsArray}
+          keyExtractor={asset => asset.assetID}
+          removeClippedSubviews
+          initialNumToRender={1}
+          renderItem={({ item: asset }) => (
+            <View style={styles.videoWrap}>
+              {asset.assetID === selectedAssetID && (
+                <VideoComposition
+                  ref={videoCompositionRef}
+                  style={styles.video}
+                  assetID={selectedAssetID}
+                  enableDepthPreview={isDepthPreviewEnabled}
+                  enablePortraitMode={isPortraitModeEnabled}
+                />
+              )}
+            </View>
+          )}
+        />
+        {/* </TouchableWithoutFeedback> */}
         <VideoReviewScreenToolbar isVisible={isFullScreenVideo}>
           <View style={styles.toolbarCentered}>
             <PlaybackToolbar

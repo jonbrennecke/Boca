@@ -160,8 +160,8 @@ export const ColorTheme: ColorByTheme = {
           default: Colors.text.mediumDark,
           highlight: Colors.text.light,
           selected: Colors.text.dark,
-        }
-      }
+        },
+      },
     },
     modal: {
       heading: {
@@ -191,8 +191,8 @@ export const ColorTheme: ColorByTheme = {
           default: Colors.text.mediumDark,
           highlight: Colors.text.light,
           selected: Colors.text.dark,
-        }
-      }
+        },
+      },
     },
   },
   dark: {
@@ -224,8 +224,8 @@ export const ColorTheme: ColorByTheme = {
           default: Colors.text.mediumDark,
           highlight: Colors.text.light,
           selected: Colors.text.dark,
-        }
-      }
+        },
+      },
     },
     modal: {
       heading: {
@@ -255,8 +255,8 @@ export const ColorTheme: ColorByTheme = {
           default: Colors.text.mediumDark,
           highlight: Colors.text.light,
           selected: Colors.text.dark,
-        }
-      }
+        },
+      },
     },
   },
 };

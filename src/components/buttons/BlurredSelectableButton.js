@@ -48,8 +48,12 @@ export const BlurredSelectableButton: SFC<BlurredSelectableButtonProps> = ({
     onPress={onPress}
   >
     {/* <BlurView blurType="light" style={styles.flex}> */}
-      <Text style={styles.buttonText(isSelected ? colors.text.selected : colors.text.default)}>
-        {text.toLocaleUpperCase()}
-      </Text>
+    <Text
+      style={styles.buttonText(
+        isSelected ? colors.text.selected : colors.text.default
+      )}
+    >
+      {text.toLocaleUpperCase()}
+    </Text>
   </TouchableOpacity>
 );
