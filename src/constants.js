@@ -198,7 +198,7 @@ export const ColorTheme: ColorByTheme = {
   dark: {
     default: {
       heading: {
-        h1Text: Colors.text.mediumDark,
+        h1Text: Colors.text.light,
       },
       select: {
         option: {
