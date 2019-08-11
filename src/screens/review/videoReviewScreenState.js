@@ -49,6 +49,7 @@ export type VideoReviewScreenStateExtraProps = {
   toggleFullScreenVideo: () => void,
   exportComposition: () => void,
   selectVideo: (assetID?: string) => void,
+  loadNextAssets: () => void,
 } & VideoReviewScreenState;
 
 export function wrapWithVideoReviewScreenState<
@@ -184,6 +185,31 @@ export function wrapWithVideoReviewScreenState<
       return uniqBy(assetsSorted.toJSON(), 'assetID');
     }
 
+    loadNextAssets() {
+      this.loadNextAssetsAsync();
+    }
+
+    async loadNextAssetsAsync() {
+      const assetsSorted = this.getSortedAssets();
+      const lastAsset = assetsSorted.last();
+      if (!lastAsset) {
+        return;
+      }
+      await this.props.queryMedia({
+        mediaType: 'video',
+        creationDateQuery: {
+          date: lastAsset.creationDate,
+          equation: 'lessThan',
+        },
+        // TODO
+        // ...(this.props.albumID
+        //   ? {
+        //       albumID: this.props.albumID,
+        //     }
+        //   : {}),
+      });
+    }
+
     getSortedAssets() {
       return this.getAssets()
         .sortBy(assets => assets.creationDate)
@@ -207,6 +233,7 @@ export function wrapWithVideoReviewScreenState<
         <WrappedComponent
           {...this.props}
           {...this.state}
+          loadNextAssets={this.loadNextAssets}
           assetsArray={this.getAssetsAsArray()}
           selectVideo={this.selectVideo}
           selectedAsset={this.props.assets.find(

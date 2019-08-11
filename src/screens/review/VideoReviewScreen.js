@@ -6,8 +6,6 @@ import {
   StatusBar,
   StyleSheet,
   View,
-  FlatList,
-  Dimensions,
 } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import noop from 'lodash/noop';
@@ -26,6 +24,7 @@ import {
 } from '../../components';
 import { VideoReviewScreenToolbar } from './VideoReviewScreenToolbar';
 import { VideoReviewScreenNavbar } from './VideoReviewScreenNavbar';
+import { VideoReviewScreenFlatList } from './VideoReviewScreenFlatList';
 import { Units, Colors, Screens, ScreenParams } from '../../constants';
 import { wrapWithVideoReviewScreenState } from './videoReviewScreenState';
 
@@ -37,8 +36,6 @@ export type VideoReviewScreenProps = {
   style?: ?Style,
   componentId?: string,
 };
-
-const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 const styles = {
   flex: {
@@ -68,13 +65,6 @@ const styles = {
     borderTopStyle: 'solid',
     borderTopColor: Colors.borders.gray,
   },
-  videoWrap: {
-    flex: 1,
-    paddingVertical: Units.small,
-    backgroundColor: Colors.backgrounds.black,
-    width: SCREEN_WIDTH,
-    height: '100%',
-  },
   video: {
     flex: 1,
     borderRadius: Units.extraSmall,
@@ -84,9 +74,6 @@ const styles = {
     height: Units.large,
     width: Units.large,
     marginHorizontal: Units.small,
-  },
-  scrollView: {
-    flex: 1,
   },
 };
 
@@ -134,6 +121,7 @@ export const VideoReviewScreen: ComponentType<
     exportProgress,
     exportComposition,
     selectVideo,
+    loadNextAssets
   }) => (
     <SafeAreaView style={[styles.container, style]}>
       <StatusBar barStyle="light-content" />
@@ -150,27 +138,20 @@ export const VideoReviewScreen: ComponentType<
           }
         />
         {/* <TouchableWithoutFeedback onPress={toggleFullScreenVideo}> */}
-        <FlatList
-          style={styles.scrollView}
-          pagingEnabled
-          horizontal={true}
-          data={assetsArray}
-          keyExtractor={asset => asset.assetID}
-          removeClippedSubviews
-          initialNumToRender={1}
-          renderItem={({ item: asset }) => (
-            <View style={styles.videoWrap}>
-              {asset.assetID === selectedAssetID && (
-                <VideoComposition
-                  ref={videoCompositionRef}
-                  style={styles.video}
-                  assetID={selectedAssetID}
-                  enableDepthPreview={isDepthPreviewEnabled}
-                  enablePortraitMode={isPortraitModeEnabled}
-                />
-              )}
-            </View>
-          )}
+        <VideoReviewScreenFlatList
+          style={styles.flex}
+          assets={assetsArray}
+          selectedAssetID={selectedAssetID}
+          renderItem={() => {
+            <VideoComposition
+              ref={videoCompositionRef}
+              style={styles.video}
+              assetID={selectedAssetID}
+              enableDepthPreview={isDepthPreviewEnabled}
+              enablePortraitMode={isPortraitModeEnabled}
+            />
+          }}
+          onRequestLoadMore={loadNextAssets}
         />
         {/* </TouchableWithoutFeedback> */}
         <VideoReviewScreenToolbar isVisible={isFullScreenVideo}>

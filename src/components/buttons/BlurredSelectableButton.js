@@ -24,7 +24,7 @@ const styles = {
     borderRadius: 2 * Units.small,
     paddingVertical: Units.small,
     paddingHorizontal: Units.large,
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
   absoluteFill: {
     ...StyleSheet.absoluteFillObject,
