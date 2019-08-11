@@ -86,9 +86,6 @@ const styles = {
     paddingHorizontal: Units.small,
     paddingVertical: 2 * Units.extraSmall,
   },
-  depthButton: {
-    backgroundColor: Colors.solid.white,
-  },
 };
 
 const pushReviewScreen = currentComponentId => {
