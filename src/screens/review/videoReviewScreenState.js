@@ -46,6 +46,7 @@ export type VideoReviewScreenStateExtraProps = {
   toggleDepthPreview: () => void,
   toggleFullScreenVideo: () => void,
   exportComposition: () => void,
+  selectVideo: (assetID?: string) => void,
 } & VideoReviewScreenState;
 
 export function wrapWithVideoReviewScreenState<
@@ -91,10 +92,11 @@ export function wrapWithVideoReviewScreenState<
         mediaType: 'video',
         // limit: 1,
       });
-      this.setState({
-        selectedAssetID: this.props.assets.toArray()[0]?.assetID,
-      });
+      this.selectVideo(this.props.assets.toArray()[0]?.assetID);
     }
+
+    selectVideo = (assetID?: string) =>
+      this.setState({ selectedAssetID: assetID });
 
     togglePortraitMode() {
       this.setState({
@@ -180,6 +182,7 @@ export function wrapWithVideoReviewScreenState<
         <WrappedComponent
           {...this.props}
           {...this.state}
+          selectVideo={this.selectVideo}
           selectedAsset={this.props.assets.find(
             a => a.assetID === this.state.selectedAssetID
           )}

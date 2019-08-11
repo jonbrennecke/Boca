@@ -5,7 +5,7 @@ import noop from 'lodash/noop';
 import { Navigation } from 'react-native-navigation';
 import { ThumbnailLoadMoreGrid } from '@jonbrennecke/react-native-media';
 
-import { Colors } from '../../constants';
+import { Colors, Screens } from '../../constants';
 import { wrapWithMediaExplorerState } from './mediaExplorerState';
 import { MediaExplorerScreenNavbar } from './MediaExplorerScreenNavbar';
 
@@ -35,27 +35,21 @@ const styles = {
   },
 };
 
-const pushCameraScreen = currentComponentId => {
-  Navigation.pop(currentComponentId);
+const pushCameraScreen = () => {
+  Navigation.dismissAllModals();
+  Navigation.popToRoot(Screens.CameraScreen);
 };
 
 // eslint-disable-next-line flowtype/generic-spacing
 export const MediaExplorerScreen: ComponentType<
   MediaExplorerScreenProps
 > = wrapWithMediaExplorerState(
-  ({
-    componentId,
-    style,
-    assets,
-    assetsArray,
-    loadNextAssets,
-    onSelectVideo = noop,
-  }) => (
+  ({ style, assets, assetsArray, loadNextAssets, onSelectVideo = noop }) => (
     <SafeAreaView style={[styles.container, style]}>
       <StatusBar barStyle="light-content" />
       <View style={styles.flex}>
         <MediaExplorerScreenNavbar
-          onRequestPushCameraScreen={() => pushCameraScreen(componentId)}
+          onRequestPushCameraScreen={pushCameraScreen}
         />
         <ThumbnailLoadMoreGrid
           style={styles.grid}

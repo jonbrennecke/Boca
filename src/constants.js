@@ -9,6 +9,7 @@ export const Screens = {
 
 const defaultScreenOptions = {
   layout: {
+    backgroundColor: '#000',
     orientation: ['portrait'],
   },
   topBar: {

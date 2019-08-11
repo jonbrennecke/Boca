@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import noop from 'lodash/noop';
+import merge from 'lodash/merge';
 
 import { VideoComposition } from '@jonbrennecke/react-native-camera';
 
@@ -84,11 +85,20 @@ const pushCameraScreen = currentComponentId => {
   Navigation.pop(currentComponentId);
 };
 
-const pushMediaExplorerScreen = currentComponentId => {
-  Navigation.push(
-    currentComponentId,
-    ScreenParams[Screens.MediaExplorerScreen]
+const pushMediaExplorerModal = (onSelectVideo: (assetID: string) => void) => {
+  Navigation.showModal(
+    merge(ScreenParams[Screens.MediaExplorerScreen], {
+      component: {
+        passProps: {
+          onSelectVideo,
+        },
+      },
+    })
   );
+};
+
+const dismissMediaExplorerModal = () => {
+  Navigation.dismissModal(Screens.MediaExplorerScreen);
 };
 
 // eslint-disable-next-line flowtype/generic-spacing
@@ -113,6 +123,7 @@ export const VideoReviewScreen: ComponentType<
     componentId,
     exportProgress,
     exportComposition,
+    selectVideo,
   }) => (
     <SafeAreaView style={[styles.container, style]}>
       <StatusBar barStyle="light-content" />
@@ -122,7 +133,10 @@ export const VideoReviewScreen: ComponentType<
           exportProgress={exportProgress}
           onRequestPushCameraScreen={() => pushCameraScreen(componentId)}
           onRequestPushMediaExplorerScreen={() =>
-            pushMediaExplorerScreen(componentId)
+            pushMediaExplorerModal(assetID => {
+              selectVideo(assetID);
+              dismissMediaExplorerModal();
+            })
           }
         />
         <TouchableWithoutFeedback onPress={toggleFullScreenVideo}>
