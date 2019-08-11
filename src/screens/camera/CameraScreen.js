@@ -16,6 +16,7 @@ import {
   BlurApertureInput,
   makeNormalizedValueFormatter,
   IconButton,
+  BlurredSelectableButton
 } from '../../components';
 import { SwitchCameraIcon } from '../../components/icons';
 import {
@@ -75,6 +76,19 @@ const styles = {
     height: Units.large,
     width: Units.large,
   },
+  overCameraToolbar: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    alignItems: 'flex-end',
+    justifyContent: 'center',
+    paddingHorizontal: Units.small,
+    paddingVertical: 2 * Units.extraSmall
+  },
+  depthButton: {
+    backgroundColor: Colors.solid.white,
+  }
 };
 
 const pushReviewScreen = currentComponentId => {
@@ -99,7 +113,6 @@ export const CameraScreen: ComponentType<
     supportedFormats,
     hasCameraPermissions,
     requestCameraPermissions,
-    presentCameraFormatModal,
     dismissCameraFormatModal,
     enableDepthPreview,
     disableDepthPreview,
@@ -114,13 +127,6 @@ export const CameraScreen: ComponentType<
         hasCameraPermissions={hasCameraPermissions}
         onRequestCameraPermissions={requestCameraPermissions}
       >
-        <TopCameraControlsToolbar
-          style={styles.topToolbar}
-          onRequestShowFormatDialog={presentCameraFormatModal}
-          onRequestToggleDepthPreview={
-            isDepthPreviewEnabled ? disableDepthPreview : enableDepthPreview
-          }
-        />
         <CameraPreviewDimensions
           style={styles.cameraWrap}
           cameraFormat={format}
@@ -141,6 +147,14 @@ export const CameraScreen: ComponentType<
               }
             }}
           />
+          <View style={styles.overCameraToolbar}>
+            <BlurredSelectableButton
+              style={styles.depthButton}
+              text="Depth"
+              isSelected={isDepthPreviewEnabled}
+              onPress={isDepthPreviewEnabled ? disableDepthPreview : enableDepthPreview}
+            />
+          </View>
         </CameraPreviewDimensions>
         <View style={styles.bottomControls}>
           <View style={styles.cameraControlsRow}>

@@ -73,5 +73,8 @@
     "transform": {
       "^.+\\.js$": "<rootDir>/node_modules/react-native/jest/preprocessor.js"
     }
+  },
+  "resolutions": {
+    "react-native-blur": "3.2.2"
   }
 }

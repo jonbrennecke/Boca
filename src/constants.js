@@ -93,13 +93,18 @@ export type ColorByTheme = {
 
 export type ColorByPresentation = {
   default: ColorByComponent,
-  modal: ColorByComponent,
+  modal: ColorByComponent, // TODO: should be actionSheet, not modal
 };
 
 export type ColorByComponent = {
   heading: ColorByHeadingType,
   select: ColorBySelectSubComponent,
-  // actionButton: ColorByButtonState,
+  button: ColorByButtonSubComponent,
+};
+
+export type ColorByButtonSubComponent = {
+  background: ColorByButtonState,
+  text: ColorByButtonState,
 };
 
 export type ColorBySelectSubComponent = {
@@ -145,6 +150,18 @@ export const ColorTheme: ColorByTheme = {
           },
         },
       },
+      button: {
+        background: {
+          default: Colors.text.light,
+          highlight: Colors.text.light,
+          selected: Colors.text.light,
+        },
+        text: {
+          default: Colors.text.mediumDark,
+          highlight: Colors.text.light,
+          selected: Colors.text.dark,
+        }
+      }
     },
     modal: {
       heading: {
@@ -164,6 +181,18 @@ export const ColorTheme: ColorByTheme = {
           },
         },
       },
+      button: {
+        background: {
+          default: Colors.text.light,
+          highlight: Colors.text.light,
+          selected: Colors.text.light,
+        },
+        text: {
+          default: Colors.text.mediumDark,
+          highlight: Colors.text.light,
+          selected: Colors.text.dark,
+        }
+      }
     },
   },
   dark: {
@@ -185,6 +214,18 @@ export const ColorTheme: ColorByTheme = {
           },
         },
       },
+      button: {
+        background: {
+          default: Colors.text.light,
+          highlight: Colors.text.light,
+          selected: Colors.text.light,
+        },
+        text: {
+          default: Colors.text.mediumDark,
+          highlight: Colors.text.light,
+          selected: Colors.text.dark,
+        }
+      }
     },
     modal: {
       heading: {
@@ -204,6 +245,18 @@ export const ColorTheme: ColorByTheme = {
           },
         },
       },
+      button: {
+        background: {
+          default: Colors.text.light,
+          highlight: Colors.text.light,
+          selected: Colors.text.light,
+        },
+        text: {
+          default: Colors.text.mediumDark,
+          highlight: Colors.text.light,
+          selected: Colors.text.dark,
+        }
+      }
     },
   },
 };

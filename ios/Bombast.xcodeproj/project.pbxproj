@@ -21,7 +21,6 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
-		280D9AF368274EB5BD6D1A74 /* libRNBlur.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 265AC1ED3D1E41B2A6D0A308 /* libRNBlur.a */; };
 		4F8355BBACD74452BF972DE7 /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A22375545D454A2599361EEB /* libReactNativeConfig.a */; };
 		6162BF639C454225B3292EA3 /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 30628CDE7DC846A981EE0F0D /* libRNSVG.a */; };
 		7F6FAEAC8FD64ACF9028F3B2 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B303F65E6CA4EE7B72368C8 /* libBVLinearGradient.a */; };
@@ -31,6 +30,7 @@
 		B7101DC27E5E45079C535488 /* libHSReactNativeMedia.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DB943A4E9F44E6BE1F603D /* libHSReactNativeMedia.a */; };
 		FC1B32CA22FCCECF0095B9A5 /* libHSReactNativeCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FCCA731E22F4B6FB00163C4E /* libHSReactNativeCamera.a */; };
 		FC254DFF21CDB03800A9C901 /* libReactNativeNavigation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC983DD521CDAF6800063476 /* libReactNativeNavigation.a */; };
+		FC366D2E23008674002709A9 /* libRNBlur.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE471D822F3B431004F4A4C /* libRNBlur.a */; };
 		FC5BADCB22ECC3D10077855E /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5BADCA22ECC3D10077855E /* Empty.swift */; };
 		FC6EA7D621CEA44D007C3B3E /* PassionOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC6EA7AC21CEA44D007C3B3E /* PassionOne-Regular.ttf */; };
 		FC6EA7D721CEA44D007C3B3E /* PT_Sans-Web-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC6EA7D421CEA44D007C3B3E /* PT_Sans-Web-Bold.ttf */; };
@@ -452,6 +452,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC366D2E23008674002709A9 /* libRNBlur.a in Frameworks */,
 				FC1B32CA22FCCECF0095B9A5 /* libHSReactNativeCamera.a in Frameworks */,
 				FC254DFF21CDB03800A9C901 /* libReactNativeNavigation.a in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
@@ -469,7 +470,6 @@
 				4F8355BBACD74452BF972DE7 /* libReactNativeConfig.a in Frameworks */,
 				B7101DC27E5E45079C535488 /* libHSReactNativeMedia.a in Frameworks */,
 				85BB55A0FE2D4A619258098E /* libHSAnimatedUI.a in Frameworks */,
-				280D9AF368274EB5BD6D1A74 /* libRNBlur.a in Frameworks */,
 				6162BF639C454225B3292EA3 /* libRNSVG.a in Frameworks */,
 				7F6FAEAC8FD64ACF9028F3B2 /* libBVLinearGradient.a in Frameworks */,
 			);
