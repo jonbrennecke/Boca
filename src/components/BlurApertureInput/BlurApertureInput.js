@@ -90,7 +90,11 @@ export class BlurApertureInput extends PureComponent<BlurApertureInputProps> {
     const scrollView: ScrollView = this.scrollViewRef.current;
     const { value, min, max } = this.props;
     const valuePercent = (value - min) / (max - min);
-    scrollView.scrollTo({ x: SCREEN_WIDTH * valuePercent, y: 0, animated: true });
+    scrollView.scrollTo({
+      x: SCREEN_WIDTH * valuePercent,
+      y: 0,
+      animated: true,
+    });
   }
 
   onScroll = ({ nativeEvent }: any) => {
@@ -104,7 +108,7 @@ export class BlurApertureInput extends PureComponent<BlurApertureInputProps> {
     const scaled = percent * (max - min) + min;
     const value = clamp(isIntegerValued ? round(scaled) : scaled, min, max);
     onSelectValue(value);
-  }
+  };
 
   viewDidLayout = ({ nativeEvent: { layout } }: any) => {
     if (!this.scrollViewRef.current) {
@@ -113,8 +117,12 @@ export class BlurApertureInput extends PureComponent<BlurApertureInputProps> {
     const scrollView: ScrollView = this.scrollViewRef.current;
     const { value, min, max } = this.props;
     const valuePercent = (value - min) / (max - min);
-    scrollView.scrollTo({ x: layout.width * valuePercent, y: 0, animated: true });
-  }
+    scrollView.scrollTo({
+      x: layout.width * valuePercent,
+      y: 0,
+      animated: true,
+    });
+  };
 
   render() {
     const {

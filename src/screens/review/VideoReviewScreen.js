@@ -23,7 +23,7 @@ import {
 } from '../../components';
 import { VideoReviewScreenToolbar } from './VideoReviewScreenToolbar';
 import { VideoReviewScreenNavbar } from './VideoReviewScreenNavbar';
-import { Units, Colors } from '../../constants';
+import { Units, Colors, Screens, ScreenParams } from '../../constants';
 import { wrapWithVideoReviewScreenState } from './videoReviewScreenState';
 
 import type { ComponentType } from 'react';
@@ -84,6 +84,13 @@ const pushCameraScreen = currentComponentId => {
   Navigation.pop(currentComponentId);
 };
 
+const pushMediaExplorerScreen = currentComponentId => {
+  Navigation.push(
+    currentComponentId,
+    ScreenParams[Screens.MediaExplorerScreen]
+  );
+};
+
 // eslint-disable-next-line flowtype/generic-spacing
 export const VideoReviewScreen: ComponentType<
   VideoReviewScreenProps
@@ -114,6 +121,9 @@ export const VideoReviewScreen: ComponentType<
           isVisible={isFullScreenVideo}
           exportProgress={exportProgress}
           onRequestPushCameraScreen={() => pushCameraScreen(componentId)}
+          onRequestPushMediaExplorerScreen={() =>
+            pushMediaExplorerScreen(componentId)
+          }
         />
         <TouchableWithoutFeedback onPress={toggleFullScreenVideo}>
           <View style={styles.videoWrap}>

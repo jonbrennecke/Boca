@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { Animated, View, StyleSheet, Easing, StatusBar } from 'react-native';
 
-import { IconButton, CameraIcon } from '../../components';
+import { IconButton, CameraIcon, GridIcon } from '../../components';
 import { ExportProgressIndicator } from './ExportProgressIndicator';
 import { Units, Colors } from '../../constants';
 
@@ -13,6 +13,7 @@ export type VideoReviewScreenNavbarProps = {
   isVisible: boolean,
   exportProgress: number,
   onRequestPushCameraScreen: () => void,
+  onRequestPushMediaExplorerScreen: () => void,
 };
 
 const styles = {
@@ -21,7 +22,7 @@ const styles = {
     paddingHorizontal: Units.small,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomStyle: 'solid',
     borderBottomColor: Colors.borders.gray,
@@ -73,7 +74,6 @@ export class VideoReviewScreenNavbar extends Component<
       duration: 150,
       toValue: 0,
       easing: Easing.linear,
-      // easing: Easing.inOut(Easing.quad),
       useNativeDriver: true,
     }).start();
   }
@@ -83,7 +83,7 @@ export class VideoReviewScreenNavbar extends Component<
     Animated.timing(this.anim, {
       duration: 150,
       toValue: 1,
-      easing: Easing.linear, //inOut(Easing.quad),
+      easing: Easing.linear,
       useNativeDriver: true,
     }).start();
   }
@@ -98,6 +98,12 @@ export class VideoReviewScreenNavbar extends Component<
             fillColor={Colors.icons.toolbar}
             onPress={this.props.onRequestPushCameraScreen}
             icon={CameraIcon}
+          />
+          <IconButton
+            style={styles.iconButton}
+            fillColor={Colors.icons.toolbar}
+            onPress={this.props.onRequestPushMediaExplorerScreen}
+            icon={GridIcon}
           />
         </View>
         <ExportProgressIndicator progress={this.props.exportProgress} />

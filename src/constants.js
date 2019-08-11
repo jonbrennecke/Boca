@@ -4,6 +4,7 @@ export const APP_BUNDLE_ID = 'com.jonbrennecke.portrait'; // TODO use DeviceInfo
 export const Screens = {
   CameraScreen: `${APP_BUNDLE_ID}.CameraScreen`,
   VideoReviewScreen: `${APP_BUNDLE_ID}.VideoReviewScreen`,
+  MediaExplorerScreen: `${APP_BUNDLE_ID}.MediaExplorerScreen`,
 };
 
 const defaultScreenOptions = {
@@ -28,6 +29,14 @@ export const ScreenParams = {
     component: {
       name: Screens.VideoReviewScreen,
       id: Screens.VideoReviewScreen,
+      passProps: {},
+      options: defaultScreenOptions,
+    },
+  },
+  [Screens.MediaExplorerScreen]: {
+    component: {
+      name: Screens.MediaExplorerScreen,
+      id: Screens.MediaExplorerScreen,
       passProps: {},
       options: defaultScreenOptions,
     },
@@ -201,5 +210,5 @@ export const ColorTheme: ColorByTheme = {
 export const BlurApertureRange = {
   lowerBound: 1.5,
   upperBound: 20,
-  initialValue: 6
+  initialValue: 6,
 };

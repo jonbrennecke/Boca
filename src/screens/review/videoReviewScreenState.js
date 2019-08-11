@@ -89,7 +89,7 @@ export function wrapWithVideoReviewScreenState<
       // TODO: query videos in the app's hidden folder
       await this.props.queryMedia({
         mediaType: 'video',
-        limit: 1,
+        // limit: 1,
       });
       this.setState({
         selectedAssetID: this.props.assets.toArray()[0]?.assetID,
