@@ -221,7 +221,7 @@ export const ColorTheme: ColorByTheme = {
           selected: Colors.text.light,
         },
         text: {
-          default: Colors.text.mediumDark,
+          default: Colors.text.light,
           highlight: Colors.text.light,
           selected: Colors.text.dark,
         },

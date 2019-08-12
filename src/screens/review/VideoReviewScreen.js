@@ -121,7 +121,7 @@ export const VideoReviewScreen: ComponentType<
     exportProgress,
     exportComposition,
     selectVideo,
-    loadNextAssets
+    loadNextAssets,
   }) => (
     <SafeAreaView style={[styles.container, style]}>
       <StatusBar barStyle="light-content" />
@@ -137,23 +137,23 @@ export const VideoReviewScreen: ComponentType<
             })
           }
         />
-        {/* <TouchableWithoutFeedback onPress={toggleFullScreenVideo}> */}
         <VideoReviewScreenFlatList
           style={styles.flex}
           assets={assetsArray}
           selectedAssetID={selectedAssetID}
-          renderItem={() => {
-            <VideoComposition
-              ref={videoCompositionRef}
-              style={styles.video}
-              assetID={selectedAssetID}
-              enableDepthPreview={isDepthPreviewEnabled}
-              enablePortraitMode={isPortraitModeEnabled}
-            />
-          }}
+          renderItem={asset => (
+            <TouchableWithoutFeedback onPress={toggleFullScreenVideo}>
+              <VideoComposition
+                ref={videoCompositionRef}
+                style={styles.video}
+                assetID={asset.assetID}
+                previewMode={isDepthPreviewEnabled ? 'depth' : 'portraitMode'}
+              />
+            </TouchableWithoutFeedback>
+          )}
           onRequestLoadMore={loadNextAssets}
+          onSelectAsset={asset => selectVideo(asset.assetID)}
         />
-        {/* </TouchableWithoutFeedback> */}
         <VideoReviewScreenToolbar isVisible={isFullScreenVideo}>
           <View style={styles.toolbarCentered}>
             <PlaybackToolbar

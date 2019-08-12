@@ -15,9 +15,7 @@ export type CameraPreviewDimensionsProps = {
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 const styles = {
-  aspectRatio: (
-    cameraFormat: ?CameraFormat,
-  ) => {
+  aspectRatio: (cameraFormat: ?CameraFormat) => {
     if (!cameraFormat) {
       return {};
     }
@@ -35,7 +33,5 @@ export const CameraPreviewDimensions: SFC<CameraPreviewDimensionsProps> = ({
   children,
   cameraFormat,
 }: CameraPreviewDimensionsProps) => (
-  <View style={[styles.aspectRatio(cameraFormat), style]}>
-    {children}
-  </View>
+  <View style={[styles.aspectRatio(cameraFormat), style]}>{children}</View>
 );

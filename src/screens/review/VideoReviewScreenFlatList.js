@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { FlatList, View, Dimensions } from 'react-native';
 import noop from 'lodash/noop';
+import { Thumbnail } from '@jonbrennecke/react-native-media';
 
 import { Units, Colors } from '../../constants';
 
@@ -13,6 +14,7 @@ export type VideoReviewScreenFlatListProps = {
   style?: ?Style,
   assets: Array<MediaObject>,
   selectedAssetID: ?string,
+  onSelectAsset: (asset: MediaObject) => void,
   renderItem: (item: MediaObject) => ?Element<*>,
   onRequestLoadMore?: () => void,
 };
@@ -26,17 +28,23 @@ const styles = {
     backgroundColor: Colors.backgrounds.black,
     width: SCREEN_WIDTH,
     height: '100%',
-  }
+  },
+  flex: {
+    flex: 1,
+  },
 };
 
-export class VideoReviewScreenFlatList extends Component<VideoReviewScreenFlatListProps> {
+export class VideoReviewScreenFlatList extends Component<
+  VideoReviewScreenFlatListProps
+> {
   render() {
     const {
       style,
       assets,
       renderItem,
       selectedAssetID,
-      onRequestLoadMore = noop
+      onSelectAsset,
+      onRequestLoadMore = noop,
     } = this.props;
     return (
       <FlatList
@@ -47,9 +55,25 @@ export class VideoReviewScreenFlatList extends Component<VideoReviewScreenFlatLi
         keyExtractor={asset => asset.assetID}
         removeClippedSubviews
         initialNumToRender={1}
+        scrollEventThrottle={16}
+        onScroll={({ nativeEvent }: any) => {
+          if (!nativeEvent) {
+            return;
+          }
+          const { contentOffset, layoutMeasurement } = nativeEvent;
+          const index = Math.round(contentOffset.x / layoutMeasurement.width);
+          if (index < assets.length) {
+            console.log(index, assets[index])
+            onSelectAsset(assets[index]);
+          }
+        }}
         renderItem={({ item: asset }) => (
           <View style={styles.videoWrap}>
-            {asset.assetID === selectedAssetID && renderItem(asset)}
+            {selectedAssetID === asset.assetID ? (
+              renderItem(asset)
+            ) : (
+              <Thumbnail style={styles.flex} assetID={asset.assetID} />
+            )}
           </View>
         )}
         onEndReached={({ distanceFromEnd }) => {
