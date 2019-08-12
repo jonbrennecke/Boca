@@ -6,3 +6,4 @@ export * from './CameraIcon';
 export * from './PlayIcon';
 export * from './SwitchCameraIcon';
 export * from './GridIcon';
+export * from './AlbumsIcon';

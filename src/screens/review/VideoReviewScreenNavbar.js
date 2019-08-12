@@ -9,7 +9,7 @@ import {
   StatusBar,
 } from 'react-native';
 
-import { IconButton, CameraIcon, GridIcon } from '../../components';
+import { IconButton, CameraIcon, AlbumsIcon } from '../../components';
 import { ExportProgressIndicator } from './ExportProgressIndicator';
 import { Units, Colors, ColorTheme } from '../../constants';
 
@@ -117,7 +117,7 @@ export class VideoReviewScreenNavbar extends Component<
             style={styles.iconButton}
             fillColor={Colors.icons.toolbar}
             onPress={this.props.onRequestPushMediaExplorerScreen}
-            icon={GridIcon}
+            icon={AlbumsIcon}
           />
         </View>
         <ExportProgressIndicator progress={this.props.exportProgress} />
