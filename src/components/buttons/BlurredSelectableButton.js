@@ -51,7 +51,7 @@ export const BlurredSelectableButton: SFC<BlurredSelectableButtonProps> = ({
     }
     onPress={onPress}
   >
-    <BlurView blurType="light" style={styles.absoluteFill} />
+    <BlurView blurType="xlight" style={styles.absoluteFill} />
     <Text
       style={styles.buttonText(
         isSelected ? colors.text.selected : colors.text.default

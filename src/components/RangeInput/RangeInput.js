@@ -1,7 +1,9 @@
 // @flow
 import React from 'react';
-import { View, Dimensions, StyleSheet } from 'react-native';
+import { View, Dimensions, MaskedViewIOS, StyleSheet } from 'react-native';
+import { BlurView } from '@jonbrennecke/react-native-animated-ui';
 
+import { hexToRgbaString } from '../../utils/Color';
 import { Colors } from '../../constants';
 import { Seekbar } from '../Seekbar';
 
@@ -18,8 +20,8 @@ export type RangeInputProps = {
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 const CONTAINER_HEIGHT = 50;
-const SLIDER_HEIGHT = 13;
-const OUTSIDE_BORDER_WIDTH = 1;
+const SLIDER_HEIGHT = 25;
+const OUTSIDE_BORDER_WIDTH = 2;
 const INSIDE_BORDER_WIDTH = 2;
 
 const styles = {
@@ -27,16 +29,20 @@ const styles = {
     height: CONTAINER_HEIGHT,
     overflow: 'hidden',
   },
-  occludeBorder: {
+  fill: StyleSheet.absoluteFill,
+  mask: {
     position: 'absolute',
-    left: -5,
-    right: -5,
-    top: (CONTAINER_HEIGHT - SLIDER_HEIGHT - 5) / 2,
-    height: SLIDER_HEIGHT + 5,
-    borderWidth: 5,
-    borderColor: '#000',
-    borderRadius: (SLIDER_HEIGHT + 5) / 2,
-    backgroundColor: 'transparent',
+    top:
+      (CONTAINER_HEIGHT - SLIDER_HEIGHT) / 2 +
+      OUTSIDE_BORDER_WIDTH +
+      INSIDE_BORDER_WIDTH,
+    bottom: 0,
+    right: OUTSIDE_BORDER_WIDTH + INSIDE_BORDER_WIDTH,
+    left: OUTSIDE_BORDER_WIDTH + INSIDE_BORDER_WIDTH,
+    height: SLIDER_HEIGHT - OUTSIDE_BORDER_WIDTH * 2 - 2 * INSIDE_BORDER_WIDTH,
+    borderRadius:
+      (SLIDER_HEIGHT - OUTSIDE_BORDER_WIDTH * 2 - 2 * INSIDE_BORDER_WIDTH) / 2,
+    backgroundColor: '#000',
   },
   border: {
     position: 'absolute',
@@ -44,15 +50,8 @@ const styles = {
     top: (CONTAINER_HEIGHT - SLIDER_HEIGHT) / 2,
     height: SLIDER_HEIGHT,
     borderWidth: OUTSIDE_BORDER_WIDTH,
-    borderColor: Colors.solid.medium,
+    borderColor: hexToRgbaString(Colors.solid.white, 0.5),
     borderRadius: SLIDER_HEIGHT / 2,
-  },
-  borderInner: {
-    height: SLIDER_HEIGHT - OUTSIDE_BORDER_WIDTH * 2,
-    borderWidth: INSIDE_BORDER_WIDTH,
-    borderColor: Colors.solid.black,
-    borderRadius: (SLIDER_HEIGHT - OUTSIDE_BORDER_WIDTH * 2) / 2,
-    overflow: 'hidden',
   },
   seekbar: {
     position: 'absolute',
@@ -76,33 +75,38 @@ const styles = {
     height: SLIDER_HEIGHT - OUTSIDE_BORDER_WIDTH * 2 - 2 * INSIDE_BORDER_WIDTH,
     borderRadius:
       (SLIDER_HEIGHT - OUTSIDE_BORDER_WIDTH * 2 - 2 * INSIDE_BORDER_WIDTH) / 2,
-    backgroundColor: Colors.solid.white,
   },
 };
 
 export const RangeInput: SFC<RangeInputProps> = ({
   style,
-  // TODO value,
+  // value,
   min,
   max,
   onSelectValue,
 }: RangeInputProps) => {
   return (
     <View style={[styles.container, style]}>
-      <Seekbar
-        style={styles.seekbar}
-        handleStyle={styles.handle}
-        handleComponent={props => (
-          <View {...props} pointerEvents="none">
-            <View style={styles.handleFill} pointerEvents="none" />
-          </View>
-        )}
-        onSeekToProgress={p => onSelectValue(p * (max - min) + min)}
-      />
-      <View style={styles.occludeBorder} pointerEvents="none" />
-      <View style={styles.border} pointerEvents="none">
-        <View style={styles.borderInner} />
-      </View>
+      <MaskedViewIOS
+        style={styles.fill}
+        maskElement={<View style={styles.mask} pointerEvents="none" />}
+      >
+        <Seekbar
+          style={styles.seekbar}
+          handleStyle={styles.handle}
+          handleComponent={props => (
+            <View {...props} pointerEvents="none">
+              <BlurView
+                blurType="xlight"
+                style={styles.handleFill}
+                pointerEvents="none"
+              />
+            </View>
+          )}
+          onSeekToProgress={p => onSelectValue(p * (max - min) + min)}
+        />
+      </MaskedViewIOS>
+      <View style={styles.border} pointerEvents="none" />
     </View>
   );
 };

@@ -7,12 +7,10 @@ import { Navigation } from 'react-native-navigation';
 
 import { wrapWithCameraScreenState } from './cameraScreenState';
 import { CameraScreenOnboarding } from './CameraScreenOnboarding';
-import { CameraPreviewDimensions } from './CameraPreviewDimensions';
 import { CameraCaptureButton } from './CameraCaptureButton';
 import { ThumbnailButton } from './ThumbnailButton';
 import {
   CameraFormatModal,
-  makeNormalizedValueFormatter,
   IconButton,
   BlurredSelectableButton,
   RangeInput,
@@ -46,18 +44,20 @@ const styles = {
   absoluteFill: StyleSheet.absoluteFillObject,
   contentWrap: {
     flex: 1,
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
   },
   bottomControls: {
     flexDirection: 'column',
   },
   cameraWrap: {
+    flex: 1,
     width: '100%',
     borderRadius: Units.small,
     overflow: 'hidden',
   },
   cameraControlsRow: {
-    paddingVertical: Units.small,
+    paddingBottom: Units.small,
+    paddingTop: Units.medium,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -92,8 +92,6 @@ const styles = {
     width: '100%',
   },
   rangeToolbar: {
-    paddingHorizontal: Units.large,
-    paddingVertical: Units.medium,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -137,10 +135,7 @@ export const CameraScreen: ComponentType<
         hasCameraPermissions={hasCameraPermissions}
         onRequestCameraPermissions={requestCameraPermissions}
       >
-        <CameraPreviewDimensions
-          style={styles.cameraWrap}
-          cameraFormat={format}
-        >
+        <View style={styles.cameraWrap}>
           <Camera
             style={styles.flex}
             ref={cameraRef}
@@ -165,18 +160,18 @@ export const CameraScreen: ComponentType<
                 isDepthPreviewEnabled ? disableDepthPreview : enableDepthPreview
               }
             />
+            <View style={styles.rangeToolbar}>
+              <RangeInput
+                style={styles.range}
+                value={blurAperture || BlurApertureRange.initialValue}
+                min={BlurApertureRange.lowerBound}
+                max={BlurApertureRange.upperBound}
+                onSelectValue={setBlurAperture}
+              />
+            </View>
           </View>
-        </CameraPreviewDimensions>
+        </View>
         <View style={styles.bottomControls}>
-          <View style={styles.rangeToolbar}>
-            <RangeInput
-              style={styles.range}
-              value={blurAperture || BlurApertureRange.initialValue}
-              min={BlurApertureRange.lowerBound}
-              max={BlurApertureRange.upperBound}
-              onSelectValue={setBlurAperture}
-            />
-          </View>
           <View style={styles.cameraControlsRow}>
             <View style={styles.captureRowItem}>
               <ThumbnailButton
