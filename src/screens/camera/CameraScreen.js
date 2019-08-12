@@ -15,7 +15,7 @@ import {
   makeNormalizedValueFormatter,
   IconButton,
   BlurredSelectableButton,
-  RangeInput
+  RangeInput,
 } from '../../components';
 import { SwitchCameraIcon } from '../../components/icons';
 import {
@@ -41,17 +41,20 @@ const styles = {
   },
   container: {
     flex: 1,
-    backgroundColor: '#000',
+    backgroundColor: Colors.solid.extraDark,
   },
   absoluteFill: StyleSheet.absoluteFillObject,
+  contentWrap: {
+    flex: 1,
+    justifyContent: 'flex-end',
+  },
   bottomControls: {
     flexDirection: 'column',
   },
   cameraWrap: {
     width: '100%',
-    borderRadius: Units.extraSmall,
+    borderRadius: Units.small,
     overflow: 'hidden',
-    borderWidth: 1,
   },
   cameraControlsRow: {
     paddingVertical: Units.small,
@@ -94,7 +97,7 @@ const styles = {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-  }
+  },
 };
 
 const pushReviewScreen = currentComponentId => {
@@ -130,6 +133,7 @@ export const CameraScreen: ComponentType<
     <SafeAreaView style={[styles.container, style]}>
       <StatusBar barStyle="light-content" />
       <CameraScreenOnboarding
+        style={styles.contentWrap}
         hasCameraPermissions={hasCameraPermissions}
         onRequestCameraPermissions={requestCameraPermissions}
       >

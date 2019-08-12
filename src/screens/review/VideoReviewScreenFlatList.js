@@ -64,9 +64,7 @@ export class VideoReviewScreenFlatList extends Component<
           }
         }}
         renderItem={({ item: asset }) => (
-          <View style={styles.videoWrap}>
-            {renderItem(asset)}
-          </View>
+          <View style={styles.videoWrap}>{renderItem(asset)}</View>
         )}
         onEndReached={({ distanceFromEnd }) => {
           if (distanceFromEnd < 0) {

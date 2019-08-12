@@ -82,6 +82,7 @@ export const Colors = {
     light: '#bbb',
     medium: '#999',
     dark: '#333',
+    extraDark: '#111',
     black: '#000',
   },
 };

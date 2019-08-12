@@ -19,9 +19,7 @@ import type {
   MediaObject,
   MediaStateHOCProps,
 } from '@jonbrennecke/react-native-media';
-import type {
-  CameraStateHOCProps
-} from '@jonbrennecke/react-native-camera';
+import type { CameraStateHOCProps } from '@jonbrennecke/react-native-camera';
 
 import type { ReturnType } from '../../types';
 
@@ -58,7 +56,10 @@ export type VideoReviewScreenStateExtraProps = {
 export function wrapWithVideoReviewScreenState<
   PassThroughProps: Object,
   C: ComponentType<
-    VideoReviewScreenStateExtraProps & MediaStateHOCProps & CameraStateHOCProps & PassThroughProps
+    VideoReviewScreenStateExtraProps &
+      MediaStateHOCProps &
+      CameraStateHOCProps &
+      PassThroughProps
   >
 >(WrappedComponent: C): ComponentType<PassThroughProps> {
   // $FlowFixMe
@@ -257,7 +258,9 @@ export function wrapWithVideoReviewScreenState<
 
   const withMediaState = createMediaStateHOC(state => state.media);
   const withCameraState = createCameraStateHOC(state => state.camera);
-  const Component = withCameraState(withMediaState(VideoReviewScreenStateContainer));
+  const Component = withCameraState(
+    withMediaState(VideoReviewScreenStateContainer)
+  );
   const WrappedWithVideoReviewScreenState = props => <Component {...props} />;
   return WrappedWithVideoReviewScreenState;
 }

@@ -36,7 +36,7 @@ const styles = {
     borderWidth: 5,
     borderColor: '#000',
     borderRadius: (SLIDER_HEIGHT + 5) / 2,
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
   },
   border: {
     position: 'absolute',
@@ -59,12 +59,13 @@ const styles = {
     left: 0,
     right: 0,
     top: (CONTAINER_HEIGHT - SLIDER_HEIGHT) / 2,
-    bottom: 0
+    bottom: 0,
   },
   handle: {
     top: OUTSIDE_BORDER_WIDTH + INSIDE_BORDER_WIDTH,
     height: SLIDER_HEIGHT - OUTSIDE_BORDER_WIDTH * 2 - 2 * INSIDE_BORDER_WIDTH,
-    borderRadius: (SLIDER_HEIGHT - OUTSIDE_BORDER_WIDTH * 2 - 2 * INSIDE_BORDER_WIDTH) / 2,
+    borderRadius:
+      (SLIDER_HEIGHT - OUTSIDE_BORDER_WIDTH * 2 - 2 * INSIDE_BORDER_WIDTH) / 2,
   },
   handleFill: {
     position: 'absolute',
@@ -73,7 +74,8 @@ const styles = {
     right: 0,
     width: SCREEN_WIDTH,
     height: SLIDER_HEIGHT - OUTSIDE_BORDER_WIDTH * 2 - 2 * INSIDE_BORDER_WIDTH,
-    borderRadius: (SLIDER_HEIGHT - OUTSIDE_BORDER_WIDTH * 2 - 2 * INSIDE_BORDER_WIDTH) / 2,
+    borderRadius:
+      (SLIDER_HEIGHT - OUTSIDE_BORDER_WIDTH * 2 - 2 * INSIDE_BORDER_WIDTH) / 2,
     backgroundColor: Colors.solid.white,
   },
 };
@@ -99,7 +101,7 @@ export const RangeInput: SFC<RangeInputProps> = ({
       />
       <View style={styles.occludeBorder} pointerEvents="none" />
       <View style={styles.border} pointerEvents="none">
-        <View style={styles.borderInner}/>
+        <View style={styles.borderInner} />
       </View>
     </View>
   );

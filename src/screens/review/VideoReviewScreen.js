@@ -21,12 +21,18 @@ import {
   SelectableButton,
   Toast,
   PlaybackToolbar,
-  RangeInput
+  RangeInput,
 } from '../../components';
 import { VideoReviewScreenToolbar } from './VideoReviewScreenToolbar';
 import { VideoReviewScreenNavbar } from './VideoReviewScreenNavbar';
 import { VideoReviewScreenFlatList } from './VideoReviewScreenFlatList';
-import { Units, Colors, Screens, ScreenParams, BlurApertureRange } from '../../constants';
+import {
+  Units,
+  Colors,
+  Screens,
+  ScreenParams,
+  BlurApertureRange,
+} from '../../constants';
 import { wrapWithVideoReviewScreenState } from './videoReviewScreenState';
 
 import type { ComponentType } from 'react';
@@ -88,7 +94,7 @@ const styles = {
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopStyle: 'solid',
     borderTopColor: Colors.borders.gray,
-  }
+  },
 };
 
 const pushCameraScreen = currentComponentId => {
