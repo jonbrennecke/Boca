@@ -2,12 +2,12 @@
 /* eslint flowtype/generic-spacing: 0 */
 import React, { PureComponent, createRef } from 'react';
 import { Linking } from 'react-native';
-import { createMediaStateHOC } from '@jonbrennecke/react-native-media';
 import { autobind } from 'core-decorators';
 import noop from 'lodash/noop';
 import uniqBy from 'lodash/uniqBy';
-
+import { createMediaStateHOC } from '@jonbrennecke/react-native-media';
 import {
+  createCameraStateHOC,
   addVideoCompositionExportProgressListener,
   addVideoCompositionExportFinishedListener,
   addVideoCompositionExportFailedListener,
@@ -19,6 +19,9 @@ import type {
   MediaObject,
   MediaStateHOCProps,
 } from '@jonbrennecke/react-native-media';
+import type {
+  CameraStateHOCProps
+} from '@jonbrennecke/react-native-camera';
 
 import type { ReturnType } from '../../types';
 
@@ -55,13 +58,13 @@ export type VideoReviewScreenStateExtraProps = {
 export function wrapWithVideoReviewScreenState<
   PassThroughProps: Object,
   C: ComponentType<
-    VideoReviewScreenStateExtraProps & MediaStateHOCProps & PassThroughProps
+    VideoReviewScreenStateExtraProps & MediaStateHOCProps & CameraStateHOCProps & PassThroughProps
   >
 >(WrappedComponent: C): ComponentType<PassThroughProps> {
   // $FlowFixMe
   @autobind
   class VideoReviewScreenStateContainer extends PureComponent<
-    MediaStateHOCProps & PassThroughProps,
+    MediaStateHOCProps & CameraStateHOCProps & PassThroughProps,
     VideoReviewScreenState
   > {
     state = {
@@ -253,7 +256,8 @@ export function wrapWithVideoReviewScreenState<
   }
 
   const withMediaState = createMediaStateHOC(state => state.media);
-  const Component = withMediaState(VideoReviewScreenStateContainer);
+  const withCameraState = createCameraStateHOC(state => state.camera);
+  const Component = withCameraState(withMediaState(VideoReviewScreenStateContainer));
   const WrappedWithVideoReviewScreenState = props => <Component {...props} />;
   return WrappedWithVideoReviewScreenState;
 }

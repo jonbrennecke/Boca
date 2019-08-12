@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { FlatList, View, Dimensions } from 'react-native';
 import noop from 'lodash/noop';
-import { Thumbnail } from '@jonbrennecke/react-native-media';
 
 import { Units, Colors } from '../../constants';
 
@@ -13,7 +12,6 @@ import type { Style } from '../../types';
 export type VideoReviewScreenFlatListProps = {
   style?: ?Style,
   assets: Array<MediaObject>,
-  selectedAssetID: ?string,
   onSelectAsset: (asset: MediaObject) => void,
   renderItem: (item: MediaObject) => ?Element<*>,
   onRequestLoadMore?: () => void,
@@ -42,7 +40,6 @@ export class VideoReviewScreenFlatList extends Component<
       style,
       assets,
       renderItem,
-      selectedAssetID,
       onSelectAsset,
       onRequestLoadMore = noop,
     } = this.props;
@@ -63,17 +60,12 @@ export class VideoReviewScreenFlatList extends Component<
           const { contentOffset, layoutMeasurement } = nativeEvent;
           const index = Math.round(contentOffset.x / layoutMeasurement.width);
           if (index < assets.length) {
-            console.log(index, assets[index])
             onSelectAsset(assets[index]);
           }
         }}
         renderItem={({ item: asset }) => (
           <View style={styles.videoWrap}>
-            {selectedAssetID === asset.assetID ? (
-              renderItem(asset)
-            ) : (
-              <Thumbnail style={styles.flex} assetID={asset.assetID} />
-            )}
+            {renderItem(asset)}
           </View>
         )}
         onEndReached={({ distanceFromEnd }) => {

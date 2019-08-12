@@ -21,11 +21,12 @@ import {
   SelectableButton,
   Toast,
   PlaybackToolbar,
+  RangeInput
 } from '../../components';
 import { VideoReviewScreenToolbar } from './VideoReviewScreenToolbar';
 import { VideoReviewScreenNavbar } from './VideoReviewScreenNavbar';
 import { VideoReviewScreenFlatList } from './VideoReviewScreenFlatList';
-import { Units, Colors, Screens, ScreenParams } from '../../constants';
+import { Units, Colors, Screens, ScreenParams, BlurApertureRange } from '../../constants';
 import { wrapWithVideoReviewScreenState } from './videoReviewScreenState';
 
 import type { ComponentType } from 'react';
@@ -75,6 +76,19 @@ const styles = {
     width: Units.large,
     marginHorizontal: Units.small,
   },
+  range: {
+    width: '100%',
+  },
+  rangeToolbar: {
+    paddingHorizontal: Units.large,
+    paddingVertical: Units.medium,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderTopStyle: 'solid',
+    borderTopColor: Colors.borders.gray,
+  }
 };
 
 const pushCameraScreen = currentComponentId => {
@@ -111,6 +125,8 @@ export const VideoReviewScreen: ComponentType<
     seekToProgress,
     selectedAssetID,
     isExporting,
+    blurAperture,
+    setBlurAperture,
     isPortraitModeEnabled,
     isDepthPreviewEnabled,
     isFullScreenVideo,
@@ -140,7 +156,6 @@ export const VideoReviewScreen: ComponentType<
         <VideoReviewScreenFlatList
           style={styles.flex}
           assets={assetsArray}
-          selectedAssetID={selectedAssetID}
           renderItem={asset => (
             <TouchableWithoutFeedback onPress={toggleFullScreenVideo}>
               <VideoComposition
@@ -148,6 +163,7 @@ export const VideoReviewScreen: ComponentType<
                 style={styles.video}
                 assetID={asset.assetID}
                 previewMode={isDepthPreviewEnabled ? 'depth' : 'portraitMode'}
+                blurAperture={blurAperture}
               />
             </TouchableWithoutFeedback>
           )}
@@ -163,16 +179,13 @@ export const VideoReviewScreen: ComponentType<
               onSeekToProgress={seekToProgress}
             />
           </View>
-          <View style={styles.toolbarCentered}>
-            <SelectableButton
-              text="Depth"
-              isSelected={isDepthPreviewEnabled}
-              onPress={toggleDepthPreview}
-            />
-            <SelectableButton
-              text="Portrait"
-              isSelected={isPortraitModeEnabled}
-              onPress={togglePortraitMode}
+          <View style={styles.rangeToolbar}>
+            <RangeInput
+              style={styles.range}
+              value={blurAperture}
+              min={BlurApertureRange.lowerBound}
+              max={BlurApertureRange.upperBound}
+              onSelectValue={setBlurAperture}
             />
           </View>
           <View style={styles.toolbar}>
