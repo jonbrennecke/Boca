@@ -182,7 +182,7 @@ export const VideoReviewScreen: ComponentType<
           <View style={styles.rangeToolbar}>
             <RangeInput
               style={styles.range}
-              value={blurAperture}
+              value={blurAperture || BlurApertureRange.initialValue}
               min={BlurApertureRange.lowerBound}
               max={BlurApertureRange.upperBound}
               onSelectValue={setBlurAperture}

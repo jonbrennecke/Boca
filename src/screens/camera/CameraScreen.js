@@ -9,14 +9,13 @@ import { wrapWithCameraScreenState } from './cameraScreenState';
 import { CameraScreenOnboarding } from './CameraScreenOnboarding';
 import { CameraPreviewDimensions } from './CameraPreviewDimensions';
 import { CameraCaptureButton } from './CameraCaptureButton';
-import { TopCameraControlsToolbar } from './TopCameraControlsToolbar';
 import { ThumbnailButton } from './ThumbnailButton';
 import {
   CameraFormatModal,
-  BlurApertureInput,
   makeNormalizedValueFormatter,
   IconButton,
   BlurredSelectableButton,
+  RangeInput
 } from '../../components';
 import { SwitchCameraIcon } from '../../components/icons';
 import {
@@ -86,6 +85,16 @@ const styles = {
     paddingHorizontal: Units.small,
     paddingVertical: 2 * Units.extraSmall,
   },
+  range: {
+    width: '100%',
+  },
+  rangeToolbar: {
+    paddingHorizontal: Units.large,
+    paddingVertical: Units.medium,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  }
 };
 
 const pushReviewScreen = currentComponentId => {
@@ -155,17 +164,13 @@ export const CameraScreen: ComponentType<
           </View>
         </CameraPreviewDimensions>
         <View style={styles.bottomControls}>
-          <View style={styles.cameraControlsRow}>
-            <BlurApertureInput
+          <View style={styles.rangeToolbar}>
+            <RangeInput
+              style={styles.range}
               value={blurAperture || BlurApertureRange.initialValue}
               min={BlurApertureRange.lowerBound}
               max={BlurApertureRange.upperBound}
-              numberOfTicks={51}
               onSelectValue={setBlurAperture}
-              formatValue={makeNormalizedValueFormatter(
-                BlurApertureRange.lowerBound,
-                BlurApertureRange.upperBound
-              )}
             />
           </View>
           <View style={styles.cameraControlsRow}>
