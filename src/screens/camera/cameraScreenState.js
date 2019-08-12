@@ -79,7 +79,7 @@ export function wrapWithCameraScreenState<
       await this.props.loadCameraPermissions();
       if (this.props.hasCameraPermissions) {
         await this.startPreview();
-        await this.props.setBlurAperture(BlurApertureRange.lowerBound);
+        await this.props.setBlurAperture(BlurApertureRange.initialValue);
         // TODO: query videos in the app's hidden folder
         await this.props.queryMedia({
           mediaType: 'video',
