@@ -21,6 +21,7 @@ import {
   Toast,
   PlaybackToolbar,
   RangeInput,
+  BlurredSelectableButton
 } from '../../components';
 import { VideoReviewScreenToolbar } from './VideoReviewScreenToolbar';
 import { VideoReviewScreenNavbar } from './VideoReviewScreenNavbar';
@@ -92,6 +93,16 @@ const styles = {
     left: 0,
     right: 0,
     paddingHorizontal: Units.small,
+  },
+  overCameraToolbar: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    alignItems: 'flex-end',
+    justifyContent: 'center',
+    paddingHorizontal: Units.small,
+    paddingVertical: 2 * Units.extraSmall,
   },
 };
 
@@ -175,6 +186,15 @@ export const VideoReviewScreen: ComponentType<
                     resizeMode="scaleAspectFill"
                     blurAperture={blurAperture}
                   />
+                  {!isFullScreenVideo && (
+                    <View style={styles.overCameraToolbar}>
+                      <BlurredSelectableButton
+                        text="Depth"
+                        isSelected={isDepthPreviewEnabled}
+                        onPress={toggleDepthPreview}
+                      />
+                    </View>
+                  )}
                 </View>
               </TouchableWithoutFeedback>
             )}
