@@ -1,13 +1,6 @@
 // @flow
 import React from 'react';
-import {
-  Animated,
-  View,
-  Dimensions,
-  MaskedViewIOS,
-  StyleSheet,
-} from 'react-native';
-import { BlurView } from '@jonbrennecke/react-native-animated-ui';
+import { Animated, View, Dimensions, StyleSheet } from 'react-native';
 
 import { hexToRgbaString } from '../../utils/Color';
 import { Colors } from '../../constants';
@@ -29,7 +22,7 @@ const CONTAINER_HEIGHT = 50;
 const SLIDER_HEIGHT = 12;
 const OUTSIDE_BORDER_WIDTH = 2;
 const INSIDE_BORDER_WIDTH = 2;
-const HANDLE_DIAMETER = 25;
+const HANDLE_RADIUS = 10;
 
 const styles = {
   container: {
@@ -80,12 +73,12 @@ const styles = {
     backgroundColor: '#fff',
   },
   handle: {
-    height: HANDLE_DIAMETER,
-    width: HANDLE_DIAMETER,
-    borderRadius: HANDLE_DIAMETER * 0.5,
+    height: HANDLE_RADIUS * 2,
+    width: HANDLE_RADIUS * 2,
+    borderRadius: HANDLE_RADIUS,
     backgroundColor: Colors.solid.white,
-    top: CONTAINER_HEIGHT * 0.5 - HANDLE_DIAMETER * 0.5,
-    left: -HANDLE_DIAMETER * 0.5,
+    top: CONTAINER_HEIGHT * 0.5 - HANDLE_RADIUS,
+    left: -HANDLE_RADIUS,
   },
 };
 
@@ -103,20 +96,20 @@ export const RangeInput: SFC<RangeInputProps> = ({
         renderHandle={props => (
           <>
             <View style={styles.border} pointerEvents="none">
-              <View style={styles.mask} pointerEvents="none">
+              <View style={styles.mask}>
                 <Animated.View
                   {...props}
                   style={[...props.style, styles.maskedBar]}
-                  pointerEvents="none"
                 >
-                  <View
-                    style={styles.maskedBarBackground}
-                    pointerEvents="none"
-                  />
+                  <View style={styles.maskedBarBackground} />
                 </Animated.View>
               </View>
             </View>
-            <Animated.View {...props} style={[...props.style, styles.handle]} />
+            <Animated.View
+              {...props}
+              style={[...props.style, styles.handle]}
+              pointerEvents="none"
+            />
           </>
         )}
         onSeekToProgress={p => onSelectValue(p * (max - min) + min)}
