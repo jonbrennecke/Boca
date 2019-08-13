@@ -21,7 +21,7 @@ import {
   Toast,
   PlaybackToolbar,
   RangeInput,
-  BlurredSelectableButton
+  BlurredSelectableButton,
 } from '../../components';
 import { VideoReviewScreenToolbar } from './VideoReviewScreenToolbar';
 import { VideoReviewScreenNavbar } from './VideoReviewScreenNavbar';
@@ -177,7 +177,11 @@ export const VideoReviewScreen: ComponentType<
               <TouchableWithoutFeedback onPress={toggleFullScreenVideo}>
                 <View style={styles.flex}>
                   <VideoComposition
-                    ref={selectedAssetID === asset.assetID ? videoCompositionRef : noop}
+                    ref={
+                      selectedAssetID === asset.assetID
+                        ? videoCompositionRef
+                        : noop
+                    }
                     style={styles.video(isFullScreenVideo)}
                     assetID={asset.assetID}
                     previewMode={
