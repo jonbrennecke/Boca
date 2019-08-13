@@ -99,8 +99,8 @@ const styles = {
   },
 };
 
-const pushReviewScreen = currentComponentId => {
-  Navigation.push(currentComponentId, ScreenParams[Screens.VideoReviewScreen]);
+const pushReviewScreen = () => {
+  Navigation.showModal(ScreenParams[Screens.VideoReviewScreen]);
 };
 
 // eslint-disable-next-line flowtype/generic-spacing

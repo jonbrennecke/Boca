@@ -107,7 +107,7 @@ const styles = {
 };
 
 const pushCameraScreen = currentComponentId => {
-  Navigation.pop(currentComponentId);
+  Navigation.dismissModal(currentComponentId);
 };
 
 const pushMediaExplorerModal = (onSelectVideo: (assetID: string) => void) => {
