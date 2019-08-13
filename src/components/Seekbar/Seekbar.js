@@ -1,12 +1,12 @@
 // @flow
-import React, { Component, createElement } from 'react';
-import { View, StyleSheet } from 'react-native';
+import React, { Component } from 'react';
+import { Animated, View, StyleSheet } from 'react-native';
 import noop from 'lodash/noop';
 import clamp from 'lodash/clamp';
 
 import { DragInteraction } from '../DragInteraction';
 
-import type { ComponentType } from 'react';
+import type { Element } from 'react';
 
 import type { Style, Children } from '../../types/react';
 
@@ -14,7 +14,7 @@ type Props = {
   style?: ?(Style | Array<Style>),
   children?: ?Children,
   handleStyle?: ?Style,
-  handleComponent?: ComponentType<*>,
+  renderHandle?: (props: Object) => Element<*>,
   onSeekToProgress: (progress: number) => void,
   onDidBeginDrag?: () => void,
   onDidEndDrag?: (progress: number) => void,
@@ -84,11 +84,19 @@ export class Seekbar extends Component<Props, State> {
           onDragEnd={this.dragDidEnd}
           onDragMove={this.dragDidMove}
           renderChildren={props =>
-            createElement(this.props.handleComponent || View, {
-              style: [styles.handle, this.props.handleStyle],
-              pointerEvents: 'none',
-              ...props,
-            })
+            this.props.renderHandle ? (
+              this.props.renderHandle({
+                style: [styles.handle, this.props.handleStyle],
+                pointerEvents: 'none',
+                ...props,
+              })
+            ) : (
+              <Animated.View
+                style={[styles.handle, this.props.handleStyle]}
+                pointerEvents="none"
+                {...props}
+              />
+            )
           }
         />
       </View>

@@ -20,7 +20,7 @@ type Props = {
   canDrag?: boolean,
   vertical?: boolean,
   horizontal?: boolean,
-  applyTransformStyles?: boolean,
+  shouldApplyTransformStyles?: boolean,
   style?: Style,
   renderChildren: (props: {}) => Element<*>,
   onDragStart: ({ x: number, y: number }) => void,
@@ -51,7 +51,7 @@ export class DragInteraction extends Component<Props, State> {
     returnToOriginalPosition: true,
     horizontal: true,
     vertical: true,
-    applyTransformStyles: true,
+    shouldApplyTransformStyles: true,
   };
 
   constructor(props: Props) {
@@ -174,8 +174,10 @@ export class DragInteraction extends Component<Props, State> {
         position: 'absolute',
         top: 0,
         bottom: 0,
+        left: 0,
+        right: 0,
       },
-      this.props.applyTransformStyles && {
+      this.props.shouldApplyTransformStyles && {
         transform: compact([
           this.props.horizontal && {
             translateX: Animated.diffClamp(this.pan.x, 0, this.state.viewWidth),
@@ -202,11 +204,10 @@ export class DragInteraction extends Component<Props, State> {
           ref={this.panResponderRef}
           {...this.panResponder?.panHandlers}
         >
-          <Animated.View style={[{ backgroundColor: 'blue' }, style]}>
-            {this.props.renderChildren({
-              isDragging: this.state.isDragging,
-            })}
-          </Animated.View>
+          {this.props.renderChildren({
+            isDragging: this.state.isDragging,
+            style,
+          })}
         </View>
       </View>
     );
