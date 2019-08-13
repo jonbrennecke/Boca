@@ -65,11 +65,11 @@ const styles = {
     borderTopStyle: 'solid',
     borderTopColor: Colors.borders.gray,
   },
-  video: {
+  video: (isFullScreen: boolean) => ({
     flex: 1,
-    borderRadius: Units.extraSmall,
+    borderRadius: isFullScreen ? 0 : Units.extraSmall,
     overflow: 'hidden',
-  },
+  }),
   iconButton: {
     height: Units.large,
     width: Units.large,
@@ -178,7 +178,7 @@ export const VideoReviewScreen: ComponentType<
                 <View style={styles.flex}>
                   <VideoComposition
                     ref={videoCompositionRef}
-                    style={styles.video}
+                    style={styles.video(isFullScreenVideo)}
                     assetID={asset.assetID}
                     previewMode={
                       isDepthPreviewEnabled ? 'depth' : 'portraitMode'
