@@ -98,7 +98,9 @@ export function wrapWithVideoReviewScreenState<
       await this.props.queryMedia({
         mediaType: 'video',
       });
-      this.selectVideo(this.props.assets.toArray()[0]?.assetID);
+      const assets = this.getAssetsAsArray();
+      const asset = assets[0];
+      this.selectVideo(asset?.assetID);
     }
 
     selectVideo = (assetID?: string) =>

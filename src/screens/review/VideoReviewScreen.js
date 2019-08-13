@@ -177,7 +177,7 @@ export const VideoReviewScreen: ComponentType<
               <TouchableWithoutFeedback onPress={toggleFullScreenVideo}>
                 <View style={styles.flex}>
                   <VideoComposition
-                    ref={videoCompositionRef}
+                    ref={selectedAssetID === asset.assetID ? videoCompositionRef : noop}
                     style={styles.video(isFullScreenVideo)}
                     assetID={asset.assetID}
                     previewMode={
