@@ -22,7 +22,7 @@ type Props = {
   horizontal?: boolean,
   shouldApplyTransformStyles?: boolean,
   style?: Style,
-  renderChildren: (props: {}) => Element<*>,
+  renderChildren: (props: Object) => Element<*>,
   onDragStart: ({ x: number, y: number }) => void,
   onDragEnd: ({ x: number, y: number }) => void,
   onDragMove: ({ x: number, y: number }) => void,
@@ -170,13 +170,6 @@ export class DragInteraction extends Component<Props, State> {
 
   render() {
     const style = [
-      {
-        position: 'absolute',
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0,
-      },
       this.props.shouldApplyTransformStyles && {
         transform: compact([
           this.props.horizontal && {

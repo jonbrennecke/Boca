@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { Animated, StyleSheet } from 'react-native';
 import { SeekbarBackground } from '@jonbrennecke/react-native-media';
 
 import { Colors, Units } from '../../constants';
@@ -26,15 +26,13 @@ const styles = {
   },
   scrollViewContent: {},
   handle: {
+    position: 'absolute',
     width: 5,
     top: -3,
     bottom: -3,
     left: -2.5,
     borderRadius: Units.extraSmall,
     backgroundColor: Colors.solid.white,
-  },
-  seekbar: {
-    flex: 1,
   },
   background: {
     borderRadius: Units.extraSmall,

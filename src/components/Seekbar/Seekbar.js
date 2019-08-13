@@ -92,9 +92,9 @@ export class Seekbar extends Component<Props, State> {
               })
             ) : (
               <Animated.View
-                style={[styles.handle, this.props.handleStyle]}
-                pointerEvents="none"
                 {...props}
+                pointerEvents="none"
+                style={[...props.style, styles.handle, this.props.handleStyle]}
               />
             )
           }
