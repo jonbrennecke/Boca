@@ -26,6 +26,7 @@ import { VideoReviewScreenToolbar } from './VideoReviewScreenToolbar';
 import { VideoReviewScreenNavbar } from './VideoReviewScreenNavbar';
 import { VideoReviewScreenFlatList } from './VideoReviewScreenFlatList';
 import { VideoReviewScreenFullScreenVideo } from './VideoReviewScreenFullScreenVideo';
+import { VideoReviewScreenPlaybackToolbar } from './VideoReviewScreenPlaybackToolbar';
 import {
   Units,
   Colors,
@@ -63,16 +64,6 @@ const styles = {
     borderTopStyle: 'solid',
     borderTopColor: Colors.borders.gray,
   },
-  toolbarCentered: {
-    paddingVertical: Units.small,
-    paddingHorizontal: Units.small,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopStyle: 'solid',
-    borderTopColor: Colors.borders.gray,
-  },
   video: {
     flex: 1,
     borderRadius: Units.extraSmall,
@@ -95,6 +86,12 @@ const styles = {
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopStyle: 'solid',
     borderTopColor: Colors.borders.gray,
+  },
+  playbackToolbar: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    paddingHorizontal: Units.small,
   },
 };
 
@@ -184,16 +181,18 @@ export const VideoReviewScreen: ComponentType<
             onRequestLoadMore={loadNextAssets}
             onSelectAsset={asset => selectVideo(asset.assetID)}
           />
+          <VideoReviewScreenPlaybackToolbar isVisible={isFullScreenVideo}>
+            <View style={styles.playbackToolbar}>
+              <PlaybackToolbar
+                assetID={selectedAssetID}
+                assetDuration={selectedAsset?.duration}
+                onRequestPlay={play}
+                onSeekToProgress={seekToProgress}
+              />
+            </View>
+          </VideoReviewScreenPlaybackToolbar>
         </VideoReviewScreenFullScreenVideo>
         <VideoReviewScreenToolbar isVisible={!isFullScreenVideo}>
-          <View style={styles.toolbarCentered}>
-            <PlaybackToolbar
-              assetID={selectedAssetID}
-              assetDuration={selectedAsset?.duration}
-              onRequestPlay={play}
-              onSeekToProgress={seekToProgress}
-            />
-          </View>
           <View style={styles.rangeToolbar}>
             <RangeInput
               style={styles.range}
