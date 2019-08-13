@@ -18,7 +18,6 @@ import {
   TrashIcon,
   ExportIcon,
   HeartIcon,
-  SelectableButton,
   Toast,
   PlaybackToolbar,
   RangeInput,
@@ -26,6 +25,7 @@ import {
 import { VideoReviewScreenToolbar } from './VideoReviewScreenToolbar';
 import { VideoReviewScreenNavbar } from './VideoReviewScreenNavbar';
 import { VideoReviewScreenFlatList } from './VideoReviewScreenFlatList';
+import { VideoReviewScreenFullScreenVideo } from './VideoReviewScreenFullScreenVideo';
 import {
   Units,
   Colors,
@@ -48,6 +48,7 @@ const styles = {
   flex: {
     flex: 1,
   },
+  absoluteFill: StyleSheet.absoluteFill,
   container: {
     flex: 1,
     backgroundColor: Colors.backgrounds.black,
@@ -133,10 +134,8 @@ export const VideoReviewScreen: ComponentType<
     isExporting,
     blurAperture,
     setBlurAperture,
-    isPortraitModeEnabled,
     isDepthPreviewEnabled,
     isFullScreenVideo,
-    togglePortraitMode,
     toggleDepthPreview,
     toggleFullScreenVideo,
     componentId,
@@ -149,7 +148,7 @@ export const VideoReviewScreen: ComponentType<
       <StatusBar barStyle="light-content" />
       <View style={styles.flex}>
         <VideoReviewScreenNavbar
-          isVisible={isFullScreenVideo}
+          isVisible={!isFullScreenVideo}
           exportProgress={exportProgress}
           onRequestPushCameraScreen={() => pushCameraScreen(componentId)}
           onRequestPushMediaExplorerScreen={() =>
@@ -159,24 +158,34 @@ export const VideoReviewScreen: ComponentType<
             })
           }
         />
-        <VideoReviewScreenFlatList
+        <VideoReviewScreenFullScreenVideo
           style={styles.flex}
-          assets={assetsArray}
-          renderItem={asset => (
-            <TouchableWithoutFeedback onPress={toggleFullScreenVideo}>
-              <VideoComposition
-                ref={videoCompositionRef}
-                style={styles.video}
-                assetID={asset.assetID}
-                previewMode={isDepthPreviewEnabled ? 'depth' : 'portraitMode'}
-                blurAperture={blurAperture}
-              />
-            </TouchableWithoutFeedback>
-          )}
-          onRequestLoadMore={loadNextAssets}
-          onSelectAsset={asset => selectVideo(asset.assetID)}
-        />
-        <VideoReviewScreenToolbar isVisible={isFullScreenVideo}>
+          isFullScreen={!isFullScreenVideo}
+        >
+          <VideoReviewScreenFlatList
+            style={styles.flex}
+            assets={assetsArray}
+            renderItem={asset => (
+              <TouchableWithoutFeedback onPress={toggleFullScreenVideo}>
+                <View style={styles.flex}>
+                  <VideoComposition
+                    ref={videoCompositionRef}
+                    style={styles.video}
+                    assetID={asset.assetID}
+                    previewMode={
+                      isDepthPreviewEnabled ? 'depth' : 'portraitMode'
+                    }
+                    resizeMode="scaleAspectFill"
+                    blurAperture={blurAperture}
+                  />
+                </View>
+              </TouchableWithoutFeedback>
+            )}
+            onRequestLoadMore={loadNextAssets}
+            onSelectAsset={asset => selectVideo(asset.assetID)}
+          />
+        </VideoReviewScreenFullScreenVideo>
+        <VideoReviewScreenToolbar isVisible={!isFullScreenVideo}>
           <View style={styles.toolbarCentered}>
             <PlaybackToolbar
               assetID={selectedAssetID}

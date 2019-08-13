@@ -97,7 +97,6 @@ export function wrapWithVideoReviewScreenState<
       // TODO: query videos in the app's hidden folder
       await this.props.queryMedia({
         mediaType: 'video',
-        // limit: 1,
       });
       this.selectVideo(this.props.assets.toArray()[0]?.assetID);
     }
@@ -163,7 +162,7 @@ export function wrapWithVideoReviewScreenState<
     }
 
     onExportFailed(error: Error) {
-      console.warn(error);
+      console.warn(error); // TODO: add toast
     }
 
     play() {

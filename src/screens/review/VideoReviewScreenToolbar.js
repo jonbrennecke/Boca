@@ -41,7 +41,16 @@ const styles = {
 export class VideoReviewScreenToolbar extends Component<
   VideoReviewScreenToolbarProps
 > {
-  anim = new Animated.Value(0);
+  anim: Animated.Value;
+
+  constructor(props: VideoReviewScreenToolbarProps) {
+    super(props);
+    this.anim = new Animated.Value(props.isVisible ? 0 : 1);
+  }
+
+  componentDidMount() {
+    this.props.isVisible ? this.animateIn() : this.animateOut();
+  }
 
   componentDidUpdate(prevProps: VideoReviewScreenToolbarProps) {
     if (prevProps.isVisible != this.props.isVisible) {

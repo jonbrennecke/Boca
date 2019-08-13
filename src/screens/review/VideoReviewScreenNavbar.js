@@ -73,7 +73,16 @@ const styles = {
 export class VideoReviewScreenNavbar extends Component<
   VideoReviewScreenNavbarProps
 > {
-  anim = new Animated.Value(0);
+  anim: Animated.Value;
+
+  constructor(props: VideoReviewScreenNavbarProps) {
+    super(props);
+    this.anim = new Animated.Value(props.isVisible ? 0 : 1);
+  }
+
+  componentDidMount() {
+    this.props.isVisible ? this.animateIn() : this.animateOut();
+  }
 
   componentDidUpdate(prevProps: VideoReviewScreenNavbarProps) {
     if (prevProps.isVisible != this.props.isVisible) {
