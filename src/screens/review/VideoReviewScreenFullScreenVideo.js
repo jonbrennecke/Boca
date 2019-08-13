@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { Animated, Easing, StatusBar, Dimensions } from 'react-native';
+import SafeArea from 'react-native-safe-area';
 
 import type { Style, Children } from '../../types';
 
@@ -73,8 +74,10 @@ export class VideoReviewScreenFullScreenVideo extends Component<
     }).start();
   };
 
-  viewDidLayout = ({ nativeEvent: { layout } }: any) => {
-    const screenHeightWithSafeArea = SCREEN_HEIGHT - 44 - 34; // TODO
+  viewDidLayout = async ({ nativeEvent: { layout } }: any) => {
+    const { safeAreaInsets } = await SafeArea.getSafeAreaInsetsForRootView();
+    const screenHeightWithSafeArea =
+      SCREEN_HEIGHT - safeAreaInsets.top - safeAreaInsets.bottom;
     const centeredOffsetY = (screenHeightWithSafeArea - layout.height) * 0.5;
     const translateY = Math.abs(layout.y - centeredOffsetY);
     this.setState({
