@@ -18,9 +18,9 @@ const styles = {
     height: 60 - Units.small,
     width: 60 - Units.small,
     borderWidth: 2,
-    borderColor: Colors.solid.light,
+    borderColor: Colors.solid.white,
     borderRadius: Units.extraSmall,
-    backgroundColor: Colors.solid.light,
+    backgroundColor: Colors.solid.dark,
   },
   thumbnail: {
     borderWidth: 1,

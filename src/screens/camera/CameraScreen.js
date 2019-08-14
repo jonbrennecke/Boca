@@ -52,7 +52,6 @@ const styles = {
   },
   cameraWrap: {
     flex: 1,
-    width: '100%',
     borderRadius: Units.small,
     overflow: 'hidden',
   },
@@ -138,7 +137,7 @@ export const CameraScreen: ComponentType<
       >
         <View style={styles.cameraWrap}>
           <Camera
-            style={styles.flex}
+            style={styles.absoluteFill}
             ref={cameraRef}
             cameraPosition={cameraPosition}
             previewMode={isDepthPreviewEnabled ? 'depth' : 'portraitMode'}

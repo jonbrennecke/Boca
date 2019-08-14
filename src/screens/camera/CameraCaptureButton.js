@@ -8,6 +8,7 @@ import {
   Easing,
 } from 'react-native';
 import { autobind } from 'core-decorators';
+import LinearGradient from 'react-native-linear-gradient';
 
 import { Colors } from '../../constants';
 
@@ -35,12 +36,13 @@ const styles = {
     borderRadius: 32.5,
     overflow: 'hidden',
     backgroundColor: '#fff',
+    opacit: 0.5,
   }),
   border: {
     height: 75,
     width: 75,
     borderRadius: 37.5,
-    borderWidth: 4,
+    borderWidth: 2,
     borderColor: '#fff',
     position: 'absolute',
   },
@@ -118,7 +120,16 @@ export class CameraCaptureButton extends Component<Props> {
             style={styles.borderMask}
             maskElement={<View style={styles.border} />}
           >
-            <View style={styles.inner} />
+            <LinearGradient
+              pointerEvents="none"
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              colors={[
+                '#02D7A4',
+                '#7375BE',
+              ]}
+              style={styles.inner}
+            />
           </MaskedViewIOS>
         </Animated.View>
       </TouchableWithoutFeedback>
