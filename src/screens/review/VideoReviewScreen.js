@@ -22,6 +22,7 @@ import {
   PlaybackToolbar,
   RangeInput,
   BlurredSelectableButton,
+  VideoCompositionGestureHandler
 } from '../../components';
 import { VideoReviewScreenToolbar } from './VideoReviewScreenToolbar';
 import { VideoReviewScreenNavbar } from './VideoReviewScreenNavbar';
@@ -174,33 +175,35 @@ export const VideoReviewScreen: ComponentType<
             style={styles.flex}
             assets={assetsArray}
             renderItem={asset => (
-              <TouchableWithoutFeedback onPress={toggleFullScreenVideo}>
-                <View style={styles.flex}>
-                  <VideoComposition
-                    ref={
-                      selectedAssetID === asset.assetID
-                        ? videoCompositionRef
-                        : noop
-                    }
-                    style={styles.video(isFullScreenVideo)}
-                    assetID={asset.assetID}
-                    previewMode={
-                      isDepthPreviewEnabled ? 'depth' : 'portraitMode'
-                    }
-                    resizeMode="scaleAspectFill"
-                    blurAperture={blurAperture}
-                  />
-                  {!isFullScreenVideo && (
-                    <View style={styles.overCameraToolbar}>
-                      <BlurredSelectableButton
-                        text="Depth"
-                        isSelected={isDepthPreviewEnabled}
-                        onPress={toggleDepthPreview}
-                      />
-                    </View>
-                  )}
-                </View>
-              </TouchableWithoutFeedback>
+              <VideoCompositionGestureHandler>
+                <TouchableWithoutFeedback onPress={toggleFullScreenVideo}>
+                  <View style={styles.flex}>
+                    <VideoComposition
+                      ref={
+                        selectedAssetID === asset.assetID
+                          ? videoCompositionRef
+                          : noop
+                      }
+                      style={styles.video(isFullScreenVideo)}
+                      assetID={asset.assetID}
+                      previewMode={
+                        isDepthPreviewEnabled ? 'depth' : 'portraitMode'
+                      }
+                      resizeMode="scaleAspectFill"
+                      blurAperture={blurAperture}
+                    />
+                    {!isFullScreenVideo && (
+                      <View style={styles.overCameraToolbar}>
+                        <BlurredSelectableButton
+                          text="Depth"
+                          isSelected={isDepthPreviewEnabled}
+                          onPress={toggleDepthPreview}
+                        />
+                      </View>
+                    )}
+                  </View>
+                </TouchableWithoutFeedback>
+              </VideoCompositionGestureHandler>
             )}
             onRequestLoadMore={loadNextAssets}
             onSelectAsset={asset => selectVideo(asset.assetID)}
