@@ -48,7 +48,7 @@ export const Units = {
   extraSmall: 3,
   small: 10,
   medium: 16,
-  large: 33,
+  large: 28,
 };
 
 export const Colors = {

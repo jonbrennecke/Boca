@@ -29,6 +29,7 @@ import { VideoReviewScreenNavbar } from './VideoReviewScreenNavbar';
 import { VideoReviewScreenFlatList } from './VideoReviewScreenFlatList';
 import { VideoReviewScreenFullScreenVideo } from './VideoReviewScreenFullScreenVideo';
 import { VideoReviewScreenPlaybackToolbar } from './VideoReviewScreenPlaybackToolbar';
+import { MediaExplorerModal } from '../mediaExplorer';
 import {
   Units,
   Colors,
@@ -152,6 +153,9 @@ export const VideoReviewScreen: ComponentType<
     exportComposition,
     selectVideo,
     loadNextAssets,
+    isMediaModalVisible,
+    showMediaModal,
+    hideMediaModal,
   }) => (
     <SafeAreaView style={[styles.container, style]}>
       <StatusBar barStyle="light-content" />
@@ -160,12 +164,7 @@ export const VideoReviewScreen: ComponentType<
           isVisible={!isFullScreenVideo}
           exportProgress={exportProgress}
           onRequestPushCameraScreen={() => pushCameraScreen(componentId)}
-          onRequestPushMediaExplorerScreen={() =>
-            pushMediaExplorerModal(assetID => {
-              selectVideo(assetID);
-              dismissMediaExplorerModal();
-            })
-          }
+          onRequestPushMediaExplorerScreen={showMediaModal}
         />
         <VideoReviewScreenFullScreenVideo
           style={styles.flex}
@@ -254,6 +253,10 @@ export const VideoReviewScreen: ComponentType<
           />
         </VideoReviewScreenToolbar>
       </View>
+      <MediaExplorerModal
+        isVisible={isMediaModalVisible}
+        onRequestDismissModal={hideMediaModal}
+      />
     </SafeAreaView>
   )
 );

@@ -31,6 +31,7 @@ export type VideoReviewScreenState = {
   isDepthPreviewEnabled: boolean,
   isFullScreenVideo: boolean,
   isExporting: boolean,
+  isMediaModalVisible: boolean,
   toast: {
     isVisible: boolean,
     message: string,
@@ -51,6 +52,8 @@ export type VideoReviewScreenStateExtraProps = {
   exportComposition: () => void,
   selectVideo: (assetID?: string) => void,
   loadNextAssets: () => void,
+  showMediaModal: () => void,
+  hideMediaModal: () => void,
 } & VideoReviewScreenState;
 
 export function wrapWithVideoReviewScreenState<
@@ -68,7 +71,7 @@ export function wrapWithVideoReviewScreenState<
     MediaStateHOCProps & CameraStateHOCProps & PassThroughProps,
     VideoReviewScreenState
   > {
-    state = {
+    state: $Exact<VideoReviewScreenState> = {
       selectedAssetID: null,
       exportProgress: 0,
       playbackTime: 0,
@@ -76,7 +79,9 @@ export function wrapWithVideoReviewScreenState<
       isDepthPreviewEnabled: false,
       isFullScreenVideo: false,
       isExporting: false,
+      isMediaModalVisible: false,
       toast: {
+        message: '',
         isVisible: false,
         text: '',
         onPress: noop,
@@ -122,6 +127,14 @@ export function wrapWithVideoReviewScreenState<
       this.setState({
         isFullScreenVideo: !this.state.isFullScreenVideo,
       });
+    }
+
+    showMediaModal() {
+      this.setState({ isMediaModalVisible: true });
+    }
+
+    hideMediaModal() {
+      this.setState({ isMediaModalVisible: false });
     }
 
     async exportComposition() {
@@ -252,6 +265,8 @@ export function wrapWithVideoReviewScreenState<
           toggleDepthPreview={this.toggleDepthPreview}
           toggleFullScreenVideo={this.toggleFullScreenVideo}
           exportComposition={this.exportComposition}
+          showMediaModal={this.showMediaModal}
+          hideMediaModal={this.hideMediaModal}
         />
       );
     }
