@@ -11,3 +11,4 @@ export * from './BlurApertureInput';
 export * from './PlaybackToolbar';
 export * from './RangeInput';
 export * from './VideoCompositionGestureHandler';
+export * from './DepthInput';

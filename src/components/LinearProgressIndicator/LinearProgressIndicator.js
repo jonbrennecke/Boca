@@ -7,7 +7,7 @@ import { MeasureContentsView } from '../MeasureContentsView';
 import type { SFC, Style } from '../../types';
 
 export type LinearProgressIndicatorProps = {
-  style?: ?Style,
+  style?: ?(Style | Array<Style>),
   barStyle?: ?Style,
   progress: Animated.Value,
 };

@@ -13,7 +13,7 @@ import {
   CameraFormatModal,
   IconButton,
   BlurredSelectableButton,
-  RangeInput,
+  DepthInput,
   ScreenGradients,
 } from '../../components';
 import { SwitchCameraIcon } from '../../components/icons';
@@ -88,14 +88,19 @@ const styles = {
     paddingHorizontal: Units.small,
     paddingVertical: 2 * Units.extraSmall,
   },
-  range: {
-    width: '100%',
-  },
-  rangeToolbar: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
+  // range: {
+  //   flex: 1,
+  // },
+  // rangeToolbar: {
+  //   flexDirection: 'row',
+  //   alignItems: 'center',
+  //   justifyContent: 'space-between',
+  // },
+  // rangeIcon: {
+  //   height: 40,
+  //   width: 40,
+  //   paddingHorizontal: Units.small,
+  // },
 };
 
 const pushReviewScreen = () => {
@@ -108,7 +113,6 @@ export const CameraScreen: ComponentType<
 > = wrapWithCameraScreenState(
   ({
     style,
-    componentId,
     thumbnailAssetID,
     cameraRef,
     isFormatModalVisible,
@@ -161,15 +165,12 @@ export const CameraScreen: ComponentType<
                 isDepthPreviewEnabled ? disableDepthPreview : enableDepthPreview
               }
             />
-            <View style={styles.rangeToolbar}>
-              <RangeInput
-                style={styles.range}
-                value={blurAperture || BlurApertureRange.initialValue}
-                min={BlurApertureRange.lowerBound}
-                max={BlurApertureRange.upperBound}
-                onSelectValue={setBlurAperture}
-              />
-            </View>
+            <DepthInput
+              value={blurAperture || BlurApertureRange.initialValue}
+              min={BlurApertureRange.lowerBound}
+              max={BlurApertureRange.upperBound}
+              onSelectValue={setBlurAperture}
+            />
           </View>
         </View>
         <View style={styles.bottomControls}>
@@ -177,7 +178,7 @@ export const CameraScreen: ComponentType<
             <View style={styles.captureRowItem}>
               <ThumbnailButton
                 assetID={thumbnailAssetID}
-                onPress={() => pushReviewScreen(componentId)}
+                onPress={pushReviewScreen}
               />
             </View>
             <View style={styles.captureRowItem}>

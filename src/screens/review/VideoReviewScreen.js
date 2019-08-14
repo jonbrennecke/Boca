@@ -20,9 +20,9 @@ import {
   HeartIcon,
   Toast,
   PlaybackToolbar,
-  RangeInput,
   BlurredSelectableButton,
-  VideoCompositionGestureHandler
+  DepthInput,
+  VideoCompositionGestureHandler,
 } from '../../components';
 import { VideoReviewScreenToolbar } from './VideoReviewScreenToolbar';
 import { VideoReviewScreenNavbar } from './VideoReviewScreenNavbar';
@@ -220,15 +220,12 @@ export const VideoReviewScreen: ComponentType<
           </VideoReviewScreenPlaybackToolbar>
         </VideoReviewScreenFullScreenVideo>
         <VideoReviewScreenToolbar isVisible={!isFullScreenVideo}>
-          <View style={styles.rangeToolbar}>
-            <RangeInput
-              style={styles.range}
-              value={blurAperture || BlurApertureRange.initialValue}
-              min={BlurApertureRange.lowerBound}
-              max={BlurApertureRange.upperBound}
-              onSelectValue={setBlurAperture}
-            />
-          </View>
+          <DepthInput
+            value={blurAperture || BlurApertureRange.initialValue}
+            min={BlurApertureRange.lowerBound}
+            max={BlurApertureRange.upperBound}
+            onSelectValue={setBlurAperture}
+          />
           <View style={styles.toolbar}>
             <IconButton
               disabled={isExporting}

@@ -15,25 +15,27 @@ const styles = {
     flex: 1,
     transform: [
       {
-        scale: pinchScaleAnim
-      }
-    ]
-  })
+        scale: pinchScaleAnim,
+      },
+    ],
+  }),
 };
 
-export class VideoCompositionGestureHandler extends Component<VideoCompositionGestureHandlerProps> {
+export class VideoCompositionGestureHandler extends Component<
+  VideoCompositionGestureHandlerProps
+> {
   pinchScaleAnim = new Animated.Value(1);
 
   onPinchGestureEvent = Animated.event(
     [{ nativeEvent: { scale: this.pinchScaleAnim } }],
     { useNativeDriver: true }
-  )
+  );
 
   onPinchHandlerStateChange = (event: any) => {
-     if (event.nativeEvent.oldState === State.ACTIVE) {
+    if (event.nativeEvent.oldState === State.ACTIVE) {
       this.pinchScaleAnim.setValue(1);
     }
-  }
+  };
 
   render() {
     return (
