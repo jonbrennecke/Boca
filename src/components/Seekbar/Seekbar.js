@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import { Animated, View, StyleSheet } from 'react-native';
 import noop from 'lodash/noop';
 import clamp from 'lodash/clamp';
@@ -14,6 +14,7 @@ type Props = {
   style?: ?(Style | Array<Style>),
   children?: ?Children,
   handleStyle?: ?Style,
+  initialProgress?: number,
   renderHandle?: (props: Object) => Element<*>,
   onSeekToProgress: (progress: number) => void,
   onDidBeginDrag?: () => void,
@@ -41,7 +42,7 @@ export class Seekbar extends Component<Props, State> {
   state: State = {
     viewWidth: 0,
   };
-  view: ?View;
+  dragRef = createRef();
 
   dragDidStart = () => {
     if (this.props.onDidBeginDrag) {
@@ -63,22 +64,33 @@ export class Seekbar extends Component<Props, State> {
   };
 
   viewDidLayout = ({ nativeEvent: { layout } }: any) => {
-    this.setState({ viewWidth: layout.width });
+    this.setState({ viewWidth: layout.width }, () => {
+      if (this.dragRef.current) {
+        this.dragRef.current.setPanValue(this.makeInitialValue());
+      }
+    });
   };
+
+  makeInitialValue(): { x: number, y: number } {
+    const initialProgress = this.props.initialProgress || 0;
+    return {
+      x: clamp(initialProgress, 0, 1) * this.state.viewWidth,
+      y: 0,
+    };
+  }
 
   render() {
     return (
       <View
         style={[styles.container, this.props.style]}
-        ref={ref => {
-          this.view = ref;
-        }}
         onLayout={this.viewDidLayout}
       >
         {this.props.children}
         <DragInteraction
+          ref={this.dragRef}
           style={styles.dragContainer}
           vertical={false}
+          initialValue={this.makeInitialValue()}
           returnToOriginalPosition={false}
           onDragStart={this.dragDidStart}
           onDragEnd={this.dragDidEnd}

@@ -17,6 +17,7 @@ import type { Element } from 'react';
 
 type Props = {
   returnToOriginalPosition?: boolean,
+  initialValue?: { x: number, y: number },
   canDrag?: boolean,
   vertical?: boolean,
   horizontal?: boolean,
@@ -52,10 +53,14 @@ export class DragInteraction extends Component<Props, State> {
     horizontal: true,
     vertical: true,
     shouldApplyTransformStyles: true,
+    initialValue: { x: 0, y: 0 },
   };
 
   constructor(props: Props) {
     super(props);
+    this.pan.setValue(
+      props.initialValue || DragInteraction.defaultProps.initialValue
+    );
     this.state = {
       isDragging: false,
       viewWidth: 0,
@@ -79,6 +84,10 @@ export class DragInteraction extends Component<Props, State> {
 
   componentWillUnmount() {
     this.pan.removeAllListeners();
+  }
+
+  setPanValue(value: { x: number, y: number }) {
+    this.pan.setValue(value);
   }
 
   panListener(value: { x: number, y: number }) {

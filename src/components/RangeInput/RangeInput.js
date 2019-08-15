@@ -84,36 +84,35 @@ const styles = {
 
 export const RangeInput: SFC<RangeInputProps> = ({
   style,
-  // value,
+  value,
   min,
   max,
   onSelectValue,
-}: RangeInputProps) => {
-  return (
-    <View style={[styles.container, style]}>
-      <Seekbar
-        style={styles.absoluteFill}
-        renderHandle={props => (
-          <>
-            <View style={styles.border} pointerEvents="none">
-              <View style={styles.mask}>
-                <Animated.View
-                  {...props}
-                  style={[...props.style, styles.maskedBar]}
-                >
-                  <View style={styles.maskedBarBackground} />
-                </Animated.View>
-              </View>
+}: RangeInputProps) => (
+  <View style={[styles.container, style]}>
+    <Seekbar
+      style={styles.absoluteFill}
+      initialProgress={(value - min) / (max - min)}
+      renderHandle={props => (
+        <>
+          <View style={styles.border} pointerEvents="none">
+            <View style={styles.mask}>
+              <Animated.View
+                {...props}
+                style={[...props.style, styles.maskedBar]}
+              >
+                <View style={styles.maskedBarBackground} />
+              </Animated.View>
             </View>
-            <Animated.View
-              {...props}
-              style={[...props.style, styles.handle]}
-              pointerEvents="none"
-            />
-          </>
-        )}
-        onSeekToProgress={p => onSelectValue(p * (max - min) + min)}
-      />
-    </View>
-  );
-};
+          </View>
+          <Animated.View
+            {...props}
+            style={[...props.style, styles.handle]}
+            pointerEvents="none"
+          />
+        </>
+      )}
+      onSeekToProgress={p => onSelectValue(p * (max - min) + min)}
+    />
+  </View>
+);
