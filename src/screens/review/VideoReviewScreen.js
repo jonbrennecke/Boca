@@ -145,6 +145,7 @@ export const VideoReviewScreen: ComponentType<
       <StatusBar barStyle="light-content" />
       <View style={styles.flex}>
         <VideoReviewScreenNavbar
+          assetCreationDate={selectedAsset?.creationDate}
           isVisible={!isFullScreenVideo}
           exportProgress={exportProgress}
           onRequestPushCameraScreen={() => pushCameraScreen(componentId)}

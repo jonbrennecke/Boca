@@ -9,6 +9,7 @@ import {
   StatusBar,
 } from 'react-native';
 import ReactNativeHaptic from 'react-native-haptic';
+import moment from 'moment';
 
 import { IconButton, CameraIcon, AlbumsIcon } from '../../components';
 import { ExportProgressIndicator } from './ExportProgressIndicator';
@@ -18,6 +19,7 @@ import type { Style } from '../../types';
 
 export type VideoReviewScreenNavbarProps = {
   style?: ?Style,
+  assetCreationDate: ?string,
   isVisible: boolean,
   exportProgress: number,
   onRequestPushCameraScreen: () => void,
@@ -69,6 +71,17 @@ const styles = {
     textAlign: 'center',
     color: ColorTheme.dark.default.components.heading.h1Text,
   },
+};
+
+const formatDate = (creationDate: ?string) => {
+  return moment(creationDate).calendar(null, {
+    sameDay: '[Today]',
+    nextDay: '[Tomorrow]',
+    nextWeek: 'dddd',
+    lastDay: '[Yesterday]',
+    lastWeek: '[Last] dddd',
+    sameElse: 'ddd, DD/MM/YYYY',
+  });
 };
 
 export class VideoReviewScreenNavbar extends Component<
@@ -125,7 +138,11 @@ export class VideoReviewScreenNavbar extends Component<
             }}
             icon={CameraIcon}
           />
-          <Text style={styles.titleText}>{'today'.toLocaleUpperCase()}</Text>
+          <Text style={styles.titleText}>
+            {this.props.assetCreationDate
+              ? formatDate(this.props.assetCreationDate).toLocaleUpperCase()
+              : ''}
+          </Text>
           <IconButton
             style={styles.iconButton}
             fillColor={Colors.icons.toolbar}

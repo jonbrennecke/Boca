@@ -41,10 +41,7 @@ export const MediaExplorerModal: ComponentType<
       onRequestDismissModal();
     };
     return (
-      <BottomSheetModal
-        isVisible={isVisible}
-        onRequestDismissModal={dismiss}
-      >
+      <BottomSheetModal isVisible={isVisible} onRequestDismissModal={dismiss}>
         <MediaExplorerModalScrollView
           style={styles.flex}
           assets={assetsArray}
