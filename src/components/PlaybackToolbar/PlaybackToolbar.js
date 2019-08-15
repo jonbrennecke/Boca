@@ -32,7 +32,6 @@ const styles = {
     marginHorizontal: Units.small,
   },
   durationWrap: {
-    width: Units.large,
     marginHorizontal: Units.small,
   },
   durationText: {
