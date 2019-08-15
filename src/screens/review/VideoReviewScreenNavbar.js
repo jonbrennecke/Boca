@@ -8,6 +8,7 @@ import {
   Easing,
   StatusBar,
 } from 'react-native';
+import ReactNativeHaptic from 'react-native-haptic';
 
 import { IconButton, CameraIcon, AlbumsIcon } from '../../components';
 import { ExportProgressIndicator } from './ExportProgressIndicator';
@@ -63,7 +64,7 @@ const styles = {
     marginHorizontal: Units.small,
   },
   titleText: {
-    fontSize: 17,
+    fontSize: 14,
     fontWeight: 'bold',
     textAlign: 'center',
     color: ColorTheme.dark.default.components.heading.h1Text,
@@ -118,14 +119,20 @@ export class VideoReviewScreenNavbar extends Component<
           <IconButton
             style={styles.iconButton}
             fillColor={Colors.icons.toolbar}
-            onPress={this.props.onRequestPushCameraScreen}
+            onPress={() => {
+              ReactNativeHaptic.generate('selection');
+              this.props.onRequestPushCameraScreen();
+            }}
             icon={CameraIcon}
           />
-          <Text style={styles.titleText}>Today</Text>
+          <Text style={styles.titleText}>{'today'.toLocaleUpperCase()}</Text>
           <IconButton
             style={styles.iconButton}
             fillColor={Colors.icons.toolbar}
-            onPress={this.props.onRequestPushMediaExplorerScreen}
+            onPress={() => {
+              ReactNativeHaptic.generate('selection');
+              this.props.onRequestPushMediaExplorerScreen();
+            }}
             icon={AlbumsIcon}
           />
         </View>
