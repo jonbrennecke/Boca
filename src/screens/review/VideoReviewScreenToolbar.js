@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Animated, View, Easing } from 'react-native';
 
 import { Colors } from '../../constants';
@@ -38,7 +38,7 @@ const styles = {
   },
 };
 
-export class VideoReviewScreenToolbar extends Component<
+export class VideoReviewScreenToolbar extends PureComponent<
   VideoReviewScreenToolbarProps
 > {
   anim: Animated.Value;

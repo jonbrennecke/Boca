@@ -174,7 +174,11 @@ export const VideoReviewScreen: ComponentType<
                         isDepthPreviewEnabled ? 'depth' : 'portraitMode'
                       }
                       resizeMode="scaleAspectFill"
-                      blurAperture={blurAperture}
+                      blurAperture={
+                        selectedAssetID === asset.assetID
+                          ? blurAperture
+                          : BlurApertureRange.initialValue
+                      }
                     />
                     {!isFullScreenVideo && (
                       <View style={styles.overCameraToolbar}>

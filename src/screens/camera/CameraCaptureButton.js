@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import {
   View,
   Animated,
@@ -70,7 +70,7 @@ const styles = {
 
 // $FlowFixMe
 @autobind
-export class CameraCaptureButton extends Component<Props> {
+export class CameraCaptureButton extends PureComponent<Props> {
   outerViewAnim: Animated.Value = new Animated.Value(1);
   centerViewAnim: Animated.Value = new Animated.Value(1);
 

@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { FlatList, View, Dimensions } from 'react-native';
 import noop from 'lodash/noop';
 
@@ -32,7 +32,7 @@ const styles = {
   },
 };
 
-export class VideoReviewScreenFlatList extends Component<
+export class VideoReviewScreenFlatList extends PureComponent<
   VideoReviewScreenFlatListProps
 > {
   render() {

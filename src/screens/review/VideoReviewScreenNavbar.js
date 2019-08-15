@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import {
   Animated,
   View,
@@ -85,7 +85,7 @@ const formatDate = (creationDate: ?string) => {
   });
 };
 
-export class VideoReviewScreenNavbar extends Component<
+export class VideoReviewScreenNavbar extends PureComponent<
   VideoReviewScreenNavbarProps
 > {
   anim: Animated.Value;

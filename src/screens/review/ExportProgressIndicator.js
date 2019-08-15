@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Animated, Easing } from 'react-native';
 
 import { LinearProgressIndicator } from '../../components';
@@ -22,7 +22,7 @@ const styles = {
   },
 };
 
-export class ExportProgressIndicator extends Component<
+export class ExportProgressIndicator extends PureComponent<
   ExportProgressIndicatorProps
 > {
   progressAnim: Animated.Value;

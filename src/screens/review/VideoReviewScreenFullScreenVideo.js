@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Animated, Easing, StatusBar, Dimensions } from 'react-native';
 import SafeArea from 'react-native-safe-area';
 
@@ -30,7 +30,7 @@ const styles = {
   }),
 };
 
-export class VideoReviewScreenFullScreenVideo extends Component<
+export class VideoReviewScreenFullScreenVideo extends PureComponent<
   VideoReviewScreenFullScreenVideoProps,
   VideoReviewScreenFullScreenVideoState
 > {

@@ -44,26 +44,21 @@ export const Units = {
 };
 
 export const Colors = {
-  // TODO: remove
   icons: {
     toolbar: '#fff',
   },
-  // TODO: remove
   backgrounds: {
     white: '#fff',
     black: '#000',
-    gray: '#111',
+    gray: '#222',
   },
-  // TODO: remove
   borders: {
     gray: '#222',
   },
-  // TODO
   buttons: {
     selectedTextColor: '#fff',
     textColor: '#999',
   },
-
   text: {
     dark: '#000',
     mediumDark: '#666',
