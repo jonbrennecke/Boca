@@ -98,7 +98,7 @@ const styles = {
   },
   overCameraToolbar: {
     position: 'absolute',
-    bottom: 0,
+    bottom: Units.small,
     left: 0,
     right: 0,
     alignItems: 'flex-end',
@@ -180,15 +180,6 @@ export const VideoReviewScreen: ComponentType<
                           : BlurApertureRange.initialValue
                       }
                     />
-                    {!isFullScreenVideo && (
-                      <View style={styles.overCameraToolbar}>
-                        <BlurredSelectableButton
-                          text="Depth"
-                          isSelected={isDepthPreviewEnabled}
-                          onPress={toggleDepthPreview}
-                        />
-                      </View>
-                    )}
                   </View>
                 </TouchableWithoutFeedback>
               </VideoCompositionGestureHandler>
@@ -196,6 +187,15 @@ export const VideoReviewScreen: ComponentType<
             onRequestLoadMore={loadNextAssets}
             onSelectAsset={asset => selectVideo(asset.assetID)}
           />
+          {!isFullScreenVideo ? (
+            <View style={styles.overCameraToolbar}>
+              <BlurredSelectableButton
+                text="Depth"
+                isSelected={isDepthPreviewEnabled}
+                onPress={toggleDepthPreview}
+              />
+            </View>
+          ) : null}
           <VideoReviewScreenPlaybackToolbar isVisible={isFullScreenVideo}>
             <View style={styles.playbackToolbar}>
               <PlaybackToolbar
