@@ -33,6 +33,7 @@ const styles = {
     color,
     fontSize: 10,
     fontWeight: 'bold',
+    fontFamily: 'Inter',
     textAlign: 'center',
   }),
 };

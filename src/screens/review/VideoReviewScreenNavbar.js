@@ -66,8 +66,9 @@ const styles = {
     marginHorizontal: Units.small,
   },
   titleText: {
-    fontSize: 14,
+    fontSize: 10,
     fontWeight: 'bold',
+    fontFamily: 'Inter',
     textAlign: 'center',
     color: ColorTheme.dark.default.components.heading.h1Text,
   },

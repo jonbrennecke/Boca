@@ -61,6 +61,8 @@
 	</dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Inter-Bold.ttf</string>
+		<string>Inter-Regular.ttf</string>
 		<string>PassionOne-Regular.ttf</string>
 		<string>PT_Sans-Web-Regular.ttf</string>
 		<string>PT_Sans-Web-Bold.ttf</string>

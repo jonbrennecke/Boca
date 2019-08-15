@@ -82,6 +82,8 @@ const styles = {
   },
   duration: {
     color: Colors.solid.white,
+    fontWeight: 'bold',
+    fontFamily: 'Inter',
   },
   navigationButtonWrap: (anim: Animated.Value) => ({
     alignItems: 'center',
