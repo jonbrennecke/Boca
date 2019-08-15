@@ -129,7 +129,7 @@ export class MediaExplorerModalScrollView extends Component<
   });
 
   onScrollViewDidUpdate({ value }: any) {
-    if (value && value < -SCREEN_HEIGHT * 0.25) {
+    if (value && value < -SCREEN_HEIGHT * 0.2) {
       this.props.onRequestDismiss();
     }
   }
