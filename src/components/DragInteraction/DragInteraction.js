@@ -11,6 +11,7 @@ import { autobind } from 'core-decorators';
 import stubTrue from 'lodash/stubTrue';
 import compact from 'lodash/compact';
 import clamp from 'lodash/clamp';
+import throttle from 'lodash/throttle';
 
 import type { Gesture, Style } from '../../types/react';
 import type { Element } from 'react';
@@ -71,7 +72,7 @@ export class DragInteraction extends Component<Props, State> {
   }
 
   componentDidMount() {
-    this.pan.addListener(this.panListener);
+    this.pan.addListener(this.panListenerThrottled);
     this.panResponder = PanResponder.create({
       onStartShouldSetPanResponder: stubTrue,
       onStartShouldSetPanResponderCapture: stubTrue,
@@ -89,6 +90,10 @@ export class DragInteraction extends Component<Props, State> {
   setPanValue(value: { x: number, y: number }) {
     this.pan.setValue(value);
   }
+
+  panListenerThrottled = throttle(this.panListener, 100, {
+    leading: true,
+  });
 
   panListener(value: { x: number, y: number }) {
     if (!this.state.isDragging) {
@@ -121,7 +126,7 @@ export class DragInteraction extends Component<Props, State> {
   }
 
   handleGrant(event: Event, gesture: Gesture) {
-    this.pan.addListener(this.panListener);
+    this.pan.addListener(this.panListenerThrottled);
     this.setState({
       isDragging: true,
     });
