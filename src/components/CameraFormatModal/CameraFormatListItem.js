@@ -20,15 +20,15 @@ const styles = {
   container: (isActive: boolean) => ({
     paddingVertical: Units.medium,
     backgroundColor: isActive
-      ? ColorTheme.dark.modal.select.option.background.selected
-      : ColorTheme.dark.modal.select.option.background.default,
+      ? ColorTheme.dark.actionSheet.components.select.option.background.selected
+      : ColorTheme.dark.actionSheet.components.select.option.background.default,
     marginVertical: Units.small,
     borderRadius: Units.extraSmall,
   }),
   formatText: (isActive: boolean) => ({
     color: isActive
-      ? ColorTheme.dark.modal.select.option.text.selected
-      : ColorTheme.dark.modal.select.option.text.default,
+      ? ColorTheme.dark.actionSheet.components.select.option.text.selected
+      : ColorTheme.dark.actionSheet.components.select.option.text.default,
     fontSize: 15,
     textAlign: 'center',
   }),

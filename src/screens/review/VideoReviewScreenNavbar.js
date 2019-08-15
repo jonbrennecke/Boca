@@ -66,7 +66,7 @@ const styles = {
     fontSize: 17,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: ColorTheme.dark.default.heading.h1Text,
+    color: ColorTheme.dark.default.components.heading.h1Text,
   },
 };
 

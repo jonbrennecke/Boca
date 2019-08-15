@@ -40,7 +40,7 @@ const styles = {
 export const BlurredSelectableButton: SFC<BlurredSelectableButtonProps> = ({
   style,
   text,
-  colors = ColorTheme.dark.default.button,
+  colors = ColorTheme.dark.default.components.button,
   isSelected = false,
   onPress,
 }: BlurredSelectableButtonProps) => (

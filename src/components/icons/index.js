@@ -9,3 +9,4 @@ export * from './GridIcon';
 export * from './AlbumsIcon';
 export * from './FlowerIcon';
 export * from './MountainIcon';
+export * from './ArrowDownCircleIcon';

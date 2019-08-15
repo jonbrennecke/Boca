@@ -42,7 +42,7 @@ const styles = {
     width: 134, // TODO: use 148px for the iPhone XS Max
   },
   heading: {
-    color: ColorTheme.dark.modal.heading.h1Text,
+    color: ColorTheme.dark.actionSheet.components.heading.h1Text,
     fontSize: 22,
     textAlign: 'left',
     fontWeight: 'bold',

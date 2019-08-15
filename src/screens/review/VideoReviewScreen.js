@@ -112,22 +112,6 @@ const pushCameraScreen = currentComponentId => {
   Navigation.dismissModal(currentComponentId);
 };
 
-const pushMediaExplorerModal = (onSelectVideo: (assetID: string) => void) => {
-  Navigation.showModal(
-    merge(ScreenParams[Screens.MediaExplorerScreen], {
-      component: {
-        passProps: {
-          onSelectVideo,
-        },
-      },
-    })
-  );
-};
-
-const dismissMediaExplorerModal = () => {
-  Navigation.dismissModal(Screens.MediaExplorerScreen);
-};
-
 // eslint-disable-next-line flowtype/generic-spacing
 export const VideoReviewScreen: ComponentType<
   VideoReviewScreenProps

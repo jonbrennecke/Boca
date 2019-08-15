@@ -34,14 +34,6 @@ export const ScreenParams = {
       options: defaultScreenOptions,
     },
   },
-  [Screens.MediaExplorerScreen]: {
-    component: {
-      name: Screens.MediaExplorerScreen,
-      id: Screens.MediaExplorerScreen,
-      passProps: {},
-      options: defaultScreenOptions,
-    },
-  },
 };
 
 export const Units = {
@@ -58,6 +50,7 @@ export const Colors = {
   },
   // TODO: remove
   backgrounds: {
+    white: '#fff',
     black: '#000',
     gray: '#111',
   },
@@ -88,13 +81,19 @@ export const Colors = {
 };
 
 export type ColorByTheme = {
-  light: ColorByPresentation,
+  // TODO: light: ColorByPresentation,
   dark: ColorByPresentation,
 };
 
 export type ColorByPresentation = {
-  default: ColorByComponent,
-  modal: ColorByComponent, // TODO: should be actionSheet, not modal
+  default: {
+    background: string,
+    components: ColorByComponent,
+  },
+  actionSheet: {
+    background: string,
+    components: ColorByComponent,
+  },
 };
 
 export type ColorByComponent = {
@@ -132,130 +131,72 @@ export type ColorByButtonState = {
 };
 
 export const ColorTheme: ColorByTheme = {
-  light: {
-    default: {
-      heading: {
-        h1Text: Colors.text.mediumDark,
-      },
-      select: {
-        option: {
-          background: {
-            default: Colors.text.dark,
-            highlight: Colors.text.light,
-            selected: Colors.text.mediumDark,
-          },
-          text: {
-            default: Colors.text.dark,
-            highlight: Colors.text.dark,
-            selected: Colors.text.dark,
-          },
-        },
-      },
-      button: {
-        background: {
-          default: Colors.text.light,
-          highlight: Colors.text.light,
-          selected: Colors.text.light,
-        },
-        text: {
-          default: Colors.text.mediumDark,
-          highlight: Colors.text.light,
-          selected: Colors.text.dark,
-        },
-      },
-    },
-    modal: {
-      heading: {
-        h1Text: Colors.text.mediumDark,
-      },
-      select: {
-        option: {
-          background: {
-            default: Colors.text.dark,
-            highlight: Colors.text.light,
-            selected: Colors.text.mediumDark,
-          },
-          text: {
-            default: Colors.text.dark,
-            highlight: Colors.text.dark,
-            selected: Colors.text.dark,
-          },
-        },
-      },
-      button: {
-        background: {
-          default: Colors.text.light,
-          highlight: Colors.text.light,
-          selected: Colors.text.light,
-        },
-        text: {
-          default: Colors.text.mediumDark,
-          highlight: Colors.text.light,
-          selected: Colors.text.dark,
-        },
-      },
-    },
-  },
   dark: {
     default: {
-      heading: {
-        h1Text: Colors.text.light,
-      },
-      select: {
-        option: {
-          background: {
-            default: Colors.text.dark,
-            highlight: Colors.text.light,
-            selected: Colors.text.mediumDark,
+      background: Colors.backgrounds.black,
+      components: {
+        heading: {
+          h1Text: Colors.text.light,
+        },
+        select: {
+          option: {
+            background: {
+              default: Colors.text.dark,
+              highlight: Colors.text.light,
+              selected: Colors.text.mediumDark,
+            },
+            text: {
+              default: Colors.text.dark,
+              highlight: Colors.text.light,
+              selected: Colors.text.mediumDark,
+            },
           },
-          text: {
-            default: Colors.text.dark,
-            highlight: Colors.text.light,
-            selected: Colors.text.mediumDark,
-          },
         },
-      },
-      button: {
-        background: {
-          default: Colors.text.light,
-          highlight: Colors.text.light,
-          selected: Colors.text.light,
-        },
-        text: {
-          default: Colors.text.mediumDark,
-          highlight: Colors.text.light,
-          selected: Colors.text.dark,
-        },
-      },
-    },
-    modal: {
-      heading: {
-        h1Text: Colors.text.dark,
-      },
-      select: {
-        option: {
+        button: {
           background: {
-            default: Colors.solid.extraLight,
-            highlight: Colors.solid.dark,
-            selected: Colors.solid.dark,
+            default: Colors.text.light,
+            highlight: Colors.text.light,
+            selected: Colors.text.light,
           },
           text: {
             default: Colors.text.mediumDark,
             highlight: Colors.text.light,
-            selected: Colors.text.light,
+            selected: Colors.text.dark,
           },
         },
       },
-      button: {
-        background: {
-          default: Colors.text.light,
-          highlight: Colors.text.light,
-          selected: Colors.text.light,
+    },
+    actionSheet: {
+      background: Colors.backgrounds.white,
+      components: {
+        heading: {
+          h1Text: Colors.text.dark,
         },
-        text: {
-          default: Colors.text.mediumDark,
-          highlight: Colors.text.light,
-          selected: Colors.text.dark,
+        select: {
+          option: {
+            background: {
+              default: Colors.solid.extraLight,
+              highlight: Colors.solid.dark,
+              selected: Colors.solid.dark,
+            },
+            text: {
+              default: Colors.text.mediumDark,
+              highlight: Colors.text.light,
+              selected: Colors.text.light,
+            },
+          },
+        },
+        button: {
+          background: {
+            default: Colors.text.light,
+            highlight: Colors.text.light,
+            selected: Colors.text.light,
+          },
+          text: {
+            default: Colors.text.mediumDark,
+            highlight: Colors.text.light,
+            selected: Colors.text.dark,
+          },
         },
       },
     },
