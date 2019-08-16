@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import noop from 'lodash/noop';
-import merge from 'lodash/merge';
 
 import { VideoComposition } from '@jonbrennecke/react-native-camera';
 
@@ -30,13 +29,7 @@ import { VideoReviewScreenFlatList } from './VideoReviewScreenFlatList';
 import { VideoReviewScreenFullScreenVideo } from './VideoReviewScreenFullScreenVideo';
 import { VideoReviewScreenPlaybackToolbar } from './VideoReviewScreenPlaybackToolbar';
 import { MediaExplorerModal } from '../mediaExplorer';
-import {
-  Units,
-  Colors,
-  Screens,
-  ScreenParams,
-  BlurApertureRange,
-} from '../../constants';
+import { Units, Colors, BlurApertureRange } from '../../constants';
 import { wrapWithVideoReviewScreenState } from './videoReviewScreenState';
 
 import type { ComponentType } from 'react';
@@ -59,7 +52,6 @@ const styles = {
   },
   toolbar: {
     paddingVertical: Units.small,
-    paddingHorizontal: Units.small,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -67,6 +59,7 @@ const styles = {
     borderTopStyle: 'solid',
     borderTopColor: Colors.borders.gray,
   },
+  depthInput: {},
   video: (isFullScreen: boolean) => ({
     flex: 1,
     borderRadius: isFullScreen ? 0 : Units.extraSmall,
@@ -75,20 +68,6 @@ const styles = {
   iconButton: {
     height: Units.large,
     width: Units.large,
-    marginHorizontal: Units.small,
-  },
-  range: {
-    width: '100%',
-  },
-  rangeToolbar: {
-    paddingHorizontal: Units.large,
-    paddingVertical: Units.medium,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopStyle: 'solid',
-    borderTopColor: Colors.borders.gray,
   },
   playbackToolbar: {
     position: 'absolute',
@@ -209,6 +188,7 @@ export const VideoReviewScreen: ComponentType<
         </VideoReviewScreenFullScreenVideo>
         <VideoReviewScreenToolbar isVisible={!isFullScreenVideo}>
           <DepthInput
+            style={styles.depthInput}
             value={blurAperture || BlurApertureRange.initialValue}
             min={BlurApertureRange.lowerBound}
             max={BlurApertureRange.upperBound}

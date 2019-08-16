@@ -8,14 +8,13 @@ export const FlowerIcon = createIconWithChildren({
   viewBox: '0 0 88 86',
   // eslint-disable-next-line react/display-name
   renderChildren: ({ fillColor }: any) => (
-    <G
-      id="Icons"
-      transform="translate(-295.000000, -129.000000)"
-      stroke={fillColor}
-      fill="none"
-      strokeWidth="6"
-    >
-      <G id="Flower" transform="translate(297.000000, 131.000000)">
+    <G id="Symbols" fill="none" fillRule="evenodd">
+      <G
+        id="Flower"
+        transform="translate(2.000000, 2.000000)"
+        stroke={fillColor}
+        strokeWidth="5"
+      >
         <Path
           d="M41.78125,49 C55.3122264,49 66.28125,38.0309764 66.28125,24.5 C66.28125,20.4992584 66.28125,12.3325918 66.28125,1.98951966e-13 L54.1165935,17.1357925 L41.78125,1.98951966e-13 L30.1725596,17.1357925 L17.28125,1.98951966e-13 C17.28125,11.8419566 17.28125,20.0086232 17.28125,24.5 C17.28125,38.0309764 28.2502736,49 41.78125,49 Z"
           id="Oval"

@@ -85,22 +85,9 @@ const styles = {
     right: 0,
     alignItems: 'flex-end',
     justifyContent: 'center',
-    paddingHorizontal: Units.small,
+    paddingHorizontal: Units.medium,
     paddingVertical: 2 * Units.extraSmall,
   },
-  // range: {
-  //   flex: 1,
-  // },
-  // rangeToolbar: {
-  //   flexDirection: 'row',
-  //   alignItems: 'center',
-  //   justifyContent: 'space-between',
-  // },
-  // rangeIcon: {
-  //   height: 40,
-  //   width: 40,
-  //   paddingHorizontal: Units.small,
-  // },
 };
 
 const pushReviewScreen = () => {

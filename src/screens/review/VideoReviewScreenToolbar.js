@@ -2,7 +2,7 @@
 import React, { PureComponent } from 'react';
 import { Animated, View, Easing } from 'react-native';
 
-import { Colors } from '../../constants';
+import { Units, Colors } from '../../constants';
 
 import type { Style, Children } from '../../types';
 
@@ -27,6 +27,9 @@ const styles = {
         }),
       },
     ],
+    justifyContent: 'center',
+    paddingHorizontal: Units.small,
+    paddingVertical: 2 * Units.extraSmall,
   }),
   background: {
     position: 'absolute',

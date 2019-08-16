@@ -22,26 +22,27 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  flex: {
+  range: {
     flex: 1,
+    marginHorizontal: Units.small,
   },
   rangeIcon: {
-    height: 40,
-    width: 40,
-    paddingHorizontal: Units.small,
+    height: Units.medium,
+    width: Units.medium,
   },
 };
 
 export const DepthInput: SFC<DepthInputProps> = ({
+  style,
   value,
   min,
   max,
   onSelectValue,
 }: DepthInputProps) => (
-  <View style={styles.container}>
+  <View style={[styles.container, style]}>
     <FlowerIcon style={styles.rangeIcon} fillColor={Colors.solid.white} />
     <RangeInput
-      style={styles.flex}
+      style={styles.range}
       value={value}
       min={min}
       max={max}
