@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import { Animated, View, Dimensions, StyleSheet } from 'react-native';
+import ReactNativeHaptic from 'react-native-haptic';
 
 import { hexToRgbaString } from '../../utils/Color';
 import { Colors } from '../../constants';
@@ -113,6 +114,8 @@ export const RangeInput: SFC<RangeInputProps> = ({
         </>
       )}
       onSeekToProgress={p => onSelectValue(p * (max - min) + min)}
+      onDidBeginDrag={() => ReactNativeHaptic.generate('selection')}
+      onDidEndDrag={() => ReactNativeHaptic.generate('selection')}
     />
   </View>
 );

@@ -10,3 +10,4 @@ export * from './AlbumsIcon';
 export * from './FlowerIcon';
 export * from './MountainIcon';
 export * from './ArrowDownCircleIcon';
+export * from './CameraBackIcon';

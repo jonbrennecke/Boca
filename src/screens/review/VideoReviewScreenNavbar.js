@@ -11,7 +11,7 @@ import {
 import ReactNativeHaptic from 'react-native-haptic';
 import moment from 'moment';
 
-import { IconButton, CameraIcon, AlbumsIcon } from '../../components';
+import { IconButton, CameraBackIcon, GridIcon } from '../../components';
 import { ExportProgressIndicator } from './ExportProgressIndicator';
 import { Units, Colors, ColorTheme } from '../../constants';
 
@@ -137,7 +137,7 @@ export class VideoReviewScreenNavbar extends PureComponent<
               ReactNativeHaptic.generate('selection');
               this.props.onRequestPushCameraScreen();
             }}
-            icon={CameraIcon}
+            icon={CameraBackIcon}
           />
           <Text style={styles.titleText}>
             {this.props.assetCreationDate
@@ -151,7 +151,7 @@ export class VideoReviewScreenNavbar extends PureComponent<
               ReactNativeHaptic.generate('selection');
               this.props.onRequestPushMediaExplorerScreen();
             }}
-            icon={AlbumsIcon}
+            icon={GridIcon}
           />
         </View>
         <ExportProgressIndicator progress={this.props.exportProgress} />

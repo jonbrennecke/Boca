@@ -28,7 +28,6 @@ const styles = {
       },
     ],
     justifyContent: 'center',
-    paddingHorizontal: Units.small,
     paddingVertical: 2 * Units.extraSmall,
   }),
   background: {

@@ -52,6 +52,7 @@ const styles = {
   },
   toolbar: {
     paddingVertical: Units.small,
+    paddingHorizontal: Units.small,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -59,7 +60,9 @@ const styles = {
     borderTopStyle: 'solid',
     borderTopColor: Colors.borders.gray,
   },
-  depthInput: {},
+  depthInput: {
+    paddingHorizontal: Units.small * 2,
+  },
   video: (isFullScreen: boolean) => ({
     flex: 1,
     borderRadius: isFullScreen ? 0 : Units.extraSmall,

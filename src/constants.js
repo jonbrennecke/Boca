@@ -53,7 +53,7 @@ export const Colors = {
     gray: '#222',
   },
   borders: {
-    gray: '#222',
+    gray: '#444',
   },
   buttons: {
     selectedTextColor: '#fff',
