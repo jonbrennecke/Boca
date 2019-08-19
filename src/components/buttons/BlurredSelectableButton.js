@@ -46,13 +46,10 @@ export const BlurredSelectableButton: SFC<BlurredSelectableButtonProps> = ({
   onPress,
 }: BlurredSelectableButtonProps) => (
   <TouchableOpacity
-    style={
-      // $FlowFixMe
-      StyleSheet.compose(styles.button, style)
-    }
+    style={StyleSheet.compose(styles.button, style)}
     onPress={onPress}
   >
-    <BlurView blurType="xlight" style={styles.absoluteFill} />
+    <BlurView blurType="light" style={styles.absoluteFill} />
     <Text
       style={styles.buttonText(
         isSelected ? colors.text.selected : colors.text.default
