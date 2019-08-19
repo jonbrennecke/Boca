@@ -161,6 +161,7 @@ export const VideoReviewScreen: ComponentType<
                           ? blurAperture
                           : BlurApertureRange.initialValue
                       }
+                      isReadyToLoad={selectedAssetID === asset.assetID}
                     />
                   </View>
                 </TouchableWithoutFeedback>
