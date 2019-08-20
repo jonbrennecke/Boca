@@ -24,12 +24,15 @@ export type CameraScreenStateExtraProps = {
   cameraRef: ReturnType<typeof createRef>,
   isFormatModalVisible: boolean,
   isDepthPreviewEnabled: boolean,
+  isReviewModalVisible: boolean,
   activeCameraSetting: $Keys<typeof CameraSettingIdentifiers>,
   setActiveCameraSetting: ($Keys<typeof CameraSettingIdentifiers>) => void,
   cameraPosition: CameraPosition,
   thumbnailAssetID: ?string,
   presentCameraFormatModal: () => void,
   dismissCameraFormatModal: () => void,
+  presentReviewModal: () => void,
+  dismissReviewModal: () => void,
   enableDepthPreview: () => void,
   disableDepthPreview: () => void,
   switchCameraPosition: () => void,
@@ -40,6 +43,7 @@ export type CameraScreenStateOwnProps = {};
 export type CameraScreenState = {
   activeCameraSetting: $Keys<typeof CameraSettingIdentifiers>,
   isFormatModalVisible: boolean,
+  isReviewModalVisible: boolean,
   isDepthPreviewEnabled: boolean,
   cameraPosition: CameraPosition,
   thumbnailAssetID: ?string,
@@ -70,6 +74,7 @@ export function wrapWithCameraScreenState<
     state: $Exact<CameraScreenState> = {
       activeCameraSetting: CameraSettingIdentifiers.Exposure,
       isFormatModalVisible: false,
+      isReviewModalVisible: false,
       isDepthPreviewEnabled: false,
       cameraPosition: 'front',
       thumbnailAssetID: null,
@@ -114,6 +119,9 @@ export function wrapWithCameraScreenState<
     dismissCameraFormatModal = () =>
       this.setState({ isFormatModalVisible: false });
 
+    presentReviewModal = () => this.setState({ isReviewModalVisible: true });
+    dismissReviewModal = () => this.setState({ isReviewModalVisible: false });
+
     enableDepthPreview = () => this.setState({ isDepthPreviewEnabled: true });
     disableDepthPreview = () => this.setState({ isDepthPreviewEnabled: false });
 
@@ -132,6 +140,8 @@ export function wrapWithCameraScreenState<
           setActiveCameraSetting={this.setActiveCameraSetting}
           presentCameraFormatModal={this.presentCameraFormatModal}
           dismissCameraFormatModal={this.dismissCameraFormatModal}
+          presentReviewModal={this.presentReviewModal}
+          dismissReviewModal={this.dismissReviewModal}
           enableDepthPreview={this.enableDepthPreview}
           disableDepthPreview={this.disableDepthPreview}
           switchCameraPosition={this.switchCameraPosition}

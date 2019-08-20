@@ -12,11 +12,19 @@ import stubTrue from 'lodash/stubTrue';
 import compact from 'lodash/compact';
 import clamp from 'lodash/clamp';
 import throttle from 'lodash/throttle';
+import noop from 'lodash/noop';
 
 import type { Gesture, Style } from '../../types/react';
 import type { Element } from 'react';
 
+type RenderChildrenProps = {
+  isDragging: boolean,
+  style: Array<Style>,
+};
+
 type Props = {
+  clampToBounds?: boolean,
+  jumpToGrantedPosition?: boolean,
   returnToOriginalPosition?: boolean,
   initialValue?: { x: number, y: number },
   canDrag?: boolean,
@@ -24,10 +32,10 @@ type Props = {
   horizontal?: boolean,
   shouldApplyTransformStyles?: boolean,
   style?: Style,
-  renderChildren: (props: Object) => Element<*>,
-  onDragStart: ({ x: number, y: number }) => void,
-  onDragEnd: ({ x: number, y: number }) => void,
-  onDragMove: ({ x: number, y: number }) => void,
+  renderChildren: (props: RenderChildrenProps) => Element<*>,
+  onDragStart?: ({ x: number, y: number }) => void,
+  onDragEnd?: ({ x: number, y: number }) => void,
+  onDragMove?: ({ x: number, y: number }) => void,
 };
 
 type State = {
@@ -50,11 +58,16 @@ export class DragInteraction extends Component<Props, State> {
   panResponderRef = createRef();
 
   static defaultProps = {
+    clampToBounds: true,
+    jumpToGrantedPosition: true,
     returnToOriginalPosition: true,
     horizontal: true,
     vertical: true,
     shouldApplyTransformStyles: true,
     initialValue: { x: 0, y: 0 },
+    onDragStart: noop,
+    onDragEnd: noop,
+    onDragMove: noop,
   };
 
   constructor(props: Props) {
@@ -99,12 +112,19 @@ export class DragInteraction extends Component<Props, State> {
     if (!this.state.isDragging) {
       return;
     }
-    const clampedValue = {
-      x: clamp(value.x - this.state.viewPageX, 0, this.state.viewWidth),
-      y: clamp(value.y - this.state.viewPageY, 0, this.state.viewHeight),
-    };
-    this.props.onDragMove(value);
-    this.panOffset = clampedValue;
+    const x = value.x - this.state.viewPageX;
+    const y = value.y - this.state.viewPageY;
+    const panOffset = this.props.clampToBounds
+      ? {
+          x: x,
+          y: y,
+        }
+      : {
+          x: clamp(x, 0, this.state.viewWidth),
+          y: clamp(y, 0, this.state.viewHeight),
+        };
+    this.props.onDragMove && this.props.onDragMove(value);
+    this.panOffset = panOffset;
   }
 
   isValidEventTarget(event: any): boolean {
@@ -113,9 +133,6 @@ export class DragInteraction extends Component<Props, State> {
   }
 
   handleMove(event: Event, gesture: Gesture) {
-    if (!this.isValidEventTarget(event)) {
-      return;
-    }
     Animated.event([
       null,
       {
@@ -125,18 +142,23 @@ export class DragInteraction extends Component<Props, State> {
     ])(event, gesture);
   }
 
-  handleGrant(event: Event, gesture: Gesture) {
+  handleGrant(event: any, gesture: Gesture) {
     this.pan.addListener(this.panListenerThrottled);
     this.setState({
       isDragging: true,
     });
-    this.panOffset = {
-      x: gesture.x0 - this.state.viewPageX,
-      y: gesture.y0 - this.state.viewPageY,
-    };
+    this.panOffset = this.props.jumpToGrantedPosition
+      ? {
+          x: gesture.x0 - this.state.viewPageX,
+          y: gesture.y0 - this.state.viewPageY,
+        }
+      : {
+          x: gesture.x0 - this.state.viewPageX - event.nativeEvent.locationX,
+          y: gesture.y0 - this.state.viewPageY - event.nativeEvent.locationY,
+        };
     this.pan.setOffset(this.panOffset);
     this.pan.setValue({ x: 0, y: 0 });
-    this.props.onDragStart(this.panOffset);
+    this.props.onDragStart && this.props.onDragStart(this.panOffset);
   }
 
   handleRelease(event: Event, gesture: Gesture) {
@@ -151,13 +173,14 @@ export class DragInteraction extends Component<Props, State> {
       isDragging: false,
     });
     this.animateRelease();
-    this.props.onDragEnd(this.panOffset);
+    this.props.onDragEnd && this.props.onDragEnd(this.panOffset);
   }
 
   animateRelease() {
     if (!this.props.returnToOriginalPosition) {
       return;
     }
+    this.pan.flattenOffset();
     Animated.spring(this.pan, {
       toValue: { x: 0, y: 0 },
     }).start();
@@ -183,23 +206,23 @@ export class DragInteraction extends Component<Props, State> {
   }
 
   render() {
-    const style = [
+    const style = compact([
       this.props.shouldApplyTransformStyles && {
         transform: compact([
           this.props.horizontal && {
-            translateX: Animated.diffClamp(this.pan.x, 0, this.state.viewWidth),
+            translateX: this.props.clampToBounds
+              ? Animated.diffClamp(this.pan.x, 0, this.state.viewWidth)
+              : this.pan.x,
           },
           this.props.vertical && {
-            translateY: Animated.diffClamp(
-              this.pan.y,
-              0,
-              this.state.viewHeight
-            ),
+            translateY: this.props.clampToBounds
+              ? Animated.diffClamp(this.pan.y, 0, this.state.viewHeight)
+              : this.pan.y,
           },
         ]),
       },
       this.state.isDragging && { zIndex: 1000 },
-    ];
+    ]);
     return (
       <View
         style={this.props.style}

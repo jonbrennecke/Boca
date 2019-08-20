@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import { View, SafeAreaView, StyleSheet, StatusBar } from 'react-native';
+import ReactNativeHaptic from 'react-native-haptic';
 
 import { Camera, CameraFocusArea } from '@jonbrennecke/react-native-camera';
 import { Navigation } from 'react-native-navigation';
@@ -9,8 +10,8 @@ import { wrapWithCameraScreenState } from './cameraScreenState';
 import { CameraScreenOnboarding } from './CameraScreenOnboarding';
 import { CameraCaptureButton } from './CameraCaptureButton';
 import { ThumbnailButton } from './ThumbnailButton';
+import { VideoReviewModal } from '../review';
 import {
-  CameraFormatModal,
   IconButton,
   BlurredSelectableButton,
   DepthInput,
@@ -102,22 +103,20 @@ export const CameraScreen: ComponentType<
     style,
     thumbnailAssetID,
     cameraRef,
-    isFormatModalVisible,
     isDepthPreviewEnabled,
+    isReviewModalVisible,
     stopCapture,
     startCapture,
-    format,
-    updateFormat,
-    supportedFormats,
     hasCameraPermissions,
     requestCameraPermissions,
-    dismissCameraFormatModal,
     enableDepthPreview,
     disableDepthPreview,
     setBlurAperture,
     blurAperture,
     cameraPosition,
     switchCameraPosition,
+    presentReviewModal,
+    dismissReviewModal,
   }) => (
     <SafeAreaView style={[styles.container, style]}>
       <StatusBar barStyle="light-content" />
@@ -127,14 +126,14 @@ export const CameraScreen: ComponentType<
         onRequestCameraPermissions={requestCameraPermissions}
       >
         <View style={styles.cameraWrap}>
-          <Camera
+          {/* <Camera
             style={styles.absoluteFill}
             ref={cameraRef}
             cameraPosition={cameraPosition}
             previewMode={isDepthPreviewEnabled ? 'depth' : 'portraitMode'}
             resizeMode="scaleAspectWidth"
             blurAperture={blurAperture}
-          />
+          /> */}
           <CameraFocusArea
             style={styles.absoluteFill}
             onRequestFocus={point => {
@@ -165,7 +164,10 @@ export const CameraScreen: ComponentType<
             <View style={styles.captureRowItem}>
               <ThumbnailButton
                 assetID={thumbnailAssetID}
-                onPress={pushReviewScreen}
+                onPress={() => {
+                  ReactNativeHaptic.generate('selection');
+                  presentReviewModal();
+                }}
               />
             </View>
             <View style={styles.captureRowItem}>
@@ -189,12 +191,9 @@ export const CameraScreen: ComponentType<
           </View>
         </View>
       </CameraScreenOnboarding>
-      <CameraFormatModal
-        activeFormat={format}
-        supportedFormats={supportedFormats}
-        isVisible={isFormatModalVisible}
-        onRequestDismissModal={dismissCameraFormatModal}
-        onRequestUpdateFormat={updateFormat}
+      <VideoReviewModal
+        isVisible={isReviewModalVisible}
+        onRequestDismissModal={dismissReviewModal}
       />
     </SafeAreaView>
   )
