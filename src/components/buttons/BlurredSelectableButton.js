@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { BlurView } from '@jonbrennecke/react-native-animated-ui';
 
 import { Units, ColorTheme } from '../../constants';
@@ -45,17 +45,16 @@ export const BlurredSelectableButton: SFC<BlurredSelectableButtonProps> = ({
   isSelected = false,
   onPress,
 }: BlurredSelectableButtonProps) => (
-  <TouchableOpacity
-    style={StyleSheet.compose(styles.button, style)}
-    onPress={onPress}
-  >
-    <BlurView blurType="light" style={styles.absoluteFill} />
-    <Text
-      style={styles.buttonText(
-        isSelected ? colors.text.selected : colors.text.default
-      )}
-    >
-      {text.toLocaleUpperCase()}
-    </Text>
+  <TouchableOpacity onPress={onPress}>
+    <View style={StyleSheet.compose(styles.button, style)}>
+      <BlurView blurType="light" style={styles.absoluteFill} />
+      <Text
+        style={styles.buttonText(
+          isSelected ? colors.text.selected : colors.text.default
+        )}
+      >
+        {text.toLocaleUpperCase()}
+      </Text>
+    </View>
   </TouchableOpacity>
 );

@@ -49,7 +49,10 @@ export type DragGestureHandlerState = {
 
 // $FlowFixMe
 @autobind
-export class DragGestureHandler extends PureComponent<DragGestureHandlerProps, DragGestureHandlerState> {
+export class DragGestureHandler extends PureComponent<
+  DragGestureHandlerProps,
+  DragGestureHandlerState
+> {
   props: DragGestureHandlerProps;
   state: DragGestureHandlerState;
   panResponder: ?PanResponder = null;
