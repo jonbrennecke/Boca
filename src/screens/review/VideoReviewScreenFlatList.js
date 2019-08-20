@@ -1,6 +1,7 @@
 // @flow
 import React, { PureComponent, createRef } from 'react';
 import { FlatList, View, Dimensions } from 'react-native';
+import ReactNativeHaptic from 'react-native-haptic';
 import noop from 'lodash/noop';
 
 import { Units, Colors } from '../../constants';
@@ -43,6 +44,7 @@ export class VideoReviewScreenFlatList extends PureComponent<
   flatListRef = createRef();
 
   onGestureDidStart = () => {
+    ReactNativeHaptic.generate('selection');
     if (!this.flatListRef.current) {
       return;
     }
@@ -52,6 +54,7 @@ export class VideoReviewScreenFlatList extends PureComponent<
   };
 
   onGestureDidEnd = () => {
+    ReactNativeHaptic.generate('selection');
     if (!this.flatListRef.current) {
       return;
     }

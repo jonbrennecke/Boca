@@ -12,14 +12,13 @@ import stubTrue from 'lodash/stubTrue';
 import compact from 'lodash/compact';
 import clamp from 'lodash/clamp';
 import throttle from 'lodash/throttle';
-import noop from 'lodash/noop';
 
 import type { Gesture, Style } from '../../types/react';
 import type { Element } from 'react';
 
 type RenderChildrenProps = {
   isDragging: boolean,
-  style: Array<Style>,
+  style: Style,
 };
 
 type Props = {
@@ -33,9 +32,11 @@ type Props = {
   shouldApplyTransformStyles?: boolean,
   style?: Style,
   renderChildren: (props: RenderChildrenProps) => Element<*>,
-  onDragStart?: ({ x: number, y: number }) => void,
+  onDragStart?: ({ x: number, y: number }, pan: Animated.ValueXY) => void,
   onDragEnd?: ({ x: number, y: number }) => void,
   onDragMove?: ({ x: number, y: number }) => void,
+  onDragMoveEvent?: (event: any, gesture: Gesture) => void,
+  onDragEndEvent?: (event: any, gesture: Gesture) => void,
 };
 
 type State = {
@@ -65,9 +66,6 @@ export class DragInteraction extends Component<Props, State> {
     vertical: true,
     shouldApplyTransformStyles: true,
     initialValue: { x: 0, y: 0 },
-    onDragStart: noop,
-    onDragEnd: noop,
-    onDragMove: noop,
   };
 
   constructor(props: Props) {
@@ -140,6 +138,7 @@ export class DragInteraction extends Component<Props, State> {
         dy: this.pan.y,
       },
     ])(event, gesture);
+    this.props.onDragMoveEvent && this.props.onDragMoveEvent(event, gesture);
   }
 
   handleGrant(event: any, gesture: Gesture) {
@@ -158,7 +157,7 @@ export class DragInteraction extends Component<Props, State> {
         };
     this.pan.setOffset(this.panOffset);
     this.pan.setValue({ x: 0, y: 0 });
-    this.props.onDragStart && this.props.onDragStart(this.panOffset);
+    this.props.onDragStart && this.props.onDragStart(this.panOffset, this.pan);
   }
 
   handleRelease(event: Event, gesture: Gesture) {
@@ -206,23 +205,20 @@ export class DragInteraction extends Component<Props, State> {
   }
 
   render() {
-    const style = compact([
-      this.props.shouldApplyTransformStyles && {
-        transform: compact([
-          this.props.horizontal && {
-            translateX: this.props.clampToBounds
-              ? Animated.diffClamp(this.pan.x, 0, this.state.viewWidth)
-              : this.pan.x,
-          },
-          this.props.vertical && {
-            translateY: this.props.clampToBounds
-              ? Animated.diffClamp(this.pan.y, 0, this.state.viewHeight)
-              : this.pan.y,
-          },
-        ]),
-      },
-      this.state.isDragging && { zIndex: 1000 },
-    ]);
+    const style = this.props.shouldApplyTransformStyles ? {
+      transform: compact([
+        this.props.horizontal && {
+          translateX: this.props.clampToBounds
+            ? Animated.diffClamp(this.pan.x, 0, this.state.viewWidth)
+            : this.pan.x,
+        },
+        this.props.vertical && {
+          translateY: this.props.clampToBounds
+            ? Animated.diffClamp(this.pan.y, 0, this.state.viewHeight)
+            : this.pan.y,
+        },
+      ]),
+    } : {};
     return (
       <View
         style={this.props.style}

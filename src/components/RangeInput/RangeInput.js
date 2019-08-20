@@ -100,7 +100,7 @@ export const RangeInput: SFC<RangeInputProps> = ({
             <View style={styles.mask}>
               <Animated.View
                 {...props}
-                style={[...props.style, styles.maskedBar]}
+                style={[props.style, styles.maskedBar]}
               >
                 <View style={styles.maskedBarBackground} />
               </Animated.View>
@@ -108,7 +108,7 @@ export const RangeInput: SFC<RangeInputProps> = ({
           </View>
           <Animated.View
             {...props}
-            style={[...props.style, styles.handle]}
+            style={[props.style, styles.handle]}
             pointerEvents="none"
           />
         </>

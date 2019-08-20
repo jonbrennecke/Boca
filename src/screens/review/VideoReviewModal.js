@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
-import { StatusBar, View, Dimensions } from 'react-native';
-import { BottomSheetModal } from '@jonbrennecke/react-native-animated-ui';
+import { StatusBar, View } from 'react-native';
 import ReactNativeHaptic from 'react-native-haptic';
 import { withSafeArea } from 'react-native-safe-area';
 
@@ -9,8 +8,6 @@ import { VideoReviewScreen } from './VideoReviewScreen';
 import { Colors } from '../../constants';
 
 import type { SFC } from '../../types';
-
-const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 export type VideoReviewModalProps = {
   isVisible: boolean,
