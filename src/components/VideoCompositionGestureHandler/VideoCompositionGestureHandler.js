@@ -1,9 +1,9 @@
 // @flow
 import React, { PureComponent } from 'react';
 import { Animated, StyleSheet, Easing } from 'react-native';
-import merge from 'lodash/merge';
+import concat from 'lodash/concat';
 
-import { DragInteraction } from '../DragInteraction';
+import { DragGestureHandler } from '../DragGestureHandler';
 
 import type { Style, Children } from '../../types';
 
@@ -42,20 +42,18 @@ export class VideoCompositionGestureHandler extends PureComponent<
 > {
   panYAnim = new Animated.Value(1);
 
-  animateDragMove = Animated.event(
-    [null, { dy: this.panYAnim }],
-  );
+  animateDragMove = Animated.event([null, { dy: this.panYAnim }]);
 
   animateDragRelease = () => {
     Animated.timing(this.panYAnim, {
       toValue: 0,
-      easing: Easing.inOut(Easing.quad),
+      easing: Easing.out(Easing.quad),
     }).start();
-  }
+  };
 
   render() {
     return (
-      <DragInteraction
+      <DragGestureHandler
         style={this.props.style}
         clampToBounds={false}
         jumpToGrantedPosition={false}
@@ -85,9 +83,6 @@ const mergeTransformStyles = (a: Style, b: Style): Style => {
   return {
     ...a,
     ...b,
-    transform: [
-      ...a.transform,
-      ...b.transform
-    ],
+    transform: concat(a.transform, b.transform),
   };
 };

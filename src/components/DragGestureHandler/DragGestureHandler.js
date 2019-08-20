@@ -1,5 +1,5 @@
 // @flow
-import React, { Component, createRef } from 'react';
+import React, { PureComponent, createRef } from 'react';
 import {
   PanResponder,
   Animated,
@@ -21,7 +21,7 @@ type RenderChildrenProps = {
   style: Style,
 };
 
-type Props = {
+export type DragGestureHandlerProps = {
   clampToBounds?: boolean,
   jumpToGrantedPosition?: boolean,
   returnToOriginalPosition?: boolean,
@@ -39,7 +39,7 @@ type Props = {
   onDragEndEvent?: (event: any, gesture: Gesture) => void,
 };
 
-type State = {
+export type DragGestureHandlerState = {
   isDragging: boolean,
   viewWidth: number,
   viewHeight: number,
@@ -49,9 +49,9 @@ type State = {
 
 // $FlowFixMe
 @autobind
-export class DragInteraction extends Component<Props, State> {
-  props: Props;
-  state: State;
+export class DragGestureHandler extends PureComponent<DragGestureHandlerProps, DragGestureHandlerState> {
+  props: DragGestureHandlerProps;
+  state: DragGestureHandlerState;
   panResponder: ?PanResponder = null;
   pan: Animated.ValueXY = new Animated.ValueXY();
   panOffset: { x: number, y: number } = { x: 0, y: 0 };
@@ -68,10 +68,10 @@ export class DragInteraction extends Component<Props, State> {
     initialValue: { x: 0, y: 0 },
   };
 
-  constructor(props: Props) {
+  constructor(props: DragGestureHandlerProps) {
     super(props);
     this.pan.setValue(
-      props.initialValue || DragInteraction.defaultProps.initialValue
+      props.initialValue || DragGestureHandler.defaultProps.initialValue
     );
     this.state = {
       isDragging: false,
@@ -205,20 +205,22 @@ export class DragInteraction extends Component<Props, State> {
   }
 
   render() {
-    const style = this.props.shouldApplyTransformStyles ? {
-      transform: compact([
-        this.props.horizontal && {
-          translateX: this.props.clampToBounds
-            ? Animated.diffClamp(this.pan.x, 0, this.state.viewWidth)
-            : this.pan.x,
-        },
-        this.props.vertical && {
-          translateY: this.props.clampToBounds
-            ? Animated.diffClamp(this.pan.y, 0, this.state.viewHeight)
-            : this.pan.y,
-        },
-      ]),
-    } : {};
+    const style = this.props.shouldApplyTransformStyles
+      ? {
+          transform: compact([
+            this.props.horizontal && {
+              translateX: this.props.clampToBounds
+                ? Animated.diffClamp(this.pan.x, 0, this.state.viewWidth)
+                : this.pan.x,
+            },
+            this.props.vertical && {
+              translateY: this.props.clampToBounds
+                ? Animated.diffClamp(this.pan.y, 0, this.state.viewHeight)
+                : this.pan.y,
+            },
+          ]),
+        }
+      : {};
     return (
       <View
         style={this.props.style}

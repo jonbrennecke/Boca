@@ -4,7 +4,7 @@ import { Animated, View, StyleSheet } from 'react-native';
 import noop from 'lodash/noop';
 import clamp from 'lodash/clamp';
 
-import { DragInteraction } from '../DragInteraction';
+import { DragGestureHandler } from '../DragGestureHandler';
 
 import type { Element } from 'react';
 
@@ -86,7 +86,7 @@ export class Seekbar extends Component<Props, State> {
         onLayout={this.viewDidLayout}
       >
         {this.props.children}
-        <DragInteraction
+        <DragGestureHandler
           ref={this.dragRef}
           style={styles.dragContainer}
           vertical={false}
