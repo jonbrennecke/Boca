@@ -4,11 +4,13 @@ import {
   PanResponder,
   Animated,
   View,
+  Easing,
   StyleSheet,
   findNodeHandle,
 } from 'react-native';
 import { autobind } from 'core-decorators';
 import stubTrue from 'lodash/stubTrue';
+import stubFalse from 'lodash/stubFalse';
 import compact from 'lodash/compact';
 import clamp from 'lodash/clamp';
 import throttle from 'lodash/throttle';
@@ -89,8 +91,16 @@ export class DragGestureHandler extends PureComponent<
     this.pan.addListener(this.panListenerThrottled);
     this.panResponder = PanResponder.create({
       onStartShouldSetPanResponder: stubTrue,
-      onStartShouldSetPanResponderCapture: stubTrue,
-      onMoveShouldSetPanResponder: stubTrue,
+      onStartShouldSetPanResponderCapture: stubFalse,
+      onMoveShouldSetPanResponder: (event, gesture) => {
+        const { dx, dy } = gesture;
+        if (this.props.vertical && !this.props.horizontal) {
+          return Math.abs(dy) > Math.abs(dx);
+        } else if (this.props.horizontal && !this.props.vertical) {
+          return Math.abs(dx) > Math.abs(dy);
+        }
+        return true;
+      },
       onPanResponderMove: this.handleMove,
       onPanResponderGrant: this.handleGrant,
       onPanResponderRelease: this.handleRelease,
@@ -183,8 +193,9 @@ export class DragGestureHandler extends PureComponent<
       return;
     }
     this.pan.flattenOffset();
-    Animated.spring(this.pan, {
+    Animated.timing(this.pan, {
       toValue: { x: 0, y: 0 },
+      easing: Easing.out(Easing.quad),
     }).start();
   }
 

@@ -15,20 +15,19 @@ export type VideoCompositionGestureHandlerProps = {
 };
 
 const styles = {
-  pinch: (anim: Animated.Value) => ({
+  gestureAnim: (anim: Animated.Value) => ({
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'red', // TODO
     opacity: anim.interpolate({
-      inputRange: [0, 400],
-      outputRange: [1, 0.25],
+      inputRange: [-400, 0, 400],
+      outputRange: [0.25, 1, 0.25],
       extrapolate: 'clamp',
       easing: Easing.inOut(Easing.quad),
     }),
     transform: [
       {
         scale: anim.interpolate({
-          inputRange: [0, 100],
-          outputRange: [1, 0.9],
+          inputRange: [-300, 0, 300],
+          outputRange: [0.66, 1, 0.66],
           extrapolate: 'clamp',
           easing: Easing.inOut(Easing.quad),
         }),
@@ -62,7 +61,10 @@ export class VideoCompositionGestureHandler extends PureComponent<
         returnToOriginalPosition
         renderChildren={({ style, ...etc }) => (
           <Animated.View
-            style={mergeTransformStyles(styles.pinch(this.panYAnim), style)}
+            style={mergeTransformStyles(
+              styles.gestureAnim(this.panYAnim),
+              style
+            )}
             {...etc}
           >
             {this.props.children}

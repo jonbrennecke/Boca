@@ -24,8 +24,7 @@ const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const styles = {
   videoWrap: {
     flex: 1,
-    // paddingVertical: Units.small,
-    backgroundColor: Colors.backgrounds.black,
+    paddingVertical: Units.small,
     width: SCREEN_WIDTH,
     height: '100%',
   },
@@ -77,17 +76,20 @@ export class VideoReviewScreenFlatList extends PureComponent<
         onGestureDidStart={this.onGestureDidStart}
         onGestureDidEnd={this.onGestureDidEnd}
       >
-        <View style={styles.debugInner} />
-        {/* <FlatList
+        <FlatList
           ref={this.flatListRef}
           style={style}
+          inverted
           pagingEnabled
-          horizontal={true}
+          horizontal
           data={assets}
           keyExtractor={asset => asset.assetID}
           removeClippedSubviews
           initialNumToRender={1}
           scrollEventThrottle={16}
+          indicatorStyle="white"
+          snapToAlignment="center"
+          directionalLockEnabled
           onScroll={({ nativeEvent }: any) => {
             if (!nativeEvent) {
               return;
@@ -99,10 +101,13 @@ export class VideoReviewScreenFlatList extends PureComponent<
             }
           }}
           renderItem={({ item: asset }) => (
-            <View style={styles.videoWrap}>
-              {renderItem(asset)}
-            </View>
+            <View style={styles.videoWrap}>{renderItem(asset)}</View>
           )}
+          getItemLayout={(data, index) => ({
+            length: SCREEN_WIDTH,
+            offset: SCREEN_WIDTH * index,
+            index,
+          })}
           onEndReached={({ distanceFromEnd }) => {
             if (distanceFromEnd < 0) {
               return;
@@ -110,7 +115,7 @@ export class VideoReviewScreenFlatList extends PureComponent<
             onRequestLoadMore();
           }}
           onEndReachedThreshold={0.75}
-        /> */}
+        />
       </VideoCompositionGestureHandler>
     );
   }
