@@ -2,7 +2,6 @@
 import React, { PureComponent, createRef } from 'react';
 import { FlatList, View, Dimensions } from 'react-native';
 import ReactNativeHaptic from 'react-native-haptic';
-import noop from 'lodash/noop';
 
 import { Units, Colors } from '../../constants';
 import { VideoCompositionGestureHandler } from '../../components';
@@ -16,7 +15,8 @@ export type VideoReviewScreenFlatListProps = {
   assets: Array<MediaObject>,
   onSelectAsset: (asset: MediaObject) => void,
   renderItem: (item: MediaObject) => ?Element<*>,
-  onRequestLoadMore?: () => void,
+  onRequestLoadMore: () => void,
+  onRequestDismiss: () => void,
 };
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
@@ -42,7 +42,7 @@ export class VideoReviewScreenFlatList extends PureComponent<
 > {
   flatListRef = createRef();
 
-  onGestureDidStart = () => {
+  onPanGestureDidStart = () => {
     ReactNativeHaptic.generate('selection');
     if (!this.flatListRef.current) {
       return;
@@ -52,7 +52,7 @@ export class VideoReviewScreenFlatList extends PureComponent<
     });
   };
 
-  onGestureDidEnd = () => {
+  onPanGestureDidEnd = (dismissRequested: boolean) => {
     ReactNativeHaptic.generate('selection');
     if (!this.flatListRef.current) {
       return;
@@ -60,6 +60,9 @@ export class VideoReviewScreenFlatList extends PureComponent<
     this.flatListRef.current.setNativeProps({
       scrollEnabled: true,
     });
+    if (dismissRequested) {
+      this.props.onRequestDismiss();
+    }
   };
 
   render() {
@@ -68,13 +71,13 @@ export class VideoReviewScreenFlatList extends PureComponent<
       assets,
       renderItem,
       onSelectAsset,
-      onRequestLoadMore = noop,
+      onRequestLoadMore,
     } = this.props;
     return (
       <VideoCompositionGestureHandler
         style={style}
-        onGestureDidStart={this.onGestureDidStart}
-        onGestureDidEnd={this.onGestureDidEnd}
+        onPanGestureDidStart={this.onPanGestureDidStart}
+        onPanGestureDidEnd={this.onPanGestureDidEnd}
       >
         <FlatList
           ref={this.flatListRef}

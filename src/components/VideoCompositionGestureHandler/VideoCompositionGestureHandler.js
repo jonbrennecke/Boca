@@ -1,6 +1,7 @@
 // @flow
 import React, { PureComponent } from 'react';
-import { Animated, StyleSheet, Easing } from 'react-native';
+import { Animated, StyleSheet, Easing, Dimensions } from 'react-native';
+import { autobind } from 'core-decorators';
 import concat from 'lodash/concat';
 
 import { DragGestureHandler } from '../DragGestureHandler';
@@ -10,9 +11,11 @@ import type { Style, Children } from '../../types';
 export type VideoCompositionGestureHandlerProps = {
   style?: ?Style,
   children?: ?Children,
-  onGestureDidStart: () => void,
-  onGestureDidEnd: () => void,
+  onPanGestureDidStart: () => void,
+  onPanGestureDidEnd: (dismissRequested: boolean) => void,
 };
+
+const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 const styles = {
   gestureAnim: (anim: Animated.Value) => ({
@@ -36,15 +39,17 @@ const styles = {
   }),
 };
 
+// $FlowFixMe
+@autobind
 export class VideoCompositionGestureHandler extends PureComponent<
   VideoCompositionGestureHandlerProps
 > {
-  panYAnim = new Animated.Value(1);
+  gestureYAnim = new Animated.Value(1);
 
-  animateDragMove = Animated.event([null, { dy: this.panYAnim }]);
+  animateDragMove = Animated.event([null, { dy: this.gestureYAnim }]);
 
   animateDragRelease = () => {
-    Animated.timing(this.panYAnim, {
+    Animated.timing(this.gestureYAnim, {
       toValue: 0,
       easing: Easing.out(Easing.quad),
     }).start();
@@ -62,7 +67,7 @@ export class VideoCompositionGestureHandler extends PureComponent<
         renderChildren={({ style, ...etc }) => (
           <Animated.View
             style={mergeTransformStyles(
-              styles.gestureAnim(this.panYAnim),
+              styles.gestureAnim(this.gestureYAnim),
               style
             )}
             {...etc}
@@ -70,9 +75,10 @@ export class VideoCompositionGestureHandler extends PureComponent<
             {this.props.children}
           </Animated.View>
         )}
-        onDragStart={this.props.onGestureDidStart}
-        onDragEnd={() => {
-          this.props.onGestureDidEnd();
+        onDragStart={this.props.onPanGestureDidStart}
+        onDragEnd={({ y }) => {
+          const dismissRequested = !!y && Math.abs(y) > SCREEN_HEIGHT * 0.35;
+          this.props.onPanGestureDidEnd(dismissRequested);
           this.animateDragRelease();
         }}
         onDragMoveEvent={this.animateDragMove}

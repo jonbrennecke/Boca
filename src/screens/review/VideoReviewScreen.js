@@ -146,6 +146,7 @@ export const VideoReviewScreen: ComponentType<
               </View>
             </TouchableWithoutFeedback>
           )}
+          onRequestDismiss={onRequestDismiss}
           onRequestLoadMore={loadNextAssets}
           onSelectAsset={asset => selectVideo(asset.assetID)}
         />
