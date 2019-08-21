@@ -11,14 +11,11 @@ import { VideoComposition } from '@jonbrennecke/react-native-camera';
 import noop from 'lodash/noop';
 
 import {
-  IconButton,
-  TrashIcon,
-  ExportIcon,
-  HeartIcon,
   Toast,
   PlaybackToolbar,
   BlurredSelectableButton,
   DepthInput,
+  SelectableButton,
   SwipeDownGestureHandler,
 } from '../../components';
 import { VideoReviewScreenToolbar } from './VideoReviewScreenToolbar';
@@ -97,6 +94,16 @@ const styles = {
     }),
     backgroundColor: Colors.backgrounds.black,
   }),
+  toolbarCentered: {
+    paddingVertical: Units.small,
+    paddingHorizontal: Units.small,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderTopStyle: 'solid',
+    borderTopColor: Colors.borders.gray,
+  },
 };
 
 const decorate = (component: ComponentType<*>) =>
@@ -233,25 +240,11 @@ export const VideoReviewScreen: ComponentType<
                 onSelectValue={setBlurAperture}
               />
             </View>
-            <View style={styles.toolbar}>
-              <IconButton
-                disabled={isExporting}
-                style={styles.iconButton}
-                fillColor={Colors.icons.toolbar}
+            <View style={styles.toolbarCentered}>
+              <SelectableButton
+                text="Save"
+                isSelected
                 onPress={exportComposition}
-                icon={ExportIcon}
-              />
-              <IconButton
-                style={styles.iconButton}
-                fillColor={Colors.icons.toolbar}
-                onPress={noop}
-                icon={HeartIcon}
-              />
-              <IconButton
-                style={styles.iconButton}
-                fillColor={Colors.icons.toolbar}
-                onPress={noop}
-                icon={TrashIcon}
               />
             </View>
             <Toast
