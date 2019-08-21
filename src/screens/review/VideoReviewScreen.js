@@ -92,7 +92,7 @@ const styles = {
   background: (swipeGesture: Animated.Value) => ({
     ...StyleSheet.absoluteFillObject,
     opacity: swipeGesture.interpolate({
-      inputRange: [-300, 0, 300],
+      inputRange: [-600, 0, 600],
       outputRange: [0, 1, 0],
       extrapolate: 'clamp',
     }),
@@ -132,6 +132,7 @@ export const VideoReviewScreen: ComponentType<
     selectVideo,
     loadNextAssets,
     isMediaModalVisible,
+    isSwipeGestureInProgress,
     showMediaModal,
     hideMediaModal,
     onRequestDismiss,
@@ -159,6 +160,7 @@ export const VideoReviewScreen: ComponentType<
             <SwipeDownGestureHandler
               style={styles.flex}
               swipeGesture={swipeGesture}
+              isSwipeGestureInProgress={isSwipeGestureInProgress}
               onSwipeDownGestureStart={onSwipeDownGestureStart}
               onSwipeDownGestureRelease={onSwipeDownGestureRelease}
               onSwipeDownGestureMove={onSwipeDownGestureMove}

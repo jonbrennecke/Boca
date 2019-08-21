@@ -13,6 +13,10 @@ export type VideoReviewScreenGestureProps = {
   onSwipeDownGestureStart: () => void,
   onSwipeDownGestureRelease: () => void,
   onSwipeDownGestureMove: (event: any, gesture: any) => void,
+} & VideoReviewScreenGestureState;
+
+export type VideoReviewScreenGestureState = {
+  isSwipeGestureInProgress: boolean,
 };
 
 export const wrapWithVideoReviewScreenGestureState = <
@@ -24,12 +28,21 @@ export const wrapWithVideoReviewScreenGestureState = <
   // $FlowFixMe
   @autobind
   class VideoReviewScreenDismissGestureHandler extends PureComponent<
-    PassThroughProps
+    PassThroughProps,
+    VideoReviewScreenGestureState
   > {
     swipeGesture = new Animated.Value(1);
     flatListRef = createRef();
+    state: $Exact<VideoReviewScreenGestureState> = {
+      isSwipeGestureInProgress: false,
+    };
 
     handleSwipeDownGestureStart = () => {
+      this.setState({
+        isSwipeGestureInProgress: true
+      });
+
+      // TODO: replace with 'isSwipeGestureInProgress'
       if (!this.flatListRef.current) {
         return;
       }
@@ -44,7 +57,12 @@ export const wrapWithVideoReviewScreenGestureState = <
     ]);
 
     handleSwipeDownGestureRelease = () => {
+      this.setState({
+        isSwipeGestureInProgress: false
+      });
       this.animateSwipeDownGestureRelease();
+
+      // TODO: replace with 'isSwipeGestureInProgress'
       if (!this.flatListRef.current) {
         return;
       }
@@ -64,6 +82,7 @@ export const wrapWithVideoReviewScreenGestureState = <
       return (
         <WrappedComponent
           {...this.props}
+          {...this.state}
           flatListRef={this.flatListRef}
           swipeGesture={this.swipeGesture}
           onSwipeDownGestureStart={this.handleSwipeDownGestureStart}

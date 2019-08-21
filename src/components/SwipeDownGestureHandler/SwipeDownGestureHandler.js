@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { Animated, StyleSheet, Easing, Dimensions } from 'react-native';
+import { Animated, StyleSheet, Easing } from 'react-native';
 import concat from 'lodash/concat';
 
 import { DragGestureHandler } from '../DragGestureHandler';
@@ -11,22 +11,20 @@ export type SwipeDownGestureHandlerProps = {
   style?: ?Style,
   children?: ?Children,
   swipeGesture: Animated.Value,
+  isSwipeGestureInProgress: boolean,
   onSwipeDownGestureStart: () => void,
   onSwipeDownGestureRelease: () => void,
   onSwipeDownGestureMove: (event: any, gesture: any) => void,
-
-  // onPanGestureDidStart: () => void,
-  // onPanGestureDidEnd: (dismissRequested: boolean) => void,
 };
 
-const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 const styles = {
-  gestureAnim: (anim: Animated.Value) => ({
+  gestureAnim: (anim: Animated.Value, isSwipeGestureInProgress: boolean) => ({
     ...StyleSheet.absoluteFillObject,
+    zIndex: isSwipeGestureInProgress ? 1000 : 1,
     opacity: anim.interpolate({
       inputRange: [-400, 0, 400],
-      outputRange: [0.25, 1, 0.25],
+      outputRange: [0.66, 1, 0.66],
       extrapolate: 'clamp',
       easing: Easing.inOut(Easing.quad),
     }),
@@ -48,6 +46,7 @@ export const SwipeDownGestureHandler: SFC<SwipeDownGestureHandlerProps> = ({
   style,
   children,
   swipeGesture,
+  isSwipeGestureInProgress,
   onSwipeDownGestureStart,
   onSwipeDownGestureRelease,
   onSwipeDownGestureMove,
@@ -61,17 +60,14 @@ export const SwipeDownGestureHandler: SFC<SwipeDownGestureHandlerProps> = ({
     returnToOriginalPosition
     renderChildren={({ style, ...etc }) => (
       <Animated.View
-        style={mergeTransformStyles(styles.gestureAnim(swipeGesture), style)}
+        style={mergeTransformStyles(styles.gestureAnim(swipeGesture, isSwipeGestureInProgress), style)}
         {...etc}
       >
         {children}
       </Animated.View>
     )}
     onDragStart={onSwipeDownGestureStart}
-    onDragEnd={({ y }) => {
-      // TODO: const dismissRequested = !!y && Math.abs(y) > SCREEN_HEIGHT * 0.35;
-      onSwipeDownGestureRelease();
-    }}
+    onDragEnd={onSwipeDownGestureRelease}
     onDragMoveEvent={onSwipeDownGestureMove}
   />
 );
