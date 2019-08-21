@@ -21,13 +21,6 @@ const styles = {
     top: 0,
     opacity: isFullScreen ? 1 : 0,
   }),
-  absoluteFill: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    top: 0,
-  },
   flex: {
     flex: 1,
   },

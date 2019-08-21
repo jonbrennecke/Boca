@@ -45,7 +45,6 @@ const styles = {
   flex: {
     flex: 1,
   },
-  absoluteFill: StyleSheet.absoluteFill,
   toolbar: {
     paddingVertical: Units.small,
     paddingHorizontal: Units.small,
@@ -96,7 +95,7 @@ const styles = {
       outputRange: [0, 1, 0],
       extrapolate: 'clamp',
     }),
-    backgroundColor: Colors.backgrounds.gray,
+    backgroundColor: Colors.backgrounds.black,
   }),
 };
 
@@ -225,13 +224,15 @@ export const VideoReviewScreen: ComponentType<
             swipeGesture={swipeGesture}
             isVisible={!isFullScreenVideo}
           >
-            <DepthInput
-              style={styles.depthInput}
-              value={blurAperture || BlurApertureRange.initialValue}
-              min={BlurApertureRange.lowerBound}
-              max={BlurApertureRange.upperBound}
-              onSelectValue={setBlurAperture}
-            />
+            <View style={styles.toolbar}>
+              <DepthInput
+                style={styles.depthInput}
+                value={blurAperture || BlurApertureRange.initialValue}
+                min={BlurApertureRange.lowerBound}
+                max={BlurApertureRange.upperBound}
+                onSelectValue={setBlurAperture}
+              />
+            </View>
             <View style={styles.toolbar}>
               <IconButton
                 disabled={isExporting}

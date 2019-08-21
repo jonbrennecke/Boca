@@ -1,8 +1,8 @@
 // @flow
 import React, { PureComponent } from 'react';
-import { Animated, View, Easing } from 'react-native';
+import { Animated, View } from 'react-native';
 
-import { Units, Colors } from '../../constants';
+import { Colors } from '../../constants';
 
 import type { Style, Children } from '../../types';
 
@@ -33,7 +33,6 @@ const styles = {
       },
     ],
     justifyContent: 'center',
-    paddingVertical: 2 * Units.extraSmall,
   }),
   background: {
     position: 'absolute',
