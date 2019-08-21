@@ -1,15 +1,12 @@
 // @flow
-import React, { PureComponent, createRef } from 'react';
+import React, { PureComponent } from 'react';
 import { Animated, Easing } from 'react-native';
 import { autobind } from 'core-decorators';
 
 import type { ComponentType } from 'react';
 
-import type { ReturnType } from '../../types';
-
 export type VideoReviewScreenGestureProps = {
   swipeGesture: Animated.Value,
-  flatListRef: ReturnType<typeof createRef>,
   onSwipeDownGestureStart: () => void,
   onSwipeDownGestureRelease: () => void,
   onSwipeDownGestureMove: (event: any, gesture: any) => void,
@@ -32,22 +29,13 @@ export const wrapWithVideoReviewScreenGestureState = <
     VideoReviewScreenGestureState
   > {
     swipeGesture = new Animated.Value(1);
-    flatListRef = createRef();
     state: $Exact<VideoReviewScreenGestureState> = {
       isSwipeGestureInProgress: false,
     };
 
     handleSwipeDownGestureStart = () => {
       this.setState({
-        isSwipeGestureInProgress: true
-      });
-
-      // TODO: replace with 'isSwipeGestureInProgress'
-      if (!this.flatListRef.current) {
-        return;
-      }
-      this.flatListRef.current.setNativeProps({
-        scrollEnabled: false,
+        isSwipeGestureInProgress: true,
       });
     };
 
@@ -58,17 +46,9 @@ export const wrapWithVideoReviewScreenGestureState = <
 
     handleSwipeDownGestureRelease = () => {
       this.setState({
-        isSwipeGestureInProgress: false
+        isSwipeGestureInProgress: false,
       });
       this.animateSwipeDownGestureRelease();
-
-      // TODO: replace with 'isSwipeGestureInProgress'
-      if (!this.flatListRef.current) {
-        return;
-      }
-      this.flatListRef.current.setNativeProps({
-        scrollEnabled: false,
-      });
     };
 
     animateSwipeDownGestureRelease = () => {
@@ -83,7 +63,6 @@ export const wrapWithVideoReviewScreenGestureState = <
         <WrappedComponent
           {...this.props}
           {...this.state}
-          flatListRef={this.flatListRef}
           swipeGesture={this.swipeGesture}
           onSwipeDownGestureStart={this.handleSwipeDownGestureStart}
           onSwipeDownGestureRelease={this.handleSwipeDownGestureRelease}

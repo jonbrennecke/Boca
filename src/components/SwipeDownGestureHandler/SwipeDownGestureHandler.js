@@ -12,16 +12,19 @@ export type SwipeDownGestureHandlerProps = {
   children?: ?Children,
   swipeGesture: Animated.Value,
   isSwipeGestureInProgress: boolean,
+  verticalThreshold: number,
   onSwipeDownGestureStart: () => void,
   onSwipeDownGestureRelease: () => void,
   onSwipeDownGestureMove: (event: any, gesture: any) => void,
+  onVerticalThresholdReached: () => void,
 };
 
-
 const styles = {
-  gestureAnim: (anim: Animated.Value, isSwipeGestureInProgress: boolean) => ({
-    ...StyleSheet.absoluteFillObject,
+  container: (isSwipeGestureInProgress: boolean) => ({
     zIndex: isSwipeGestureInProgress ? 1000 : 1,
+  }),
+  gestureAnim: (anim: Animated.Value) => ({
+    ...StyleSheet.absoluteFillObject,
     opacity: anim.interpolate({
       inputRange: [-400, 0, 400],
       outputRange: [0.66, 1, 0.66],
@@ -45,14 +48,16 @@ const styles = {
 export const SwipeDownGestureHandler: SFC<SwipeDownGestureHandlerProps> = ({
   style,
   children,
+  verticalThreshold,
   swipeGesture,
   isSwipeGestureInProgress,
   onSwipeDownGestureStart,
   onSwipeDownGestureRelease,
   onSwipeDownGestureMove,
+  onVerticalThresholdReached,
 }: SwipeDownGestureHandlerProps) => (
   <DragGestureHandler
-    style={style}
+    style={[styles.container(isSwipeGestureInProgress), style]}
     clampToBounds={false}
     jumpToGrantedPosition={false}
     vertical={true}
@@ -60,14 +65,20 @@ export const SwipeDownGestureHandler: SFC<SwipeDownGestureHandlerProps> = ({
     returnToOriginalPosition
     renderChildren={({ style, ...etc }) => (
       <Animated.View
-        style={mergeTransformStyles(styles.gestureAnim(swipeGesture, isSwipeGestureInProgress), style)}
+        style={mergeTransformStyles(styles.gestureAnim(swipeGesture), style)}
         {...etc}
       >
         {children}
       </Animated.View>
     )}
     onDragStart={onSwipeDownGestureStart}
-    onDragEnd={onSwipeDownGestureRelease}
+    onDragEnd={({ y }) => {
+      onSwipeDownGestureRelease();
+      const isThresholdReached = !!y && Math.abs(y) > verticalThreshold;
+      if (isThresholdReached) {
+        onVerticalThresholdReached();
+      }
+    }}
     onDragMoveEvent={onSwipeDownGestureMove}
   />
 );

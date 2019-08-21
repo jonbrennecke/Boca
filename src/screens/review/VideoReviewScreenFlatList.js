@@ -12,6 +12,7 @@ export type VideoReviewScreenFlatListProps = {
   style?: ?Style,
   flatListRef?: ReturnType<typeof createRef>,
   assets: Array<MediaObject>,
+  isScrollEnabled?: boolean,
   onSelectAsset: (asset: MediaObject) => void,
   renderItem: (item: MediaObject) => ?Element<*>,
   onRequestLoadMore: () => void,
@@ -40,18 +41,20 @@ const styles = {
 
 // eslint-disable-next-line flowtype/generic-spacing
 export const VideoReviewScreenFlatList: SFC<VideoReviewScreenFlatListProps> = ({
-  flatListRef,
   style,
+  flatListRef,
   assets,
   renderItem,
   onSelectAsset,
   onRequestLoadMore,
+  isScrollEnabled = true,
 }: VideoReviewScreenFlatListProps) => (
   <FlatList
     ref={flatListRef}
     style={style}
     inverted
     pagingEnabled
+    scrollEnabled={isScrollEnabled}
     horizontal
     data={assets}
     keyExtractor={asset => asset.assetID}
