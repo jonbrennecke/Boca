@@ -28,7 +28,7 @@ const styles = {
       {
         translateY: anim.interpolate({
           inputRange: [0, 1],
-          outputRange: [0, 100],
+          outputRange: [0, 160],
         }),
       },
     ],
