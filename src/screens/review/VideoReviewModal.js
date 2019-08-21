@@ -2,9 +2,6 @@
 import React from 'react';
 import { StatusBar, View } from 'react-native';
 import ReactNativeHaptic from 'react-native-haptic';
-import { BlurView } from '@jonbrennecke/react-native-animated-ui';
-// $FlowFixMe
-import { withSafeArea } from 'react-native-safe-area';
 
 import { VideoReviewScreen } from './VideoReviewScreen';
 
@@ -36,8 +33,6 @@ const styles = {
   },
 };
 
-const SafeAreaView = withSafeArea(View, 'margin', 'all');
-
 export const VideoReviewModal: SFC<VideoReviewModalProps> = ({
   isVisible,
   onRequestDismissModal,
@@ -52,10 +47,7 @@ export const VideoReviewModal: SFC<VideoReviewModalProps> = ({
       pointerEvents={isVisible ? 'auto' : 'none'}
     >
       {isVisible && <StatusBar barStyle="light-content" />}
-      <BlurView blurType="dark" blurAmount={20} style={styles.absoluteFill} />
-      <SafeAreaView style={styles.flex}>
-        <VideoReviewScreen onRequestDismiss={dismiss} />
-      </SafeAreaView>
+      <VideoReviewScreen onRequestDismiss={dismiss} />
     </View>
   );
 };

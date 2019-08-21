@@ -12,3 +12,4 @@ export * from './PlaybackToolbar';
 export * from './RangeInput';
 export * from './SwipeDownGestureHandler';
 export * from './DepthInput';
+export * from './AnimatedBlurView';

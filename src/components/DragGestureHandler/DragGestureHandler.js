@@ -104,6 +104,7 @@ export class DragGestureHandler extends PureComponent<
       onPanResponderMove: this.handleMove,
       onPanResponderGrant: this.handleGrant,
       onPanResponderRelease: this.handleRelease,
+      onPanResponderTerminate: this.handleRelease,
     });
   }
 

@@ -10,7 +10,7 @@ import type { SFC, Style, ReturnType } from '../../types';
 
 export type VideoReviewScreenFlatListProps = {
   style?: ?Style,
-  ref?: ReturnType<typeof createRef>,
+  flatListRef?: ReturnType<typeof createRef>,
   assets: Array<MediaObject>,
   onSelectAsset: (asset: MediaObject) => void,
   renderItem: (item: MediaObject) => ?Element<*>,
@@ -40,7 +40,7 @@ const styles = {
 
 // eslint-disable-next-line flowtype/generic-spacing
 export const VideoReviewScreenFlatList: SFC<VideoReviewScreenFlatListProps> = ({
-  ref,
+  flatListRef,
   style,
   assets,
   renderItem,
@@ -48,7 +48,7 @@ export const VideoReviewScreenFlatList: SFC<VideoReviewScreenFlatListProps> = ({
   onRequestLoadMore,
 }: VideoReviewScreenFlatListProps) => (
   <FlatList
-    ref={ref}
+    ref={flatListRef}
     style={style}
     inverted
     pagingEnabled

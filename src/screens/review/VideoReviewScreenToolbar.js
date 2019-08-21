@@ -9,16 +9,21 @@ import type { Style, Children } from '../../types';
 export type VideoReviewScreenToolbarProps = {
   style?: ?Style,
   children: Children,
+  swipeGesture: Animated.Value,
   isVisible: boolean,
 };
 
 const styles = {
-  container: (anim: Animated.Value) => ({
+  container: (anim: Animated.Value, swipeAnim: Animated.Value) => ({
     flexDirection: 'column',
-    opacity: anim.interpolate({
-      inputRange: [0, 1],
-      outputRange: [1, 0],
+    opacity: swipeAnim.interpolate({
+      inputRange: [-300, 0, 300],
+      outputRange: [0, 1, 0],
     }),
+    // opacity: anim.interpolate({
+    //   inputRange: [0, 1],
+    //   outputRange: [1, 0],
+    // }),
     transform: [
       {
         translateY: anim.interpolate({
@@ -64,8 +69,8 @@ export class VideoReviewScreenToolbar extends PureComponent<
     Animated.timing(this.anim, {
       duration: 150,
       toValue: 0,
-      easing: Easing.linear,
-      useNativeDriver: true,
+      // easing: Easing.linear,
+      // useNativeDriver: true,
     }).start();
   }
 
@@ -73,14 +78,16 @@ export class VideoReviewScreenToolbar extends PureComponent<
     Animated.timing(this.anim, {
       duration: 150,
       toValue: 1,
-      easing: Easing.linear,
-      useNativeDriver: true,
+      // easing: Easing.linear,
+      // useNativeDriver: true,
     }).start();
   }
 
   render() {
     return (
-      <Animated.View style={styles.container(this.anim)}>
+      <Animated.View
+        style={styles.container(this.anim, this.props.swipeGesture)}
+      >
         <View style={styles.background} />
         {this.props.children}
       </Animated.View>

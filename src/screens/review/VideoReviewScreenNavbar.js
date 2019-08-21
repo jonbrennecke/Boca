@@ -20,6 +20,7 @@ import type { Style } from '../../types';
 export type VideoReviewScreenNavbarProps = {
   style?: ?Style,
   assetCreationDate: ?string,
+  swipeGesture: Animated.Value,
   isVisible: boolean,
   exportProgress: number,
   onRequestPushCameraScreen: () => void,
@@ -37,11 +38,12 @@ const styles = {
     borderBottomStyle: 'solid',
     borderBottomColor: Colors.borders.gray,
   },
-  navigationBarWrap: (anim: Animated.Value) => ({
+  navigationBarWrap: (anim: Animated.Value, swipeAnim: Animated.Value) => ({
     flexDirection: 'column',
-    opacity: anim.interpolate({
-      inputRange: [0, 1],
-      outputRange: [1, 0],
+    // opacity: Animated.add(swipeAnim, anim)
+    opacity: swipeAnim.interpolate({
+      inputRange: [-300, 0, 300],
+      outputRange: [0, 1, 0],
     }),
     transform: [
       {
@@ -110,8 +112,8 @@ export class VideoReviewScreenNavbar extends PureComponent<
     Animated.timing(this.anim, {
       duration: 150,
       toValue: 0,
-      easing: Easing.linear,
-      useNativeDriver: true,
+      // easing: Easing.linear,
+      // useNativeDriver: true,
     }).start();
   }
 
@@ -120,14 +122,16 @@ export class VideoReviewScreenNavbar extends PureComponent<
     Animated.timing(this.anim, {
       duration: 150,
       toValue: 1,
-      easing: Easing.linear,
-      useNativeDriver: true,
+      // easing: Easing.linear,
+      // useNativeDriver: true,
     }).start();
   }
 
   render() {
     return (
-      <Animated.View style={styles.navigationBarWrap(this.anim)}>
+      <Animated.View
+        style={styles.navigationBarWrap(this.anim, this.props.swipeGesture)}
+      >
         <View style={styles.navigationBar}>
           <View style={styles.navigationBarBackground} />
           <IconButton
