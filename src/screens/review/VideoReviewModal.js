@@ -7,7 +7,6 @@ import { BlurView } from '@jonbrennecke/react-native-animated-ui';
 import { withSafeArea } from 'react-native-safe-area';
 
 import { VideoReviewScreen } from './VideoReviewScreen';
-import { Colors } from '../../constants';
 
 import type { SFC } from '../../types';
 

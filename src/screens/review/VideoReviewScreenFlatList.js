@@ -1,22 +1,23 @@
 // @flow
-import React, { PureComponent, createRef } from 'react';
+import React, { createRef } from 'react';
 import { FlatList, View, Dimensions } from 'react-native';
-import ReactNativeHaptic from 'react-native-haptic';
 
-import { Units, Colors } from '../../constants';
-import { VideoCompositionGestureHandler } from '../../components';
+import { Units } from '../../constants';
 
 import type { Element } from 'react';
 import type { MediaObject } from '@jonbrennecke/react-native-media';
-import type { Style } from '../../types';
+import type { SFC, Style, ReturnType } from '../../types';
 
 export type VideoReviewScreenFlatListProps = {
   style?: ?Style,
+  ref?: ReturnType<typeof createRef>,
   assets: Array<MediaObject>,
   onSelectAsset: (asset: MediaObject) => void,
   renderItem: (item: MediaObject) => ?Element<*>,
   onRequestLoadMore: () => void,
   onRequestDismiss: () => void,
+  onSwipeDownGestureRelease: () => void,
+  onSwipeDownGestureMove: (event: any, gesture: any) => void,
 };
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
@@ -37,89 +38,53 @@ const styles = {
   },
 };
 
-export class VideoReviewScreenFlatList extends PureComponent<
-  VideoReviewScreenFlatListProps
-> {
-  flatListRef = createRef();
-
-  onPanGestureDidStart = () => {
-    ReactNativeHaptic.generate('selection');
-    if (!this.flatListRef.current) {
-      return;
-    }
-    this.flatListRef.current.setNativeProps({
-      scrollEnabled: false,
-    });
-  };
-
-  onPanGestureDidEnd = (dismissRequested: boolean) => {
-    ReactNativeHaptic.generate('selection');
-    if (!this.flatListRef.current) {
-      return;
-    }
-    this.flatListRef.current.setNativeProps({
-      scrollEnabled: true,
-    });
-    if (dismissRequested) {
-      this.props.onRequestDismiss();
-    }
-  };
-
-  render() {
-    const {
-      style,
-      assets,
-      renderItem,
-      onSelectAsset,
-      onRequestLoadMore,
-    } = this.props;
-    return (
-      <VideoCompositionGestureHandler
-        style={style}
-        onPanGestureDidStart={this.onPanGestureDidStart}
-        onPanGestureDidEnd={this.onPanGestureDidEnd}
-      >
-        <FlatList
-          ref={this.flatListRef}
-          style={style}
-          inverted
-          pagingEnabled
-          horizontal
-          data={assets}
-          keyExtractor={asset => asset.assetID}
-          removeClippedSubviews
-          initialNumToRender={1}
-          scrollEventThrottle={16}
-          indicatorStyle="white"
-          snapToAlignment="center"
-          directionalLockEnabled
-          onScroll={({ nativeEvent }: any) => {
-            if (!nativeEvent) {
-              return;
-            }
-            const { contentOffset, layoutMeasurement } = nativeEvent;
-            const index = Math.round(contentOffset.x / layoutMeasurement.width);
-            if (index < assets.length) {
-              onSelectAsset(assets[index]);
-            }
-          }}
-          renderItem={({ item: asset }) => (
-            <View style={styles.videoWrap}>{renderItem(asset)}</View>
-          )}
-          getItemLayout={(data, index) => ({
-            length: SCREEN_WIDTH,
-            offset: SCREEN_WIDTH * index,
-            index,
-          })}
-          onEndReached={({ distanceFromEnd }) => {
-            if (distanceFromEnd < 0) {
-              return;
-            }
-            onRequestLoadMore();
-          }}
-          onEndReachedThreshold={0.75}
-        />
-      </VideoCompositionGestureHandler>
-    );
-  }
-}
+// eslint-disable-next-line flowtype/generic-spacing
+export const VideoReviewScreenFlatList: SFC<VideoReviewScreenFlatListProps> = ({
+  ref,
+  style,
+  assets,
+  renderItem,
+  onSelectAsset,
+  onRequestLoadMore,
+}: VideoReviewScreenFlatListProps) => (
+  <FlatList
+    ref={ref}
+    style={style}
+    inverted
+    pagingEnabled
+    horizontal
+    data={assets}
+    keyExtractor={asset => asset.assetID}
+    removeClippedSubviews
+    initialNumToRender={1}
+    scrollEventThrottle={16}
+    indicatorStyle="white"
+    snapToAlignment="center"
+    directionalLockEnabled
+    onScroll={({ nativeEvent }: any) => {
+      if (!nativeEvent) {
+        return;
+      }
+      const { contentOffset, layoutMeasurement } = nativeEvent;
+      const index = Math.round(contentOffset.x / layoutMeasurement.width);
+      if (index < assets.length) {
+        onSelectAsset(assets[index]);
+      }
+    }}
+    renderItem={({ item: asset }) => (
+      <View style={styles.videoWrap}>{renderItem(asset)}</View>
+    )}
+    getItemLayout={(data, index) => ({
+      length: SCREEN_WIDTH,
+      offset: SCREEN_WIDTH * index,
+      index,
+    })}
+    onEndReached={({ distanceFromEnd }) => {
+      if (distanceFromEnd < 0) {
+        return;
+      }
+      onRequestLoadMore();
+    }}
+    onEndReachedThreshold={0.75}
+  />
+);
