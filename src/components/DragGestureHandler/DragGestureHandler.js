@@ -32,7 +32,7 @@ export type DragGestureHandlerProps = {
   vertical?: boolean,
   horizontal?: boolean,
   shouldApplyTransformStyles?: boolean,
-  style?: Style,
+  style?: ?(Style | Array<Style>),
   renderChildren: (props: RenderChildrenProps) => Element<*>,
   onDragStart?: ({ x: number, y: number }, pan: Animated.ValueXY) => void,
   onDragEnd?: ({ x: number, y: number }) => void,
@@ -113,6 +113,9 @@ export class DragGestureHandler extends PureComponent<
   }
 
   setPanValue(value: { x: number, y: number }) {
+    if (this.state.isDragging) {
+      return;
+    }
     this.pan.setValue(value);
   }
 

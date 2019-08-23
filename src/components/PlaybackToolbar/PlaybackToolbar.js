@@ -14,6 +14,7 @@ import type { Style, SFC } from '../../types';
 
 export type PlaybackToolbarProps = {
   style?: ?Style,
+  playbackProgress: number,
   playbackState: PlaybackState,
   assetID: ?string,
   assetDuration: ?number,
@@ -24,8 +25,8 @@ export type PlaybackToolbarProps = {
 
 const styles = {
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: 'column',
+    flex: 1,
   },
   seekbar: {
     flex: 1,
@@ -44,33 +45,41 @@ const styles = {
     fontWeight: 'bold',
     textAlign: 'center',
   },
+  playButtonRow: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    flex: 1,
+    paddingHorizontal: Units.small,
+  },
 };
 
 export const PlaybackToolbar: SFC<PlaybackToolbarProps> = ({
   style,
   playbackState,
+  playbackProgress,
   assetID,
-  assetDuration,
   onRequestPlay,
   onRequestPause,
   onSeekToProgress,
 }: PlaybackToolbarProps) => (
   <View style={[styles.container, style]}>
-    <IconButton
-      style={styles.playIcon}
-      fillColor={Colors.icons.toolbar}
-      onPress={playbackState === 'playing' ? onRequestPause : onRequestPlay}
-      icon={playbackState === 'playing' ? PauseIcon : PlayIcon}
-    />
     <PlaybackSeekbar
       style={styles.seekbar}
       assetID={assetID}
+      playbackState={playbackState}
+      playbackProgress={playbackProgress}
       onSeekToProgress={onSeekToProgress}
+      onRequestPlay={onRequestPlay}
+      onRequestPause={onRequestPause}
     />
-    <View style={styles.durationWrap}>
-      <Text style={styles.durationText} numberOfLines={1}>
-        {formatDuration(assetDuration || 0)}
-      </Text>
+    <View style={styles.playButtonRow}>
+      <IconButton
+        style={styles.playIcon}
+        fillColor={Colors.icons.toolbar}
+        onPress={playbackState === 'playing' ? onRequestPause : onRequestPlay}
+        icon={playbackState === 'playing' ? PauseIcon : PlayIcon}
+      />
     </View>
   </View>
 );

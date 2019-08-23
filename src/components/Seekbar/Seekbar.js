@@ -14,6 +14,7 @@ type Props = {
   style?: ?(Style | Array<Style>),
   children?: ?Children,
   handleStyle?: ?Style,
+  progress?: number,
   initialProgress?: number,
   renderHandle?: (props: Object) => Element<*>,
   onSeekToProgress: (progress: number) => void,
@@ -22,6 +23,7 @@ type Props = {
 };
 
 type State = {
+  isDragging: boolean,
   viewWidth: number,
 };
 
@@ -41,24 +43,42 @@ export class Seekbar extends Component<Props, State> {
 
   state: State = {
     viewWidth: 0,
+    isDragging: false,
   };
   dragRef = createRef();
+
+  componentDidUpdate(prevProps: Props) {
+    if (this.props.progress != prevProps.progress) {
+      this.dragRef.current &&
+        this.dragRef.current.setPanValue(
+          this.makePanValueWithProgress(this.props.progress || 0)
+        );
+    }
+  }
 
   dragDidStart = () => {
     if (this.props.onDidBeginDrag) {
       this.props.onDidBeginDrag();
     }
+    this.setState({
+      isDragging: true,
+    });
   };
 
   dragDidEnd = ({ x }: { x: number, y: number }) => {
+    this.setState({
+      isDragging: false,
+    });
     const progress = clamp(x / this.state.viewWidth, 0, 1);
-    this.props.onSeekToProgress(progress);
     if (this.props.onDidEndDrag) {
       this.props.onDidEndDrag(progress);
     }
   };
 
   dragDidMove = ({ x }: { x: number, y: number }) => {
+    if (this.state.isDragging) {
+      return;
+    }
     const progress = clamp(x / this.state.viewWidth, 0, 1);
     this.props.onSeekToProgress(progress);
   };
@@ -66,15 +86,18 @@ export class Seekbar extends Component<Props, State> {
   viewDidLayout = ({ nativeEvent: { layout } }: any) => {
     this.setState({ viewWidth: layout.width }, () => {
       if (this.dragRef.current) {
-        this.dragRef.current.setPanValue(this.makeInitialValue());
+        this.dragRef.current.setPanValue(this.makeInitialPanValue());
       }
     });
   };
 
-  makeInitialValue(): { x: number, y: number } {
-    const initialProgress = this.props.initialProgress || 0;
+  makeInitialPanValue(): { x: number, y: number } {
+    return this.makePanValueWithProgress(this.props.initialProgress || 0);
+  }
+
+  makePanValueWithProgress(progress: number): { x: number, y: number } {
     return {
-      x: clamp(initialProgress, 0, 1) * this.state.viewWidth,
+      x: clamp(progress, 0, 1) * this.state.viewWidth,
       y: 0,
     };
   }
@@ -90,7 +113,7 @@ export class Seekbar extends Component<Props, State> {
           ref={this.dragRef}
           style={styles.dragContainer}
           vertical={false}
-          initialValue={this.makeInitialValue()}
+          initialValue={this.makeInitialPanValue()}
           returnToOriginalPosition={false}
           onDragStart={this.dragDidStart}
           onDragEnd={this.dragDidEnd}

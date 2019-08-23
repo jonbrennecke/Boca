@@ -68,7 +68,7 @@ const styles = {
     position: 'absolute',
     left: 0,
     right: 0,
-    paddingHorizontal: Units.small,
+    height: 100,
   },
   overCameraToolbar: (swipeGesture: Animated.Value) => ({
     position: 'absolute',
@@ -135,6 +135,7 @@ export const VideoReviewScreen: ComponentType<
     exportComposition,
     swipeGesture,
     playbackState,
+    playbackProgress,
     selectVideo,
     loadNextAssets,
     isMediaModalVisible,
@@ -145,7 +146,7 @@ export const VideoReviewScreen: ComponentType<
     onSwipeDownGestureStart,
     onSwipeDownGestureRelease,
     onSwipeDownGestureMove,
-    setPlaybackProgress,
+    setPlaybackProgressThrottled,
     setPlaybackState,
   }) => (
     <>
@@ -199,7 +200,7 @@ export const VideoReviewScreen: ComponentType<
                           : BlurApertureRange.initialValue
                       }
                       isReadyToLoad={selectedAssetID === asset.assetID}
-                      onPlaybackProgress={setPlaybackProgress}
+                      onPlaybackProgress={setPlaybackProgressThrottled}
                       onPlaybackStateChange={setPlaybackState}
                     />
                   </View>
@@ -224,6 +225,7 @@ export const VideoReviewScreen: ComponentType<
           <VideoReviewScreenPlaybackToolbar isVisible={isFullScreenVideo}>
             <View style={styles.playbackToolbar}>
               <PlaybackToolbar
+                playbackProgress={playbackProgress}
                 playbackState={playbackState}
                 assetID={selectedAssetID}
                 assetDuration={selectedAsset?.duration}

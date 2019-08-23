@@ -5,6 +5,7 @@ import { Linking } from 'react-native';
 import { autobind } from 'core-decorators';
 import noop from 'lodash/noop';
 import uniqBy from 'lodash/uniqBy';
+import throttle from 'lodash/throttle';
 import { createMediaStateHOC } from '@jonbrennecke/react-native-media';
 import {
   createCameraStateHOC,
@@ -57,6 +58,7 @@ export type VideoReviewScreenStateExtraProps = {
   loadNextAssets: () => void,
   showMediaModal: () => void,
   hideMediaModal: () => void,
+  setPlaybackProgressThrottled: (progress: number) => void,
 } & VideoReviewScreenState;
 
 export function wrapWithVideoReviewScreenState<
@@ -180,6 +182,7 @@ export function wrapWithVideoReviewScreenState<
     }
 
     onExportFailed(error: Error) {
+      // eslint-disable-next-line no-console
       console.warn(error); // TODO: add toast
     }
 
@@ -200,6 +203,14 @@ export function wrapWithVideoReviewScreenState<
         this.videoCompositionRef.current.seekToProgress(progress);
       }
     }
+
+    setPlaybackProgressThrottled = throttle(
+      this.props.setPlaybackProgress,
+      100,
+      {
+        leading: true,
+      }
+    );
 
     getAssetsAsArray() {
       const assetsSorted = this.getSortedAssets();
@@ -270,6 +281,7 @@ export function wrapWithVideoReviewScreenState<
           exportComposition={this.exportComposition}
           showMediaModal={this.showMediaModal}
           hideMediaModal={this.hideMediaModal}
+          setPlaybackProgressThrottled={this.setPlaybackProgressThrottled}
         />
       );
     }
