@@ -19,7 +19,10 @@ import type {
   MediaObject,
   MediaStateHOCProps,
 } from '@jonbrennecke/react-native-media';
-import type { CameraStateHOCProps } from '@jonbrennecke/react-native-camera';
+import type {
+  CameraStateHOCProps,
+  PlaybackState,
+} from '@jonbrennecke/react-native-camera';
 
 import type { ReturnType } from '../../types';
 

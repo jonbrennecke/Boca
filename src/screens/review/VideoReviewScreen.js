@@ -121,10 +121,10 @@ export const VideoReviewScreen: ComponentType<
     assetsArray,
     videoCompositionRef,
     play,
+    pause,
     selectedAsset,
     seekToProgress,
     selectedAssetID,
-    isExporting,
     blurAperture,
     setBlurAperture,
     isDepthPreviewEnabled,
@@ -134,6 +134,7 @@ export const VideoReviewScreen: ComponentType<
     exportProgress,
     exportComposition,
     swipeGesture,
+    playbackState,
     selectVideo,
     loadNextAssets,
     isMediaModalVisible,
@@ -144,6 +145,8 @@ export const VideoReviewScreen: ComponentType<
     onSwipeDownGestureStart,
     onSwipeDownGestureRelease,
     onSwipeDownGestureMove,
+    setPlaybackProgress,
+    setPlaybackState,
   }) => (
     <>
       <Animated.View style={styles.background(swipeGesture)} />
@@ -196,6 +199,8 @@ export const VideoReviewScreen: ComponentType<
                           : BlurApertureRange.initialValue
                       }
                       isReadyToLoad={selectedAssetID === asset.assetID}
+                      onPlaybackProgress={setPlaybackProgress}
+                      onPlaybackStateChange={setPlaybackState}
                     />
                   </View>
                 </TouchableWithoutFeedback>
@@ -219,9 +224,11 @@ export const VideoReviewScreen: ComponentType<
           <VideoReviewScreenPlaybackToolbar isVisible={isFullScreenVideo}>
             <View style={styles.playbackToolbar}>
               <PlaybackToolbar
+                playbackState={playbackState}
                 assetID={selectedAssetID}
                 assetDuration={selectedAsset?.duration}
                 onRequestPlay={play}
+                onRequestPause={pause}
                 onSeekToProgress={seekToProgress}
               />
             </View>

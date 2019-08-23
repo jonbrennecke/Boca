@@ -1,6 +1,7 @@
 // @flow
 import React, { PureComponent } from 'react';
 import { Animated, Easing, StatusBar, Dimensions } from 'react-native';
+// $FlowFixMe
 import SafeArea from 'react-native-safe-area';
 
 import type { Style, Children } from '../../types';

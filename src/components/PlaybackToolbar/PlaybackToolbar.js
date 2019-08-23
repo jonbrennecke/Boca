@@ -3,18 +3,22 @@ import React from 'react';
 import { View, Text } from 'react-native';
 
 import { IconButton } from '../';
-import { PlayIcon } from '../icons';
+import { PlayIcon, PauseIcon } from '../icons';
 import { Units, Colors } from '../../constants';
 
 import { PlaybackSeekbar } from './PlaybackSeekbar';
+
+import type { PlaybackState } from '@jonbrennecke/react-native-camera';
 
 import type { Style, SFC } from '../../types';
 
 export type PlaybackToolbarProps = {
   style?: ?Style,
+  playbackState: PlaybackState,
   assetID: ?string,
   assetDuration: ?number,
   onRequestPlay: () => void,
+  onRequestPause: () => void,
   onSeekToProgress: number => void,
 };
 
@@ -44,17 +48,19 @@ const styles = {
 
 export const PlaybackToolbar: SFC<PlaybackToolbarProps> = ({
   style,
+  playbackState,
   assetID,
   assetDuration,
   onRequestPlay,
+  onRequestPause,
   onSeekToProgress,
 }: PlaybackToolbarProps) => (
   <View style={[styles.container, style]}>
     <IconButton
       style={styles.playIcon}
       fillColor={Colors.icons.toolbar}
-      onPress={onRequestPlay}
-      icon={PlayIcon}
+      onPress={playbackState === 'playing' ? onRequestPause : onRequestPlay}
+      icon={playbackState === 'playing' ? PauseIcon : PlayIcon}
     />
     <PlaybackSeekbar
       style={styles.seekbar}
