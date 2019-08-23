@@ -126,14 +126,15 @@ export const CameraScreen: ComponentType<
         onRequestCameraPermissions={requestCameraPermissions}
       >
         <View style={styles.cameraWrap}>
-          {/* <Camera
+          <Camera
             style={styles.absoluteFill}
             ref={cameraRef}
             cameraPosition={cameraPosition}
             previewMode={isDepthPreviewEnabled ? 'depth' : 'portraitMode'}
             resizeMode="scaleAspectWidth"
             blurAperture={blurAperture}
-          /> */}
+            isPaused={isReviewModalVisible}
+          />
           <CameraFocusArea
             style={styles.absoluteFill}
             onRequestFocus={point => {
