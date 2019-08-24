@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 
 import { IconButton } from '../';
 import { PlayIcon, PauseIcon } from '../icons';
@@ -83,11 +83,3 @@ export const PlaybackToolbar: SFC<PlaybackToolbarProps> = ({
     </View>
   </View>
 );
-
-const formatDuration = (duration: number): string => {
-  const seconds = duration % 60;
-  const minutes = Math.round(duration / 60);
-  const minutesString = minutes.toFixed(0).padStart(2, '0');
-  const secondsString = seconds.toFixed(0).padStart(2, '0');
-  return `${minutesString}:${secondsString}`;
-};

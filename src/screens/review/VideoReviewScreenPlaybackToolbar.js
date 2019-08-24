@@ -17,14 +17,6 @@ const styles = {
       inputRange: [0, 1],
       outputRange: [1, 0],
     }),
-    transform: [
-      {
-        translateY: anim.interpolate({
-          inputRange: [0, 1],
-          outputRange: [0, 100],
-        }),
-      },
-    ],
   }),
 };
 

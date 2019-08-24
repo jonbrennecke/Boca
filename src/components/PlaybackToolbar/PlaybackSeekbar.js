@@ -27,9 +27,6 @@ export type PlaybackSeekbarState = {
 const styles = {
   container: {
     height: 50,
-    // borderWidth: 0.5,
-    // borderColor: Colors.solid.light,
-    // borderRadius: Units.extraSmall,
   },
   scrollView: {
     flexDirection: 'row',
@@ -44,10 +41,7 @@ const styles = {
     borderRadius: Units.extraSmall,
     backgroundColor: Colors.solid.white,
   },
-  background: {
-    // borderRadius: Units.extraSmall,
-    ...StyleSheet.absoluteFillObject,
-  },
+  absoluteFill: StyleSheet.absoluteFillObject,
 };
 
 export class PlaybackSeekbar extends PureComponent<
@@ -82,18 +76,17 @@ export class PlaybackSeekbar extends PureComponent<
             onRequestPause();
           }
         }}
-        onDidEndDrag={progress => {
+        onDidEndDrag={() => {
           if (this.state.playbackStateOnDragStart === 'playing') {
             onRequestPlay();
             this.setState({
               playbackStateOnDragStart: null,
             });
           }
-          // onSeekToProgress(progress);
         }}
       >
         {assetID && (
-          <SeekbarBackground assetID={assetID} style={styles.background} />
+          <SeekbarBackground assetID={assetID} style={styles.absoluteFill} />
         )}
       </Seekbar>
     );

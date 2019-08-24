@@ -161,10 +161,6 @@ export const VideoReviewScreen: ComponentType<
             onRequestPushCameraScreen={onRequestDismiss}
             onRequestPushMediaExplorerScreen={showMediaModal}
           />
-          {/* <VideoReviewScreenFullScreenVideo
-            style={styles.flex}
-            isFullScreen={!isFullScreenVideo}
-          > */}
           <SwipeDownGestureHandler
             style={styles.flex}
             verticalThreshold={350}
@@ -180,7 +176,12 @@ export const VideoReviewScreen: ComponentType<
               style={styles.flex}
               assets={assetsArray}
               renderItem={asset => (
-                <TouchableWithoutFeedback onPress={toggleFullScreenVideo}>
+                <TouchableWithoutFeedback onPress={() => {
+                  if (playbackState !== 'playing') {
+                    play();
+                  }
+                  toggleFullScreenVideo();
+                }}>
                   <View style={styles.flex}>
                     <VideoComposition
                       ref={
@@ -235,7 +236,6 @@ export const VideoReviewScreen: ComponentType<
               />
             </View>
           </VideoReviewScreenPlaybackToolbar>
-          {/* </VideoReviewScreenFullScreenVideo> */}
           <VideoReviewScreenToolbar
             swipeGesture={swipeGesture}
             isVisible={!isFullScreenVideo}
