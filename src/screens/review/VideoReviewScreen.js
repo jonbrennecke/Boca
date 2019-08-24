@@ -176,12 +176,14 @@ export const VideoReviewScreen: ComponentType<
               style={styles.flex}
               assets={assetsArray}
               renderItem={asset => (
-                <TouchableWithoutFeedback onPress={() => {
-                  if (playbackState !== 'playing') {
-                    play();
-                  }
-                  toggleFullScreenVideo();
-                }}>
+                <TouchableWithoutFeedback
+                  onPress={() => {
+                    if (playbackState !== 'playing') {
+                      play();
+                    }
+                    toggleFullScreenVideo();
+                  }}
+                >
                   <View style={styles.flex}>
                     <VideoComposition
                       ref={
