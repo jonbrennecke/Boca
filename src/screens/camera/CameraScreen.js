@@ -9,6 +9,7 @@ import { Navigation } from 'react-native-navigation';
 import { wrapWithCameraScreenState } from './cameraScreenState';
 import { CameraScreenOnboarding } from './CameraScreenOnboarding';
 import { CameraCaptureButton } from './CameraCaptureButton';
+import { CameraPreviewDimensions } from './CameraPreviewDimensions';
 import { ThumbnailButton } from './ThumbnailButton';
 import { VideoReviewModal } from '../review';
 import {
@@ -91,16 +92,13 @@ const styles = {
   },
 };
 
-const pushReviewScreen = () => {
-  Navigation.showModal(ScreenParams[Screens.VideoReviewScreen]);
-};
-
 // eslint-disable-next-line flowtype/generic-spacing
 export const CameraScreen: ComponentType<
   CameraScreenProps
 > = wrapWithCameraScreenState(
   ({
     style,
+    format,
     thumbnailAssetID,
     cameraRef,
     isDepthPreviewEnabled,
@@ -125,9 +123,15 @@ export const CameraScreen: ComponentType<
         hasCameraPermissions={hasCameraPermissions}
         onRequestCameraPermissions={requestCameraPermissions}
       >
-        <View style={styles.cameraWrap}>
+        <CameraPreviewDimensions
+          style={styles.cameraWrap}
+          cameraFormat={format}
+        >
           <Camera
-            style={styles.absoluteFill}
+            style={{
+              ...styles.absoluteFill,
+              backgroundColor: 'red',
+            }}
             ref={cameraRef}
             cameraPosition={cameraPosition}
             previewMode={isDepthPreviewEnabled ? 'depth' : 'portraitMode'}
@@ -159,7 +163,7 @@ export const CameraScreen: ComponentType<
               onSelectValue={setBlurAperture}
             />
           </View>
-        </View>
+        </CameraPreviewDimensions>
         <View style={styles.bottomControls}>
           <View style={styles.cameraControlsRow}>
             <View style={styles.captureRowItem}>
