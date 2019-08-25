@@ -49,8 +49,9 @@ export const Colors = {
   },
   backgrounds: {
     white: '#fff',
-    black: '#000',
+    black: '#2B2A2A',
     gray: '#222',
+    mediumGray: '#E0E0E0'
   },
   borders: {
     gray: '#444',
@@ -60,8 +61,8 @@ export const Colors = {
     textColor: '#999',
   },
   text: {
-    dark: '#000',
-    mediumDark: '#666',
+    dark: '#2B2A2A',
+    mediumDarkGray: '#838282',
     light: '#fff',
   },
   solid: {
@@ -83,18 +84,32 @@ export type ColorByTheme = {
 export type ColorByPresentation = {
   default: {
     background: string,
-    components: ColorByComponent,
+    components: {
+      heading: ColorByHeadingType,
+      select: ColorBySelectSubComponent,
+      button: ColorByButtonSubComponent,
+    },
   },
   actionSheet: {
     background: string,
-    components: ColorByComponent,
+    components: {
+      heading: ColorByHeadingType,
+      select: ColorBySelectSubComponent,
+      button: ColorByButtonSubComponent,
+    },
+  },
+  onboarding: {
+    background: string,
+    components: {
+      heading: ColorByHeadingType,
+      button: ColorByButtonRole,
+    },
   },
 };
 
-export type ColorByComponent = {
-  heading: ColorByHeadingType,
-  select: ColorBySelectSubComponent,
-  button: ColorByButtonSubComponent,
+export type ColorByButtonRole = {
+  primary: ColorByButtonSubComponent,
+  secondary: ColorByButtonSubComponent,
 };
 
 export type ColorByButtonSubComponent = {
@@ -138,12 +153,12 @@ export const ColorTheme: ColorByTheme = {
             background: {
               default: Colors.text.dark,
               highlight: Colors.text.light,
-              selected: Colors.text.mediumDark,
+              selected: Colors.text.mediumDarkGray,
             },
             text: {
               default: Colors.text.dark,
               highlight: Colors.text.light,
-              selected: Colors.text.mediumDark,
+              selected: Colors.text.mediumDarkGray,
             },
           },
         },
@@ -175,7 +190,7 @@ export const ColorTheme: ColorByTheme = {
               selected: Colors.solid.dark,
             },
             text: {
-              default: Colors.text.mediumDark,
+              default: Colors.text.mediumDarkGray,
               highlight: Colors.text.light,
               selected: Colors.text.light,
             },
@@ -188,9 +203,43 @@ export const ColorTheme: ColorByTheme = {
             selected: Colors.text.light,
           },
           text: {
-            default: Colors.text.mediumDark,
+            default: Colors.text.mediumDarkGray,
             highlight: Colors.text.light,
             selected: Colors.text.dark,
+          },
+        },
+      },
+    },
+    onboarding: {
+      background: Colors.backgrounds.white,
+      components: {
+        heading: {
+          h1Text: Colors.text.dark,
+        },
+        button: {
+          primary: {
+            background: {
+              default: Colors.backgrounds.mediumGray,
+              highlight: Colors.backgrounds.mediumGray,
+              selected: Colors.backgrounds.mediumGray,
+            },
+            text: {
+              default: Colors.text.dark,
+              highlight: Colors.text.dark,
+              selected: Colors.text.mediumDarkGray,
+            },
+          },
+          secondary: {
+            background: {
+              default: Colors.text.light,
+              highlight: Colors.text.light,
+              selected: Colors.text.light,
+            },
+            text: {
+              default: Colors.text.mediumDarkGray,
+              highlight: Colors.text.mediumDarkGray,
+              selected: Colors.text.mediumDarkGray,
+            },
           },
         },
       },

@@ -4,7 +4,6 @@ import { View, SafeAreaView, StyleSheet, StatusBar } from 'react-native';
 import ReactNativeHaptic from 'react-native-haptic';
 
 import { Camera, CameraFocusArea } from '@jonbrennecke/react-native-camera';
-import { Navigation } from 'react-native-navigation';
 
 import { wrapWithCameraScreenState } from './cameraScreenState';
 import { CameraScreenOnboarding } from './CameraScreenOnboarding';
@@ -19,13 +18,7 @@ import {
   ScreenGradients,
 } from '../../components';
 import { SwitchCameraIcon } from '../../components/icons';
-import {
-  Units,
-  ScreenParams,
-  Screens,
-  BlurApertureRange,
-  Colors,
-} from '../../constants';
+import { Units, BlurApertureRange, Colors } from '../../constants';
 
 import type { ComponentType } from 'react';
 
@@ -116,13 +109,13 @@ export const CameraScreen: ComponentType<
     presentReviewModal,
     dismissReviewModal,
   }) => (
-    <SafeAreaView style={[styles.container, style]}>
-      <StatusBar barStyle="light-content" />
-      <CameraScreenOnboarding
-        style={styles.contentWrap}
-        hasCameraPermissions={hasCameraPermissions}
-        onRequestCameraPermissions={requestCameraPermissions}
-      >
+    <CameraScreenOnboarding
+      style={styles.contentWrap}
+      hasCameraPermissions={hasCameraPermissions}
+      onRequestCameraPermissions={requestCameraPermissions}
+    >
+      <SafeAreaView style={[styles.container, style]}>
+        <StatusBar barStyle="light-content" />
         <CameraPreviewDimensions
           style={styles.cameraWrap}
           cameraFormat={format}
@@ -192,11 +185,11 @@ export const CameraScreen: ComponentType<
             </View>
           </View>
         </View>
-      </CameraScreenOnboarding>
-      <VideoReviewModal
-        isVisible={isReviewModalVisible}
-        onRequestDismissModal={dismissReviewModal}
-      />
-    </SafeAreaView>
+        <VideoReviewModal
+          isVisible={isReviewModalVisible}
+          onRequestDismissModal={dismissReviewModal}
+        />
+      </SafeAreaView>
+    </CameraScreenOnboarding>
   )
 );

@@ -1,6 +1,7 @@
 // @flow
 export * from './buttons';
 export * from './icons';
+export * from './text';
 export * from './CameraFormatModal';
 export * from './FullScreenAnimatedView';
 export * from './MeasureContentsView';
