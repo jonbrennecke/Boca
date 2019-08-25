@@ -1,6 +1,8 @@
 // @flow
 import React from 'react';
-import { View, Button } from 'react-native';
+import { View } from 'react-native';
+
+import { OnboardingScreen } from '../onboarding';
 
 import type { SFC, Style, Children } from '../../types';
 
@@ -15,12 +17,6 @@ const styles = {
   container: {
     flex: 1,
   },
-  centerContent: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#fff',
-  },
 };
 
 export const CameraScreenOnboarding: SFC<CameraScreenOnboardingProps> = ({
@@ -34,13 +30,7 @@ export const CameraScreenOnboarding: SFC<CameraScreenOnboardingProps> = ({
   };
   return (
     <View style={[styles.container, style]}>
-      {hasCameraPermissions ? (
-        children
-      ) : (
-        <View style={styles.centerContent}>
-          <Button title="Enable camera" onPress={enableCamera} />
-        </View>
-      )}
+      {hasCameraPermissions ? children : <OnboardingScreen />}
     </View>
   );
 };
