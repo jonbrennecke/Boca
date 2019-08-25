@@ -128,10 +128,7 @@ export const CameraScreen: ComponentType<
           cameraFormat={format}
         >
           <Camera
-            style={{
-              ...styles.absoluteFill,
-              backgroundColor: 'red',
-            }}
+            style={styles.absoluteFill}
             ref={cameraRef}
             cameraPosition={cameraPosition}
             previewMode={isDepthPreviewEnabled ? 'depth' : 'portraitMode'}

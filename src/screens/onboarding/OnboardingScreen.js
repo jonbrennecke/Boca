@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { View, Dimensions } from 'react-native';
+import { View, Button, Dimensions } from 'react-native';
 
 import { OnboardingScrollView } from './OnboardingScrollView';
 import { OnboardingAnimation } from './OnboardingAnimation';
@@ -12,6 +12,7 @@ import type { Style } from '../../types';
 
 export type OnboardingScreenProps = {
   style?: ?Style,
+  onRequestEnableCamera: () => void,
 };
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
@@ -28,11 +29,16 @@ const styles = {
 // eslint-disable-next-line flowtype/generic-spacing
 export const OnboardingScreen: ComponentType<
   OnboardingScreenProps
-> = wrapWithOnboardingScreenState(({ style, scrollAnimation }) => (
-  <View style={[styles.container, style]}>
-    <OnboardingAnimation scrollAnimation={scrollAnimation} />
-    <OnboardingScrollView scrollAnimation={scrollAnimation}>
-      <View style={styles.scrollViewContents} />
-    </OnboardingScrollView>
-  </View>
-));
+> = wrapWithOnboardingScreenState(
+  ({ style, onRequestEnableCamera, scrollAnimation }) => (
+    <View style={[styles.container, style]}>
+      <OnboardingAnimation scrollAnimation={scrollAnimation} />
+      <OnboardingScrollView scrollAnimation={scrollAnimation}>
+        <View style={styles.scrollViewContents} />
+      </OnboardingScrollView>
+      <View>
+        <Button title="Enable Camera" onPress={onRequestEnableCamera} />
+      </View>
+    </View>
+  )
+);

@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
-import { View, Animated, Dimensions, Easing } from 'react-native';
+import { View, Animated, Dimensions, Easing, StyleSheet } from 'react-native';
+import { Camera } from '@jonbrennecke/react-native-camera';
 
 import { Units } from '../../constants';
 
@@ -17,12 +18,14 @@ const styles = {
   container: {
     flexDirection: 'row',
   },
+  absoluteFill: StyleSheet.absoluteFillObject,
   video: (scrollAnimation: Animated.Value) => ({
     position: 'absolute',
     width: SCREEN_WIDTH,
     height: SCREEN_WIDTH * (16 / 9),
     backgroundColor: '#ccc',
     borderRadius: Units.small,
+    overflow: 'hidden',
     transform: [
       {
         scale: scrollAnimation.interpolate({
@@ -40,6 +43,7 @@ const styles = {
     height: SCREEN_WIDTH * (16 / 9),
     backgroundColor: '#666',
     borderRadius: Units.small,
+    overflow: 'hidden',
     transform: [
       {
         scale: scrollAnimation.interpolate({
@@ -74,7 +78,25 @@ export const OnboardingAnimation: SFC<OnboardingAnimationProps> = ({
   scrollAnimation,
 }: OnboardingAnimationProps) => (
   <View style={[styles.container, style]}>
-    <Animated.View style={styles.depthVideo(scrollAnimation)} />
-    <Animated.View style={styles.video(scrollAnimation)} />
+    <Animated.View style={styles.depthVideo(scrollAnimation)}>
+      <Camera
+        style={styles.absoluteFill}
+        cameraPosition="front"
+        previewMode="depth"
+        resizeMode="scaleAspectWidth"
+        blurAperture={2.4}
+        isPaused={false}
+      />
+    </Animated.View>
+    <Animated.View style={styles.video(scrollAnimation)}>
+      <Camera
+        style={styles.absoluteFill}
+        cameraPosition="front"
+        previewMode="depth"
+        resizeMode="scaleAspectWidth"
+        blurAperture={2.4}
+        isPaused={false}
+      />
+    </Animated.View>
   </View>
 );
