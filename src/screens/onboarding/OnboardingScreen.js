@@ -4,7 +4,7 @@ import { View, Dimensions, SafeAreaView } from 'react-native';
 import clamp from 'lodash/clamp';
 
 import { Heading, Paragraph, SelectableButton } from '../../components';
-import { ColorTheme, Units, BlurApertureRange } from '../../constants';
+import { Colors, ColorTheme, Units, BlurApertureRange } from '../../constants';
 import { PagedScrollIndicator } from './PagedScrollIndicator';
 import { OnboardingScrollView } from './OnboardingScrollView';
 import { OnboardingAnimation } from './OnboardingAnimation';
@@ -39,7 +39,7 @@ const styles = {
   },
   cameraContainer: {
     flex: 1,
-    backgroundColor: '#000',
+    backgroundColor: Colors.backgrounds.black,
   },
   heading: {
     textAlign: 'center',

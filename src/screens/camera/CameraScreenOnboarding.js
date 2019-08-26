@@ -30,12 +30,12 @@ export const CameraScreenOnboarding: SFC<CameraScreenOnboardingProps> = ({
   };
   return (
     <View style={[styles.container, style]}>
-      {hasCameraPermissions ? children : <OnboardingScreen onRequestEnableCamera={enableCamera} />}
-      {/* <OnboardingScreen
+      {/* {hasCameraPermissions ? children : <OnboardingScreen onRequestEnableCamera={enableCamera} />} */}
+      <OnboardingScreen
         onRequestEnableCamera={() => {
           enableCamera();
         }}
-      /> */}
+      />
     </View>
   );
 };

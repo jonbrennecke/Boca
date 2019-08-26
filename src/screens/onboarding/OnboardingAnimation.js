@@ -25,7 +25,7 @@ const styles = {
     width: SCREEN_WIDTH,
     height: SCREEN_WIDTH * (16 / 9),
     backgroundColor: '#ccc',
-    borderRadius: Units.small,
+    // borderRadius: Units.small,
     overflow: 'hidden',
     opacity: scrollAnimation.interpolate({
       inputRange: [-SCREEN_WIDTH, 0, SCREEN_WIDTH * 2],
@@ -42,6 +42,22 @@ const styles = {
           easing: Easing.inOut(Easing.quad),
         }),
       },
+      {
+        translateX: scrollAnimation.interpolate({
+          inputRange: [-SCREEN_WIDTH, 0, SCREEN_WIDTH],
+          outputRange: [-300, -200, 0],
+          extrapolate: 'clamp',
+          easing: Easing.inOut(Easing.quad),
+        }),
+      },
+      {
+        translateY: scrollAnimation.interpolate({
+          inputRange: [-SCREEN_WIDTH, 0, SCREEN_WIDTH],
+          outputRange: [-200, -150, 0],
+          extrapolate: 'clamp',
+          easing: Easing.inOut(Easing.quad),
+        }),
+      },
     ],
   }),
   backVideo: (scrollAnimation: Animated.Value) => ({
@@ -49,7 +65,7 @@ const styles = {
     width: SCREEN_WIDTH,
     height: SCREEN_WIDTH * (16 / 9),
     backgroundColor: '#666',
-    borderRadius: Units.small,
+    // borderRadius: Units.small,
     overflow: 'hidden',
     transform: [
       {
@@ -78,6 +94,8 @@ const styles = {
       },
     ],
   }),
+
+  // TODO: remove this
   video: {
     position: 'absolute',
     width: SCREEN_WIDTH,
@@ -90,27 +108,27 @@ const styles = {
 export const OnboardingAnimation: SFC<OnboardingAnimationProps> = ({
   style,
   blurAperture,
+  scrollAnimation,
 }: OnboardingAnimationProps) => (
   <View style={[styles.container, style]}>
-    {/* <Animated.View style={styles.backVideo(scrollAnimation)}>
-      <Camera
+    <Animated.View style={styles.backVideo(scrollAnimation)}>
+      {/* <Camera
         style={styles.absoluteFill}
         cameraPosition="front"
         previewMode="portraitMode"
         resizeMode="scaleAspectWidth"
-        blurAperture={BlurApertureRange.upperBound}
-      />
+        blurAperture={blurAperture}
+      /> */}
     </Animated.View>
     <Animated.View style={styles.frontVideo(scrollAnimation)}>
-      <Camera
+      {/* <Camera
         style={styles.absoluteFill}
         cameraPosition="front"
         previewMode="depth"
         resizeMode="scaleAspectWidth"
-        blurAperture={BlurApertureRange.upperBound}
-      />
-    </Animated.View> */}
-    <View style={styles.video}>
+      /> */}
+    </Animated.View>
+    {/* <Animated.View style={styles.frontVideo(scrollAnimation)}>
       <Camera
         style={styles.absoluteFill}
         cameraPosition="front"
@@ -118,6 +136,6 @@ export const OnboardingAnimation: SFC<OnboardingAnimationProps> = ({
         resizeMode="scaleAspectWidth"
         blurAperture={blurAperture}
       />
-    </View>
+    </Animated.View> */}
   </View>
 );
