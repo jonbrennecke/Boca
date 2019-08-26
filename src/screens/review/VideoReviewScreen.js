@@ -21,7 +21,6 @@ import {
 import { VideoReviewScreenToolbar } from './VideoReviewScreenToolbar';
 import { VideoReviewScreenNavbar } from './VideoReviewScreenNavbar';
 import { VideoReviewScreenFlatList } from './VideoReviewScreenFlatList';
-// TODO: import { VideoReviewScreenFullScreenVideo } from './VideoReviewScreenFullScreenVideo';
 import { VideoReviewScreenPlaybackToolbar } from './VideoReviewScreenPlaybackToolbar';
 import { MediaExplorerModal } from '../mediaExplorer';
 import { Units, Colors, BlurApertureRange } from '../../constants';
@@ -35,6 +34,7 @@ import type { Style } from '../../types';
 export type VideoReviewScreenProps = {
   style?: ?Style,
   componentId?: string,
+  isReviewScreenVisible: boolean,
   onRequestDismiss: () => void,
 };
 
@@ -127,6 +127,7 @@ export const VideoReviewScreen: ComponentType<
     selectedAssetID,
     blurAperture,
     setBlurAperture,
+    isReviewScreenVisible,
     isDepthPreviewEnabled,
     isFullScreenVideo,
     toggleDepthPreview,
@@ -171,7 +172,7 @@ export const VideoReviewScreen: ComponentType<
             onSwipeDownGestureMove={onSwipeDownGestureMove}
             onVerticalThresholdReached={onRequestDismiss}
           >
-            <VideoReviewScreenFlatList
+            {isReviewScreenVisible && <VideoReviewScreenFlatList
               isScrollEnabled={!isSwipeGestureInProgress}
               style={styles.flex}
               assets={assetsArray}
@@ -214,7 +215,7 @@ export const VideoReviewScreen: ComponentType<
               onSelectAsset={asset => selectVideo(asset.assetID)}
               onSwipeDownGestureRelease={onSwipeDownGestureRelease}
               onSwipeDownGestureMove={onSwipeDownGestureMove}
-            />
+            />}
             {!isFullScreenVideo ? (
               <Animated.View style={styles.overCameraToolbar(swipeGesture)}>
                 <BlurredSelectableButton
