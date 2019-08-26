@@ -1,7 +1,9 @@
 // @flow
 import React from 'react';
-import { Animated } from 'react-native';
+import { Animated, Easing } from 'react-native';
 import { CameraFocusArea } from '@jonbrennecke/react-native-camera';
+
+import { FocusIndicator } from './FocusIndicator';
 
 import type { Style, SFC } from '../../types';
 
@@ -16,7 +18,6 @@ const styles = {
     width: 100,
     left: -50,
     top: -50,
-    backgroundColor: 'red',
     transform: [
       {
         translateX: position.x,
@@ -24,9 +25,18 @@ const styles = {
       {
         translateY: position.y,
       },
+      {
+        scale: touch.interpolate({
+          inputRange: [0, 1],
+          outputRange: [0.66, 1],
+        })
+      }
     ],
     opacity: touch,
   }),
+  flex: {
+    flex: 1
+  }
 };
 
 export const CameraScreenFocusArea: SFC<CameraScreenFocusAreaProps> = ({
@@ -37,7 +47,9 @@ export const CameraScreenFocusArea: SFC<CameraScreenFocusAreaProps> = ({
     style={style}
     onRequestFocus={onRequestFocus}
     renderFocusArea={(positionAnim, touchAnim) => (
-      <Animated.View style={styles.focus(positionAnim, touchAnim)} />
+      <Animated.View style={styles.focus(positionAnim, touchAnim)}>
+        <FocusIndicator style={styles.flex} />
+      </Animated.View>
     )}
   />
 );
