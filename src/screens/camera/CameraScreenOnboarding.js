@@ -25,17 +25,18 @@ export const CameraScreenOnboarding: SFC<CameraScreenOnboardingProps> = ({
   hasCameraPermissions,
   onRequestCameraPermissions,
 }: CameraScreenOnboardingProps) => {
-  const enableCamera = async () => {
+  const requestCameraPermissions = async () => {
     await onRequestCameraPermissions();
   };
   return (
     <View style={[styles.container, style]}>
-      {/* {hasCameraPermissions ? children : <OnboardingScreen onRequestEnableCamera={enableCamera} />} */}
-      <OnboardingScreen
-        onRequestEnableCamera={() => {
-          enableCamera();
-        }}
-      />
+      {hasCameraPermissions ? (
+        children
+      ) : (
+        <OnboardingScreen
+          onRequestCameraPermissions={requestCameraPermissions}
+        />
+      )}
     </View>
   );
 };

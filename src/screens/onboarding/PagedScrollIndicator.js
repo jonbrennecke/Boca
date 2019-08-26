@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import { View } from 'react-native';
+import { VibrancyView } from '@jonbrennecke/react-native-animated-ui';
 import times from 'lodash/times';
 
 import { Colors, Units } from '../../constants';
@@ -34,7 +35,11 @@ export const PagedScrollIndicator: SFC<PagedScrollIndicatorProps> = ({
 }: PagedScrollIndicatorProps) => (
   <View style={[styles.container, style]}>
     {times(numberOfPages).map(i => (
-      <View key={i} style={styles.dot(i === currentPageIndex)} />
+      <VibrancyView
+        key={i}
+        blurType="light"
+        style={styles.dot(i === currentPageIndex)}
+      />
     ))}
   </View>
 );

@@ -3,9 +3,12 @@ import React from 'react';
 import { View, Animated, Dimensions, Easing, StyleSheet } from 'react-native';
 import { Camera } from '@jonbrennecke/react-native-camera';
 
+import { MeasureContentsView } from '../../components';
 import { Units } from '../../constants';
 
 import type { Style, SFC } from '../../types';
+
+export type Size = { width: number, height: number };
 
 export type OnboardingAnimationProps = {
   style?: ?Style,
@@ -17,22 +20,37 @@ const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 const styles = {
   container: {
+    flex: 1,
     flexDirection: 'row',
   },
-  absoluteFill: StyleSheet.absoluteFillObject,
-  frontVideo: (scrollAnimation: Animated.Value) => ({
-    position: 'absolute',
-    width: SCREEN_WIDTH,
-    height: SCREEN_WIDTH * (16 / 9),
-    backgroundColor: '#ccc',
-    // borderRadius: Units.small,
+  absoluteFill: {
+    ...StyleSheet.absoluteFillObject,
     overflow: 'hidden',
+  },
+  frontVideo: ({ width, height }: Size, scrollAnimation: Animated.Value) => ({
+    position: 'absolute',
+    width: width,
+    height: height,
+    backgroundColor: '#ccc',
+    borderRadius: scrollAnimation.interpolate({
+      inputRange: [0, SCREEN_WIDTH * 2],
+      outputRange: [Units.small, 0],
+      extrapolate: 'clamp',
+      easing: Easing.inOut(Easing.quad),
+    }),
     opacity: scrollAnimation.interpolate({
       inputRange: [-SCREEN_WIDTH, 0, SCREEN_WIDTH * 2],
       outputRange: [0.5, 1, 0],
       extrapolate: 'clamp',
       easing: Easing.inOut(Easing.quad),
     }),
+    shadowOpacity: 0.2,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 5,
+      height: 5,
+    },
+    shadowRadius: 25,
     transform: [
       {
         scale: scrollAnimation.interpolate({
@@ -53,19 +71,31 @@ const styles = {
       {
         translateY: scrollAnimation.interpolate({
           inputRange: [-SCREEN_WIDTH, 0, SCREEN_WIDTH],
-          outputRange: [-200, -150, 0],
+          outputRange: [75, 50, 0],
           extrapolate: 'clamp',
           easing: Easing.inOut(Easing.quad),
         }),
       },
     ],
   }),
-  backVideo: (scrollAnimation: Animated.Value) => ({
+  backVideo: ({ width, height }: Size, scrollAnimation: Animated.Value) => ({
     position: 'absolute',
-    width: SCREEN_WIDTH,
-    height: SCREEN_WIDTH * (16 / 9),
+    width: width,
+    height: height,
     backgroundColor: '#666',
-    // borderRadius: Units.small,
+    borderRadius: scrollAnimation.interpolate({
+      inputRange: [0, SCREEN_WIDTH * 2],
+      outputRange: [Units.small, 0],
+      extrapolate: 'clamp',
+      easing: Easing.inOut(Easing.quad),
+    }),
+    shadowOpacity: 0.2,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 5,
+      height: 5,
+    },
+    shadowRadius: 25,
     overflow: 'hidden',
     transform: [
       {
@@ -94,15 +124,6 @@ const styles = {
       },
     ],
   }),
-
-  // TODO: remove this
-  video: {
-    position: 'absolute',
-    width: SCREEN_WIDTH,
-    height: SCREEN_WIDTH * (16 / 9),
-    backgroundColor: '#666',
-    overflow: 'hidden',
-  },
 };
 
 export const OnboardingAnimation: SFC<OnboardingAnimationProps> = ({
@@ -110,32 +131,28 @@ export const OnboardingAnimation: SFC<OnboardingAnimationProps> = ({
   blurAperture,
   scrollAnimation,
 }: OnboardingAnimationProps) => (
-  <View style={[styles.container, style]}>
-    <Animated.View style={styles.backVideo(scrollAnimation)}>
-      {/* <Camera
-        style={styles.absoluteFill}
-        cameraPosition="front"
-        previewMode="portraitMode"
-        resizeMode="scaleAspectWidth"
-        blurAperture={blurAperture}
-      /> */}
-    </Animated.View>
-    <Animated.View style={styles.frontVideo(scrollAnimation)}>
-      {/* <Camera
-        style={styles.absoluteFill}
-        cameraPosition="front"
-        previewMode="depth"
-        resizeMode="scaleAspectWidth"
-      /> */}
-    </Animated.View>
-    {/* <Animated.View style={styles.frontVideo(scrollAnimation)}>
-      <Camera
-        style={styles.absoluteFill}
-        cameraPosition="front"
-        previewMode="portraitMode"
-        resizeMode="scaleAspectWidth"
-        blurAperture={blurAperture}
-      />
-    </Animated.View> */}
-  </View>
+  <MeasureContentsView
+    style={style}
+    renderChildren={size => (
+      <View style={styles.container}>
+        <Animated.View style={styles.backVideo(size, scrollAnimation)}>
+          {/* <Camera
+            style={styles.absoluteFill}
+            cameraPosition="front"
+            previewMode="portraitMode"
+            resizeMode="scaleAspectWidth"
+            blurAperture={blurAperture}
+          /> */}
+        </Animated.View>
+        <Animated.View style={styles.frontVideo(size, scrollAnimation)}>
+          {/* <Camera
+            style={styles.absoluteFill}
+            cameraPosition="front"
+            previewMode="depth"
+            resizeMode="scaleAspectWidth"
+          /> */}
+        </Animated.View>
+      </View>
+    )}
+  />
 );

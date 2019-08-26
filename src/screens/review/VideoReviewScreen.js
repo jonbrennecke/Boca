@@ -172,50 +172,52 @@ export const VideoReviewScreen: ComponentType<
             onSwipeDownGestureMove={onSwipeDownGestureMove}
             onVerticalThresholdReached={onRequestDismiss}
           >
-            {isReviewScreenVisible && <VideoReviewScreenFlatList
-              isScrollEnabled={!isSwipeGestureInProgress}
-              style={styles.flex}
-              assets={assetsArray}
-              renderItem={asset => (
-                <TouchableWithoutFeedback
-                  onPress={() => {
-                    if (playbackState !== 'playing') {
-                      play();
-                    }
-                    toggleFullScreenVideo();
-                  }}
-                >
-                  <View style={styles.flex}>
-                    <VideoComposition
-                      ref={
-                        selectedAssetID === asset.assetID
-                          ? videoCompositionRef
-                          : noop
+            {isReviewScreenVisible && (
+              <VideoReviewScreenFlatList
+                isScrollEnabled={!isSwipeGestureInProgress}
+                style={styles.flex}
+                assets={assetsArray}
+                renderItem={asset => (
+                  <TouchableWithoutFeedback
+                    onPress={() => {
+                      if (playbackState !== 'playing') {
+                        play();
                       }
-                      style={styles.video(isFullScreenVideo)}
-                      assetID={asset.assetID}
-                      previewMode={
-                        isDepthPreviewEnabled ? 'depth' : 'portraitMode'
-                      }
-                      resizeMode="scaleAspectFill"
-                      blurAperture={
-                        selectedAssetID === asset.assetID
-                          ? blurAperture
-                          : BlurApertureRange.initialValue
-                      }
-                      isReadyToLoad={selectedAssetID === asset.assetID}
-                      onPlaybackProgress={setPlaybackProgressThrottled}
-                      onPlaybackStateChange={setPlaybackState}
-                    />
-                  </View>
-                </TouchableWithoutFeedback>
-              )}
-              onRequestDismiss={onRequestDismiss}
-              onRequestLoadMore={loadNextAssets}
-              onSelectAsset={asset => selectVideo(asset.assetID)}
-              onSwipeDownGestureRelease={onSwipeDownGestureRelease}
-              onSwipeDownGestureMove={onSwipeDownGestureMove}
-            />}
+                      toggleFullScreenVideo();
+                    }}
+                  >
+                    <View style={styles.flex}>
+                      <VideoComposition
+                        ref={
+                          selectedAssetID === asset.assetID
+                            ? videoCompositionRef
+                            : noop
+                        }
+                        style={styles.video(isFullScreenVideo)}
+                        assetID={asset.assetID}
+                        previewMode={
+                          isDepthPreviewEnabled ? 'depth' : 'portraitMode'
+                        }
+                        resizeMode="scaleAspectFill"
+                        blurAperture={
+                          selectedAssetID === asset.assetID
+                            ? blurAperture
+                            : BlurApertureRange.initialValue
+                        }
+                        isReadyToLoad={selectedAssetID === asset.assetID}
+                        onPlaybackProgress={setPlaybackProgressThrottled}
+                        onPlaybackStateChange={setPlaybackState}
+                      />
+                    </View>
+                  </TouchableWithoutFeedback>
+                )}
+                onRequestDismiss={onRequestDismiss}
+                onRequestLoadMore={loadNextAssets}
+                onSelectAsset={asset => selectVideo(asset.assetID)}
+                onSwipeDownGestureRelease={onSwipeDownGestureRelease}
+                onSwipeDownGestureMove={onSwipeDownGestureMove}
+              />
+            )}
             {!isFullScreenVideo ? (
               <Animated.View style={styles.overCameraToolbar(swipeGesture)}>
                 <BlurredSelectableButton

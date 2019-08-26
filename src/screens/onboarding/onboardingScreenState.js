@@ -1,13 +1,17 @@
 // @flow
-import React, { PureComponent } from 'react';
+import React, { PureComponent, createRef } from 'react';
 import { Animated } from 'react-native';
 import { autobind } from 'core-decorators';
 
 import type { ComponentType } from 'react';
 
+import type { ReturnType } from '../../types';
+
 export type OnboardingScreenProps = {
   scrollAnimation: Animated.Value,
+  scrollViewRef: ReturnType<typeof createRef>,
   onScrollViewDidUpdateProgress: number => void,
+  onRequestScrollToProgress: number => void,
 } & OnboardingScreenState;
 
 export type OnboardingScreenState = {
@@ -27,6 +31,7 @@ export const wrapWithOnboardingScreenState = <
     OnboardingScreenState
   > {
     scrollAnimation = new Animated.Value(0);
+    scrollViewRef = createRef();
     state: $Exact<OnboardingScreenState> = {
       scrollProgress: 0,
     };
@@ -37,13 +42,21 @@ export const wrapWithOnboardingScreenState = <
       });
     }
 
+    scrollToProgress(progress: number) {
+      if (this.scrollViewRef.current) {
+        this.scrollViewRef.current.scrollToProgress(progress);
+      }
+    }
+
     render() {
       return (
         <WrappedComponent
           {...this.props}
           {...this.state}
+          scrollViewRef={this.scrollViewRef}
           scrollAnimation={this.scrollAnimation}
           onScrollViewDidUpdateProgress={this.handleScrollViewProgressUpdate}
+          onRequestScrollToProgress={this.scrollToProgress}
         />
       );
     }
