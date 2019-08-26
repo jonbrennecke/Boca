@@ -3,10 +3,11 @@ import React from 'react';
 import { View, SafeAreaView, StyleSheet, StatusBar } from 'react-native';
 import ReactNativeHaptic from 'react-native-haptic';
 
-import { Camera, CameraFocusArea } from '@jonbrennecke/react-native-camera';
+import { Camera } from '@jonbrennecke/react-native-camera';
 
 import { wrapWithCameraScreenState } from './cameraScreenState';
 import { CameraScreenOnboarding } from './CameraScreenOnboarding';
+import { CameraScreenFocusArea } from './CameraScreenFocusArea';
 import { CameraCaptureButton } from './CameraCaptureButton';
 import { CameraPreviewDimensions } from './CameraPreviewDimensions';
 import { ThumbnailButton } from './ThumbnailButton';
@@ -129,7 +130,7 @@ export const CameraScreen: ComponentType<
             blurAperture={blurAperture}
             isPaused={isReviewModalVisible}
           />
-          <CameraFocusArea
+          <CameraScreenFocusArea
             style={styles.absoluteFill}
             onRequestFocus={point => {
               if (cameraRef && cameraRef.current) {
