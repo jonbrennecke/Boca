@@ -1,5 +1,5 @@
 {
-  "name": "Bombast",
+  "name": "Boca",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -14,7 +14,9 @@
     "ios": "react-native run-ios",
     "android": "cd ./android && ./gradlew app:assembleDebug && ./gradlew installDebug",
     "link": "react-native link",
-    "rename": "react-native-rename"
+    "rename": "react-native-rename",
+    "fastlane": "bundle exec fastlane",
+    "bundle-install": "bundle install --path vendor/bundle"
   },
   "dependencies": {
     "@jonbrennecke/react-native-animated-ui": "1.0.11",

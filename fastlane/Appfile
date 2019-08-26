@@ -1,0 +1,12 @@
+require 'xcodeproj'
+
+def product_bundle_id(scheme)
+    project = Xcodeproj::Project.open('./ios/Boca.xcodeproj')
+    scheme = project.native_targets.find { |target| target.name == scheme }
+    build_configuration = scheme.build_configurations.first
+    build_configuration.build_settings['PRODUCT_BUNDLE_IDENTIFIER']
+end
+
+app_identifier 'com.jonbrennecke.Boca' # TODO: product_bundle_id(scheme_name)
+team_id '6DUV3UU8M8'
+itc_team_id '118649769'

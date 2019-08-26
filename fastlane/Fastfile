@@ -1,0 +1,74 @@
+lane :beta do |options|
+  Fastlane::LaneManager.cruise_lane("android", "beta", options)
+  Fastlane::LaneManager.cruise_lane("ios", "beta", options)
+end
+
+lane :build do |options|
+  Fastlane::LaneManager.cruise_lane("android", "build", options)
+  Fastlane::LaneManager.cruise_lane("ios", "build", options)
+end
+
+platform :ios do |options|
+  lane :build do |options|
+    app_identifier = CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier)
+    team_id = CredentialsManager::AppfileConfig.try_fetch_value(:team_id)
+    match(
+      type: options[:export_method] == 'app-store' ? 'appstore' : 'adhoc',
+      team_id: team_id,
+      app_identifier: app_identifier
+    )
+    gym(
+      project: './ios/Boca.xcodeproj',
+      scheme: 'Boca Release',
+      export_method: options[:export_method] || 'ad-hoc'
+    )
+  end
+
+  lane :deploy_beta do |options|
+    crashlytics_tester_groups = ['beta']
+    crashlytics_api_token = ENV['CRASHLYTICS_API_TOKEN']
+    crashlytics_build_secret = ENV['CRASHLYTICS_BUILD_SECRET']
+    File.write("changelog.txt", changelog_from_git_commits)
+    crashlytics(
+      api_token: crashlytics_api_token,
+      build_secret: crashlytics_build_secret,
+      groups: crashlytics_tester_groups,
+      notes_path: "fastlane/changelog.txt",
+      notifications: true
+    )
+    upload_symbols_to_crashlytics(dsym_path: './Boca.app.dSYM.zip')
+  end
+
+  lane :deploy_appstore do |options|
+    increment_build_number(
+      xcodeproj: './ios/Boca.xcodeproj',
+    )
+    increment_version_number(
+      xcodeproj: './ios/Boca.xcodeproj',
+    )
+    app_identifier = CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier)
+    itc_team_id = CredentialsManager::AppfileConfig.try_fetch_value(:itc_team_id)
+    build(release: true, export_method: 'app-store')
+    deliver(
+      force: true,
+      app_identifier: app_identifier,
+      run_precheck_before_submit: true,
+      submit_for_review: false,
+      automatic_release: false,
+      team_id: itc_team_id,
+    )
+  end
+
+  lane :beta do |options|
+    build(release: true)
+    deploy_beta
+  end
+
+  lane :icon do
+    appicon(
+      appicon_image_file: 'assets/appstore/Icon.png',
+      appicon_devices: [:ipad, :iphone],
+      appicon_path: 'ios/Boca/Images.xcassets'
+    )
+  end
+end
