@@ -25,8 +25,8 @@ export const CameraScreenOnboarding: SFC<CameraScreenOnboardingProps> = ({
   hasCameraPermissions,
   onRequestCameraPermissions,
 }: CameraScreenOnboardingProps) => {
-  const requestCameraPermissions = async () => {
-    await onRequestCameraPermissions();
+  const requestCameraPermissions = () => {
+    onRequestCameraPermissions();
   };
   return (
     <View style={[styles.container, style]}>

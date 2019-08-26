@@ -89,7 +89,6 @@ export const OnboardingScreen: ComponentType<
     scrollProgress,
     scrollViewRef,
     onRequestScrollToProgress,
-    onRequestEnableCamera,
     onScrollViewDidUpdateProgress,
     onRequestCameraPermissions,
   }) => {
@@ -103,10 +102,6 @@ export const OnboardingScreen: ComponentType<
       2
     );
     const handlePressNext = () => {
-      if (isFinalPage) {
-        onRequestEnableCamera();
-        return;
-      }
       const scrollToProgress = (currentPageIndex + 1) / (numberOfPages - 1);
       onRequestScrollToProgress(scrollToProgress);
     };

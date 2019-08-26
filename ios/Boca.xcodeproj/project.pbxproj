@@ -26,6 +26,7 @@
 		7F6FAEAC8FD64ACF9028F3B2 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B303F65E6CA4EE7B72368C8 /* libBVLinearGradient.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		85BB55A0FE2D4A619258098E /* libHSAnimatedUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFEB39AE8F984633A0CF9F6D /* libHSAnimatedUI.a */; };
+		A6417FFB7A4F4F8F8DA73305 /* libSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A17965807A40CB9AD41F0C /* libSplashScreen.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		B1847AA7D7EB4825AA88FBEE /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 79FC96B9A5734E1BA3A263CD /* libRNGestureHandler.a */; };
 		D2916D4F22BE4D1BA101BDCC /* libRNSafeArea.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD2877BF4B4940C9B684C389 /* libRNSafeArea.a */; };
@@ -412,6 +413,13 @@
 			remoteGlobalIDString = FC75EB2B22CAE84A003AB14E;
 			remoteInfo = HSReactNativeCamera;
 		};
+		FCDFF00623147BD3006D7255 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 51268D1B7C5B495C97E9CB0D /* SplashScreen.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D7682761D8E76B80014119E;
+			remoteInfo = SplashScreen;
+		};
 		FCE4719222F3B09A004F4A4C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AA86142A1C7E44C5935048E9 /* HSAnimatedUI.xcodeproj */;
@@ -460,6 +468,8 @@
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		30628CDE7DC846A981EE0F0D /* libRNSVG.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSVG.a; sourceTree = "<group>"; };
 		3238105B577147C59D3EDB5F /* libHSReactNativeCamera.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libHSReactNativeCamera.a; sourceTree = "<group>"; };
+		43A17965807A40CB9AD41F0C /* libSplashScreen.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libSplashScreen.a; sourceTree = "<group>"; };
+		51268D1B7C5B495C97E9CB0D /* SplashScreen.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = SplashScreen.xcodeproj; path = "../node_modules/react-native-splash-screen/ios/SplashScreen.xcodeproj"; sourceTree = "<group>"; };
 		5AC3AC84D4E24EDA91E08877 /* ReactNativeNavigationTests.xctest */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = ReactNativeNavigationTests.xctest; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
@@ -526,6 +536,7 @@
 				D2916D4F22BE4D1BA101BDCC /* libRNSafeArea.a in Frameworks */,
 				B1847AA7D7EB4825AA88FBEE /* libRNGestureHandler.a in Frameworks */,
 				F7037509C6D04BBDA72E4433 /* libReactNativeHaptic.a in Frameworks */,
+				A6417FFB7A4F4F8F8DA73305 /* libSplashScreen.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -704,6 +715,7 @@
 				A806432AF2FC47919DEF0E22 /* RNSafeArea.xcodeproj */,
 				89932B26F15345A292AF4B96 /* RNGestureHandler.xcodeproj */,
 				A93F14D230704F4085648775 /* ReactNativeHaptic.xcodeproj */,
+				51268D1B7C5B495C97E9CB0D /* SplashScreen.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -783,6 +795,7 @@
 				CD2877BF4B4940C9B684C389 /* libRNSafeArea.a */,
 				79FC96B9A5734E1BA3A263CD /* libRNGestureHandler.a */,
 				1C4AA6EDF3AB491081D2973D /* libReactNativeHaptic.a */,
+				43A17965807A40CB9AD41F0C /* libSplashScreen.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -867,6 +880,14 @@
 			isa = PBXGroup;
 			children = (
 				FCCA731E22F4B6FB00163C4E /* libHSReactNativeCamera.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FCDFF00323147BD3006D7255 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FCDFF00723147BD3006D7255 /* libSplashScreen.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1032,6 +1053,10 @@
 				{
 					ProductGroup = FC07FCC622F3FCC300CB1E2C /* Products */;
 					ProjectRef = 11BC89623304422BA45F228B /* RNSVG.xcodeproj */;
+				},
+				{
+					ProductGroup = FCDFF00323147BD3006D7255 /* Products */;
+					ProjectRef = 51268D1B7C5B495C97E9CB0D /* SplashScreen.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -1406,6 +1431,13 @@
 			remoteRef = FCCA731D22F4B6FB00163C4E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		FCDFF00723147BD3006D7255 /* libSplashScreen.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSplashScreen.a;
+			remoteRef = FCDFF00623147BD3006D7255 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		FCE4719322F3B09A004F4A4C /* libHSAnimatedUI.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1517,6 +1549,7 @@
 					"$(SRCROOT)/../node_modules/react-native-safe-area/ios/RNSafeArea",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-haptic/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 				);
 				INFOPLIST_FILE = Bombast/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
@@ -1531,6 +1564,7 @@
 					"\"$(SRCROOT)/Bombast\"",
 					"\"$(SRCROOT)/Bombast\"",
 					"\"$(SRCROOT)/Bombast\"",
+					"\"$(SRCROOT)/Boca\"",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1568,6 +1602,7 @@
 					"$(SRCROOT)/../node_modules/react-native-safe-area/ios/RNSafeArea",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-haptic/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 				);
 				INFOPLIST_FILE = Bombast/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
@@ -1582,6 +1617,7 @@
 					"\"$(SRCROOT)/Bombast\"",
 					"\"$(SRCROOT)/Bombast\"",
 					"\"$(SRCROOT)/Bombast\"",
+					"\"$(SRCROOT)/Boca\"",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",

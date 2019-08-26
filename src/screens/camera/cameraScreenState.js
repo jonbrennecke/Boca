@@ -8,6 +8,7 @@ import {
 } from '@jonbrennecke/react-native-camera';
 import { createMediaStateHOC } from '@jonbrennecke/react-native-media';
 import { autobind } from 'core-decorators';
+import SplashScreen from 'react-native-splash-screen';
 
 import { BlurApertureRange } from '../../constants';
 
@@ -82,6 +83,7 @@ export function wrapWithCameraScreenState<
 
     async componentDidMount() {
       await this.props.loadCameraPermissions();
+      SplashScreen.hide();
       if (this.props.hasCameraPermissions) {
         await this.startPreview();
         await this.props.setBlurAperture(BlurApertureRange.initialValue);

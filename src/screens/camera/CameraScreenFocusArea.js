@@ -29,20 +29,20 @@ const styles = {
         scale: touch.interpolate({
           inputRange: [0, 1],
           outputRange: [0.66, 1],
-        })
+        }),
       },
       {
         rotate: touch.interpolate({
           inputRange: [0, 1],
           outputRange: ['0deg', '360deg'],
-        })
-      }
+        }),
+      },
     ],
     opacity: touch,
   }),
   flex: {
-    flex: 1
-  }
+    flex: 1,
+  },
 };
 
 export const CameraScreenFocusArea: SFC<CameraScreenFocusAreaProps> = ({
