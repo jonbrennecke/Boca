@@ -68,7 +68,7 @@ platform :ios do |options|
     appicon(
       appicon_image_file: 'assets/appstore/Icon.png',
       appicon_devices: [:ipad, :iphone],
-      appicon_path: 'ios/Boca/Images.xcassets'
+      appicon_path: 'ios/Bombast/Images.xcassets'
     )
   end
 end

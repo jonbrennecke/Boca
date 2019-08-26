@@ -611,7 +611,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* Bombast */ = {
+		13B07FAE1A68108700A75B9A /* Boca */ = {
 			isa = PBXGroup;
 			children = (
 				FC6EA7D921CEA457007C3B3E /* fonts */,
@@ -625,7 +625,7 @@
 				FC5BADCA22ECC3D10077855E /* Empty.swift */,
 				FC5BADC922ECC3D00077855E /* Bombast-Bridging-Header.h */,
 			);
-			name = Bombast;
+			name = Boca;
 			sourceTree = "<group>";
 		};
 		146834001AC3E56700842450 /* Products */ = {
@@ -720,7 +720,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				13B07FAE1A68108700A75B9A /* Bombast */,
+				13B07FAE1A68108700A75B9A /* Boca */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* BombastTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
