@@ -76,7 +76,7 @@ export class Seekbar extends Component<Props, State> {
   };
 
   dragDidMove = ({ x }: { x: number, y: number }) => {
-    if (this.state.isDragging) {
+    if (!this.props.onSeekToProgress) {
       return;
     }
     const progress = clamp(x / this.state.viewWidth, 0, 1);

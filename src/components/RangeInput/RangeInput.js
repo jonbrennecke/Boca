@@ -112,7 +112,10 @@ export const RangeInput: SFC<RangeInputProps> = ({
       )}
       onSeekToProgress={p => onSelectValue(p * (max - min) + min)}
       onDidBeginDrag={() => ReactNativeHaptic.generate('selection')}
-      onDidEndDrag={() => ReactNativeHaptic.generate('selection')}
+      onDidEndDrag={p => {
+        ReactNativeHaptic.generate('selection');
+        onSelectValue(p * (max - min) + min);
+      }}
     />
   </View>
 );
