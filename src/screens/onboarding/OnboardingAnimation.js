@@ -3,12 +3,13 @@ import React from 'react';
 import { View, Animated, Dimensions, Easing, StyleSheet } from 'react-native';
 import { Camera } from '@jonbrennecke/react-native-camera';
 
-import { Units, BlurApertureRange } from '../../constants';
+import { Units } from '../../constants';
 
 import type { Style, SFC } from '../../types';
 
 export type OnboardingAnimationProps = {
   style?: ?Style,
+  blurAperture: number,
   scrollAnimation: Animated.Value,
 };
 
@@ -88,7 +89,7 @@ const styles = {
 
 export const OnboardingAnimation: SFC<OnboardingAnimationProps> = ({
   style,
-  scrollAnimation,
+  blurAperture,
 }: OnboardingAnimationProps) => (
   <View style={[styles.container, style]}>
     {/* <Animated.View style={styles.backVideo(scrollAnimation)}>
@@ -110,13 +111,13 @@ export const OnboardingAnimation: SFC<OnboardingAnimationProps> = ({
       />
     </Animated.View> */}
     <View style={styles.video}>
-      {/* <Camera
+      <Camera
         style={styles.absoluteFill}
         cameraPosition="front"
         previewMode="portraitMode"
         resizeMode="scaleAspectWidth"
-        blurAperture={BlurApertureRange.upperBound}
-      /> */}
+        blurAperture={blurAperture}
+      />
     </View>
   </View>
 );

@@ -7,6 +7,11 @@ import type { ComponentType } from 'react';
 
 export type OnboardingScreenProps = {
   scrollAnimation: Animated.Value,
+  onScrollViewDidUpdateProgress: number => void,
+} & OnboardingScreenState;
+
+export type OnboardingScreenState = {
+  scrollProgress: number,
 };
 
 export const wrapWithOnboardingScreenState = <
@@ -17,14 +22,28 @@ export const wrapWithOnboardingScreenState = <
 ): ComponentType<PassThroughProps> => {
   // $FlowFixMe
   @autobind
-  class OnboardingScreen extends PureComponent<PassThroughProps> {
+  class OnboardingScreen extends PureComponent<
+    PassThroughProps,
+    OnboardingScreenState
+  > {
     scrollAnimation = new Animated.Value(0);
+    state: $Exact<OnboardingScreenState> = {
+      scrollProgress: 0,
+    };
+
+    handleScrollViewProgressUpdate(progress: number) {
+      this.setState({
+        scrollProgress: progress,
+      });
+    }
 
     render() {
       return (
         <WrappedComponent
           {...this.props}
+          {...this.state}
           scrollAnimation={this.scrollAnimation}
+          onScrollViewDidUpdateProgress={this.handleScrollViewProgressUpdate}
         />
       );
     }

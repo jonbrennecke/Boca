@@ -51,7 +51,7 @@ export const Colors = {
     white: '#fff',
     black: '#2B2A2A',
     gray: '#222',
-    mediumGray: '#E0E0E0'
+    mediumGray: '#E0E0E0',
   },
   borders: {
     gray: '#444',

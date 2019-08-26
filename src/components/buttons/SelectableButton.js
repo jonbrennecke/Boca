@@ -42,11 +42,22 @@ export const SelectableButton: SFC<SelectableButtonProps> = ({
   <TouchableOpacity
     style={
       // $FlowFixMe
-      StyleSheet.compose(styles.button(isSelected ? colorTheme.background.selected : colorTheme.background.default), style)
+      StyleSheet.compose(
+        styles.button(
+          isSelected
+            ? colorTheme.background.selected
+            : colorTheme.background.default
+        ),
+        style
+      )
     }
     onPress={onPress}
   >
-    <Text style={styles.buttonText(isSelected ? colorTheme.text.selected : colorTheme.text.default)}>
+    <Text
+      style={styles.buttonText(
+        isSelected ? colorTheme.text.selected : colorTheme.text.default
+      )}
+    >
       {text.toLocaleUpperCase()}
     </Text>
   </TouchableOpacity>
