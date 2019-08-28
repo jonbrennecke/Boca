@@ -6,7 +6,10 @@ import {
   CameraSettingIdentifiers,
   startCameraPreview,
 } from '@jonbrennecke/react-native-camera';
-import { createMediaStateHOC, createAlbum } from '@jonbrennecke/react-native-media';
+import {
+  createMediaStateHOC,
+  createAlbum,
+} from '@jonbrennecke/react-native-media';
 import { autobind } from 'core-decorators';
 import SplashScreen from 'react-native-splash-screen';
 
@@ -50,7 +53,7 @@ export type CameraScreenState = {
   isDepthPreviewEnabled: boolean,
   cameraPosition: CameraPosition,
   thumbnailAssetID: ?string,
-  initializationStatus: InitializationStatus
+  initializationStatus: InitializationStatus,
 };
 
 export function wrapWithCameraScreenState<
@@ -129,12 +132,12 @@ export function wrapWithCameraScreenState<
       await this.props.queryMedia({
         mediaType: 'video',
         limit: 1,
-        albumID: album.albumID
+        albumID: album.albumID,
       });
       const albumAssets = this.props.assetsForAlbum(album.albumID);
       const assetID = albumAssets.assetIDs.toArray()[0];
       this.setState({
-        thumbnailAssetID: assetID
+        thumbnailAssetID: assetID,
       });
     }
 
