@@ -6,10 +6,7 @@ import {
   CameraSettingIdentifiers,
   startCameraPreview,
 } from '@jonbrennecke/react-native-camera';
-import {
-  createMediaStateHOC,
-  createAlbum,
-} from '@jonbrennecke/react-native-media';
+import { createMediaStateHOC } from '@jonbrennecke/react-native-media';
 import { autobind } from 'core-decorators';
 import SplashScreen from 'react-native-splash-screen';
 
@@ -123,7 +120,8 @@ export function wrapWithCameraScreenState<
     }
 
     async configureThumbnail() {
-      const album = await createAlbum('BOCA');
+      await this.props.createAlbum('BOCA');
+      const album = this.props.albums.find(a => a.title === 'BOCA');
       if (!album) {
         // eslint-disable-next-line no-console
         console.warn('Failed to create BOCA album.');

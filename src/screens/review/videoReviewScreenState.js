@@ -101,9 +101,14 @@ export function wrapWithVideoReviewScreenState<
     videoCompositionRef = createRef();
 
     async componentDidMount() {
-      // TODO: query videos in the app's hidden folder
+      await this.props.createAlbum('BOCA');
+      const album = this.props.albums.find(a => a.title === 'BOCA');
+      if (!album) {
+        return;
+      }
       await this.props.queryMedia({
         mediaType: 'video',
+        albumID: album.albumID,
       });
       const assets = this.getAssetsAsArray();
       const asset = assets[0];
@@ -224,18 +229,14 @@ export function wrapWithVideoReviewScreenState<
       if (!lastAsset) {
         return;
       }
+      const album = this.props.albums.find(a => a.title === 'BOCA');
       await this.props.queryMedia({
         mediaType: 'video',
         creationDateQuery: {
           date: lastAsset.creationDate,
           equation: 'lessThan',
         },
-        // TODO
-        // ...(this.props.albumID
-        //   ? {
-        //       albumID: this.props.albumID,
-        //     }
-        //   : {}),
+        albumID: album ? album.albumID : null,
       });
     }
 
@@ -246,8 +247,9 @@ export function wrapWithVideoReviewScreenState<
     }
 
     getAssets() {
-      if (this.props.albumID) {
-        const albumAssets = this.props.albumAssets.get(this.props.albumID);
+      const album = this.props.albums.find(a => a.title === 'BOCA');
+      if (album) {
+        const albumAssets = this.props.albumAssets.get(album.albumID);
         if (albumAssets) {
           return this.props.assets.filter(a =>
             albumAssets.assetIDs.includes(a.assetID)
