@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoType" translatesAutoresizingMaskIntoConstraints="NO" id="98f-id-zqN">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BOCA LogoType.png" translatesAutoresizingMaskIntoConstraints="NO" id="98f-id-zqN">
                     <rect key="frame" x="174" y="226" width="132" height="28"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="28" id="mME-HZ-7oX"/>
@@ -23,7 +23,7 @@
                     </constraints>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" red="0.16862745098039217" green="0.16470588235294117" blue="0.16470588235294117" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="98f-id-zqN" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="PBj-84-WBs"/>
                 <constraint firstItem="98f-id-zqN" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="tNx-yq-hSZ"/>
@@ -34,6 +34,6 @@
         </view>
     </objects>
     <resources>
-        <image name="LogoType" width="156" height="33"/>
+        <image name="BOCA LogoType.png" width="156" height="33"/>
     </resources>
 </document>
