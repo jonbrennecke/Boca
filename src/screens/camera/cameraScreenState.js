@@ -6,7 +6,7 @@ import {
   CameraSettingIdentifiers,
   startCameraPreview,
 } from '@jonbrennecke/react-native-camera';
-import { createMediaStateHOC } from '@jonbrennecke/react-native-media';
+import { createMediaStateHOC, createAlbum } from '@jonbrennecke/react-native-media';
 import { autobind } from 'core-decorators';
 import SplashScreen from 'react-native-splash-screen';
 
@@ -20,6 +20,8 @@ import type {
 import type { MediaStateHOCProps } from '@jonbrennecke/react-native-media';
 
 import type { ReturnType } from '../../types';
+
+export type InitializationStatus = 'loading' | 'loaded' | 'none';
 
 export type CameraScreenStateExtraProps = {
   cameraRef: ReturnType<typeof createRef>,
@@ -48,6 +50,7 @@ export type CameraScreenState = {
   isDepthPreviewEnabled: boolean,
   cameraPosition: CameraPosition,
   thumbnailAssetID: ?string,
+  initializationStatus: InitializationStatus
 };
 
 export function wrapWithCameraScreenState<
@@ -79,23 +82,15 @@ export function wrapWithCameraScreenState<
       isDepthPreviewEnabled: false,
       cameraPosition: 'front',
       thumbnailAssetID: null,
+      initializationStatus: 'none',
     };
 
     async componentDidMount() {
       await this.props.loadCameraPermissions();
-      SplashScreen.hide();
       if (this.props.hasCameraPermissions) {
-        await this.startPreview();
-        await this.props.setBlurAperture(BlurApertureRange.initialValue);
-        // TODO: query videos in the app's hidden folder
-        await this.props.queryMedia({
-          mediaType: 'video',
-          limit: 1,
-        });
-        this.setState({
-          thumbnailAssetID: this.props.assets.toArray()[0]?.assetID,
-        });
+        await this.initialize();
       }
+      SplashScreen.hide();
     }
 
     async componentDidUpdate(
@@ -104,13 +99,43 @@ export function wrapWithCameraScreenState<
         PassThroughProps
     ) {
       if (this.props.hasCameraPermissions && !prevProps.hasCameraPermissions) {
-        await this.startPreview();
+        await this.initialize();
       }
     }
 
-    async startPreview() {
+    async initialize() {
+      if (this.state.initializationStatus === 'loading') {
+        return;
+      }
+      this.setState({
+        initializationStatus: 'loading',
+      });
       startCameraPreview();
       await this.props.loadSupportedFeatures();
+      await this.props.setBlurAperture(BlurApertureRange.initialValue);
+      await this.configureThumbnail();
+      this.setState({
+        initializationStatus: 'loaded',
+      });
+    }
+
+    async configureThumbnail() {
+      const album = await createAlbum('BOCA');
+      if (!album) {
+        // eslint-disable-next-line no-console
+        console.warn('Failed to create BOCA album.');
+        return;
+      }
+      await this.props.queryMedia({
+        mediaType: 'video',
+        limit: 1,
+        albumID: album.albumID
+      });
+      const albumAssets = this.props.assetsForAlbum(album.albumID);
+      const assetID = albumAssets.assetIDs.toArray()[0];
+      this.setState({
+        thumbnailAssetID: assetID
+      });
     }
 
     setActiveCameraSetting = setting =>
