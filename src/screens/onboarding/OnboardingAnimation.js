@@ -1,7 +1,8 @@
 // @flow
 import React from 'react';
 import { View, Animated, Dimensions, Easing, StyleSheet } from 'react-native';
-import { Camera } from '@jonbrennecke/react-native-camera';
+import { VideoCompositionImage } from '@jonbrennecke/react-native-camera';
+import { BlurView } from '@jonbrennecke/react-native-animated-ui';
 
 import { MeasureContentsView } from '../../components';
 import { Units } from '../../constants';
@@ -12,6 +13,7 @@ export type Size = { width: number, height: number };
 
 export type OnboardingAnimationProps = {
   style?: ?Style,
+  videoProgress: number,
   blurAperture: number,
   scrollAnimation: Animated.Value,
 };
@@ -50,6 +52,7 @@ const styles = {
       width: 5,
       height: 5,
     },
+    overflow: 'hidden',
     shadowRadius: 25,
     transform: [
       {
@@ -128,6 +131,7 @@ const styles = {
 
 export const OnboardingAnimation: SFC<OnboardingAnimationProps> = ({
   style,
+  videoProgress,
   blurAperture,
   scrollAnimation,
 }: OnboardingAnimationProps) => (
@@ -135,22 +139,34 @@ export const OnboardingAnimation: SFC<OnboardingAnimationProps> = ({
     style={style}
     renderChildren={size => (
       <View style={styles.container}>
+        {/* <VideoCompositionImage
+          style={styles.absoluteFill}
+          resourceNameWithExt="onboarding.mov"
+          previewMode="portraitMode"
+          resizeMode="scaleAspectFill"
+          blurAperture={blurAperture}
+          progress={videoProgress}
+        />
+        <BlurView style={styles.absoluteFill} blurType="extraDark" blurAmount={25} /> */}
         <Animated.View style={styles.backVideo(size, scrollAnimation)}>
-          {/* <Camera
+          <VideoCompositionImage
             style={styles.absoluteFill}
-            cameraPosition="front"
+            resourceNameWithExt="onboarding.mov"
             previewMode="portraitMode"
-            resizeMode="scaleAspectWidth"
+            resizeMode="scaleAspectFill"
             blurAperture={blurAperture}
-          /> */}
+            progress={videoProgress}
+          />
         </Animated.View>
         <Animated.View style={styles.frontVideo(size, scrollAnimation)}>
-          {/* <Camera
+          <VideoCompositionImage
             style={styles.absoluteFill}
-            cameraPosition="front"
+            resourceNameWithExt="onboarding.mov"
             previewMode="depth"
-            resizeMode="scaleAspectWidth"
-          /> */}
+            resizeMode="scaleAspectFill"
+            blurAperture={blurAperture}
+            progress={videoProgress}
+          />
         </Animated.View>
       </View>
     )}

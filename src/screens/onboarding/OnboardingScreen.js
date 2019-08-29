@@ -79,6 +79,16 @@ const makeBlurApertureInterpolationFunction = (
   };
 };
 
+const mapRange = (
+  x: number,
+  fromRange: { min: number, max: number },
+  toRange: { min: number, max: number }
+): number =>
+  (x - fromRange.min) *
+    (toRange.max - toRange.min) /
+    (fromRange.max - fromRange.min) +
+  toRange.min;
+
 // eslint-disable-next-line flowtype/generic-spacing
 export const OnboardingScreen: ComponentType<
   OnboardingScreenProps
@@ -116,6 +126,7 @@ export const OnboardingScreen: ComponentType<
         <View style={styles.cameraContainer}>
           <OnboardingAnimation
             style={styles.absoluteFill}
+            videoProgress={scrollProgress}
             blurAperture={interpolateBlurAperture(scrollProgress)}
             scrollAnimation={scrollAnimation}
           />
@@ -158,16 +169,6 @@ export const OnboardingScreen: ComponentType<
     );
   }
 );
-
-const mapRange = (
-  x: number,
-  fromRange: { min: number, max: number },
-  toRange: { min: number, max: number }
-): number =>
-  (x - fromRange.min) *
-    (toRange.max - toRange.min) /
-    (fromRange.max - fromRange.min) +
-  toRange.min;
 
 const OnboardingConfig = {
   pages: [
