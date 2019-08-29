@@ -108,8 +108,8 @@ const styles = {
     ],
   }),
   iconButton: {
-    height: Units.large,
-    width: Units.large,
+    height: Units.extraLarge,
+    width: Units.extraLarge,
   },
 };
 

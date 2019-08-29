@@ -18,6 +18,7 @@ import {
   SelectableButton,
   SwipeDownGestureHandler,
 } from '../../components';
+import { ExportIcon } from '../../components/icons';
 import { VideoReviewScreenToolbar } from './VideoReviewScreenToolbar';
 import { VideoReviewScreenNavbar } from './VideoReviewScreenNavbar';
 import { VideoReviewScreenFlatList } from './VideoReviewScreenFlatList';
@@ -258,6 +259,7 @@ export const VideoReviewScreen: ComponentType<
               <SelectableButton
                 text="Save"
                 isSelected
+                icon={ExportIcon}
                 onPress={exportComposition}
               />
             </View>

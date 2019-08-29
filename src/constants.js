@@ -40,7 +40,8 @@ export const Units = {
   extraSmall: 3,
   small: 10,
   medium: 16,
-  large: 28,
+  large: 22,
+  extraLarge: 28,
 };
 
 export const Colors = {
@@ -115,6 +116,7 @@ export type ColorByButtonRole = {
 export type ColorByButtonSubComponent = {
   background: ColorByButtonState,
   text: ColorByButtonState,
+  icon: ColorByButtonState,
 };
 
 export type ColorBySelectSubComponent = {
@@ -173,6 +175,11 @@ export const ColorTheme: ColorByTheme = {
             highlight: Colors.text.light,
             selected: Colors.text.dark,
           },
+          icon: {
+            default: Colors.text.light,
+            highlight: Colors.text.light,
+            selected: Colors.text.dark,
+          },
         },
       },
     },
@@ -207,6 +214,11 @@ export const ColorTheme: ColorByTheme = {
             highlight: Colors.text.light,
             selected: Colors.text.dark,
           },
+          icon: {
+            default: Colors.text.mediumDarkGray,
+            highlight: Colors.text.light,
+            selected: Colors.text.dark,
+          },
         },
       },
     },
@@ -228,6 +240,11 @@ export const ColorTheme: ColorByTheme = {
               highlight: Colors.text.dark,
               selected: Colors.text.mediumDarkGray,
             },
+            icon: {
+              default: Colors.text.dark,
+              highlight: Colors.text.dark,
+              selected: Colors.text.mediumDarkGray,
+            },
           },
           secondary: {
             background: {
@@ -236,6 +253,11 @@ export const ColorTheme: ColorByTheme = {
               selected: Colors.text.light,
             },
             text: {
+              default: Colors.text.mediumDarkGray,
+              highlight: Colors.text.mediumDarkGray,
+              selected: Colors.text.mediumDarkGray,
+            },
+            icon: {
               default: Colors.text.mediumDarkGray,
               highlight: Colors.text.mediumDarkGray,
               selected: Colors.text.mediumDarkGray,

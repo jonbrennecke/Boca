@@ -71,8 +71,8 @@ const styles = {
     width: '100%',
   },
   iconButton: {
-    height: Units.large,
-    width: Units.large,
+    height: Units.extraLarge,
+    width: Units.extraLarge,
   },
   overCameraToolbar: {
     position: 'absolute',
