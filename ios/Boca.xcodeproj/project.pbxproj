@@ -48,6 +48,7 @@
 		FC7452F82305E49700436E62 /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC7452F12305E49700436E62 /* Inter-SemiBold.ttf */; };
 		FC7452F92305E49700436E62 /* Inter-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC7452F22305E49700436E62 /* Inter-Black.ttf */; };
 		FC980B0E2301CAB400CFBFD4 /* libHSReactNativeMedia.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC5BAE0F22ECC4750077855E /* libHSReactNativeMedia.a */; };
+		FCE9B07E231897E1008A8407 /* High Street LogoType Black@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCE9B045231897E0008A8407 /* High Street LogoType Black@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -510,6 +511,7 @@
 		FC7452F02305E49700436E62 /* Inter-ExtraLight-BETA.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Inter-ExtraLight-BETA.ttf"; path = "../assets/fonts/Inter (TTF)/Inter-ExtraLight-BETA.ttf"; sourceTree = "<group>"; };
 		FC7452F12305E49700436E62 /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Inter-SemiBold.ttf"; path = "../assets/fonts/Inter (TTF)/Inter-SemiBold.ttf"; sourceTree = "<group>"; };
 		FC7452F22305E49700436E62 /* Inter-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Inter-Black.ttf"; path = "../assets/fonts/Inter (TTF)/Inter-Black.ttf"; sourceTree = "<group>"; };
+		FCE9B045231897E0008A8407 /* High Street LogoType Black@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "High Street LogoType Black@3x.png"; path = "../../assets/appstore/High Street LogoType Black@3x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -787,6 +789,7 @@
 		FC419C812316E61200A5FA08 /* launchScreenAssets */ = {
 			isa = PBXGroup;
 			children = (
+				FCE9B045231897E0008A8407 /* High Street LogoType Black@3x.png */,
 				FC419C472316E5D300A5FA08 /* BOCA LogoType@3x.png */,
 			);
 			path = launchScreenAssets;
@@ -1485,6 +1488,7 @@
 				FC6EA7D721CEA44D007C3B3E /* PT_Sans-Web-Bold.ttf in Resources */,
 				FC7452F32305E49700436E62 /* Inter-Medium.ttf in Resources */,
 				FC7452F82305E49700436E62 /* Inter-SemiBold.ttf in Resources */,
+				FCE9B07E231897E1008A8407 /* High Street LogoType Black@3x.png in Resources */,
 				FC7452F62305E49700436E62 /* Inter-Bold.ttf in Resources */,
 				FC419C802316E5D400A5FA08 /* BOCA LogoType@3x.png in Resources */,
 				FC7452F52305E49700436E62 /* Inter-ExtraBold.ttf in Resources */,
