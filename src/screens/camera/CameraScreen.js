@@ -3,7 +3,7 @@ import React from 'react';
 import { View, SafeAreaView, StyleSheet, StatusBar } from 'react-native';
 import ReactNativeHaptic from 'react-native-haptic';
 
-import { Camera } from '@jonbrennecke/react-native-camera';
+import { Camera, HiddenVolume } from '@jonbrennecke/react-native-camera';
 
 import { wrapWithCameraScreenState } from './cameraScreenState';
 import { CameraScreenOnboarding } from './CameraScreenOnboarding';
@@ -99,6 +99,7 @@ export const CameraScreen: ComponentType<
     isReviewModalVisible,
     stopCapture,
     startCapture,
+    captureStatus,
     hasCameraPermissions,
     requestCameraPermissions,
     enableDepthPreview,
@@ -117,6 +118,7 @@ export const CameraScreen: ComponentType<
     >
       <SafeAreaView style={[styles.container, style]}>
         <StatusBar barStyle="light-content" />
+        <HiddenVolume />
         <CameraPreviewDimensions
           style={styles.cameraWrap}
           cameraFormat={format}
@@ -168,6 +170,7 @@ export const CameraScreen: ComponentType<
             </View>
             <View style={styles.captureRowItem}>
               <CameraCaptureButton
+                captureStatus={captureStatus}
                 onRequestBeginCapture={startCapture}
                 onRequestEndCapture={() =>
                   stopCapture({

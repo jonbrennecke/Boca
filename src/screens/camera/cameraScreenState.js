@@ -5,6 +5,7 @@ import {
   createCameraStateHOC,
   CameraSettingIdentifiers,
   startCameraPreview,
+  addVolumeButtonListener
 } from '@jonbrennecke/react-native-camera';
 import { createMediaStateHOC } from '@jonbrennecke/react-native-media';
 import { autobind } from 'core-decorators';
@@ -74,6 +75,9 @@ export function wrapWithCameraScreenState<
     CameraScreenState
   > {
     cameraRef = createRef();
+    volumeButtonListener: ?ReturnType<
+      typeof addVolumeButtonListener
+    >;
 
     state: $Exact<CameraScreenState> = {
       activeCameraSetting: CameraSettingIdentifiers.Exposure,
@@ -91,6 +95,12 @@ export function wrapWithCameraScreenState<
         await this.initialize();
       }
       SplashScreen.hide();
+    }
+
+    componentWillUnmount() {
+      if (this.volumeButtonListener) {
+        this.volumeButtonListener.remove();
+      }
     }
 
     async componentDidUpdate(
@@ -114,6 +124,7 @@ export function wrapWithCameraScreenState<
       await this.props.loadSupportedFeatures();
       await this.props.setBlurAperture(BlurApertureRange.initialValue);
       await this.configureThumbnail();
+      this.volumeButtonListener = addVolumeButtonListener(this.handleVolumeButtonPress)
       this.setState({
         initializationStatus: 'loaded',
       });
@@ -137,6 +148,16 @@ export function wrapWithCameraScreenState<
       this.setState({
         thumbnailAssetID: assetID,
       });
+    }
+
+    handleVolumeButtonPress() {
+      if (this.props.captureStatus === 'started') {
+        this.props.stopCapture({
+          saveToCameraRoll: true,
+        });
+      } else {
+        this.props.startCapture();
+      }
     }
 
     setActiveCameraSetting = setting =>

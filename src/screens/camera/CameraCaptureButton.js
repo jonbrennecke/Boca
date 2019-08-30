@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { autobind } from 'core-decorators';
 import LinearGradient from 'react-native-linear-gradient';
+import type { CameraCaptureStatus } from '@jonbrennecke/react-native-camera';
 
 import { Colors } from '../../constants';
 
@@ -16,6 +17,7 @@ import type { Style } from '../../types';
 
 type Props = {
   style?: ?Style,
+  captureStatus: CameraCaptureStatus,
   onRequestBeginCapture: () => void,
   onRequestEndCapture: () => void,
 };
@@ -74,6 +76,66 @@ export class CameraCaptureButton extends PureComponent<Props> {
   outerViewAnim: Animated.Value = new Animated.Value(1);
   centerViewAnim: Animated.Value = new Animated.Value(1);
 
+  componentDidUpdate(prevProps: Props) {
+    if (this.props.captureStatus !== prevProps.captureStatus) {
+      this.props.captureStatus === 'started'
+        ? this.animateIn()
+        : this.animateOut();
+    }
+  }
+
+  animateIn() {
+    Animated.loop(
+      Animated.sequence([
+        Animated.parallel([
+          // Animated.spring(this.outerViewAnim, {
+          //   toValue: 0.9,
+          //   duration: 250,
+          //   useNativeDriver: true,
+          //   easing: Easing.inOut(Easing.quad)
+          // }),
+          Animated.spring(this.centerViewAnim, {
+            toValue: 0.65,
+            duration: 250,
+            useNativeDriver: true,
+            // easing: Easing.inOut(Easing.quad)
+            easing: Easing.bounce(5)
+          }),
+        ]),
+        // Animated.delay(300),
+        // Animated.parallel([
+        //   // Animated.spring(this.outerViewAnim, {
+        //   //   toValue: 0.95,
+        //   //   duration: 250,
+        //   //   useNativeDriver: true,
+        //   //   easing: Easing.inOut(Easing.quad)
+        //   // }),
+        //   Animated.spring(this.centerViewAnim, {
+        //     toValue: 0.65,
+        //     duration: 250,
+        //     useNativeDriver: true,
+        //     easing: Easing.inOut(Easing.quad)
+        //   }),
+        // ])
+      ])
+    ).start();
+  }
+
+  animateOut() {
+    Animated.spring(this.outerViewAnim, {
+      toValue: 1.0,
+      duration: 250,
+      useNativeDriver: true,
+      easing: Easing.out(Easing.quad),
+    }).start();
+    Animated.spring(this.centerViewAnim, {
+      toValue: 1.0,
+      duration: 250,
+      useNativeDriver: true,
+      easing: Easing.out(Easing.quad),
+    }).start();
+  }
+
   touchableOnPressIn() {
     Animated.spring(this.outerViewAnim, {
       toValue: 0.95,
@@ -87,23 +149,12 @@ export class CameraCaptureButton extends PureComponent<Props> {
       useNativeDriver: true,
       easing: Easing.out(Easing.quad),
     }).start();
-    this.props.onRequestBeginCapture();
   }
 
   touchableOnPressOut() {
-    Animated.spring(this.outerViewAnim, {
-      toValue: 1.0,
-      duration: 250,
-      useNativeDriver: true,
-      easing: Easing.out(Easing.quad),
-    }).start();
-    Animated.spring(this.centerViewAnim, {
-      toValue: 1.0,
-      duration: 250,
-      useNativeDriver: true,
-      easing: Easing.out(Easing.quad),
-    }).start();
-    this.props.onRequestEndCapture();
+    this.props.captureStatus === 'started'
+      ? this.props.onRequestEndCapture()
+      : this.props.onRequestBeginCapture();
   }
 
   render() {
