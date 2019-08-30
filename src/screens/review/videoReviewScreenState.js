@@ -230,13 +230,19 @@ export function wrapWithVideoReviewScreenState<
         return;
       }
       const album = this.props.albums.find(a => a.title === 'BOCA');
+      if (!album) {
+        return;
+      }
+      if (this.props.isLoadingAssetsForAlbum(album.albumID)) {
+        return;
+      }
       await this.props.queryMedia({
         mediaType: 'video',
         creationDateQuery: {
           date: lastAsset.creationDate,
           equation: 'lessThan',
         },
-        albumID: album ? album.albumID : null,
+        albumID: album.albumID,
       });
     }
 
