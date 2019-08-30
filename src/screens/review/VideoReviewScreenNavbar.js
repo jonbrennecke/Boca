@@ -5,7 +5,6 @@ import {
   View,
   Text,
   StyleSheet,
-  Easing,
   StatusBar,
 } from 'react-native';
 import ReactNativeHaptic from 'react-native-haptic';

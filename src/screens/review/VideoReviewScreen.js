@@ -165,7 +165,7 @@ export const VideoReviewScreen: ComponentType<
           />
           <SwipeDownGestureHandler
             style={styles.flex}
-            verticalThreshold={350}
+            verticalThreshold={300}
             swipeGesture={swipeGesture}
             isSwipeGestureInProgress={isSwipeGestureInProgress}
             onSwipeDownGestureStart={onSwipeDownGestureStart}
@@ -173,7 +173,7 @@ export const VideoReviewScreen: ComponentType<
             onSwipeDownGestureMove={onSwipeDownGestureMove}
             onVerticalThresholdReached={onRequestDismiss}
           >
-            {isReviewScreenVisible && (
+            {isReviewScreenVisible ? (
               <VideoReviewScreenFlatList
                 isScrollEnabled={!isSwipeGestureInProgress}
                 style={styles.flex}
@@ -218,7 +218,7 @@ export const VideoReviewScreen: ComponentType<
                 onSwipeDownGestureRelease={onSwipeDownGestureRelease}
                 onSwipeDownGestureMove={onSwipeDownGestureMove}
               />
-            )}
+            ) : null}
             {!isFullScreenVideo ? (
               <Animated.View style={styles.overCameraToolbar(swipeGesture)}>
                 <BlurredSelectableButton
