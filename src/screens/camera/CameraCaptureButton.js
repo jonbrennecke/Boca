@@ -124,7 +124,7 @@ export class CameraCaptureButton extends PureComponent<Props> {
               pointerEvents="none"
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
-              colors={['#02D7A4', '#7375BE']}
+              colors={['#FEF393', '#F48B34']}
               style={styles.inner}
             />
           </MaskedViewIOS>
