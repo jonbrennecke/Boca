@@ -96,7 +96,17 @@ export class CameraCaptureButton extends PureComponent<Props> {
   }
 
   animateIn() {
-    // noop
+    Animated.spring(this.outerViewAnim, {
+      toValue: 0,
+      duration: 200,
+      useNativeDriver: true,
+      easing: Easing.out(Easing.quad),
+    }).start();
+    Animated.spring(this.centerViewAnim, {
+      toValue: 0,
+      duration: 200,
+      easing: Easing.out(Easing.quad),
+    }).start();
   }
 
   animateOut() {
@@ -114,17 +124,7 @@ export class CameraCaptureButton extends PureComponent<Props> {
   }
 
   touchableOnPressIn() {
-    Animated.spring(this.outerViewAnim, {
-      toValue: 0,
-      duration: 200,
-      useNativeDriver: true,
-      easing: Easing.out(Easing.quad),
-    }).start();
-    Animated.spring(this.centerViewAnim, {
-      toValue: 0,
-      duration: 200,
-      easing: Easing.out(Easing.quad),
-    }).start();
+    this.animateIn();
   }
 
   touchableOnPressOut() {
