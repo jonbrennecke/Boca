@@ -8,7 +8,6 @@ import {
   Easing,
 } from 'react-native';
 import { autobind } from 'core-decorators';
-import LinearGradient from 'react-native-linear-gradient';
 import type { CameraCaptureStatus } from '@jonbrennecke/react-native-camera';
 
 import { Colors } from '../../constants';
@@ -27,25 +26,37 @@ const styles = {
     height: 75,
     width: 75,
     borderRadius: 37.5,
-    transform: [{ scale: anim }],
     alignItems: 'center',
     justifyContent: 'center',
+    transform: [{
+      scale: anim.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0.95, 1]
+      })
+    }],
   }),
   centerAnim: (anim: Animated.Value) => ({
-    transform: [{ scale: anim }],
     height: 65,
     width: 65,
     borderRadius: 32.5,
     overflow: 'hidden',
-    backgroundColor: '#fff',
-    opacit: 0.5,
+    backgroundColor: anim.interpolate({
+      inputRange: [0, 1],
+      outputRange: [Colors.solid.red, Colors.solid.white],
+    }),
+    transform: [{
+      scale: anim.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0.65, 1]
+      })
+    }],
   }),
   border: {
     height: 75,
     width: 75,
     borderRadius: 37.5,
     borderWidth: 2,
-    borderColor: '#fff',
+    borderColor: Colors.solid.white,
     position: 'absolute',
   },
   borderMask: {
@@ -60,7 +71,7 @@ const styles = {
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: Colors.solid.light,
+    backgroundColor: Colors.solid.white,
   },
   progress: {
     height: 75,
@@ -85,68 +96,33 @@ export class CameraCaptureButton extends PureComponent<Props> {
   }
 
   animateIn() {
-    Animated.loop(
-      Animated.sequence([
-        Animated.parallel([
-          // Animated.spring(this.outerViewAnim, {
-          //   toValue: 0.9,
-          //   duration: 250,
-          //   useNativeDriver: true,
-          //   easing: Easing.inOut(Easing.quad)
-          // }),
-          Animated.spring(this.centerViewAnim, {
-            toValue: 0.65,
-            duration: 250,
-            useNativeDriver: true,
-            // easing: Easing.inOut(Easing.quad)
-            easing: Easing.bounce(5)
-          }),
-        ]),
-        // Animated.delay(300),
-        // Animated.parallel([
-        //   // Animated.spring(this.outerViewAnim, {
-        //   //   toValue: 0.95,
-        //   //   duration: 250,
-        //   //   useNativeDriver: true,
-        //   //   easing: Easing.inOut(Easing.quad)
-        //   // }),
-        //   Animated.spring(this.centerViewAnim, {
-        //     toValue: 0.65,
-        //     duration: 250,
-        //     useNativeDriver: true,
-        //     easing: Easing.inOut(Easing.quad)
-        //   }),
-        // ])
-      ])
-    ).start();
+    // noop
   }
 
   animateOut() {
     Animated.spring(this.outerViewAnim, {
       toValue: 1.0,
-      duration: 250,
+      duration: 200,
       useNativeDriver: true,
       easing: Easing.out(Easing.quad),
     }).start();
     Animated.spring(this.centerViewAnim, {
       toValue: 1.0,
-      duration: 250,
-      useNativeDriver: true,
+      duration: 200,
       easing: Easing.out(Easing.quad),
     }).start();
   }
 
   touchableOnPressIn() {
     Animated.spring(this.outerViewAnim, {
-      toValue: 0.95,
-      duration: 250,
+      toValue: 0,
+      duration: 200,
       useNativeDriver: true,
       easing: Easing.out(Easing.quad),
     }).start();
     Animated.spring(this.centerViewAnim, {
-      toValue: 0.65,
-      duration: 250,
-      useNativeDriver: true,
+      toValue: 0,
+      duration: 200,
       easing: Easing.out(Easing.quad),
     }).start();
   }
@@ -171,11 +147,8 @@ export class CameraCaptureButton extends PureComponent<Props> {
             style={styles.borderMask}
             maskElement={<View style={styles.border} />}
           >
-            <LinearGradient
+            <View
               pointerEvents="none"
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 1 }}
-              colors={['#FEF393', '#F48B34']}
               style={styles.inner}
             />
           </MaskedViewIOS>

@@ -74,6 +74,7 @@ export const Colors = {
     dark: '#333',
     extraDark: '#111',
     black: '#000',
+    red: '#ff0000',
   },
 };
 
