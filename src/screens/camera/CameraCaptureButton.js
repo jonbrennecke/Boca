@@ -28,12 +28,14 @@ const styles = {
     borderRadius: 37.5,
     alignItems: 'center',
     justifyContent: 'center',
-    transform: [{
-      scale: anim.interpolate({
-        inputRange: [0, 1],
-        outputRange: [0.95, 1]
-      })
-    }],
+    transform: [
+      {
+        scale: anim.interpolate({
+          inputRange: [0, 1],
+          outputRange: [0.95, 1],
+        }),
+      },
+    ],
   }),
   centerAnim: (anim: Animated.Value) => ({
     height: 65,
@@ -44,12 +46,14 @@ const styles = {
       inputRange: [0, 1],
       outputRange: [Colors.solid.red, Colors.solid.white],
     }),
-    transform: [{
-      scale: anim.interpolate({
-        inputRange: [0, 1],
-        outputRange: [0.65, 1]
-      })
-    }],
+    transform: [
+      {
+        scale: anim.interpolate({
+          inputRange: [0, 1],
+          outputRange: [0.65, 1],
+        }),
+      },
+    ],
   }),
   border: {
     height: 75,
@@ -147,10 +151,7 @@ export class CameraCaptureButton extends PureComponent<Props> {
             style={styles.borderMask}
             maskElement={<View style={styles.border} />}
           >
-            <View
-              pointerEvents="none"
-              style={styles.inner}
-            />
+            <View pointerEvents="none" style={styles.inner} />
           </MaskedViewIOS>
         </Animated.View>
       </TouchableWithoutFeedback>

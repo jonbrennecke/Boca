@@ -5,7 +5,7 @@ import {
   createCameraStateHOC,
   CameraSettingIdentifiers,
   startCameraPreview,
-  addVolumeButtonListener
+  addVolumeButtonListener,
 } from '@jonbrennecke/react-native-camera';
 import { createMediaStateHOC } from '@jonbrennecke/react-native-media';
 import { autobind } from 'core-decorators';
@@ -75,9 +75,7 @@ export function wrapWithCameraScreenState<
     CameraScreenState
   > {
     cameraRef = createRef();
-    volumeButtonListener: ?ReturnType<
-      typeof addVolumeButtonListener
-    >;
+    volumeButtonListener: ?ReturnType<typeof addVolumeButtonListener>;
 
     state: $Exact<CameraScreenState> = {
       activeCameraSetting: CameraSettingIdentifiers.Exposure,
@@ -124,7 +122,9 @@ export function wrapWithCameraScreenState<
       await this.props.loadSupportedFeatures();
       await this.props.setBlurAperture(BlurApertureRange.initialValue);
       await this.configureThumbnail();
-      this.volumeButtonListener = addVolumeButtonListener(this.handleVolumeButtonPress)
+      this.volumeButtonListener = addVolumeButtonListener(
+        this.handleVolumeButtonPress
+      );
       this.setState({
         initializationStatus: 'loaded',
       });

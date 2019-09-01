@@ -1,12 +1,6 @@
 // @flow
 import React, { PureComponent } from 'react';
-import {
-  Animated,
-  View,
-  Text,
-  StyleSheet,
-  StatusBar,
-} from 'react-native';
+import { Animated, View, Text, StyleSheet, StatusBar } from 'react-native';
 import ReactNativeHaptic from 'react-native-haptic';
 import moment from 'moment';
 
