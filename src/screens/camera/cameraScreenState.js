@@ -10,6 +10,7 @@ import {
 import { createMediaStateHOC } from '@jonbrennecke/react-native-media';
 import { autobind } from 'core-decorators';
 import SplashScreen from 'react-native-splash-screen';
+import uniqBy from 'lodash/uniqBy';
 
 import { BlurApertureRange } from '../../constants';
 
@@ -18,7 +19,11 @@ import type {
   CameraStateHOCProps,
   CameraPosition,
 } from '@jonbrennecke/react-native-camera';
-import type { MediaStateHOCProps } from '@jonbrennecke/react-native-media';
+import type {
+  MediaObject,
+  AlbumObject,
+  MediaStateHOCProps,
+} from '@jonbrennecke/react-native-media';
 
 import type { ReturnType } from '../../types';
 
@@ -109,6 +114,16 @@ export function wrapWithCameraScreenState<
       if (this.props.hasCameraPermissions && !prevProps.hasCameraPermissions) {
         await this.initialize();
       }
+      if (
+        this.props.lastCapturedVideoURL &&
+        this.props.lastCapturedVideoURL !== prevProps.lastCapturedVideoURL
+      ) {
+        await this.saveCapturedVideo(this.props.lastCapturedVideoURL);
+      }
+    }
+
+    findBocaAlbum(): ?AlbumObject {
+      return this.props.albums.find(a => a.title === 'BOCA');
     }
 
     async initialize() {
@@ -130,26 +145,6 @@ export function wrapWithCameraScreenState<
       });
     }
 
-    async configureThumbnail() {
-      await this.props.createAlbum('BOCA');
-      const album = this.props.albums.find(a => a.title === 'BOCA');
-      if (!album) {
-        // eslint-disable-next-line no-console
-        console.warn('Failed to create BOCA album.');
-        return;
-      }
-      await this.props.queryMedia({
-        mediaType: 'video',
-        limit: 1,
-        albumID: album.albumID,
-      });
-      const albumAssets = this.props.assetsForAlbum(album.albumID);
-      const assetID = albumAssets.assetIDs.toArray()[0];
-      this.setState({
-        thumbnailAssetID: assetID,
-      });
-    }
-
     handleVolumeButtonPress() {
       if (this.props.captureStatus === 'started') {
         this.props.stopCapture({
@@ -158,6 +153,59 @@ export function wrapWithCameraScreenState<
       } else {
         this.props.startCapture();
       }
+    }
+
+    async saveCapturedVideo(videoURL: string) {
+      const album = this.findBocaAlbum();
+      if (album) {
+        await this.props.createAssetWithVideoFileAtURL(videoURL, album.albumID);
+        await this.configureThumbnail();
+      }
+    }
+
+    async configureThumbnail() {
+      await this.props.createAlbum('BOCA');
+      const album = this.findBocaAlbum();
+      if (!album) {
+        // eslint-disable-next-line no-console
+        console.warn('Failed to find BOCA album.');
+        return;
+      }
+      await this.props.queryMedia({
+        mediaType: 'video',
+        limit: 1,
+        albumID: album.albumID,
+      });
+      const assets = this.getAssetsAsArray();
+      if (assets.length > 0) {
+        this.setState({
+          thumbnailAssetID: assets[0].assetID,
+        });
+      }
+    }
+
+    getAssetsAsArray(): [MediaObject] {
+      const assetsSorted = this.getSortedAssets();
+      return uniqBy(assetsSorted.toJSON(), 'assetID');
+    }
+
+    getSortedAssets() {
+      return this.getAssets()
+        .sortBy(assets => assets.creationDate)
+        .reverse();
+    }
+
+    getAssets() {
+      const album = this.props.albums.find(a => a.title === 'BOCA');
+      if (album) {
+        const albumAssets = this.props.albumAssets.get(album.albumID);
+        if (albumAssets) {
+          return this.props.assets.filter(a =>
+            albumAssets.assetIDs.includes(a.assetID)
+          );
+        }
+      }
+      return this.props.assets;
     }
 
     setActiveCameraSetting = setting =>
