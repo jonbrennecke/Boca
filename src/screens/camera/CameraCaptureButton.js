@@ -42,7 +42,8 @@ const styles = {
     width: 65,
     borderRadius: 32.5,
     overflow: 'hidden',
-    backgroundColor: captureStatus === 'started' ? Colors.solid.red : Colors.solid.white,
+    backgroundColor:
+      captureStatus === 'started' ? Colors.solid.red : Colors.solid.white,
     transform: [
       {
         scale: anim.interpolate({
@@ -144,7 +145,10 @@ export class CameraCaptureButton extends PureComponent<Props> {
       >
         <Animated.View style={styles.outerViewAnim(this.outerViewAnim)}>
           <Animated.View
-            style={[styles.centerAnim(this.centerViewAnim, this.props.captureStatus), this.props.style]}
+            style={[
+              styles.centerAnim(this.centerViewAnim, this.props.captureStatus),
+              this.props.style,
+            ]}
           />
           <MaskedViewIOS
             style={styles.borderMask}

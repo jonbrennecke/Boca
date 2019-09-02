@@ -12,6 +12,7 @@ import { autobind } from 'core-decorators';
 import SplashScreen from 'react-native-splash-screen';
 import uniqBy from 'lodash/uniqBy';
 
+import { wrapWithAppState } from './appStateHOC';
 import { BlurApertureRange } from '../../constants';
 
 import type { ComponentType } from 'react';
@@ -24,7 +25,7 @@ import type {
   AlbumObject,
   MediaStateHOCProps,
 } from '@jonbrennecke/react-native-media';
-
+import type { AppStateHOCProps } from './appStateHOC';
 import type { ReturnType } from '../../types';
 
 export type InitializationStatus = 'loading' | 'loaded' | 'none';
@@ -65,6 +66,7 @@ export function wrapWithCameraScreenState<
     CameraScreenStateExtraProps &
       CameraStateHOCProps &
       MediaStateHOCProps &
+      AppStateHOCProps &
       PassThroughProps
   >
 >(
@@ -76,6 +78,7 @@ export function wrapWithCameraScreenState<
     CameraScreenStateOwnProps &
       CameraStateHOCProps &
       MediaStateHOCProps &
+      AppStateHOCProps &
       PassThroughProps,
     CameraScreenState
   > {
@@ -109,6 +112,7 @@ export function wrapWithCameraScreenState<
     async componentDidUpdate(
       prevProps: CameraScreenStateOwnProps &
         CameraStateHOCProps &
+        AppStateHOCProps &
         PassThroughProps
     ) {
       if (this.props.hasCameraPermissions && !prevProps.hasCameraPermissions) {
@@ -119,6 +123,39 @@ export function wrapWithCameraScreenState<
         this.props.lastCapturedVideoURL !== prevProps.lastCapturedVideoURL
       ) {
         await this.saveCapturedVideo(this.props.lastCapturedVideoURL);
+      }
+
+      if (this.props.appState !== prevProps.appState) {
+        if (
+          this.props.appState &&
+          /inactive|background/.test(this.props.appState)
+        ) {
+          this.handleAppWillEnterBackground();
+        } else {
+          this.handleAppWillEnterForeground();
+        }
+      }
+    }
+
+    handleAppWillEnterBackground() {
+      if (this.props.captureStatus === 'started') {
+        this.props.stopCapture({
+          saveToCameraRoll: true,
+        });
+      }
+      if (this.volumeButtonListener) {
+        this.volumeButtonListener.remove();
+      }
+    }
+
+    handleAppWillEnterForeground() {
+      if (this.props.initializationStatus) {
+        if (this.volumeButtonListener) {
+          this.volumeButtonListener.remove();
+        }
+        this.volumeButtonListener = addVolumeButtonListener(
+          this.handleVolumeButtonPress
+        );
       }
     }
 
@@ -249,7 +286,9 @@ export function wrapWithCameraScreenState<
 
   const withMediaState = createMediaStateHOC(state => state.media);
   const withCameraState = createCameraStateHOC(state => state.camera);
-  const Component = withMediaState(withCameraState(CameraScreenStateContainer));
+  const Component = wrapWithAppState(
+    withMediaState(withCameraState(CameraScreenStateContainer))
+  );
   const WrappedWithCameraState = props => <Component {...props} />;
   return WrappedWithCameraState;
 }
