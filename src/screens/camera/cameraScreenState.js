@@ -143,19 +143,26 @@ export function wrapWithCameraScreenState<
           saveToCameraRoll: true,
         });
       }
-      if (this.volumeButtonListener) {
-        this.volumeButtonListener.remove();
-      }
+      this.removeVolumeButtonListener();
     }
 
     handleAppWillEnterForeground() {
-      if (this.props.initializationStatus) {
-        if (this.volumeButtonListener) {
-          this.volumeButtonListener.remove();
-        }
-        this.volumeButtonListener = addVolumeButtonListener(
-          this.handleVolumeButtonPress
-        );
+      if (this.state.initializationStatus === 'loaded') {
+        this.addVolumeButtonListener();
+      }
+    }
+
+    addVolumeButtonListener() {
+      this.removeVolumeButtonListener();
+      this.volumeButtonListener = addVolumeButtonListener(
+        this.handleVolumeButtonPress
+      );
+    }
+
+    removeVolumeButtonListener() {
+      if (this.volumeButtonListener) {
+        this.volumeButtonListener.remove();
+        this.volumeButtonListener = null;
       }
     }
 
@@ -174,9 +181,7 @@ export function wrapWithCameraScreenState<
       await this.props.loadSupportedFeatures();
       await this.props.setBlurAperture(BlurApertureRange.initialValue);
       await this.configureThumbnail();
-      this.volumeButtonListener = addVolumeButtonListener(
-        this.handleVolumeButtonPress
-      );
+      this.addVolumeButtonListener();
       this.setState({
         initializationStatus: 'loaded',
       });
