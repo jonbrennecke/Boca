@@ -36,7 +36,7 @@ const styles = {
   },
   container: {
     flex: 1,
-    backgroundColor: Colors.solid.extraDark,
+    backgroundColor: Colors.solid.black,
   },
   absoluteFill: StyleSheet.absoluteFillObject,
   contentWrap: {

@@ -15,7 +15,7 @@ const styles = {
   text: {
     fontFamily: 'Inter',
     fontWeight: 'bold',
-    fontSize: 13,
+    fontSize: 14,
     letterSpacing: 1.5,
     color: ColorTheme.dark.onboarding.components.heading.h1Text,
   },

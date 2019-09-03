@@ -14,7 +14,8 @@ export type ParagraphProps = {
 const styles = {
   text: {
     fontFamily: 'Inter',
-    color: ColorTheme.dark.onboarding.components.heading.h1Text,
+    fontSize: 17,
+    color: ColorTheme.dark.onboarding.components.paragraph,
   },
 };
 

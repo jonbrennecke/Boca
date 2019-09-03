@@ -43,7 +43,7 @@ const styles = {
     borderRadius: 32.5,
     overflow: 'hidden',
     backgroundColor:
-      captureStatus === 'started' ? Colors.solid.red : Colors.solid.white,
+      captureStatus === 'started' ? Colors.solid.peach : Colors.solid.white,
     transform: [
       {
         scale: anim.interpolate({

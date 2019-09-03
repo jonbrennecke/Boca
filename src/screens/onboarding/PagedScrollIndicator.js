@@ -24,7 +24,7 @@ const styles = {
     width: 10,
     borderRadius: 5,
     marginHorizontal: Units.small,
-    backgroundColor: isActive ? Colors.solid.white : Colors.solid.medium,
+    backgroundColor: isActive ? Colors.solid.white : Colors.solid.black,
   }),
 };
 

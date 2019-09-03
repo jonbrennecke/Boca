@@ -28,24 +28,31 @@ const styles = {
     flex: 1,
   },
   absoluteFill: StyleSheet.absoluteFill,
-  textContainer: {
+  bottomArea: {
     height: 250,
-    justifyContent: 'space-between',
-    paddingTop: Units.large,
-    paddingBottom: Units.medium,
+    justifyContent: 'center',
+    paddingVertical: Units.extraLarge,
     paddingHorizontal: Units.large,
     backgroundColor: ColorTheme.dark.onboarding.background,
   },
+  bottomText: {
+    flexGrow: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
   cameraContainer: {
     flex: 1,
-    backgroundColor: Colors.backgrounds.black,
+    backgroundColor: Colors.solid.cloud,
   },
   heading: {
     textAlign: 'center',
   },
+  paragraphWrap: {
+    flexGrow: 1,
+    justifyContent: 'center',
+  },
   paragraph: {
     textAlign: 'center',
-    paddingVertical: Units.large,
     paddingHorizontal: Units.medium,
   },
   buttonWithTopMargin: {
@@ -144,26 +151,30 @@ export const OnboardingScreen: ComponentType<
             />
           </View>
         </View>
-        <View style={styles.textContainer}>
-          <View style={styles.flex}>
+        <View style={styles.bottomArea}>
+          <View style={styles.bottomText}>
             <Heading style={styles.heading} text={pageConfig.heading} />
-            <Paragraph style={styles.paragraph} text={pageConfig.body} />
+            <View style={styles.paragraphWrap}>
+              <Paragraph style={styles.paragraph} text={pageConfig.body} />
+            </View>
           </View>
-          <SelectableButton
-            text={isFinalPage ? 'Done' : 'Next'}
-            colorTheme={ColorTheme.dark.onboarding.components.button.primary}
-            onPress={isFinalPage ? handlePressDone : handlePressNext}
-          />
-          {!isFinalPage && (
+          <View style={styles.flex}>
             <SelectableButton
-              style={styles.buttonWithTopMargin}
-              text="Skip"
-              colorTheme={
-                ColorTheme.dark.onboarding.components.button.secondary
-              }
-              onPress={handlePressSkip}
+              text={isFinalPage ? 'Done' : 'Next'}
+              colorTheme={ColorTheme.dark.onboarding.components.button.primary}
+              onPress={isFinalPage ? handlePressDone : handlePressNext}
             />
-          )}
+            {!isFinalPage && (
+              <SelectableButton
+                style={styles.buttonWithTopMargin}
+                text="Skip"
+                colorTheme={
+                  ColorTheme.dark.onboarding.components.button.secondary
+                }
+                onPress={handlePressSkip}
+              />
+            )}
+          </View>
         </View>
       </SafeAreaView>
     );
@@ -173,9 +184,9 @@ export const OnboardingScreen: ComponentType<
 const OnboardingConfig = {
   pages: [
     {
-      heading: 'Computational Video',
+      heading: 'Welcome',
       body:
-        'BOCA combines depth and video data to create beautiful portrait videos.',
+        'BOCA is a unique video camera app that adds a “portrait mode” effect to videos.',
     },
     {
       heading: 'Variable Blur',
