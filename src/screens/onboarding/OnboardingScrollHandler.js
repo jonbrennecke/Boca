@@ -1,5 +1,5 @@
 // @flow
-import React, { Component, createRef } from 'react';
+import React, { PureComponent, createRef } from 'react';
 import {
   ScrollView,
   Dimensions,
@@ -30,7 +30,7 @@ const styles = {
   }),
 };
 
-export class OnboardingScrollHandler extends Component<
+export class OnboardingScrollHandler extends PureComponent<
   OnboardingScrollHandlerProps
 > {
   scrollViewRef = createRef();

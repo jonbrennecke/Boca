@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { View } from 'react-native';
 import { autobind } from 'core-decorators';
 
@@ -21,7 +21,7 @@ type State = {
 
 // $FlowFixMe
 @autobind
-export class MeasureContentsView extends Component<Props, State> {
+export class MeasureContentsView extends PureComponent<Props, State> {
   state = {
     viewSize: { width: 0, height: 0 },
   };

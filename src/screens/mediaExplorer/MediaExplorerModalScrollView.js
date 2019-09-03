@@ -1,5 +1,5 @@
 // @flow
-import React, { Component, createRef } from 'react';
+import React, { PureComponent, createRef } from 'react';
 import { SafeAreaView, Easing, View, Dimensions, Animated } from 'react-native';
 import { autobind } from 'core-decorators';
 import { ThumbnailLoadMoreGrid } from '@jonbrennecke/react-native-media';
@@ -115,7 +115,7 @@ const styles = {
 
 // $FlowFixMe
 @autobind
-export class MediaExplorerModalScrollView extends Component<
+export class MediaExplorerModalScrollView extends PureComponent<
   MediaExplorerModalScrollViewProps
 > {
   scrollViewRef = createRef();

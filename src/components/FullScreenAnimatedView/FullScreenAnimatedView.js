@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Animated, Easing, Dimensions } from 'react-native';
 
 import { MeasureContentsView } from '../MeasureContentsView';
@@ -68,7 +68,7 @@ const styles = {
     anim.getAnimatedStyle(size),
 };
 
-export class FullScreenAnimatedView extends Component<
+export class FullScreenAnimatedView extends PureComponent<
   FullScreenAnimatedViewProps
 > {
   anim: FullScreenAnimation;
