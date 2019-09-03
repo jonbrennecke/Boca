@@ -186,20 +186,20 @@ const OnboardingConfig = {
     {
       heading: 'Welcome',
       body:
-        'BOCA is a unique video camera app that adds a “portrait mode” effect to videos.',
+        'BOCA is a unique camera app that adds a “portrait mode” effect to videos.',
+    },
+    {
+      heading: 'Computation Video',
+      body: 'BOCA combines depth and video data to create a depth-of-field effect.',
     },
     {
       heading: 'Variable Blur',
-      body: 'Adjust the amount of blur — before or after recording a video.',
-    },
-    {
-      heading: 'Focus Point',
-      body: 'Tap the screen to set a focus point.',
+      body: 'Unlike traditional lenses, this means you can adjust the amount of blur — before or after recording a video.',
     },
     {
       heading: 'Permissions',
       body:
-        'Before we get started, we need your permission to use your iPhone camera, microphone and video library.',
+        'One more thing... we just need your permission to use your iPhone camera, microphone and video library.',
     },
   ],
 };
