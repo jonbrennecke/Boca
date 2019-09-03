@@ -40,10 +40,10 @@ export const VideoReviewModal: SFC<VideoReviewModalProps> = ({
       pointerEvents={isVisible ? 'auto' : 'none'}
     >
       {isVisible && <StatusBar barStyle="light-content" />}
-      <VideoReviewScreen
+      {isVisible && <VideoReviewScreen
         isReviewScreenVisible={isVisible}
         onRequestDismiss={dismiss}
-      />
+      />}
     </View>
   );
 };

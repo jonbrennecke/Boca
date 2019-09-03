@@ -171,7 +171,11 @@ export const CameraScreen: ComponentType<
             <View style={styles.captureRowItem}>
               <CameraCaptureButton
                 captureStatus={captureStatus}
-                onRequestBeginCapture={startCapture}
+                onRequestBeginCapture={() => startCapture({
+                  metadata: {
+                    blurAperture
+                  }
+                })}
                 onRequestEndCapture={() =>
                   stopCapture({
                     saveToCameraRoll: true,

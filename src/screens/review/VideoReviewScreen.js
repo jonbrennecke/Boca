@@ -152,7 +152,7 @@ export const VideoReviewScreen: ComponentType<
     setPlaybackState,
   }) => (
     <>
-      <Animated.View style={styles.background(swipeGesture)} />
+      <Animated.View style={styles.background(swipeGesture)} pointerEvents="none" />
       <SafeAreaView style={styles.flex}>
         <View style={[styles.flex, style]}>
           <VideoReviewScreenNavbar
@@ -208,6 +208,11 @@ export const VideoReviewScreen: ComponentType<
                         isReadyToLoad={selectedAssetID === asset.assetID}
                         onPlaybackProgress={setPlaybackProgressThrottled}
                         onPlaybackStateChange={setPlaybackState}
+                        onMetadataLoaded={metadata => {
+                          if (metadata.blurAperture && selectedAssetID === asset.assetID) {
+                            setBlurAperture(metadata.blurAperture);
+                          }
+                        }}
                       />
                     </View>
                   </TouchableWithoutFeedback>

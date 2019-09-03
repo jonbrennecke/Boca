@@ -14,6 +14,7 @@ import type { ComponentType } from 'react';
 import type {
   MediaStateHOCProps,
   MediaObject,
+  AlbumObject,
   MediaEventEmitterSubscription,
 } from '@jonbrennecke/react-native-media';
 
@@ -38,15 +39,7 @@ export function wrapWithMediaExplorerState<
 
     async componentDidMount() {
       await authorizeMediaLibrary();
-      await this.props.queryMedia({
-        mediaType: 'video',
-        // TODO
-        // ...(this.props.albumID
-        //   ? {
-        //       albumID: this.props.albumID,
-        //     }
-        //   : {}),
-      });
+      await this.reloadAssets();
       this.subscription = startObservingVideos(this.onMediaChanged);
     }
 
@@ -62,19 +55,25 @@ export function wrapWithMediaExplorerState<
       }
     }
 
+    findBocaAlbum(): ?AlbumObject {
+      return this.props.albums.find(a => a.title === 'BOCA');
+    }
+
     onMediaChanged() {
       this.reloadAssets();
     }
 
     async reloadAssets() {
+      const album = this.findBocaAlbum();
+      if (!album) {
+        return;
+      }
+      if (this.props.isLoadingAssetsForAlbum(album.albumID)) {
+        return;
+      }
       await this.props.queryMedia({
         mediaType: 'video',
-        // TODO
-        // ...(this.props.albumID
-        //   ? {
-        //       albumID: this.props.albumID,
-        //     }
-        //   : {}),
+        albumID: album.albumID,
       });
     }
 
@@ -88,24 +87,33 @@ export function wrapWithMediaExplorerState<
       if (!lastAsset) {
         return;
       }
+      const album = this.findBocaAlbum();
+      if (!album) {
+        return;
+      }
+      if (this.props.isLoadingAssetsForAlbum(album.albumID)) {
+        return;
+      }
       await this.props.queryMedia({
         mediaType: 'video',
         creationDateQuery: {
           date: lastAsset.creationDate,
           equation: 'lessThan',
         },
-        // TODO
-        // ...(this.props.albumID
-        //   ? {
-        //       albumID: this.props.albumID,
-        //     }
-        //   : {}),
+        albumID: album.albumID,
       });
     }
 
+    getSortedAssets() {
+      return this.getAssets()
+        .sortBy(assets => assets.creationDate)
+        .reverse();
+    }
+
     getAssets() {
-      if (this.props.albumID) {
-        const albumAssets = this.props.albumAssets.get(this.props.albumID);
+      const album = this.props.albums.find(a => a.title === 'BOCA');
+      if (album) {
+        const albumAssets = this.props.albumAssets.get(album.albumID);
         if (albumAssets) {
           return this.props.assets.filter(a =>
             albumAssets.assetIDs.includes(a.assetID)
@@ -113,12 +121,6 @@ export function wrapWithMediaExplorerState<
         }
       }
       return this.props.assets;
-    }
-
-    getSortedAssets() {
-      return this.getAssets()
-        .sortBy(assets => assets.creationDate)
-        .reverse();
     }
 
     render() {

@@ -93,6 +93,7 @@ export const RangeInput: SFC<RangeInputProps> = ({
   <View style={[styles.container, style]}>
     <Seekbar
       style={styles.absoluteFill}
+      progress={(value - min) / (max - min)}
       initialProgress={(value - min) / (max - min)}
       renderHandle={props => (
         <>

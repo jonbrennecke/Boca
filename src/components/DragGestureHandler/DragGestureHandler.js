@@ -116,6 +116,7 @@ export class DragGestureHandler extends PureComponent<
     if (this.state.isDragging) {
       return;
     }
+    this.pan.flattenOffset();
     this.pan.setValue(value);
   }
 

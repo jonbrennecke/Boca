@@ -1,5 +1,5 @@
 // @flow
-import React, { Component, createRef } from 'react';
+import React, { PureComponent, createRef } from 'react';
 import { Animated, View, StyleSheet } from 'react-native';
 import noop from 'lodash/noop';
 import clamp from 'lodash/clamp';
@@ -35,7 +35,7 @@ const styles = {
   dragContainer: StyleSheet.absoluteFillObject,
 };
 
-export class Seekbar extends Component<Props, State> {
+export class Seekbar extends PureComponent<Props, State> {
   static defaultProps = {
     onDidBeginDrag: noop,
     onDidEndDrag: noop,
