@@ -97,6 +97,7 @@ export const CameraScreen: ComponentType<
     cameraRef,
     isDepthPreviewEnabled,
     isReviewModalVisible,
+    initializationStatus,
     stopCapture,
     startCapture,
     captureStatus,
@@ -113,6 +114,7 @@ export const CameraScreen: ComponentType<
   }) => (
     <CameraScreenOnboarding
       style={styles.contentWrap}
+      isAppInitializationComplete={initializationStatus === 'loaded'}
       hasCameraPermissions={hasCameraPermissions}
       onRequestCameraPermissions={requestCameraPermissions}
     >

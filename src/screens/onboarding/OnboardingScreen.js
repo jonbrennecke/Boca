@@ -16,6 +16,7 @@ import type { Style } from '../../types';
 
 export type OnboardingScreenProps = {
   style?: ?Style,
+  isAppInitializationComplete: boolean,
   onRequestCameraPermissions: () => void,
 };
 
@@ -105,10 +106,14 @@ export const OnboardingScreen: ComponentType<
     scrollAnimation,
     scrollProgress,
     scrollViewRef,
+    isAppInitializationComplete,
     onRequestScrollToProgress,
     onScrollViewDidUpdateProgress,
     onRequestCameraPermissions,
   }) => {
+    if (isAppInitializationComplete) {
+      <View style={[styles.container, style]} />;
+    }
     const numberOfPages = OnboardingConfig.pages.length;
     const currentPageIndex = Math.round(scrollProgress * (numberOfPages - 1));
     const isFinalPage = currentPageIndex === numberOfPages - 1;

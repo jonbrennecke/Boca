@@ -9,6 +9,7 @@ import type { SFC, Style, Children } from '../../types';
 export type CameraScreenOnboardingProps = {
   style?: ?Style,
   children?: ?Children,
+  isAppInitializationComplete: boolean,
   hasCameraPermissions: boolean,
   onRequestCameraPermissions: () => Promise<void>,
 };
@@ -22,6 +23,7 @@ const styles = {
 export const CameraScreenOnboarding: SFC<CameraScreenOnboardingProps> = ({
   style,
   children,
+  isAppInitializationComplete,
   hasCameraPermissions,
   onRequestCameraPermissions,
 }: CameraScreenOnboardingProps) => {
@@ -34,6 +36,7 @@ export const CameraScreenOnboarding: SFC<CameraScreenOnboardingProps> = ({
         children
       ) : (
         <OnboardingScreen
+          isAppInitializationComplete={isAppInitializationComplete}
           onRequestCameraPermissions={requestCameraPermissions}
         />
       )}

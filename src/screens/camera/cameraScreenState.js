@@ -35,6 +35,7 @@ export type CameraScreenStateExtraProps = {
   isFormatModalVisible: boolean,
   isDepthPreviewEnabled: boolean,
   isReviewModalVisible: boolean,
+  initializationStatus: InitializationStatus,
   activeCameraSetting: $Keys<typeof CameraSettingIdentifiers>,
   setActiveCameraSetting: ($Keys<typeof CameraSettingIdentifiers>) => void,
   cameraPosition: CameraPosition,
@@ -99,8 +100,9 @@ export function wrapWithCameraScreenState<
       await this.props.loadCameraPermissions();
       if (this.props.hasCameraPermissions) {
         await this.initialize();
+      } else {
+        SplashScreen.hide();
       }
-      SplashScreen.hide();
     }
 
     componentWillUnmount() {
@@ -184,6 +186,8 @@ export function wrapWithCameraScreenState<
       this.addVolumeButtonListener();
       this.setState({
         initializationStatus: 'loaded',
+      }, () => {
+        SplashScreen.hide();
       });
     }
 
