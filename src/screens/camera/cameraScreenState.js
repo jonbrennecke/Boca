@@ -185,17 +185,18 @@ export function wrapWithCameraScreenState<
         await this.props.setBlurAperture(BlurApertureRange.initialValue);
         await this.configureThumbnail();
         this.addVolumeButtonListener();
-      }
-      catch (error) {
+      } catch (error) {
         // eslint-disable-next-line no-console
         console.warn(error);
-      }
-      finally {
-        this.setState({
-          initializationStatus: 'loaded',
-        }, () => {
-          SplashScreen.hide();
-        });
+      } finally {
+        this.setState(
+          {
+            initializationStatus: 'loaded',
+          },
+          () => {
+            SplashScreen.hide();
+          }
+        );
       }
     }
 

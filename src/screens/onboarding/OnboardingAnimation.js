@@ -276,7 +276,7 @@ const styles = {
     height: 8,
     width: 8,
     backgroundColor: Colors.solid.peach,
-    borderRadius: 5
+    borderRadius: 5,
   },
   dotGrid1: (scrollAnimation: Animated.Value) => ({
     position: 'absolute',
@@ -298,7 +298,7 @@ const styles = {
     height: 6,
     width: 6,
     backgroundColor: Colors.solid.lavender,
-    borderRadius: 5
+    borderRadius: 5,
   },
   dotGrid2: (scrollAnimation: Animated.Value) => ({
     position: 'absolute',
@@ -316,7 +316,7 @@ const styles = {
         }),
       },
     ],
-  })
+  }),
 };
 
 export const OnboardingAnimation: SFC<OnboardingAnimationProps> = ({
@@ -330,34 +330,42 @@ export const OnboardingAnimation: SFC<OnboardingAnimationProps> = ({
     renderChildren={size => (
       <View style={styles.container}>
         <Animated.View style={styles.dotGrid1(scrollAnimation)}>
-          <DotGrid dotStyle={styles.dot1} numberOfRows={5} numberOfColumns={8} />
+          <DotGrid
+            dotStyle={styles.dot1}
+            numberOfRows={5}
+            numberOfColumns={8}
+          />
         </Animated.View>
         <Animated.View style={styles.dotGrid2(scrollAnimation)}>
-          <DotGrid dotStyle={styles.dot2} numberOfRows={8} numberOfColumns={5} />
+          <DotGrid
+            dotStyle={styles.dot2}
+            numberOfRows={8}
+            numberOfColumns={5}
+          />
         </Animated.View>
         <Animated.View style={styles.rightVideo(size, scrollAnimation)}>
-            <VideoCompositionImage
-              style={styles.absoluteFill}
-              resourceNameWithExt="onboarding.mov"
-              previewMode="portraitMode"
-              resizeMode="scaleAspectFill"
-              blurAperture={blurAperture}
-              progress={videoProgress}
-            />
+          <VideoCompositionImage
+            style={styles.absoluteFill}
+            resourceNameWithExt="onboarding.mov"
+            previewMode="portraitMode"
+            resizeMode="scaleAspectFill"
+            blurAperture={blurAperture}
+            progress={videoProgress}
+          />
         </Animated.View>
         <Animated.View style={styles.leftVideo(size, scrollAnimation)}>
-            <VideoCompositionImage
-              style={styles.absoluteFill}
-              resourceNameWithExt="onboarding.mov"
-              previewMode="depth"
-              resizeMode="scaleAspectFill"
-              blurAperture={blurAperture}
-              progress={videoProgress}
-            />
+          <VideoCompositionImage
+            style={styles.absoluteFill}
+            resourceNameWithExt="onboarding.mov"
+            previewMode="depth"
+            resizeMode="scaleAspectFill"
+            blurAperture={blurAperture}
+            progress={videoProgress}
+          />
         </Animated.View>
-        <Animated.View style={styles.circle(scrollAnimation)}/>
-        <Animated.View style={styles.circle2(scrollAnimation)}/>
-        <Animated.View style={styles.circle3(scrollAnimation)}/>
+        <Animated.View style={styles.circle(scrollAnimation)} />
+        <Animated.View style={styles.circle2(scrollAnimation)} />
+        <Animated.View style={styles.circle3(scrollAnimation)} />
       </View>
     )}
   />

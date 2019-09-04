@@ -195,11 +195,13 @@ const OnboardingConfig = {
     },
     {
       heading: 'Computation Video',
-      body: 'BOCA combines depth and video data to create a depth-of-field effect.',
+      body:
+        'BOCA combines depth and video data to create a depth-of-field effect.',
     },
     {
       heading: 'Variable Blur',
-      body: 'Unlike traditional lenses, this means you can adjust the amount of blur — before or after recording a video.',
+      body:
+        'Unlike traditional lenses, this means you can adjust the amount of blur — before or after recording a video.',
     },
     {
       heading: 'Permissions',

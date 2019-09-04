@@ -9,7 +9,7 @@ export type DotGridProps = {
   style?: ?Style,
   dotStyle?: Style,
   numberOfColumns: number,
-  numberOfRows: number
+  numberOfRows: number,
 };
 
 const styles = {
@@ -26,11 +26,16 @@ const styles = {
     flex: 1,
   },
   dot: {
-    flex: 1
-  }
+    flex: 1,
+  },
 };
 
-export const DotGrid: SFC<DotGridProps> = ({ style, dotStyle, numberOfRows, numberOfColumns }: DotGridProps) => (
+export const DotGrid: SFC<DotGridProps> = ({
+  style,
+  dotStyle,
+  numberOfRows,
+  numberOfColumns,
+}: DotGridProps) => (
   <View style={[styles.container, style]}>
     {times(numberOfRows, r => (
       <View key={`row-${r}`} style={styles.row}>
