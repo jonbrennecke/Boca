@@ -173,22 +173,30 @@ export function wrapWithCameraScreenState<
     }
 
     async initialize() {
-      if (this.state.initializationStatus === 'loading') {
-        return;
+      try {
+        if (this.state.initializationStatus === 'loading') {
+          return;
+        }
+        this.setState({
+          initializationStatus: 'loading',
+        });
+        startCameraPreview();
+        await this.props.loadSupportedFeatures();
+        await this.props.setBlurAperture(BlurApertureRange.initialValue);
+        await this.configureThumbnail();
+        this.addVolumeButtonListener();
       }
-      this.setState({
-        initializationStatus: 'loading',
-      });
-      startCameraPreview();
-      await this.props.loadSupportedFeatures();
-      await this.props.setBlurAperture(BlurApertureRange.initialValue);
-      await this.configureThumbnail();
-      this.addVolumeButtonListener();
-      this.setState({
-        initializationStatus: 'loaded',
-      }, () => {
-        SplashScreen.hide();
-      });
+      catch (error) {
+        // eslint-disable-next-line no-console
+        console.warn(error);
+      }
+      finally {
+        this.setState({
+          initializationStatus: 'loaded',
+        }, () => {
+          SplashScreen.hide();
+        });
+      }
     }
 
     handleVolumeButtonPress() {
