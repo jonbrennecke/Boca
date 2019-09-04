@@ -31,6 +31,21 @@
 		B1847AA7D7EB4825AA88FBEE /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 79FC96B9A5734E1BA3A263CD /* libRNGestureHandler.a */; };
 		D2916D4F22BE4D1BA101BDCC /* libRNSafeArea.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD2877BF4B4940C9B684C389 /* libRNSafeArea.a */; };
 		F7037509C6D04BBDA72E4433 /* libReactNativeHaptic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C4AA6EDF3AB491081D2973D /* libReactNativeHaptic.a */; };
+		FC0524B423205F4F0045C2F3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC05247B23205F4F0045C2F3 /* GoogleService-Info.plist */; };
+		FC0525FD2320646E0045C2F3 /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0525F32320646E0045C2F3 /* GoogleUtilities.framework */; };
+		FC0525FE2320646E0045C2F3 /* GoogleDataTransport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0525F42320646E0045C2F3 /* GoogleDataTransport.framework */; };
+		FC0525FF2320646E0045C2F3 /* FirebaseCoreDiagnostics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0525F52320646E0045C2F3 /* FirebaseCoreDiagnostics.framework */; };
+		FC0526002320646E0045C2F3 /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0525F62320646E0045C2F3 /* GoogleAppMeasurement.framework */; };
+		FC0526012320646E0045C2F3 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0525F72320646E0045C2F3 /* FirebaseAnalytics.framework */; };
+		FC0526022320646E0045C2F3 /* nanopb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0525F82320646E0045C2F3 /* nanopb.framework */; };
+		FC0526032320646E0045C2F3 /* FirebaseInstanceID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0525F92320646E0045C2F3 /* FirebaseInstanceID.framework */; };
+		FC0526042320646E0045C2F3 /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0525FA2320646E0045C2F3 /* FirebaseCore.framework */; };
+		FC0526052320646E0045C2F3 /* FIRAnalyticsConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0525FB2320646E0045C2F3 /* FIRAnalyticsConnector.framework */; };
+		FC0526062320646E0045C2F3 /* GoogleDataTransportCCTSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0525FC2320646E0045C2F3 /* GoogleDataTransportCCTSupport.framework */; };
+		FC052608232065320045C2F3 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FC052607232065320045C2F3 /* libsqlite3.tbd */; };
+		FC05260A2320653A0045C2F3 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0526092320653A0045C2F3 /* libc++.tbd */; };
+		FC05260C232065550045C2F3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC05260B232065550045C2F3 /* SystemConfiguration.framework */; };
+		FC05260E232065630045C2F3 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC05260D232065620045C2F3 /* StoreKit.framework */; };
 		FC254DFF21CDB03800A9C901 /* libReactNativeNavigation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC983DD521CDAF6800063476 /* libReactNativeNavigation.a */; };
 		FC366D2E23008674002709A9 /* libRNBlur.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE471D822F3B431004F4A4C /* libRNBlur.a */; };
 		FC419C802316E5D400A5FA08 /* BOCA LogoType@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC419C472316E5D300A5FA08 /* BOCA LogoType@3x.png */; };
@@ -446,6 +461,19 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		FC0525D8232063670045C2F3 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTActionSheet.xcodeproj; path = "../node_modules/react-native/Libraries/ActionSheetIOS/RCTActionSheet.xcodeproj"; sourceTree = "<group>"; };
@@ -496,6 +524,21 @@
 		CD2877BF4B4940C9B684C389 /* libRNSafeArea.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSafeArea.a; sourceTree = "<group>"; };
 		D1A322132CEB40238AD3A6FC /* ReactNativeNavigation.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeNavigation.xcodeproj; path = "../node_modules/react-native-navigation/lib/ios/ReactNativeNavigation.xcodeproj"; sourceTree = "<group>"; };
 		EDF9D805004747F996337EDF /* ReactNativeConfig.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeConfig.xcodeproj; path = "../node_modules/react-native-config/ios/ReactNativeConfig.xcodeproj"; sourceTree = "<group>"; };
+		FC05247B23205F4F0045C2F3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FC0525F32320646E0045C2F3 /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleUtilities.framework; path = Firebase/Analytics/GoogleUtilities.framework; sourceTree = "<group>"; };
+		FC0525F42320646E0045C2F3 /* GoogleDataTransport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleDataTransport.framework; path = Firebase/Analytics/GoogleDataTransport.framework; sourceTree = "<group>"; };
+		FC0525F52320646E0045C2F3 /* FirebaseCoreDiagnostics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCoreDiagnostics.framework; path = Firebase/Analytics/FirebaseCoreDiagnostics.framework; sourceTree = "<group>"; };
+		FC0525F62320646E0045C2F3 /* GoogleAppMeasurement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleAppMeasurement.framework; path = Firebase/Analytics/GoogleAppMeasurement.framework; sourceTree = "<group>"; };
+		FC0525F72320646E0045C2F3 /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAnalytics.framework; path = Firebase/Analytics/FirebaseAnalytics.framework; sourceTree = "<group>"; };
+		FC0525F82320646E0045C2F3 /* nanopb.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = nanopb.framework; path = Firebase/Analytics/nanopb.framework; sourceTree = "<group>"; };
+		FC0525F92320646E0045C2F3 /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseInstanceID.framework; path = Firebase/Analytics/FirebaseInstanceID.framework; sourceTree = "<group>"; };
+		FC0525FA2320646E0045C2F3 /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCore.framework; path = Firebase/Analytics/FirebaseCore.framework; sourceTree = "<group>"; };
+		FC0525FB2320646E0045C2F3 /* FIRAnalyticsConnector.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FIRAnalyticsConnector.framework; path = Firebase/Analytics/FIRAnalyticsConnector.framework; sourceTree = "<group>"; };
+		FC0525FC2320646E0045C2F3 /* GoogleDataTransportCCTSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleDataTransportCCTSupport.framework; path = Firebase/Analytics/GoogleDataTransportCCTSupport.framework; sourceTree = "<group>"; };
+		FC052607232065320045C2F3 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		FC0526092320653A0045C2F3 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		FC05260B232065550045C2F3 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		FC05260D232065620045C2F3 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		FC419C472316E5D300A5FA08 /* BOCA LogoType@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BOCA LogoType@3x.png"; sourceTree = "<group>"; };
 		FC4E9A1E23185C49008E23EC /* onboarding.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = onboarding.mov; sourceTree = "<group>"; };
 		FC5BADC922ECC3D00077855E /* Bombast-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bombast-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -519,28 +562,42 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC05260E232065630045C2F3 /* StoreKit.framework in Frameworks */,
+				FC05260C232065550045C2F3 /* SystemConfiguration.framework in Frameworks */,
+				FC05260A2320653A0045C2F3 /* libc++.tbd in Frameworks */,
+				FC052608232065320045C2F3 /* libsqlite3.tbd in Frameworks */,
 				FC980B0E2301CAB400CFBFD4 /* libHSReactNativeMedia.a in Frameworks */,
 				FC6D734123011C3100D07CD0 /* libHSReactNativeCamera.a in Frameworks */,
 				FC366D2E23008674002709A9 /* libRNBlur.a in Frameworks */,
 				FC254DFF21CDB03800A9C901 /* libReactNativeNavigation.a in Frameworks */,
+				FC0526052320646E0045C2F3 /* FIRAnalyticsConnector.framework in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				11D1A2F320CAFA9E000508D9 /* libRCTAnimation.a in Frameworks */,
+				FC0526032320646E0045C2F3 /* FirebaseInstanceID.framework in Frameworks */,
+				FC0525FF2320646E0045C2F3 /* FirebaseCoreDiagnostics.framework in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
+				FC0525FD2320646E0045C2F3 /* GoogleUtilities.framework in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
+				FC0526062320646E0045C2F3 /* GoogleDataTransportCCTSupport.framework in Frameworks */,
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
+				FC0526002320646E0045C2F3 /* GoogleAppMeasurement.framework in Frameworks */,
 				4F8355BBACD74452BF972DE7 /* libReactNativeConfig.a in Frameworks */,
+				FC0526012320646E0045C2F3 /* FirebaseAnalytics.framework in Frameworks */,
 				85BB55A0FE2D4A619258098E /* libHSAnimatedUI.a in Frameworks */,
+				FC0526022320646E0045C2F3 /* nanopb.framework in Frameworks */,
 				6162BF639C454225B3292EA3 /* libRNSVG.a in Frameworks */,
 				7F6FAEAC8FD64ACF9028F3B2 /* libBVLinearGradient.a in Frameworks */,
 				D2916D4F22BE4D1BA101BDCC /* libRNSafeArea.a in Frameworks */,
 				B1847AA7D7EB4825AA88FBEE /* libRNGestureHandler.a in Frameworks */,
+				FC0526042320646E0045C2F3 /* FirebaseCore.framework in Frameworks */,
+				FC0525FE2320646E0045C2F3 /* GoogleDataTransport.framework in Frameworks */,
 				F7037509C6D04BBDA72E4433 /* libReactNativeHaptic.a in Frameworks */,
 				A6417FFB7A4F4F8F8DA73305 /* libSplashScreen.a in Frameworks */,
 			);
@@ -631,6 +688,7 @@
 		13B07FAE1A68108700A75B9A /* Boca */ = {
 			isa = PBXGroup;
 			children = (
+				FC05247B23205F4F0045C2F3 /* GoogleService-Info.plist */,
 				FC419C812316E61200A5FA08 /* launchScreenAssets */,
 				FC6EA7D921CEA457007C3B3E /* fonts */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -672,6 +730,20 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FC05260D232065620045C2F3 /* StoreKit.framework */,
+				FC05260B232065550045C2F3 /* SystemConfiguration.framework */,
+				FC0526092320653A0045C2F3 /* libc++.tbd */,
+				FC052607232065320045C2F3 /* libsqlite3.tbd */,
+				FC0525FB2320646E0045C2F3 /* FIRAnalyticsConnector.framework */,
+				FC0525F72320646E0045C2F3 /* FirebaseAnalytics.framework */,
+				FC0525FA2320646E0045C2F3 /* FirebaseCore.framework */,
+				FC0525F52320646E0045C2F3 /* FirebaseCoreDiagnostics.framework */,
+				FC0525F92320646E0045C2F3 /* FirebaseInstanceID.framework */,
+				FC0525F62320646E0045C2F3 /* GoogleAppMeasurement.framework */,
+				FC0525F42320646E0045C2F3 /* GoogleDataTransport.framework */,
+				FC0525FC2320646E0045C2F3 /* GoogleDataTransportCCTSupport.framework */,
+				FC0525F32320646E0045C2F3 /* GoogleUtilities.framework */,
+				FC0525F82320646E0045C2F3 /* nanopb.framework */,
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
 			);
 			name = Frameworks;
@@ -937,6 +1009,7 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				FC0525D8232063670045C2F3 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1492,6 +1565,7 @@
 				FC7452F62305E49700436E62 /* Inter-Bold.ttf in Resources */,
 				FC419C802316E5D400A5FA08 /* BOCA LogoType@3x.png in Resources */,
 				FC7452F52305E49700436E62 /* Inter-ExtraBold.ttf in Resources */,
+				FC0524B423205F4F0045C2F3 /* GoogleService-Info.plist in Resources */,
 				FC7452F72305E49700436E62 /* Inter-ExtraLight-BETA.ttf in Resources */,
 				FC7452F92305E49700436E62 /* Inter-Black.ttf in Resources */,
 				FC6EA7D821CEA44D007C3B3E /* PT_Sans-Web-Regular.ttf in Resources */,
@@ -1554,6 +1628,36 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 6DUV3UU8M8;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Firebase/MLModelInterpreter",
+					"$(PROJECT_DIR)/Firebase/MLNLLanguageID",
+					"$(PROJECT_DIR)/Firebase/MLVisionBarcodeModel",
+					"$(PROJECT_DIR)/Firebase/Database",
+					"$(PROJECT_DIR)/Firebase/ABTesting",
+					"$(PROJECT_DIR)/Firebase/DynamicLinks",
+					"$(PROJECT_DIR)/Firebase/MLVisionAutoML",
+					"$(PROJECT_DIR)/Firebase/MLVisionTextModel",
+					"$(PROJECT_DIR)/Firebase/InAppMessagingDisplay",
+					"$(PROJECT_DIR)/Firebase/Firestore",
+					"$(PROJECT_DIR)/Firebase/Auth",
+					"$(PROJECT_DIR)/Firebase/MLVisionFaceModel",
+					"$(PROJECT_DIR)/Firebase/RemoteConfig",
+					"$(PROJECT_DIR)/Firebase/AdMob",
+					"$(PROJECT_DIR)/Firebase/Storage",
+					"$(PROJECT_DIR)/Firebase/MLNaturalLanguage",
+					"$(PROJECT_DIR)/Firebase/MLVisionLabelModel",
+					"$(PROJECT_DIR)/Firebase/MLVision",
+					"$(PROJECT_DIR)/Firebase/MLNLSmartReply",
+					"$(PROJECT_DIR)/Firebase/Functions",
+					"$(PROJECT_DIR)/Firebase/MLNLTranslate",
+					"$(PROJECT_DIR)/Firebase/InAppMessaging",
+					"$(PROJECT_DIR)/Firebase/Performance",
+					"$(PROJECT_DIR)/Firebase/GoogleSignIn",
+					"$(PROJECT_DIR)/Firebase/Messaging",
+					"$(PROJECT_DIR)/Firebase/Analytics",
+					"$(PROJECT_DIR)/Firebase/MLVisionObjectDetection",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-navigation/lib/ios/**",
@@ -1607,6 +1711,36 @@
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6DUV3UU8M8;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Firebase/MLModelInterpreter",
+					"$(PROJECT_DIR)/Firebase/MLNLLanguageID",
+					"$(PROJECT_DIR)/Firebase/MLVisionBarcodeModel",
+					"$(PROJECT_DIR)/Firebase/Database",
+					"$(PROJECT_DIR)/Firebase/ABTesting",
+					"$(PROJECT_DIR)/Firebase/DynamicLinks",
+					"$(PROJECT_DIR)/Firebase/MLVisionAutoML",
+					"$(PROJECT_DIR)/Firebase/MLVisionTextModel",
+					"$(PROJECT_DIR)/Firebase/InAppMessagingDisplay",
+					"$(PROJECT_DIR)/Firebase/Firestore",
+					"$(PROJECT_DIR)/Firebase/Auth",
+					"$(PROJECT_DIR)/Firebase/MLVisionFaceModel",
+					"$(PROJECT_DIR)/Firebase/RemoteConfig",
+					"$(PROJECT_DIR)/Firebase/AdMob",
+					"$(PROJECT_DIR)/Firebase/Storage",
+					"$(PROJECT_DIR)/Firebase/MLNaturalLanguage",
+					"$(PROJECT_DIR)/Firebase/MLVisionLabelModel",
+					"$(PROJECT_DIR)/Firebase/MLVision",
+					"$(PROJECT_DIR)/Firebase/MLNLSmartReply",
+					"$(PROJECT_DIR)/Firebase/Functions",
+					"$(PROJECT_DIR)/Firebase/MLNLTranslate",
+					"$(PROJECT_DIR)/Firebase/InAppMessaging",
+					"$(PROJECT_DIR)/Firebase/Performance",
+					"$(PROJECT_DIR)/Firebase/GoogleSignIn",
+					"$(PROJECT_DIR)/Firebase/Messaging",
+					"$(PROJECT_DIR)/Firebase/Analytics",
+					"$(PROJECT_DIR)/Firebase/MLVisionObjectDetection",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-navigation/lib/ios/**",
