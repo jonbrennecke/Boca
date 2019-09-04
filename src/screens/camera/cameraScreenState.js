@@ -197,7 +197,11 @@ export function wrapWithCameraScreenState<
           saveToCameraRoll: true,
         });
       } else {
-        this.props.startCapture();
+        this.props.startCapture({
+          metadata: {
+            blurAperture: this.props.blurAperture,
+          },
+        });
       }
     }
 
