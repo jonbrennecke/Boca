@@ -17,14 +17,10 @@ const styles = {
   button: {
     height: 60 - Units.small,
     width: 60 - Units.small,
-    borderWidth: 2,
-    borderColor: Colors.solid.white,
-    borderRadius: Units.extraSmall,
-    backgroundColor: Colors.solid.darkGray,
   },
   thumbnail: {
     borderWidth: 1,
-    borderColor: Colors.solid.darkGray,
+    borderColor: Colors.solid.white,
     borderRadius: Units.extraSmall,
     flex: 1,
   },
