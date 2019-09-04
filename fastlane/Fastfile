@@ -48,7 +48,7 @@ platform :ios do |options|
 
   lane :deploy_testflight do |options|
     set_version_number
-    build(release: true, export_method: 'ad-hoc')
+    build(release: true, export_method: 'app-store')
     pilot(
       username: 'jpbrennecke@gmail.com'
     )

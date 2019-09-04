@@ -46,6 +46,8 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app requires use of the media library to save videos</string>
 	<key>UIAppFonts</key>
+  <key>NSLocationAlwaysUsageDescription </key>
+	<string>This app requires use of your location</string>
 	<array>
 		<string>Inter-Bold.ttf</string>
 		<string>Inter-Regular.ttf</string>
