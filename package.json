@@ -16,7 +16,8 @@
     "link": "react-native link",
     "rename": "react-native-rename",
     "fastlane": "bundle exec fastlane",
-    "bundle-install": "bundle install --path vendor/bundle"
+    "bundle-install": "bundle install --path vendor/bundle",
+    "deploy:testflight": "npm version patch && npm run fastlane ios deploy_testflight"
   },
   "dependencies": {
     "@jonbrennecke/react-native-animated-ui": "1.0.11",

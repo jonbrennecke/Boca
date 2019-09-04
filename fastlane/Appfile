@@ -7,6 +7,6 @@ def product_bundle_id(scheme)
     build_configuration.build_settings['PRODUCT_BUNDLE_IDENTIFIER']
 end
 
-app_identifier 'com.jonbrennecke.Boca' # TODO: product_bundle_id(scheme_name)
+app_identifier 'com.jonbrennecke.boca' # TODO: product_bundle_id(scheme_name)
 team_id '6DUV3UU8M8'
 itc_team_id '118649769'

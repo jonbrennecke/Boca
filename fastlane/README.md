@@ -34,19 +34,19 @@ fastlane build
 fastlane ios build
 ```
 
-### ios deploy_beta
+### ios deploy_crashlytics
 ```
-fastlane ios deploy_beta
+fastlane ios deploy_crashlytics
+```
+
+### ios deploy_testflight
+```
+fastlane ios deploy_testflight
 ```
 
 ### ios deploy_appstore
 ```
 fastlane ios deploy_appstore
-```
-
-### ios beta
-```
-fastlane ios beta
 ```
 
 ### ios icon
