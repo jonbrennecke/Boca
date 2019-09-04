@@ -130,7 +130,7 @@ export const CameraScreen: ComponentType<
             ref={cameraRef}
             cameraPosition={cameraPosition}
             previewMode={isDepthPreviewEnabled ? 'depth' : 'portraitMode'}
-            resizeMode="scaleAspectWidth"
+            resizeMode="scaleAspectFill"
             blurAperture={blurAperture}
             isPaused={isReviewModalVisible}
           />
