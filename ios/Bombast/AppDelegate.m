@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-#import <FirebaseCore/FIRApp.h>
+//#import <FirebaseCore/FIRApp.h>
 
 #import "AppDelegate.h"
 #import "RNSplashScreen.h"
@@ -31,7 +31,7 @@
 
   [ReactNativeNavigation bootstrap:jsCodeLocation launchOptions:launchOptions];
   [RNSplashScreen show];
-  [FIRApp configure];
+//  [FIRApp configure];
   return YES;
 }
 

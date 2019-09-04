@@ -31,7 +31,6 @@
 		B1847AA7D7EB4825AA88FBEE /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 79FC96B9A5734E1BA3A263CD /* libRNGestureHandler.a */; };
 		D2916D4F22BE4D1BA101BDCC /* libRNSafeArea.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD2877BF4B4940C9B684C389 /* libRNSafeArea.a */; };
 		F7037509C6D04BBDA72E4433 /* libReactNativeHaptic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C4AA6EDF3AB491081D2973D /* libReactNativeHaptic.a */; };
-		FC0524B423205F4F0045C2F3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC05247B23205F4F0045C2F3 /* GoogleService-Info.plist */; };
 		FC0525FD2320646E0045C2F3 /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0525F32320646E0045C2F3 /* GoogleUtilities.framework */; };
 		FC0525FE2320646E0045C2F3 /* GoogleDataTransport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0525F42320646E0045C2F3 /* GoogleDataTransport.framework */; };
 		FC0525FF2320646E0045C2F3 /* FirebaseCoreDiagnostics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0525F52320646E0045C2F3 /* FirebaseCoreDiagnostics.framework */; };
@@ -524,7 +523,6 @@
 		CD2877BF4B4940C9B684C389 /* libRNSafeArea.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSafeArea.a; sourceTree = "<group>"; };
 		D1A322132CEB40238AD3A6FC /* ReactNativeNavigation.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeNavigation.xcodeproj; path = "../node_modules/react-native-navigation/lib/ios/ReactNativeNavigation.xcodeproj"; sourceTree = "<group>"; };
 		EDF9D805004747F996337EDF /* ReactNativeConfig.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeConfig.xcodeproj; path = "../node_modules/react-native-config/ios/ReactNativeConfig.xcodeproj"; sourceTree = "<group>"; };
-		FC05247B23205F4F0045C2F3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FC0525F32320646E0045C2F3 /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleUtilities.framework; path = Firebase/Analytics/GoogleUtilities.framework; sourceTree = "<group>"; };
 		FC0525F42320646E0045C2F3 /* GoogleDataTransport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleDataTransport.framework; path = Firebase/Analytics/GoogleDataTransport.framework; sourceTree = "<group>"; };
 		FC0525F52320646E0045C2F3 /* FirebaseCoreDiagnostics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCoreDiagnostics.framework; path = Firebase/Analytics/FirebaseCoreDiagnostics.framework; sourceTree = "<group>"; };
@@ -688,7 +686,6 @@
 		13B07FAE1A68108700A75B9A /* Boca */ = {
 			isa = PBXGroup;
 			children = (
-				FC05247B23205F4F0045C2F3 /* GoogleService-Info.plist */,
 				FC419C812316E61200A5FA08 /* launchScreenAssets */,
 				FC6EA7D921CEA457007C3B3E /* fonts */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -1565,7 +1562,6 @@
 				FC7452F62305E49700436E62 /* Inter-Bold.ttf in Resources */,
 				FC419C802316E5D400A5FA08 /* BOCA LogoType@3x.png in Resources */,
 				FC7452F52305E49700436E62 /* Inter-ExtraBold.ttf in Resources */,
-				FC0524B423205F4F0045C2F3 /* GoogleService-Info.plist in Resources */,
 				FC7452F72305E49700436E62 /* Inter-ExtraLight-BETA.ttf in Resources */,
 				FC7452F92305E49700436E62 /* Inter-Black.ttf in Resources */,
 				FC6EA7D821CEA44D007C3B3E /* PT_Sans-Web-Regular.ttf in Resources */,
