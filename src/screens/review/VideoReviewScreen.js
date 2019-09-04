@@ -187,6 +187,9 @@ export const VideoReviewScreen: ComponentType<
                       if (playbackState !== 'playing') {
                         play();
                       }
+                      if (isFullScreenVideo && playbackState == 'playing') {
+                        pause();
+                      }
                       toggleFullScreenVideo();
                     }}
                   >
