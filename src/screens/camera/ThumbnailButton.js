@@ -20,11 +20,11 @@ const styles = {
     borderWidth: 2,
     borderColor: Colors.solid.white,
     borderRadius: Units.extraSmall,
-    backgroundColor: Colors.solid.dark,
+    backgroundColor: Colors.solid.darkGray,
   },
   thumbnail: {
     borderWidth: 1,
-    borderColor: Colors.solid.dark,
+    borderColor: Colors.solid.darkGray,
     borderRadius: Units.extraSmall,
     flex: 1,
   },

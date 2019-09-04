@@ -111,23 +111,29 @@ const styles = {
   }),
   circle3: (scrollAnimation: Animated.Value) => ({
     position: 'absolute',
-    top: 200,
-    left: 100,
+    top: 300,
+    left: 150,
     width: 37,
     height: 37,
     borderRadius: 50,
     borderColor: Colors.solid.sunrise,
     borderWidth: scrollAnimation.interpolate({
       inputRange: [-SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_WIDTH * 2],
-      outputRange: [5, 10, 5, 0],
+      outputRange: [5, 10, 3, 0],
+      extrapolate: 'clamp',
+      easing: Easing.inOut(Easing.quad),
+    }),
+    opacity: scrollAnimation.interpolate({
+      inputRange: [SCREEN_WIDTH, SCREEN_WIDTH * 2],
+      outputRange: [1, 0],
       extrapolate: 'clamp',
       easing: Easing.inOut(Easing.quad),
     }),
     transform: [
       {
         scale: scrollAnimation.interpolate({
-          inputRange: [SCREEN_WIDTH, SCREEN_WIDTH * 2],
-          outputRange: [1, 10],
+          inputRange: [0, SCREEN_WIDTH, SCREEN_WIDTH * 2],
+          outputRange: [1, 2.7, 10],
           extrapolate: 'clamp',
           easing: Easing.inOut(Easing.quad),
         }),
@@ -135,7 +141,7 @@ const styles = {
       {
         translateX: scrollAnimation.interpolate({
           inputRange: [-SCREEN_WIDTH, 0, SCREEN_WIDTH],
-          outputRange: [120, 50, 120],
+          outputRange: [120, 0, 69],
           extrapolate: 'clamp',
           easing: Easing.inOut(Easing.quad),
         }),
@@ -143,7 +149,7 @@ const styles = {
       {
         translateY: scrollAnimation.interpolate({
           inputRange: [-SCREEN_WIDTH, 0, SCREEN_WIDTH],
-          outputRange: [150, 100, 200],
+          outputRange: [150, 0, 15],
           extrapolate: 'clamp',
           easing: Easing.inOut(Easing.quad),
         }),
@@ -163,8 +169,8 @@ const styles = {
       easing: Easing.inOut(Easing.quad),
     }),
     opacity: scrollAnimation.interpolate({
-      inputRange: [-SCREEN_WIDTH, 0, SCREEN_WIDTH * 2],
-      outputRange: [0.5, 1, 0],
+      inputRange: [-SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_WIDTH * 2],
+      outputRange: [0, 1, 1, 0],
       extrapolate: 'clamp',
       easing: Easing.inOut(Easing.quad),
     }),
@@ -181,6 +187,14 @@ const styles = {
         scale: scrollAnimation.interpolate({
           inputRange: [-SCREEN_WIDTH, 0, SCREEN_WIDTH * 2],
           outputRange: [0.1, 0.66, 1],
+          extrapolate: 'clamp',
+          easing: Easing.inOut(Easing.quad),
+        }),
+      },
+      {
+        rotate: scrollAnimation.interpolate({
+          inputRange: [-SCREEN_WIDTH, 0, SCREEN_WIDTH],
+          outputRange: ['-33deg', '-5deg', '0deg'],
           extrapolate: 'clamp',
           easing: Easing.inOut(Easing.quad),
         }),
@@ -228,6 +242,14 @@ const styles = {
         scale: scrollAnimation.interpolate({
           inputRange: [-SCREEN_WIDTH, 0, SCREEN_WIDTH * 2],
           outputRange: [0.1, 1.33, 1],
+          extrapolate: 'clamp',
+          easing: Easing.inOut(Easing.quad),
+        }),
+      },
+      {
+        rotate: scrollAnimation.interpolate({
+          inputRange: [-SCREEN_WIDTH, 0, SCREEN_WIDTH],
+          outputRange: ['45deg', '-2deg', '0deg'],
           extrapolate: 'clamp',
           easing: Easing.inOut(Easing.quad),
         }),
@@ -314,7 +336,6 @@ export const OnboardingAnimation: SFC<OnboardingAnimationProps> = ({
           <DotGrid dotStyle={styles.dot2} numberOfRows={8} numberOfColumns={5} />
         </Animated.View>
         <Animated.View style={styles.rightVideo(size, scrollAnimation)}>
-          {/* <Animated.View style={styles.absoluteFillWithBorder(scrollAnimation)}> */}
             <VideoCompositionImage
               style={styles.absoluteFill}
               resourceNameWithExt="onboarding.mov"
@@ -323,10 +344,8 @@ export const OnboardingAnimation: SFC<OnboardingAnimationProps> = ({
               blurAperture={blurAperture}
               progress={videoProgress}
             />
-          {/* </Animated.View> */}
         </Animated.View>
         <Animated.View style={styles.leftVideo(size, scrollAnimation)}>
-          {/* <Animated.View style={styles.absoluteFillWithBorder(scrollAnimation)}> */}
             <VideoCompositionImage
               style={styles.absoluteFill}
               resourceNameWithExt="onboarding.mov"
@@ -335,7 +354,6 @@ export const OnboardingAnimation: SFC<OnboardingAnimationProps> = ({
               blurAperture={blurAperture}
               progress={videoProgress}
             />
-          {/* </Animated.View> */}
         </Animated.View>
         <Animated.View style={styles.circle(scrollAnimation)}/>
         <Animated.View style={styles.circle2(scrollAnimation)}/>
