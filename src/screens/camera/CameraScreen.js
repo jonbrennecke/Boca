@@ -16,7 +16,6 @@ import {
   IconButton,
   BlurredSelectableButton,
   DepthInput,
-  ScreenGradients,
 } from '../../components';
 import { SwitchCameraIcon } from '../../components/icons';
 import { Units, BlurApertureRange, Colors } from '../../constants';
@@ -142,7 +141,6 @@ export const CameraScreen: ComponentType<
               }
             }}
           />
-          {/* <ScreenGradients /> */}
           <View style={styles.overCameraToolbar} pointerEvents="box-none">
             <BlurredSelectableButton
               text="Depth"
