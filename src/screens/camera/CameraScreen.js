@@ -142,7 +142,7 @@ export const CameraScreen: ComponentType<
               }
             }}
           />
-          <ScreenGradients />
+          {/* <ScreenGradients /> */}
           <View style={styles.overCameraToolbar} pointerEvents="box-none">
             <BlurredSelectableButton
               text="Depth"
