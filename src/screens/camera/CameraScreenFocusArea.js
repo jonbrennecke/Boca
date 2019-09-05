@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { Animated, Easing } from 'react-native';
+import { Animated } from 'react-native';
 import { CameraFocusArea } from '@jonbrennecke/react-native-camera';
 
 import { FocusIndicator } from './FocusIndicator';
@@ -29,14 +29,12 @@ const styles = {
         scale: touch.interpolate({
           inputRange: [0, 1],
           outputRange: [0.66, 1],
-          easing: Easing.inOut(Easing.quad),
         }),
       },
       {
         rotate: touch.interpolate({
           inputRange: [0, 1],
           outputRange: ['0deg', '360deg'],
-          easing: Easing.inOut(Easing.quad),
         }),
       },
     ],
