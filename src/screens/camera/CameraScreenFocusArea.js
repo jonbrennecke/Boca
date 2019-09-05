@@ -29,12 +29,14 @@ const styles = {
         scale: touch.interpolate({
           inputRange: [0, 1],
           outputRange: [0.66, 1],
+          easing: Easing.inOut(Easing.quad),
         }),
       },
       {
         rotate: touch.interpolate({
           inputRange: [0, 1],
           outputRange: ['0deg', '360deg'],
+          easing: Easing.inOut(Easing.quad),
         }),
       },
     ],

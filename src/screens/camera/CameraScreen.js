@@ -85,6 +85,13 @@ const styles = {
   },
 };
 
+function withHapticFeedback<R, T>(fn: (T) => R): T => R {
+  return (args) => {
+    ReactNativeHaptic.generate('selection');
+    return fn(args);
+  };
+}
+
 // eslint-disable-next-line flowtype/generic-spacing
 export const CameraScreen: ComponentType<
   CameraScreenProps
@@ -145,9 +152,7 @@ export const CameraScreen: ComponentType<
             <BlurredSelectableButton
               text="Depth"
               isSelected={isDepthPreviewEnabled}
-              onPress={
-                isDepthPreviewEnabled ? disableDepthPreview : enableDepthPreview
-              }
+              onPress={withHapticFeedback(isDepthPreviewEnabled ? disableDepthPreview : enableDepthPreview)}
             />
             <DepthInput
               value={blurAperture || BlurApertureRange.initialValue}
@@ -162,10 +167,7 @@ export const CameraScreen: ComponentType<
             <View style={styles.captureRowItem}>
               <ThumbnailButton
                 assetID={thumbnailAssetID}
-                onPress={() => {
-                  ReactNativeHaptic.generate('selection');
-                  presentReviewModal();
-                }}
+                onPress={withHapticFeedback(presentReviewModal)}
               />
             </View>
             <View style={styles.captureRowItem}>
@@ -189,7 +191,7 @@ export const CameraScreen: ComponentType<
               <IconButton
                 style={styles.iconButton}
                 fillColor={Colors.icons.toolbar}
-                onPress={switchCameraPosition}
+                onPress={withHapticFeedback(switchCameraPosition)}
                 icon={SwitchCameraIcon}
               />
             </View>
