@@ -282,12 +282,13 @@ export function wrapWithCameraScreenState<
     disableDepthPreview = () => this.setState({ isDepthPreviewEnabled: false });
 
     switchCameraPosition = () =>
-      this.setState({
-        cameraPosition:
-          this.state.cameraPosition === 'front' ? 'back' : 'front',
-      }, () => {
-        
-      });
+      this.setState(
+        {
+          cameraPosition:
+            this.state.cameraPosition === 'front' ? 'back' : 'front',
+        },
+        () => {}
+      );
 
     render() {
       return (

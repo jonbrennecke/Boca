@@ -1,23 +1,19 @@
 // @flow
 import React from 'react';
-import { TouchableOpacity, StyleSheet } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { Thumbnail } from '@jonbrennecke/react-native-media';
 
 import { Units, Colors } from '../../constants';
 
-import type { SFC, Style } from '../../types';
+import type { SFC } from '../../types';
 
 export type ThumbnailButtonProps = {
-  style?: ?Style,
+  style?: ?any, // TODO: should be `?Style` but TouchableOpacity complains
   assetID: ?string,
   onPress: () => void,
 };
 
 const styles = {
-  button: {
-    height: 60 - Units.small,
-    width: 60 - Units.small,
-  },
   thumbnail: {
     borderWidth: 1,
     borderColor: Colors.solid.white,
@@ -31,13 +27,7 @@ export const ThumbnailButton: SFC<ThumbnailButtonProps> = ({
   assetID,
   onPress,
 }: ThumbnailButtonProps) => (
-  <TouchableOpacity
-    style={
-      // $FlowFixMe
-      StyleSheet.compose(styles.button, style)
-    }
-    onPress={onPress}
-  >
+  <TouchableOpacity style={style} onPress={onPress}>
     {assetID && <Thumbnail assetID={assetID} style={styles.thumbnail} />}
   </TouchableOpacity>
 );

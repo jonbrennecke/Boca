@@ -31,7 +31,7 @@
 
   [ReactNativeNavigation bootstrap:jsCodeLocation launchOptions:launchOptions];
   [RNSplashScreen show];
-//  [FIRApp configure];
+  //  [FIRApp configure];
   return YES;
 }
 

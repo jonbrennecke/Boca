@@ -53,25 +53,14 @@ const styles = {
   cameraControlsRow: {
     paddingBottom: Units.small,
     paddingTop: Units.medium,
+    paddingHorizontal: Units.medium,
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
   },
-  captureRowItem: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  topToolbar: {
-    paddingVertical: Units.small,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-  },
-  iconButton: {
-    height: Units.extraLarge,
-    width: Units.extraLarge,
+  cameraSideButton: {
+    height: 40,
+    width: 40,
   },
   overCameraToolbar: {
     position: 'absolute',
@@ -80,13 +69,13 @@ const styles = {
     right: 0,
     alignItems: 'flex-end',
     justifyContent: 'center',
-    paddingHorizontal: Units.medium,
+    marginHorizontal: Units.medium,
     paddingVertical: 2 * Units.extraSmall,
   },
 };
 
-function withHapticFeedback<R, T>(fn: (T) => R): T => R {
-  return (args) => {
+function withHapticFeedback<R, T>(fn: T => R): T => R {
+  return args => {
     ReactNativeHaptic.generate('selection');
     return fn(args);
   };
@@ -152,7 +141,9 @@ export const CameraScreen: ComponentType<
             <BlurredSelectableButton
               text="Depth"
               isSelected={isDepthPreviewEnabled}
-              onPress={withHapticFeedback(isDepthPreviewEnabled ? disableDepthPreview : enableDepthPreview)}
+              onPress={withHapticFeedback(
+                isDepthPreviewEnabled ? disableDepthPreview : enableDepthPreview
+              )}
             />
             <DepthInput
               value={blurAperture || BlurApertureRange.initialValue}
@@ -164,37 +155,32 @@ export const CameraScreen: ComponentType<
         </CameraPreviewDimensions>
         <View style={styles.bottomControls}>
           <View style={styles.cameraControlsRow}>
-            <View style={styles.captureRowItem}>
-              <ThumbnailButton
-                assetID={thumbnailAssetID}
-                onPress={withHapticFeedback(presentReviewModal)}
-              />
-            </View>
-            <View style={styles.captureRowItem}>
-              <CameraCaptureButton
-                captureStatus={captureStatus}
-                onRequestBeginCapture={() =>
-                  startCapture({
-                    metadata: {
-                      blurAperture,
-                    },
-                  })
-                }
-                onRequestEndCapture={() =>
-                  stopCapture({
-                    saveToCameraRoll: true,
-                  })
-                }
-              />
-            </View>
-            <View style={styles.captureRowItem}>
-              <IconButton
-                style={styles.iconButton}
-                fillColor={Colors.icons.toolbar}
-                onPress={withHapticFeedback(switchCameraPosition)}
-                icon={SwitchCameraIcon}
-              />
-            </View>
+            <ThumbnailButton
+              style={styles.cameraSideButton}
+              assetID={thumbnailAssetID}
+              onPress={withHapticFeedback(presentReviewModal)}
+            />
+            <CameraCaptureButton
+              captureStatus={captureStatus}
+              onRequestBeginCapture={() =>
+                startCapture({
+                  metadata: {
+                    blurAperture,
+                  },
+                })
+              }
+              onRequestEndCapture={() =>
+                stopCapture({
+                  saveToCameraRoll: true,
+                })
+              }
+            />
+            <IconButton
+              style={styles.cameraSideButton}
+              fillColor={Colors.icons.toolbar}
+              onPress={withHapticFeedback(switchCameraPosition)}
+              icon={SwitchCameraIcon}
+            />
           </View>
         </View>
         <VideoReviewModal
