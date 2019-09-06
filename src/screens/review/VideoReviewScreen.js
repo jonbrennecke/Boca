@@ -6,6 +6,7 @@ import {
   TouchableWithoutFeedback,
   StyleSheet,
   View,
+  ActivityIndicator
 } from 'react-native';
 import { VideoComposition } from '@jonbrennecke/react-native-camera';
 import noop from 'lodash/noop';
@@ -123,6 +124,7 @@ export const VideoReviewScreen: ComponentType<
     assetsArray,
     flatListRef,
     videoCompositionRef,
+    isExporting,
     play,
     pause,
     selectedAsset,
@@ -276,9 +278,10 @@ export const VideoReviewScreen: ComponentType<
             </View>
             <View style={styles.toolbarCentered}>
               <SelectableButton
+                isDisabled={isExporting}
                 text="Save"
                 isSelected
-                icon={ExportIcon}
+                icon={isExporting ? ActivityIndicator : ExportIcon}
                 onPress={exportComposition}
               />
             </View>

@@ -48,6 +48,7 @@ export type VideoReviewScreenStateExtraProps = {
   flatListRef: ReturnType<typeof createRef>,
   selectedAsset: ?MediaObject,
   assetsArray: Array<MediaObject>,
+  isExporting: boolean,
   play: () => void,
   pause: () => void,
   seekToProgress: (progress: number) => void,
@@ -182,7 +183,6 @@ export function wrapWithVideoReviewScreenState<
     }
 
     onExportFinished(url: string) {
-      // save url to photos library
       this.setState({
         exportProgress: 0,
         isExporting: false,

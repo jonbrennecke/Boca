@@ -13,6 +13,7 @@ export type SelectableButtonProps = {
   style?: ?Style,
   text: string,
   icon?: ComponentType<*>,
+  isDisabled?: boolean,
   isSelected?: boolean,
   colorTheme?: ColorByButtonSubComponent,
   onPress: () => void,
@@ -24,7 +25,7 @@ const styles = {
     width: Units.large,
     marginRight: Units.small,
   },
-  button: (backgroundColor: string) => ({
+  button: (backgroundColor: string, isDisabled: boolean) => ({
     backgroundColor,
     flexDirection: 'row',
     alignItems: 'center',
@@ -32,6 +33,7 @@ const styles = {
     borderRadius: Units.extraLarge,
     paddingVertical: Units.small,
     paddingHorizontal: Units.extraLarge,
+    opacity: isDisabled ? 0.75 : 1
   }),
   buttonText: (color: string) => ({
     color,
@@ -47,18 +49,21 @@ export const SelectableButton: SFC<SelectableButtonProps> = ({
   style,
   text,
   colorTheme = ColorTheme.dark.default.components.button,
+  isDisabled = false,
   isSelected = false,
   onPress,
   icon,
 }: SelectableButtonProps) => (
   <TouchableOpacity
+    disabled={isDisabled}
     style={
       // $FlowFixMe
       StyleSheet.compose(
         styles.button(
           isSelected
             ? colorTheme.background.selected
-            : colorTheme.background.default
+            : colorTheme.background.default,
+          isDisabled
         ),
         style
       )
