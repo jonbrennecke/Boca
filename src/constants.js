@@ -100,7 +100,7 @@ export type ColorByPresentation = {
     components: {
       heading: ColorByHeadingType,
       select: ColorBySelectSubComponent,
-      button: ColorByButtonSubComponent,
+      button: ColorByButtonRole,
     },
   },
   onboarding: {
@@ -209,20 +209,39 @@ export const ColorTheme: ColorByTheme = {
           },
         },
         button: {
-          background: {
-            default: Colors.solid.peach,
-            highlight: Colors.solid.peach,
-            selected: Colors.solid.peach,
+          primary: {
+            background: {
+              default: Colors.solid.peach,
+              highlight: Colors.solid.peach,
+              selected: Colors.solid.peach,
+            },
+            text: {
+              default: Colors.solid.white,
+              highlight: Colors.solid.white,
+              selected: Colors.solid.white,
+            },
+            icon: {
+              default: Colors.solid.white,
+              highlight: Colors.solid.white,
+              selected: Colors.solid.white,
+            },
           },
-          text: {
-            default: Colors.solid.white,
-            highlight: Colors.solid.white,
-            selected: Colors.solid.white,
-          },
-          icon: {
-            default: Colors.solid.white,
-            highlight: Colors.solid.white,
-            selected: Colors.solid.white,
+          secondary: {
+            background: {
+              default: Colors.solid.white,
+              highlight: Colors.solid.white,
+              selected: Colors.solid.white,
+            },
+            text: {
+              default: Colors.solid.mediumGray,
+              highlight: Colors.solid.mediumGray,
+              selected: Colors.solid.mediumGray,
+            },
+            icon: {
+              default: Colors.solid.mediumGray,
+              highlight: Colors.solid.mediumGray,
+              selected: Colors.solid.mediumGray,
+            },
           },
         },
       },

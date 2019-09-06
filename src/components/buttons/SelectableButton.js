@@ -33,7 +33,7 @@ const styles = {
     borderRadius: Units.extraLarge,
     paddingVertical: Units.small,
     paddingHorizontal: Units.extraLarge,
-    opacity: isDisabled ? 0.75 : 1
+    opacity: isDisabled ? 0.75 : 1,
   }),
   buttonText: (color: string) => ({
     color,

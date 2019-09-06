@@ -1,7 +1,7 @@
 // @flow
 /* eslint flowtype/generic-spacing: 0 */
 import React, { PureComponent, createRef } from 'react';
-import { Linking, Share } from 'react-native';
+import { Share } from 'react-native';
 import { autobind } from 'core-decorators';
 import uniqBy from 'lodash/uniqBy';
 import throttle from 'lodash/throttle';
@@ -38,6 +38,7 @@ export type VideoReviewScreenState = {
     body: string,
     buttons: Array<{
       text: string,
+      role: 'primary' | 'secondary',
       onPress: () => any,
     }>,
   },
@@ -193,10 +194,16 @@ export function wrapWithVideoReviewScreenState<
           buttons: [
             {
               text: 'Share',
+              role: 'primary',
               onPress: async () => Share.share({ url }),
             },
+            {
+              text: 'Done',
+              role: 'secondary',
+              onPress: this.hideToast,
+            },
           ],
-        }
+        },
       });
     }
 

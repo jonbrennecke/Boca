@@ -12,7 +12,11 @@ export type ToastProps = {
   isVisible: boolean,
   title: string,
   body: string,
-  buttons: Array<{ text: string, onPress: () => void }>,
+  buttons: Array<{
+    text: string,
+    role: 'primary' | 'secondary',
+    onPress: () => void,
+  }>,
   onRequestDismiss: () => void,
 };
 
@@ -21,12 +25,14 @@ const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 const styles = {
   container: {
     flex: 1,
-    alignItems: 'center',
     paddingVertical: Units.small,
     paddingHorizontal: Units.extraLarge,
   },
   flex: {
     flex: 1,
+  },
+  heading: {
+    textAlign: 'center',
   },
   paragraph: {
     marginVertical: Units.extraLarge,
@@ -34,6 +40,9 @@ const styles = {
   },
   actionSheet: {
     height: SCREEN_HEIGHT * 0.5,
+  },
+  button: {
+    marginBottom: Units.medium,
   },
 };
 
@@ -50,15 +59,17 @@ export const Toast: SFC<ToastProps> = ({
   >
     <ActionSheet style={styles.actionSheet} onRequestDismiss={onRequestDismiss}>
       <View style={styles.container}>
-        <Heading text={title} />
-        <Paragraph
-          style={styles.paragraph}
-          text={body}
-        />
+        <Heading style={styles.heading} text={title} />
+        <Paragraph style={styles.paragraph} text={body} />
         {buttons.map((b, i) => (
           <SelectableButton
             key={`button-${i}`}
-            colorTheme={ColorTheme.dark.actionSheet.components.button}
+            style={styles.button}
+            colorTheme={
+              b.role === 'primary'
+                ? ColorTheme.dark.actionSheet.components.button.primary
+                : ColorTheme.dark.actionSheet.components.button.secondary
+            }
             text={b.text}
             onPress={b.onPress}
           />
