@@ -1,7 +1,7 @@
 // @flow
 /* eslint flowtype/generic-spacing: 0 */
 import React, { PureComponent, createRef } from 'react';
-import { Linking } from 'react-native';
+import { Linking, Share } from 'react-native';
 import { autobind } from 'core-decorators';
 import uniqBy from 'lodash/uniqBy';
 import throttle from 'lodash/throttle';
@@ -192,13 +192,8 @@ export function wrapWithVideoReviewScreenState<
           body: 'Your video has been saved to the camera roll',
           buttons: [
             {
-              text: 'Open in Photos',
-              onPress: async () => {
-                const canOpen = await Linking.canOpenURL(url);
-                if (canOpen) {
-                  Linking.openURL(url);
-                }
-              },
+              text: 'Share',
+              onPress: async () => Share.share({ url }),
             },
           ],
         }
