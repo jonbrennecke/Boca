@@ -42,6 +42,7 @@ export type VideoReviewScreenState = {
 
 export type VideoReviewScreenStateExtraProps = {
   videoCompositionRef: ReturnType<typeof createRef>,
+  flatListRef: ReturnType<typeof createRef>,
   selectedAsset: ?MediaObject,
   assetsArray: Array<MediaObject>,
   play: () => void,
@@ -56,6 +57,7 @@ export type VideoReviewScreenStateExtraProps = {
   showMediaModal: () => void,
   hideMediaModal: () => void,
   setPlaybackProgressThrottled: (progress: number) => void,
+  scrollToAsset: (assetID: string) => void,
 } & VideoReviewScreenState;
 
 export function wrapWithVideoReviewScreenState<
@@ -99,6 +101,7 @@ export function wrapWithVideoReviewScreenState<
       typeof addVideoCompositionExportFailedListener
     >;
     videoCompositionRef = createRef();
+    flatListRef = createRef();
 
     async componentDidMount() {
       await this.props.createAlbum('BOCA');
@@ -214,13 +217,23 @@ export function wrapWithVideoReviewScreenState<
       }
     );
 
-    getAssetsAsArray() {
-      const assetsSorted = this.getSortedAssets();
-      return uniqBy(assetsSorted.toJSON(), 'assetID');
-    }
-
     loadNextAssets() {
       this.loadNextAssetsAsync();
+    }
+
+    scrollToAsset(assetID: string) {
+      const assets = this.getAssetsAsArray();
+      const index = assets.findIndex(a => a.assetID === assetID);
+      if (!index) {
+        return;
+      }
+      if (this.flatListRef.current) {
+        this.flatListRef.current.scrollToIndex({
+          index,
+          animated: true,
+          viewPosition: 0.5
+        });
+      }
     }
 
     async loadNextAssetsAsync() {
@@ -244,6 +257,11 @@ export function wrapWithVideoReviewScreenState<
         },
         albumID: album.albumID,
       });
+    }
+
+    getAssetsAsArray(): Array<MediaObject> {
+      const assetsSorted = this.getSortedAssets();
+      return uniqBy(assetsSorted.toJSON(), 'assetID');
     }
 
     getSortedAssets() {
@@ -276,6 +294,7 @@ export function wrapWithVideoReviewScreenState<
           selectedAsset={this.props.assets.find(
             a => a.assetID === this.state.selectedAssetID
           )}
+          flatListRef={this.flatListRef}
           videoCompositionRef={this.videoCompositionRef}
           play={this.play}
           pause={this.pause}
@@ -287,6 +306,7 @@ export function wrapWithVideoReviewScreenState<
           showMediaModal={this.showMediaModal}
           hideMediaModal={this.hideMediaModal}
           setPlaybackProgressThrottled={this.setPlaybackProgressThrottled}
+          scrollToAsset={this.scrollToAsset}
         />
       );
     }

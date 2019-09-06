@@ -70,7 +70,7 @@ export const VideoReviewScreenFlatList: SFC<VideoReviewScreenFlatListProps> = ({
       }
       const { contentOffset, layoutMeasurement } = nativeEvent;
       const index = Math.round(contentOffset.x / layoutMeasurement.width);
-      if (index < assets.length) {
+      if (index < assets.length && assets[index]) {
         onSelectAsset(assets[index]);
       }
     }}

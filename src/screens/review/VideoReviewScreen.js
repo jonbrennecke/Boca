@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { VideoComposition } from '@jonbrennecke/react-native-camera';
 import noop from 'lodash/noop';
+import ReactNativeHaptic from 'react-native-haptic';
 
 import {
   Toast,
@@ -120,6 +121,7 @@ export const VideoReviewScreen: ComponentType<
     style,
     toast,
     assetsArray,
+    flatListRef,
     videoCompositionRef,
     play,
     pause,
@@ -150,6 +152,7 @@ export const VideoReviewScreen: ComponentType<
     onSwipeDownGestureMove,
     setPlaybackProgressThrottled,
     setPlaybackState,
+    scrollToAsset
   }) => (
     <>
       <Animated.View
@@ -179,6 +182,7 @@ export const VideoReviewScreen: ComponentType<
             {isReviewScreenVisible ? (
               <VideoReviewScreenFlatList
                 isScrollEnabled={!isSwipeGestureInProgress}
+                flatListRef={flatListRef}
                 style={styles.flex}
                 assets={assetsArray}
                 renderItem={asset => (
@@ -288,6 +292,12 @@ export const VideoReviewScreen: ComponentType<
       <MediaExplorerModal
         isVisible={isMediaModalVisible}
         onRequestDismissModal={hideMediaModal}
+        onSelectVideo={assetID => {
+          ReactNativeHaptic.generate('selection');
+          selectVideo(assetID);
+          scrollToAsset(assetID);
+          hideMediaModal();
+        }}
       />
     </>
   )
