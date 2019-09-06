@@ -14,6 +14,7 @@ export type RangeInputProps = {
   value: number,
   min: number,
   max: number,
+  isInverted?: boolean,
   onSelectValue: number => void,
 };
 
@@ -83,18 +84,26 @@ const styles = {
   },
 };
 
+const invertProgressValue = (isInverted: boolean, value: number): number => {
+  return isInverted ? 1 - value : value;
+};
+
 export const RangeInput: SFC<RangeInputProps> = ({
   style,
   value,
   min,
   max,
+  isInverted = false,
   onSelectValue,
 }: RangeInputProps) => (
   <View style={[styles.container, style]}>
     <Seekbar
       style={styles.absoluteFill}
-      progress={(value - min) / (max - min)}
-      initialProgress={(value - min) / (max - min)}
+      progress={invertProgressValue(isInverted, (value - min) / (max - min))}
+      initialProgress={invertProgressValue(
+        isInverted,
+        (value - min) / (max - min)
+      )}
       renderHandle={props => (
         <>
           <View style={styles.border} pointerEvents="none">
@@ -111,11 +120,13 @@ export const RangeInput: SFC<RangeInputProps> = ({
           />
         </>
       )}
-      onSeekToProgress={p => onSelectValue(p * (max - min) + min)}
+      onSeekToProgress={p =>
+        onSelectValue(invertProgressValue(isInverted, p) * (max - min) + min)
+      }
       onDidBeginDrag={() => ReactNativeHaptic.generate('selection')}
       onDidEndDrag={p => {
         ReactNativeHaptic.generate('selection');
-        onSelectValue(p * (max - min) + min);
+        onSelectValue(invertProgressValue(isInverted, p) * (max - min) + min);
       }}
     />
   </View>

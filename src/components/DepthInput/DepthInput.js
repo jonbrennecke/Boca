@@ -40,14 +40,15 @@ export const DepthInput: SFC<DepthInputProps> = ({
   onSelectValue,
 }: DepthInputProps) => (
   <View style={[styles.container, style]}>
-    <FlowerIcon style={styles.rangeIcon} fillColor={Colors.solid.white} />
+    <MountainIcon style={styles.rangeIcon} fillColor={Colors.solid.white} />
     <RangeInput
       style={styles.range}
       value={value}
       min={min}
       max={max}
+      isInverted
       onSelectValue={onSelectValue}
     />
-    <MountainIcon style={styles.rangeIcon} fillColor={Colors.solid.white} />
+    <FlowerIcon style={styles.rangeIcon} fillColor={Colors.solid.white} />
   </View>
 );
