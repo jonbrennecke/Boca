@@ -3,7 +3,6 @@
 import React, { PureComponent, createRef } from 'react';
 import { Linking } from 'react-native';
 import { autobind } from 'core-decorators';
-import noop from 'lodash/noop';
 import uniqBy from 'lodash/uniqBy';
 import throttle from 'lodash/throttle';
 import { createMediaStateHOC } from '@jonbrennecke/react-native-media';
@@ -35,8 +34,12 @@ export type VideoReviewScreenState = {
   isMediaModalVisible: boolean,
   toast: {
     isVisible: boolean,
-    message: string,
-    onPress: () => any,
+    title: string,
+    body: string,
+    buttons: Array<{
+      text: string,
+      onPress: () => any,
+    }>,
   },
 };
 
@@ -58,6 +61,7 @@ export type VideoReviewScreenStateExtraProps = {
   hideMediaModal: () => void,
   setPlaybackProgressThrottled: (progress: number) => void,
   scrollToAsset: (assetID: string) => void,
+  hideToast: () => void,
 } & VideoReviewScreenState;
 
 export function wrapWithVideoReviewScreenState<
@@ -85,10 +89,10 @@ export function wrapWithVideoReviewScreenState<
       isExporting: false,
       isMediaModalVisible: false,
       toast: {
-        message: '',
         isVisible: false,
-        text: '',
-        onPress: noop,
+        title: '',
+        body: '',
+        buttons: [],
       },
     };
     exportProgressListener: ?ReturnType<
@@ -104,6 +108,14 @@ export function wrapWithVideoReviewScreenState<
     flatListRef = createRef();
 
     async componentDidMount() {
+      this.setState({
+        toast: {
+          isVisible: false,
+          title: '',
+          body: '',
+          buttons: [],
+        },
+      });
       await this.props.createAlbum('BOCA');
       const album = this.props.albums.find(a => a.title === 'BOCA');
       if (!album) {
@@ -170,19 +182,26 @@ export function wrapWithVideoReviewScreenState<
     }
 
     onExportFinished(url: string) {
+      // save url to photos library
       this.setState({
         exportProgress: 0,
         isExporting: false,
         toast: {
           isVisible: true,
-          message: 'Exporting complete',
-          onPress: async () => {
-            const canOpen = await Linking.canOpenURL(url);
-            if (canOpen) {
-              Linking.openURL(url);
-            }
-          },
-        },
+          title: '🎉 Ta dah! 🎉',
+          body: 'Your video has been saved to the camera roll',
+          buttons: [
+            {
+              text: 'Open in Photos',
+              onPress: async () => {
+                const canOpen = await Linking.canOpenURL(url);
+                if (canOpen) {
+                  Linking.openURL(url);
+                }
+              },
+            },
+          ],
+        }
       });
     }
 
@@ -283,6 +302,17 @@ export function wrapWithVideoReviewScreenState<
       return this.props.assets;
     }
 
+    hideToast() {
+      this.setState({
+        toast: {
+          isVisible: false,
+          title: '',
+          body: '',
+          buttons: [],
+        },
+      });
+    }
+
     render() {
       return (
         <WrappedComponent
@@ -307,6 +337,7 @@ export function wrapWithVideoReviewScreenState<
           hideMediaModal={this.hideMediaModal}
           setPlaybackProgressThrottled={this.setPlaybackProgressThrottled}
           scrollToAsset={this.scrollToAsset}
+          hideToast={this.hideToast}
         />
       );
     }

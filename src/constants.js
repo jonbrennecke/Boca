@@ -197,9 +197,9 @@ export const ColorTheme: ColorByTheme = {
         select: {
           option: {
             background: {
-              default: Colors.solid.extraLight,
-              highlight: Colors.solid.dark,
-              selected: Colors.solid.dark,
+              default: Colors.solid.darkGray,
+              highlight: Colors.solid.darkGray,
+              selected: Colors.solid.darkGray,
             },
             text: {
               default: Colors.text.mediumDarkGray,
@@ -210,19 +210,19 @@ export const ColorTheme: ColorByTheme = {
         },
         button: {
           background: {
-            default: Colors.text.light,
-            highlight: Colors.text.light,
-            selected: Colors.text.light,
+            default: Colors.solid.peach,
+            highlight: Colors.solid.peach,
+            selected: Colors.solid.peach,
           },
           text: {
-            default: Colors.text.mediumDarkGray,
-            highlight: Colors.text.light,
-            selected: Colors.text.dark,
+            default: Colors.solid.white,
+            highlight: Colors.solid.white,
+            selected: Colors.solid.white,
           },
           icon: {
-            default: Colors.text.mediumDarkGray,
-            highlight: Colors.text.light,
-            selected: Colors.text.dark,
+            default: Colors.solid.white,
+            highlight: Colors.solid.white,
+            selected: Colors.solid.white,
           },
         },
       },

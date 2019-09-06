@@ -1,60 +1,69 @@
 // @flow
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Dimensions } from 'react-native';
+import { BottomSheetModal } from '@jonbrennecke/react-native-animated-ui';
 
-import { SlideUpAnimatedView } from '@jonbrennecke/react-native-animated-ui';
+import { ActionSheet, Heading, Paragraph, SelectableButton } from '../';
+import { Units, ColorTheme } from '../../constants';
 
-import { Units } from '../../constants';
-
-import type { SFC, Style } from '../../types';
+import type { SFC } from '../../types';
 
 export type ToastProps = {
-  style?: ?Style,
   isVisible: boolean,
-  text: string,
-  onPress: () => void,
+  title: string,
+  body: string,
+  buttons: Array<{ text: string, onPress: () => void }>,
+  onRequestDismiss: () => void,
 };
 
+const { height: SCREEN_HEIGHT } = Dimensions.get('window');
+
 const styles = {
-  absoluteFill: StyleSheet.absoluteFill,
   container: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
+    flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
     paddingVertical: Units.small,
-    paddingHorizontal: Units.medium,
+    paddingHorizontal: Units.extraLarge,
   },
-  background: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    height: 200,
-    backgroundColor: '#fff',
+  flex: {
+    flex: 1,
   },
-  text: {
-    color: '#000',
-    fontSize: 15,
-    fontWeight: 'normal',
-    textAlign: 'left',
+  paragraph: {
+    marginVertical: Units.extraLarge,
+    textAlign: 'center',
+  },
+  actionSheet: {
+    height: SCREEN_HEIGHT * 0.5,
   },
 };
 
 export const Toast: SFC<ToastProps> = ({
-  style,
-  text,
+  title,
+  body,
   isVisible,
-  onPress,
+  buttons,
+  onRequestDismiss,
 }: ToastProps) => (
-  <View style={[styles.container, style]}>
-    <SlideUpAnimatedView isVisible={isVisible}>
-      <TouchableOpacity style={styles.absoluteFill} onPress={onPress}>
-        <View style={styles.background} />
-        <Text style={styles.text}>{text}</Text>
-      </TouchableOpacity>
-    </SlideUpAnimatedView>
-  </View>
+  <BottomSheetModal
+    isVisible={isVisible}
+    onRequestDismissModal={onRequestDismiss}
+  >
+    <ActionSheet style={styles.actionSheet} onRequestDismiss={onRequestDismiss}>
+      <View style={styles.container}>
+        <Heading text={title} />
+        <Paragraph
+          style={styles.paragraph}
+          text={body}
+        />
+        {buttons.map((b, i) => (
+          <SelectableButton
+            key={`button-${i}`}
+            colorTheme={ColorTheme.dark.actionSheet.components.button}
+            text={b.text}
+            onPress={b.onPress}
+          />
+        ))}
+      </View>
+    </ActionSheet>
+  </BottomSheetModal>
 );

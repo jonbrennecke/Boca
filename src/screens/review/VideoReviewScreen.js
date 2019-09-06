@@ -153,6 +153,7 @@ export const VideoReviewScreen: ComponentType<
     setPlaybackProgressThrottled,
     setPlaybackState,
     scrollToAsset,
+    hideToast
   }) => (
     <>
       <Animated.View
@@ -281,14 +282,19 @@ export const VideoReviewScreen: ComponentType<
                 onPress={exportComposition}
               />
             </View>
-            <Toast
-              isVisible={toast.isVisible}
-              text={toast.message}
-              onPress={toast.onPress}
-            />
           </VideoReviewScreenToolbar>
         </View>
       </SafeAreaView>
+      <Toast
+        isVisible={toast.isVisible}
+        title={toast.title}
+        body={toast.body}
+        buttons={toast.buttons}
+        onRequestDismiss={() => {
+          ReactNativeHaptic.generate('selection');
+          hideToast();
+        }}
+      />
       <MediaExplorerModal
         isVisible={isMediaModalVisible}
         onRequestDismissModal={hideMediaModal}

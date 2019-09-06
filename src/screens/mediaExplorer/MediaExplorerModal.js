@@ -19,9 +19,6 @@ const styles = {
   flex: {
     flex: 1,
   },
-  container: {
-    flex: 1,
-  },
 };
 
 // eslint-disable-next-line flowtype/generic-spacing
