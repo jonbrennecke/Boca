@@ -152,7 +152,7 @@ export const VideoReviewScreen: ComponentType<
     onSwipeDownGestureMove,
     setPlaybackProgressThrottled,
     setPlaybackState,
-    scrollToAsset
+    scrollToAsset,
   }) => (
     <>
       <Animated.View

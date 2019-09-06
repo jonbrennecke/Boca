@@ -231,7 +231,7 @@ export function wrapWithVideoReviewScreenState<
         this.flatListRef.current.scrollToIndex({
           index,
           animated: true,
-          viewPosition: 0.5
+          viewPosition: 0.5,
         });
       }
     }
