@@ -31,7 +31,11 @@ export const ThumbnailButton: SFC<ThumbnailButtonProps> = ({
   assetID,
   onPress,
 }: ThumbnailButtonProps) => (
-  <TouchableOpacity style={[styles.container(!assetID), style]} onPress={onPress} disabled={!assetID}>
+  <TouchableOpacity
+    style={[styles.container(!assetID), style]}
+    onPress={onPress}
+    disabled={!assetID}
+  >
     {assetID && <Thumbnail assetID={assetID} style={styles.thumbnail} />}
   </TouchableOpacity>
 );
