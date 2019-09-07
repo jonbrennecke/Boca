@@ -1,6 +1,7 @@
 // @flow
 /* eslint flowtype/generic-spacing: 0 */
 import React, { PureComponent, createRef } from 'react';
+import { InteractionManager } from 'react-native';
 import {
   createCameraStateHOC,
   CameraSettingIdentifiers,
@@ -85,6 +86,12 @@ export function wrapWithCameraScreenState<
   > {
     cameraRef = createRef();
     volumeButtonListener: ?ReturnType<typeof addVolumeButtonListener>;
+    initInteractionHandle: ?ReturnType<
+      typeof InteractionManager.runAfterInteractions
+    >;
+    willEnterForegroundInteractionHandle: ?ReturnType<
+      typeof InteractionManager.runAfterInteractions
+    >;
 
     state: $Exact<CameraScreenState> = {
       activeCameraSetting: CameraSettingIdentifiers.Exposure,
@@ -108,6 +115,16 @@ export function wrapWithCameraScreenState<
     componentWillUnmount() {
       if (this.volumeButtonListener) {
         this.volumeButtonListener.remove();
+      }
+      if (this.initInteractionHandle) {
+        // $FlowFixMe
+        InteractionManager.clearInteractionHandle(this.initInteractionHandle);
+      }
+      if (this.willEnterForegroundInteractionHandle) {
+        InteractionManager.clearInteractionHandle(
+          // $FlowFixMe
+          this.willEnterForegroundInteractionHandle
+        );
       }
     }
 
@@ -149,9 +166,13 @@ export function wrapWithCameraScreenState<
     }
 
     handleAppWillEnterForeground() {
-      if (this.state.initializationStatus === 'loaded') {
-        this.addVolumeButtonListener();
-      }
+      this.willEnterForegroundInteractionHandle = InteractionManager.runAfterInteractions(
+        () => {
+          if (this.state.initializationStatus === 'loaded') {
+            this.addVolumeButtonListener();
+          }
+        }
+      );
     }
 
     addVolumeButtonListener() {
@@ -172,30 +193,38 @@ export function wrapWithCameraScreenState<
       return this.props.albums.find(a => a.title === 'BOCA');
     }
 
-    async initialize() {
-      try {
-        if (this.state.initializationStatus === 'loading') {
-          return;
-        }
-        this.setState({
-          initializationStatus: 'loading',
-        });
-        startCameraPreview();
-        await this.props.loadSupportedFeatures();
-        await this.props.setBlurAperture(BlurApertureRange.initialValue);
-        await this.configureThumbnail();
-        this.addVolumeButtonListener();
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.warn(error);
-      } finally {
-        this.setState(
-          {
-            initializationStatus: 'loaded',
-          },
-          () => SplashScreen.hide()
-        );
+    initialize() {
+      if (this.state.initializationStatus === 'loading') {
+        return;
       }
+      this.setState({
+        initializationStatus: 'loading',
+      });
+      if (this.initInteractionHandle) {
+        // $FlowFixMe
+        InteractionManager.clearInteractionHandle(this.initInteractionHandle);
+      }
+      this.initInteractionHandle = InteractionManager.runAfterInteractions(
+        async () => {
+          try {
+            startCameraPreview();
+            await this.props.loadSupportedFeatures();
+            await this.props.setBlurAperture(BlurApertureRange.initialValue);
+            await this.configureThumbnail();
+            this.addVolumeButtonListener();
+          } catch (error) {
+            // eslint-disable-next-line no-console
+            console.warn(error);
+          } finally {
+            this.setState(
+              {
+                initializationStatus: 'loaded',
+              },
+              () => SplashScreen.hide()
+            );
+          }
+        }
+      );
     }
 
     handleVolumeButtonPress() {
