@@ -115,7 +115,7 @@ export const CameraScreen: ComponentType<
     >
       <SafeAreaView style={[styles.container, style]}>
         <StatusBar barStyle="light-content" />
-        <HiddenVolume />
+        {isReviewModalVisible ? null : <HiddenVolume />}
         <CameraPreviewDimensions
           style={styles.cameraWrap}
           cameraFormat={format}
