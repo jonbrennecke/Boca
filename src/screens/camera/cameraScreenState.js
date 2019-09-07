@@ -108,7 +108,9 @@ export function wrapWithCameraScreenState<
       if (this.props.hasCameraPermissions) {
         await this.initialize();
       } else {
-        SplashScreen.hide();
+        this.setState({ initializationStatus: 'loaded' }, () =>
+          SplashScreen.hide()
+        );
       }
     }
 
@@ -216,15 +218,36 @@ export function wrapWithCameraScreenState<
             // eslint-disable-next-line no-console
             console.warn(error);
           } finally {
-            this.setState(
-              {
-                initializationStatus: 'loaded',
-              },
-              () => SplashScreen.hide()
-            );
+            const cameraPosition = this.getInitialCameraPosition();
+            if (!cameraPosition) {
+              SplashScreen.hide();
+              alert('Device has no supported cameras');
+            } else {
+              this.setState(
+                {
+                  initializationStatus: 'loaded',
+                  cameraPosition: cameraPosition,
+                },
+                () => SplashScreen.hide()
+              );
+            }
           }
         }
       );
+    }
+
+    getInitialCameraPosition(): ?CameraPosition {
+      const cameraDeviceSupport = this.props.cameraDeviceSupport;
+      if (!cameraDeviceSupport) {
+        return null;
+      }
+      if (
+        !cameraDeviceSupport.hasSupportedFrontCamera &&
+        !cameraDeviceSupport.hasSupportedBackCamera
+      ) {
+        return null;
+      }
+      return cameraDeviceSupport.hasSupportedFrontCamera ? 'front' : 'back';
     }
 
     handleVolumeButtonPress() {
