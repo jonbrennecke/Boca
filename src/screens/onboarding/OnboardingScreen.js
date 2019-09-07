@@ -112,7 +112,7 @@ export const OnboardingScreen: ComponentType<
     onRequestCameraPermissions,
   }) => {
     if (isAppInitializationComplete) {
-      <View style={[styles.container, style]} />;
+      return <View style={[styles.container, style]} />;
     }
     const numberOfPages = OnboardingConfig.pages.length;
     const currentPageIndex = Math.round(scrollProgress * (numberOfPages - 1));
