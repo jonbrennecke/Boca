@@ -111,7 +111,7 @@ export const OnboardingScreen: ComponentType<
     onScrollViewDidUpdateProgress,
     onRequestCameraPermissions,
   }) => {
-    if (isAppInitializationComplete) {
+    if (!isAppInitializationComplete) {
       return <View style={[styles.container, style]} />;
     }
     const numberOfPages = OnboardingConfig.pages.length;
