@@ -39,7 +39,7 @@
         </view>
     </objects>
     <resources>
-        <image name="BOCA LogoType.png" width="156" height="33"/>
+        <image name="BOCA LogoType.png" width="154" height="31"/>
         <image name="High Street LogoType Black.png" width="122" height="30"/>
     </resources>
 </document>

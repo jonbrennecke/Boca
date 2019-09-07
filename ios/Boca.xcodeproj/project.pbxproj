@@ -49,7 +49,6 @@
 		FC05260E232065630045C2F3 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC05260D232065620045C2F3 /* StoreKit.framework */; };
 		FC254DFF21CDB03800A9C901 /* libReactNativeNavigation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC983DD521CDAF6800063476 /* libReactNativeNavigation.a */; };
 		FC366D2E23008674002709A9 /* libRNBlur.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE471D822F3B431004F4A4C /* libRNBlur.a */; };
-		FC419C802316E5D400A5FA08 /* BOCA LogoType@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC419C472316E5D300A5FA08 /* BOCA LogoType@3x.png */; };
 		FC4E9A5723185C4A008E23EC /* onboarding.mov in Resources */ = {isa = PBXBuildFile; fileRef = FC4E9A1E23185C49008E23EC /* onboarding.mov */; };
 		FC5BADCB22ECC3D10077855E /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5BADCA22ECC3D10077855E /* Empty.swift */; };
 		FC6D734123011C3100D07CD0 /* libHSReactNativeCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FCCA731E22F4B6FB00163C4E /* libHSReactNativeCamera.a */; };
@@ -64,6 +63,7 @@
 		FC7452F82305E49700436E62 /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC7452F12305E49700436E62 /* Inter-SemiBold.ttf */; };
 		FC7452F92305E49700436E62 /* Inter-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC7452F22305E49700436E62 /* Inter-Black.ttf */; };
 		FC980B0E2301CAB400CFBFD4 /* libHSReactNativeMedia.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC5BAE0F22ECC4750077855E /* libHSReactNativeMedia.a */; };
+		FCC9E8702324533E00441517 /* BOCA LogoType@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCC9E86F2324533E00441517 /* BOCA LogoType@3x.png */; };
 		FCE9B07E231897E1008A8407 /* High Street LogoType Black@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCE9B045231897E0008A8407 /* High Street LogoType Black@3x.png */; };
 /* End PBXBuildFile section */
 
@@ -556,7 +556,6 @@
 		FC0526092320653A0045C2F3 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		FC05260B232065550045C2F3 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		FC05260D232065620045C2F3 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		FC419C472316E5D300A5FA08 /* BOCA LogoType@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BOCA LogoType@3x.png"; sourceTree = "<group>"; };
 		FC4E9A1E23185C49008E23EC /* onboarding.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = onboarding.mov; sourceTree = "<group>"; };
 		FC5BADC922ECC3D00077855E /* Bombast-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bombast-Bridging-Header.h"; sourceTree = "<group>"; };
 		FC5BADCA22ECC3D10077855E /* Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
@@ -571,6 +570,7 @@
 		FC7452F02305E49700436E62 /* Inter-ExtraLight-BETA.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Inter-ExtraLight-BETA.ttf"; path = "../assets/fonts/Inter (TTF)/Inter-ExtraLight-BETA.ttf"; sourceTree = "<group>"; };
 		FC7452F12305E49700436E62 /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Inter-SemiBold.ttf"; path = "../assets/fonts/Inter (TTF)/Inter-SemiBold.ttf"; sourceTree = "<group>"; };
 		FC7452F22305E49700436E62 /* Inter-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Inter-Black.ttf"; path = "../assets/fonts/Inter (TTF)/Inter-Black.ttf"; sourceTree = "<group>"; };
+		FCC9E86F2324533E00441517 /* BOCA LogoType@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BOCA LogoType@3x.png"; path = "../../assets/appstore/BOCA LogoType@3x.png"; sourceTree = "<group>"; };
 		FCE9B045231897E0008A8407 /* High Street LogoType Black@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "High Street LogoType Black@3x.png"; path = "../../assets/appstore/High Street LogoType Black@3x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -882,7 +882,7 @@
 			isa = PBXGroup;
 			children = (
 				FCE9B045231897E0008A8407 /* High Street LogoType Black@3x.png */,
-				FC419C472316E5D300A5FA08 /* BOCA LogoType@3x.png */,
+				FCC9E86F2324533E00441517 /* BOCA LogoType@3x.png */,
 			);
 			path = launchScreenAssets;
 			sourceTree = "<group>";
@@ -1612,9 +1612,9 @@
 				FC7452F82305E49700436E62 /* Inter-SemiBold.ttf in Resources */,
 				FCE9B07E231897E1008A8407 /* High Street LogoType Black@3x.png in Resources */,
 				FC7452F62305E49700436E62 /* Inter-Bold.ttf in Resources */,
-				FC419C802316E5D400A5FA08 /* BOCA LogoType@3x.png in Resources */,
 				FC7452F52305E49700436E62 /* Inter-ExtraBold.ttf in Resources */,
 				FC7452F72305E49700436E62 /* Inter-ExtraLight-BETA.ttf in Resources */,
+				FCC9E8702324533E00441517 /* BOCA LogoType@3x.png in Resources */,
 				FC7452F92305E49700436E62 /* Inter-Black.ttf in Resources */,
 				FC6EA7D821CEA44D007C3B3E /* PT_Sans-Web-Regular.ttf in Resources */,
 				FC6EA7D621CEA44D007C3B3E /* PassionOne-Regular.ttf in Resources */,
