@@ -45,7 +45,7 @@
 	<string>This app requires use of the microphone to record videos</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app requires use of the media library to save videos</string>
-  <key>NSLocationAlwaysUsageDescription</key>
+	<key>NSLocationAlwaysUsageDescription</key>
 	<string>This app requires use of your location</string>
 	<key>UIAppFonts</key>
 	<array>
@@ -59,6 +59,10 @@
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
+		<string>nfc</string>
+		<string>arkit</string>
+		<string>video-camera</string>
+		<string>metal</string>
 		<string>armv7</string>
 	</array>
 	<key>UIStatusBarStyle</key>
