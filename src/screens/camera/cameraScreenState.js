@@ -142,7 +142,7 @@ export function wrapWithCameraScreenState<
     handleAppWillEnterBackground() {
       if (this.props.captureStatus === 'started') {
         this.props.stopCapture({
-          saveToCameraRoll: true,
+          saveToCameraRoll: false,
         });
       }
       this.removeVolumeButtonListener();
@@ -203,7 +203,7 @@ export function wrapWithCameraScreenState<
     handleVolumeButtonPress() {
       if (this.props.captureStatus === 'started') {
         this.props.stopCapture({
-          saveToCameraRoll: true,
+          saveToCameraRoll: false,
         });
       } else {
         this.props.startCapture({

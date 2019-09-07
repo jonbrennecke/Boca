@@ -171,7 +171,7 @@ export const CameraScreen: ComponentType<
               }
               onRequestEndCapture={() =>
                 stopCapture({
-                  saveToCameraRoll: true,
+                  saveToCameraRoll: false,
                 })
               }
             />
