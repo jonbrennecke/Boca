@@ -193,9 +193,7 @@ export function wrapWithCameraScreenState<
           {
             initializationStatus: 'loaded',
           },
-          () => {
-            SplashScreen.hide();
-          }
+          () => SplashScreen.hide()
         );
       }
     }
