@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -21,6 +20,8 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		16DF9DF0567349B99CB18D2B /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5424CEBFC30D4DABB9808729 /* libz.tbd */; };
+		31B05688E6B94E0491DF689C /* libRNSentry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17D5081A9E144C26BA21D83A /* libRNSentry.a */; };
 		4F8355BBACD74452BF972DE7 /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A22375545D454A2599361EEB /* libReactNativeConfig.a */; };
 		6162BF639C454225B3292EA3 /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 30628CDE7DC846A981EE0F0D /* libRNSVG.a */; };
 		7F6FAEAC8FD64ACF9028F3B2 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B303F65E6CA4EE7B72368C8 /* libBVLinearGradient.a */; };
@@ -423,6 +424,20 @@
 			remoteGlobalIDString = 7B49FEBB1E95090800DEB3EA;
 			remoteInfo = ReactNativeNavigationTests;
 		};
+		FCC9E7E22324499E00441517 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F6B9DF43C9D6409C83FA8384 /* RNSentry.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNSentry;
+		};
+		FCC9E7E42324499E00441517 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F6B9DF43C9D6409C83FA8384 /* RNSentry.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 274692C321B4414400BF91A8;
+			remoteInfo = "RNSentry-tvOS";
+		};
 		FCCA731D22F4B6FB00163C4E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C3B89F93805948A9ABA5AA0B /* HSReactNativeCamera.xcodeproj */;
@@ -493,6 +508,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Bombast/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Bombast/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		17D5081A9E144C26BA21D83A /* libRNSentry.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSentry.a; sourceTree = "<group>"; };
 		1C4AA6EDF3AB491081D2973D /* libReactNativeHaptic.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeHaptic.a; sourceTree = "<group>"; };
 		265AC1ED3D1E41B2A6D0A308 /* libRNBlur.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNBlur.a; sourceTree = "<group>"; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -500,6 +516,7 @@
 		3238105B577147C59D3EDB5F /* libHSReactNativeCamera.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libHSReactNativeCamera.a; sourceTree = "<group>"; };
 		43A17965807A40CB9AD41F0C /* libSplashScreen.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libSplashScreen.a; sourceTree = "<group>"; };
 		51268D1B7C5B495C97E9CB0D /* SplashScreen.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = SplashScreen.xcodeproj; path = "../node_modules/react-native-splash-screen/ios/SplashScreen.xcodeproj"; sourceTree = "<group>"; };
+		5424CEBFC30D4DABB9808729 /* libz.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		5AC3AC84D4E24EDA91E08877 /* ReactNativeNavigationTests.xctest */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = ReactNativeNavigationTests.xctest; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
@@ -523,6 +540,7 @@
 		CD2877BF4B4940C9B684C389 /* libRNSafeArea.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSafeArea.a; sourceTree = "<group>"; };
 		D1A322132CEB40238AD3A6FC /* ReactNativeNavigation.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeNavigation.xcodeproj; path = "../node_modules/react-native-navigation/lib/ios/ReactNativeNavigation.xcodeproj"; sourceTree = "<group>"; };
 		EDF9D805004747F996337EDF /* ReactNativeConfig.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeConfig.xcodeproj; path = "../node_modules/react-native-config/ios/ReactNativeConfig.xcodeproj"; sourceTree = "<group>"; };
+		F6B9DF43C9D6409C83FA8384 /* RNSentry.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSentry.xcodeproj; path = "../node_modules/react-native-sentry/ios/RNSentry.xcodeproj"; sourceTree = "<group>"; };
 		FC0525F32320646E0045C2F3 /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleUtilities.framework; path = Firebase/Analytics/GoogleUtilities.framework; sourceTree = "<group>"; };
 		FC0525F42320646E0045C2F3 /* GoogleDataTransport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleDataTransport.framework; path = Firebase/Analytics/GoogleDataTransport.framework; sourceTree = "<group>"; };
 		FC0525F52320646E0045C2F3 /* FirebaseCoreDiagnostics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCoreDiagnostics.framework; path = Firebase/Analytics/FirebaseCoreDiagnostics.framework; sourceTree = "<group>"; };
@@ -598,6 +616,8 @@
 				FC0525FE2320646E0045C2F3 /* GoogleDataTransport.framework in Frameworks */,
 				F7037509C6D04BBDA72E4433 /* libReactNativeHaptic.a in Frameworks */,
 				A6417FFB7A4F4F8F8DA73305 /* libSplashScreen.a in Frameworks */,
+				31B05688E6B94E0491DF689C /* libRNSentry.a in Frameworks */,
+				16DF9DF0567349B99CB18D2B /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -742,6 +762,7 @@
 				FC0525F32320646E0045C2F3 /* GoogleUtilities.framework */,
 				FC0525F82320646E0045C2F3 /* nanopb.framework */,
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
+				5424CEBFC30D4DABB9808729 /* libz.tbd */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -792,6 +813,7 @@
 				89932B26F15345A292AF4B96 /* RNGestureHandler.xcodeproj */,
 				A93F14D230704F4085648775 /* ReactNativeHaptic.xcodeproj */,
 				51268D1B7C5B495C97E9CB0D /* SplashScreen.xcodeproj */,
+				F6B9DF43C9D6409C83FA8384 /* RNSentry.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -881,6 +903,7 @@
 				79FC96B9A5734E1BA3A263CD /* libRNGestureHandler.a */,
 				1C4AA6EDF3AB491081D2973D /* libReactNativeHaptic.a */,
 				43A17965807A40CB9AD41F0C /* libSplashScreen.a */,
+				17D5081A9E144C26BA21D83A /* libRNSentry.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -962,6 +985,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		FCC9E7DE2324499E00441517 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FCC9E7E32324499E00441517 /* libRNSentry.a */,
+				FCC9E7E52324499E00441517 /* libRNSentry-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		FCCA731622F4B6FB00163C4E /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -995,6 +1027,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		66BB665556854DCAA775A3D2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			path = Application;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1007,6 +1047,7 @@
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				FC0525D8232063670045C2F3 /* Embed Frameworks */,
+				D4F5C5EE76EB4BA28AA84176 /* Upload Debug Symbols to Sentry */,
 			);
 			buildRules = (
 			);
@@ -1136,6 +1177,10 @@
 				{
 					ProductGroup = FC7AF72A23032ED900506DE1 /* Products */;
 					ProjectRef = A806432AF2FC47919DEF0E22 /* RNSafeArea.xcodeproj */;
+				},
+				{
+					ProductGroup = FCC9E7DE2324499E00441517 /* Products */;
+					ProjectRef = F6B9DF43C9D6409C83FA8384 /* RNSentry.xcodeproj */;
 				},
 				{
 					ProductGroup = FC07FCC622F3FCC300CB1E2C /* Products */;
@@ -1511,6 +1556,20 @@
 			remoteRef = FC983DD621CDAF6800063476 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		FCC9E7E32324499E00441517 /* libRNSentry.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNSentry.a;
+			remoteRef = FCC9E7E22324499E00441517 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FCC9E7E52324499E00441517 /* libRNSentry-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libRNSentry-tvOS.a";
+			remoteRef = FCC9E7E42324499E00441517 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		FCCA731E22F4B6FB00163C4E /* libHSReactNativeCamera.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1586,7 +1645,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
+			shellScript = "export SENTRY_PROPERTIES=sentry.properties\nexport NODE_BINARY=node\n../node_modules/@sentry/cli/bin/sentry-cli react-native xcode ../node_modules/react-native/scripts/react-native-xcode.sh\n";
+		};
+		D4F5C5EE76EB4BA28AA84176 /* Upload Debug Symbols to Sentry */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			name = "Upload Debug Symbols to Sentry";
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			shellPath = /bin/sh;
+			shellScript = "export SENTRY_PROPERTIES=sentry.properties\n../node_modules/@sentry/cli/bin/sentry-cli upload-dsym";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1670,6 +1743,7 @@
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-haptic/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
+					"$(SRCROOT)/../node_modules/react-native-sentry/ios/**",
 				);
 				INFOPLIST_FILE = Bombast/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
@@ -1684,6 +1758,7 @@
 					"\"$(SRCROOT)/Bombast\"",
 					"\"$(SRCROOT)/Bombast\"",
 					"\"$(SRCROOT)/Bombast\"",
+					"\"$(SRCROOT)/Boca\"",
 					"\"$(SRCROOT)/Boca\"",
 				);
 				OTHER_LDFLAGS = (
@@ -1753,6 +1828,7 @@
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-haptic/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
+					"$(SRCROOT)/../node_modules/react-native-sentry/ios/**",
 				);
 				INFOPLIST_FILE = Bombast/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
@@ -1767,6 +1843,7 @@
 					"\"$(SRCROOT)/Bombast\"",
 					"\"$(SRCROOT)/Bombast\"",
 					"\"$(SRCROOT)/Bombast\"",
+					"\"$(SRCROOT)/Boca\"",
 					"\"$(SRCROOT)/Boca\"",
 				);
 				OTHER_LDFLAGS = (
