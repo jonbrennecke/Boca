@@ -176,7 +176,7 @@ export function wrapWithVideoReviewScreenState<
       this.exportFailedListener = addVideoCompositionExportFailedListener(
         this.onExportFailed
       );
-      await exportComposition(selectedAssetID);
+      await exportComposition(selectedAssetID, { blurAperture: this.props.blurAperture });
     }
 
     onExportProgress(progress: number) {
