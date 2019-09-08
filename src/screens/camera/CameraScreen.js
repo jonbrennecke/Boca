@@ -92,7 +92,8 @@ export const CameraScreen: ComponentType<
     cameraRef,
     isDepthPreviewEnabled,
     isReviewModalVisible,
-    initializationStatus,
+    isSwitchCameraEnabled,
+    isAppInitializationComplete,
     stopCapture,
     startCapture,
     captureStatus,
@@ -109,7 +110,7 @@ export const CameraScreen: ComponentType<
   }) => (
     <CameraScreenOnboarding
       style={styles.contentWrap}
-      isAppInitializationComplete={initializationStatus === 'loaded'}
+      isAppInitializationComplete={isAppInitializationComplete}
       hasCameraPermissions={hasCameraPermissions}
       onRequestCameraPermissions={requestCameraPermissions}
     >
@@ -120,15 +121,17 @@ export const CameraScreen: ComponentType<
           style={styles.cameraWrap}
           cameraFormat={format}
         >
-          <Camera
-            style={styles.absoluteFill}
-            ref={cameraRef}
-            cameraPosition={cameraPosition}
-            previewMode={isDepthPreviewEnabled ? 'depth' : 'portraitMode'}
-            resizeMode="scaleAspectFill"
-            blurAperture={blurAperture}
-            isPaused={isReviewModalVisible}
-          />
+          {cameraPosition && isAppInitializationComplete ? (
+            <Camera
+              style={styles.absoluteFill}
+              ref={cameraRef}
+              cameraPosition={cameraPosition}
+              previewMode={isDepthPreviewEnabled ? 'depth' : 'portraitMode'}
+              resizeMode="scaleAspectFill"
+              blurAperture={blurAperture}
+              isPaused={isReviewModalVisible}
+            />
+          ) : null}
           <CameraScreenFocusArea
             style={styles.absoluteFill}
             onRequestFocus={point => {
@@ -175,12 +178,16 @@ export const CameraScreen: ComponentType<
                 })
               }
             />
-            <IconButton
-              style={styles.cameraSideButton}
-              fillColor={Colors.icons.toolbar}
-              onPress={withHapticFeedback(switchCameraPosition)}
-              icon={SwitchCameraIcon}
-            />
+            {isSwitchCameraEnabled ? (
+              <IconButton
+                style={styles.cameraSideButton}
+                fillColor={Colors.icons.toolbar}
+                onPress={withHapticFeedback(switchCameraPosition)}
+                icon={SwitchCameraIcon}
+              />
+            ) : (
+              <View style={styles.cameraSideButton} />
+            )}
           </View>
         </View>
         <VideoReviewModal

@@ -36,10 +36,12 @@ export type CameraScreenStateExtraProps = {
   isFormatModalVisible: boolean,
   isDepthPreviewEnabled: boolean,
   isReviewModalVisible: boolean,
+  isSwitchCameraEnabled: boolean,
+  isAppInitializationComplete: boolean,
   initializationStatus: InitializationStatus,
   activeCameraSetting: $Keys<typeof CameraSettingIdentifiers>,
   setActiveCameraSetting: ($Keys<typeof CameraSettingIdentifiers>) => void,
-  cameraPosition: CameraPosition,
+  cameraPosition: ?CameraPosition,
   thumbnailAssetID: ?string,
   presentCameraFormatModal: () => void,
   dismissCameraFormatModal: () => void,
@@ -57,7 +59,8 @@ export type CameraScreenState = {
   isFormatModalVisible: boolean,
   isReviewModalVisible: boolean,
   isDepthPreviewEnabled: boolean,
-  cameraPosition: CameraPosition,
+  isSwitchCameraEnabled: boolean,
+  cameraPosition: ?CameraPosition,
   thumbnailAssetID: ?string,
   initializationStatus: InitializationStatus,
 };
@@ -98,7 +101,8 @@ export function wrapWithCameraScreenState<
       isFormatModalVisible: false,
       isReviewModalVisible: false,
       isDepthPreviewEnabled: false,
-      cameraPosition: 'front',
+      isSwitchCameraEnabled: false,
+      cameraPosition: null,
       thumbnailAssetID: null,
       initializationStatus: 'none',
     };
@@ -209,10 +213,9 @@ export function wrapWithCameraScreenState<
       this.initInteractionHandle = InteractionManager.runAfterInteractions(
         async () => {
           try {
-            startCameraPreview();
+            await this.configureThumbnail();
             await this.props.loadSupportedFeatures();
             await this.props.setBlurAperture(BlurApertureRange.initialValue);
-            await this.configureThumbnail();
             this.addVolumeButtonListener();
           } catch (error) {
             // eslint-disable-next-line no-console
@@ -227,12 +230,27 @@ export function wrapWithCameraScreenState<
                 {
                   initializationStatus: 'loaded',
                   cameraPosition: cameraPosition,
+                  isSwitchCameraEnabled: this.hasMultipleSupportedCameras(),
                 },
-                () => SplashScreen.hide()
+                () => {
+                  SplashScreen.hide();
+                  startCameraPreview();
+                }
               );
             }
           }
         }
+      );
+    }
+
+    hasMultipleSupportedCameras(): boolean {
+      const cameraDeviceSupport = this.props.cameraDeviceSupport;
+      if (!cameraDeviceSupport) {
+        return false;
+      }
+      return (
+        cameraDeviceSupport.hasSupportedBackCamera &&
+        cameraDeviceSupport.hasSupportedBackCamera
       );
     }
 
@@ -346,6 +364,9 @@ export function wrapWithCameraScreenState<
           {...this.props}
           {...this.state}
           cameraRef={this.cameraRef}
+          isAppInitializationComplete={
+            this.state.initializationStatus === 'loaded'
+          }
           setActiveCameraSetting={this.setActiveCameraSetting}
           presentCameraFormatModal={this.presentCameraFormatModal}
           dismissCameraFormatModal={this.dismissCameraFormatModal}
