@@ -64,6 +64,7 @@ export type VideoReviewScreenStateExtraProps = {
   setPlaybackProgressThrottled: (progress: number) => void,
   scrollToAsset: (assetID: string) => void,
   hideToast: () => void,
+  showFullScreenVideo: () => void,
 } & VideoReviewScreenState;
 
 export function wrapWithVideoReviewScreenState<
@@ -147,6 +148,12 @@ export function wrapWithVideoReviewScreenState<
       });
     }
 
+    showFullScreenVideo() {
+      this.setState({
+        isFullScreenVideo: true,
+      });
+    }
+
     toggleFullScreenVideo() {
       this.setState({
         isFullScreenVideo: !this.state.isFullScreenVideo,
@@ -176,7 +183,9 @@ export function wrapWithVideoReviewScreenState<
       this.exportFailedListener = addVideoCompositionExportFailedListener(
         this.onExportFailed
       );
-      await exportComposition(selectedAssetID, { blurAperture: this.props.blurAperture });
+      await exportComposition(selectedAssetID, {
+        blurAperture: this.props.blurAperture,
+      });
     }
 
     onExportProgress(progress: number) {
@@ -337,6 +346,7 @@ export function wrapWithVideoReviewScreenState<
           exportComposition={this.exportComposition}
           showMediaModal={this.showMediaModal}
           hideMediaModal={this.hideMediaModal}
+          showFullScreenVideo={this.showFullScreenVideo}
           setPlaybackProgressThrottled={this.setPlaybackProgressThrottled}
           scrollToAsset={this.scrollToAsset}
           hideToast={this.hideToast}

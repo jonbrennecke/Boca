@@ -29,6 +29,7 @@ import { MediaExplorerModal } from '../mediaExplorer';
 import { Units, Colors, BlurApertureRange } from '../../constants';
 import { wrapWithVideoReviewScreenState } from './videoReviewScreenState';
 import { wrapWithVideoReviewScreenGestureState } from './videoReviewScreenGestureState';
+import { VideoPlayButton } from './VideoPlayButton';
 
 import type { ComponentType } from 'react';
 
@@ -107,6 +108,15 @@ const styles = {
     borderTopStyle: 'solid',
     borderTopColor: Colors.borders.gray,
   },
+  playButtonContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 };
 
 const decorate = (component: ComponentType<*>) =>
@@ -156,6 +166,7 @@ export const VideoReviewScreen: ComponentType<
     setPlaybackState,
     scrollToAsset,
     hideToast,
+    showFullScreenVideo,
   }) => (
     <>
       <Animated.View
@@ -189,49 +200,58 @@ export const VideoReviewScreen: ComponentType<
                 style={styles.flex}
                 assets={assetsArray}
                 renderItem={asset => (
-                  <TouchableWithoutFeedback
-                    onPress={() => {
-                      if (playbackState !== 'playing') {
-                        play();
-                      }
-                      if (isFullScreenVideo && playbackState == 'playing') {
-                        pause();
-                      }
-                      toggleFullScreenVideo();
-                    }}
-                  >
-                    <View style={styles.flex}>
-                      <VideoComposition
-                        ref={
-                          selectedAssetID === asset.assetID
-                            ? videoCompositionRef
-                            : noop
-                        }
-                        style={styles.video(isFullScreenVideo)}
-                        assetID={asset.assetID}
-                        previewMode={
-                          isDepthPreviewEnabled ? 'depth' : 'portraitMode'
-                        }
-                        resizeMode="scaleAspectFill"
-                        blurAperture={
-                          selectedAssetID === asset.assetID
-                            ? blurAperture
-                            : BlurApertureRange.initialValue
-                        }
-                        isReadyToLoad={selectedAssetID === asset.assetID}
-                        onPlaybackProgress={setPlaybackProgressThrottled}
-                        onPlaybackStateChange={setPlaybackState}
-                        onMetadataLoaded={metadata => {
-                          if (
-                            metadata.blurAperture &&
+                  <>
+                    <TouchableWithoutFeedback
+                      onPress={() => toggleFullScreenVideo()}
+                    >
+                      <View style={styles.flex}>
+                        <VideoComposition
+                          ref={
                             selectedAssetID === asset.assetID
-                          ) {
-                            setBlurAperture(metadata.blurAperture);
+                              ? videoCompositionRef
+                              : noop
+                          }
+                          style={styles.video(isFullScreenVideo)}
+                          assetID={asset.assetID}
+                          previewMode={
+                            isDepthPreviewEnabled ? 'depth' : 'portraitMode'
+                          }
+                          resizeMode="scaleAspectFill"
+                          blurAperture={
+                            selectedAssetID === asset.assetID
+                              ? blurAperture
+                              : BlurApertureRange.initialValue
+                          }
+                          isReadyToLoad={selectedAssetID === asset.assetID}
+                          onPlaybackProgress={setPlaybackProgressThrottled}
+                          onPlaybackStateChange={setPlaybackState}
+                          onMetadataLoaded={metadata => {
+                            if (
+                              metadata.blurAperture &&
+                              selectedAssetID === asset.assetID
+                            ) {
+                              setBlurAperture(metadata.blurAperture);
+                            }
+                          }}
+                        />
+                      </View>
+                    </TouchableWithoutFeedback>
+                    <View
+                      style={styles.playButtonContainer}
+                      pointerEvents="box-none"
+                    >
+                      <VideoPlayButton
+                        isVisible={playbackState === 'paused'}
+                        onPress={() => {
+                          if (playbackState !== 'playing') {
+                            seekToProgress(0);
+                            play();
+                            showFullScreenVideo();
                           }
                         }}
                       />
                     </View>
-                  </TouchableWithoutFeedback>
+                  </>
                 )}
                 onRequestDismiss={onRequestDismiss}
                 onRequestLoadMore={loadNextAssets}
