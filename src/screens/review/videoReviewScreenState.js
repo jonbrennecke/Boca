@@ -143,7 +143,7 @@ export function wrapWithVideoReviewScreenState<
         this.seekToProgress(0);
       }
       this.setState({ selectedAssetID: assetID });
-    }
+    };
 
     togglePortraitMode() {
       this.setState({

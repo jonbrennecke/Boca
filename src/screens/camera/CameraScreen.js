@@ -12,12 +12,9 @@ import { CameraCaptureButton } from './CameraCaptureButton';
 import { CameraPreviewDimensions } from './CameraPreviewDimensions';
 import { ThumbnailButton } from './ThumbnailButton';
 import { VideoReviewModal } from '../review';
-import {
-  IconButton,
-  BlurredSelectableButton,
-  DepthInput,
-} from '../../components';
-import { SwitchCameraIcon } from '../../components/icons';
+import { BlurredSelectableButton, DepthInput } from '../../components';
+
+import { SwitchCameraButton } from './SwitchCameraButton';
 import { Units, BlurApertureRange, Colors } from '../../constants';
 
 import type { ComponentType } from 'react';
@@ -178,16 +175,11 @@ export const CameraScreen: ComponentType<
                 })
               }
             />
-            {isSwitchCameraEnabled ? (
-              <IconButton
-                style={styles.cameraSideButton}
-                fillColor={Colors.icons.toolbar}
-                onPress={withHapticFeedback(switchCameraPosition)}
-                icon={SwitchCameraIcon}
-              />
-            ) : (
-              <View style={styles.cameraSideButton} />
-            )}
+            <SwitchCameraButton
+              style={styles.cameraSideButton}
+              isEnabled={isSwitchCameraEnabled}
+              onPress={withHapticFeedback(switchCameraPosition)}
+            />
           </View>
         </View>
         <VideoReviewModal

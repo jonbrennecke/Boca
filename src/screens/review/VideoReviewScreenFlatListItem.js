@@ -29,7 +29,7 @@ export type VideoReviewScreenFlatListItemProps = {
 
 const styles = {
   flex: {
-    flex: 1
+    flex: 1,
   },
   video: (isFullScreen: boolean) => ({
     flex: 1,
@@ -47,7 +47,9 @@ const styles = {
   },
 };
 
-export const VideoReviewScreenFlatListItem: SFC<VideoReviewScreenFlatListItemProps> = ({
+export const VideoReviewScreenFlatListItem: SFC<
+  VideoReviewScreenFlatListItemProps
+> = ({
   asset,
   blurAperture,
   playbackState,
@@ -59,22 +61,16 @@ export const VideoReviewScreenFlatListItem: SFC<VideoReviewScreenFlatListItemPro
   setPlaybackState,
   setBlurAperture,
   setPlaybackProgress,
-  onPlayButtonPress
+  onPlayButtonPress,
 }: VideoReviewScreenFlatListItemProps) => (
   <>
     <TouchableWithoutFeedback onPress={toggleFullScreenVideo}>
       <View style={styles.flex}>
         <VideoComposition
-          ref={
-            selectedAssetID === asset.assetID
-              ? videoCompositionRef
-              : noop
-          }
+          ref={selectedAssetID === asset.assetID ? videoCompositionRef : noop}
           style={styles.video(isFullScreenVideo)}
           assetID={asset.assetID}
-          previewMode={
-            isDepthPreviewEnabled ? 'depth' : 'portraitMode'
-          }
+          previewMode={isDepthPreviewEnabled ? 'depth' : 'portraitMode'}
           resizeMode="scaleAspectFill"
           blurAperture={
             selectedAssetID === asset.assetID
@@ -83,24 +79,16 @@ export const VideoReviewScreenFlatListItem: SFC<VideoReviewScreenFlatListItemPro
           }
           isReadyToLoad={selectedAssetID === asset.assetID}
           onPlaybackProgress={setPlaybackProgress}
-          onPlaybackStateChange={p =>
-            setPlaybackState(asset.assetID, p)
-          }
+          onPlaybackStateChange={p => setPlaybackState(asset.assetID, p)}
           onMetadataLoaded={metadata => {
-            if (
-              metadata.blurAperture &&
-              selectedAssetID === asset.assetID
-            ) {
+            if (metadata.blurAperture && selectedAssetID === asset.assetID) {
               setBlurAperture(metadata.blurAperture);
             }
           }}
         />
       </View>
     </TouchableWithoutFeedback>
-    <View
-      style={styles.playButtonContainer}
-      pointerEvents="box-none"
-    >
+    <View style={styles.playButtonContainer} pointerEvents="box-none">
       <VideoPlayButton
         playbackState={playbackState}
         onPress={() => {

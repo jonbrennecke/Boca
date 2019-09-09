@@ -43,7 +43,10 @@ export const VideoPlayButton: SFC<VideoPlayButtonProps> = ({
   playbackState,
   onPress,
 }: VideoPlayButtonProps) => (
-  <TouchableOpacity onPress={onPress} disabled={!['paused', 'readyToPlay'].includes(playbackState)}>
+  <TouchableOpacity
+    onPress={onPress}
+    disabled={!['paused', 'readyToPlay'].includes(playbackState)}
+  >
     <View style={[styles.button(playbackState), style]}>
       <BlurView style={styles.background} blurType="light" />
       {['paused', 'readyToPlay'].includes(playbackState) ? (
