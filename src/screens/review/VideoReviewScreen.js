@@ -169,7 +169,7 @@ export const VideoReviewScreen: ComponentType<
     hideToast,
     showFullScreenVideo,
     onScrollDidBegin,
-    onScrollDidEnd
+    onScrollDidEnd,
   }) => (
     <>
       <Animated.View

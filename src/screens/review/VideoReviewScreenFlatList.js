@@ -49,7 +49,7 @@ export const VideoReviewScreenFlatList: SFC<VideoReviewScreenFlatListProps> = ({
   onSelectAsset,
   onRequestLoadMore,
   onScrollBegin = noop,
-  onScrollEnd = noop
+  onScrollEnd = noop,
 }: VideoReviewScreenFlatListProps) => (
   <FlatList
     ref={flatListRef}
