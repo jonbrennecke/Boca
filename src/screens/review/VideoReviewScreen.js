@@ -3,13 +3,10 @@ import React from 'react';
 import {
   Animated,
   SafeAreaView,
-  TouchableWithoutFeedback,
   StyleSheet,
   View,
   ActivityIndicator,
 } from 'react-native';
-import { VideoComposition } from '@jonbrennecke/react-native-camera';
-import noop from 'lodash/noop';
 import ReactNativeHaptic from 'react-native-haptic';
 
 import {
@@ -29,7 +26,7 @@ import { MediaExplorerModal } from '../mediaExplorer';
 import { Units, Colors, BlurApertureRange } from '../../constants';
 import { wrapWithVideoReviewScreenState } from './videoReviewScreenState';
 import { wrapWithVideoReviewScreenGestureState } from './videoReviewScreenGestureState';
-import { VideoPlayButton } from './VideoPlayButton';
+import { VideoReviewScreenFlatListItem } from './VideoReviewScreenFlatListItem';
 
 import type { ComponentType } from 'react';
 
@@ -59,11 +56,6 @@ const styles = {
   depthInput: {
     paddingHorizontal: Units.small * 2,
   },
-  video: (isFullScreen: boolean) => ({
-    flex: 1,
-    borderRadius: isFullScreen ? 0 : Units.extraSmall,
-    overflow: 'hidden',
-  }),
   iconButton: {
     height: Units.large,
     width: Units.large,
@@ -107,15 +99,6 @@ const styles = {
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopStyle: 'solid',
     borderTopColor: Colors.borders.gray,
-  },
-  playButtonContainer: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 };
 
@@ -206,58 +189,24 @@ export const VideoReviewScreen: ComponentType<
                 onScrollBegin={onScrollDidBegin}
                 onScrollEnd={onScrollDidEnd}
                 renderItem={asset => (
-                  <>
-                    <TouchableWithoutFeedback onPress={toggleFullScreenVideo}>
-                      <View style={styles.flex}>
-                        <VideoComposition
-                          ref={
-                            selectedAssetID === asset.assetID
-                              ? videoCompositionRef
-                              : noop
-                          }
-                          style={styles.video(isFullScreenVideo)}
-                          assetID={asset.assetID}
-                          previewMode={
-                            isDepthPreviewEnabled ? 'depth' : 'portraitMode'
-                          }
-                          resizeMode="scaleAspectFill"
-                          blurAperture={
-                            selectedAssetID === asset.assetID
-                              ? blurAperture
-                              : BlurApertureRange.initialValue
-                          }
-                          isReadyToLoad={selectedAssetID === asset.assetID}
-                          onPlaybackProgress={setPlaybackProgressThrottled}
-                          onPlaybackStateChange={p =>
-                            setPlaybackState(asset.assetID, p)
-                          }
-                          onMetadataLoaded={metadata => {
-                            if (
-                              metadata.blurAperture &&
-                              selectedAssetID === asset.assetID
-                            ) {
-                              setBlurAperture(metadata.blurAperture);
-                            }
-                          }}
-                        />
-                      </View>
-                    </TouchableWithoutFeedback>
-                    <View
-                      style={styles.playButtonContainer}
-                      pointerEvents="box-none"
-                    >
-                      <VideoPlayButton
-                        playbackState={playbackState(asset.assetID)}
-                        onPress={() => {
-                          if (playbackState(asset.assetID) !== 'playing') {
-                            seekToProgress(0);
-                            play();
-                            showFullScreenVideo();
-                          }
-                        }}
-                      />
-                    </View>
-                  </>
+                  <VideoReviewScreenFlatListItem
+                    asset={asset}
+                    setPlaybackProgress={setPlaybackProgressThrottled}
+                    blurAperture={blurAperture}
+                    videoCompositionRef={videoCompositionRef}
+                    selectedAssetID={selectedAssetID}
+                    playbackState={playbackState(asset.assetID)}
+                    isDepthPreviewEnabled={isDepthPreviewEnabled}
+                    isFullScreenVideo={isFullScreenVideo}
+                    toggleFullScreenVideo={toggleFullScreenVideo}
+                    setPlaybackState={setPlaybackState}
+                    setBlurAperture={setBlurAperture}
+                    onPlayButtonPress={() => {
+                      seekToProgress(0);
+                      // play();
+                      showFullScreenVideo();
+                    }}
+                  />
                 )}
                 onRequestDismiss={onRequestDismiss}
                 onRequestLoadMore={loadNextAssets}
