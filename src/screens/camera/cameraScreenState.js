@@ -182,17 +182,17 @@ export function wrapWithCameraScreenState<
     }
 
     addVolumeButtonListener() {
-      // this.removeVolumeButtonListener();
-      // this.volumeButtonListener = addVolumeButtonListener(
-      //   this.handleVolumeButtonPress
-      // );
+      this.removeVolumeButtonListener();
+      this.volumeButtonListener = addVolumeButtonListener(
+        this.handleVolumeButtonPress
+      );
     }
 
     removeVolumeButtonListener() {
-      // if (this.volumeButtonListener) {
-      //   this.volumeButtonListener.remove();
-      //   this.volumeButtonListener = null;
-      // }
+      if (this.volumeButtonListener) {
+        this.volumeButtonListener.remove();
+        this.volumeButtonListener = null;
+      }
     }
 
     findBocaAlbum(): ?AlbumObject {
