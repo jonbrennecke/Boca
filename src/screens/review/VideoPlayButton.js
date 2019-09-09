@@ -43,10 +43,10 @@ export const VideoPlayButton: SFC<VideoPlayButtonProps> = ({
   playbackState,
   onPress,
 }: VideoPlayButtonProps) => (
-  <TouchableOpacity onPress={onPress} disabled={playbackState !== 'paused'}>
+  <TouchableOpacity onPress={onPress} disabled={!['paused', 'readyToPlay'].includes(playbackState)}>
     <View style={[styles.button(playbackState), style]}>
       <BlurView style={styles.background} blurType="light" />
-      {playbackState === 'paused' ? (
+      {['paused', 'readyToPlay'].includes(playbackState) ? (
         <PlayIcon style={styles.icon} fillColor={Colors.solid.white} />
       ) : (
         <ActivityIndicator color={Colors.solid.white} />

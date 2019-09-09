@@ -203,7 +203,7 @@ export const VideoReviewScreen: ComponentType<
                     setBlurAperture={setBlurAperture}
                     onPlayButtonPress={() => {
                       seekToProgress(0);
-                      // play();
+                      play();
                       showFullScreenVideo();
                     }}
                   />
