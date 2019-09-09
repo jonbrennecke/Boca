@@ -207,9 +207,7 @@ export const VideoReviewScreen: ComponentType<
                 onScrollEnd={onScrollDidEnd}
                 renderItem={asset => (
                   <>
-                    <TouchableWithoutFeedback
-                      onPress={() => toggleFullScreenVideo()}
-                    >
+                    <TouchableWithoutFeedback onPress={toggleFullScreenVideo}>
                       <View style={styles.flex}>
                         <VideoComposition
                           ref={
@@ -230,7 +228,9 @@ export const VideoReviewScreen: ComponentType<
                           }
                           isReadyToLoad={selectedAssetID === asset.assetID}
                           onPlaybackProgress={setPlaybackProgressThrottled}
-                          onPlaybackStateChange={setPlaybackState}
+                          onPlaybackStateChange={p =>
+                            setPlaybackState(asset.assetID, p)
+                          }
                           onMetadataLoaded={metadata => {
                             if (
                               metadata.blurAperture &&
@@ -247,9 +247,9 @@ export const VideoReviewScreen: ComponentType<
                       pointerEvents="box-none"
                     >
                       <VideoPlayButton
-                        isVisible={playbackState === 'paused'}
+                        playbackState={playbackState(asset.assetID)}
                         onPress={() => {
-                          if (playbackState !== 'playing') {
+                          if (playbackState(asset.assetID) !== 'playing') {
                             seekToProgress(0);
                             play();
                             showFullScreenVideo();
@@ -280,7 +280,11 @@ export const VideoReviewScreen: ComponentType<
             <View style={styles.playbackToolbar}>
               <PlaybackToolbar
                 playbackProgress={playbackProgress}
-                playbackState={playbackState}
+                playbackState={
+                  selectedAssetID
+                    ? playbackState(selectedAssetID) || 'waiting'
+                    : 'waiting'
+                }
                 assetID={selectedAssetID}
                 assetDuration={selectedAsset?.duration}
                 onRequestPlay={play}

@@ -21,6 +21,8 @@
 
 .*/node_modules/react-native-safe-area/.*
 
+.*/vendor/bundle
+
 [include]
 
 [libs]
