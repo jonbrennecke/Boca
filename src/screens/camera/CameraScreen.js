@@ -178,6 +178,7 @@ export const CameraScreen: ComponentType<
             <SwitchCameraButton
               style={styles.cameraSideButton}
               isEnabled={isSwitchCameraEnabled}
+              cameraPosition={cameraPosition}
               onPress={withHapticFeedback(switchCameraPosition)}
             />
           </View>
