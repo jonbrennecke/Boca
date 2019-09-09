@@ -137,8 +137,13 @@ export function wrapWithVideoReviewScreenState<
       this.selectVideo(asset?.assetID);
     }
 
-    selectVideo = (assetID?: string) =>
+    selectVideo = (assetID?: string) => {
+      if (this.videoCompositionRef.current) {
+        this.pause();
+        this.seekToProgress(0);
+      }
       this.setState({ selectedAssetID: assetID });
+    }
 
     togglePortraitMode() {
       this.setState({
