@@ -28,7 +28,7 @@ export type DragGestureHandlerProps = {
   jumpToGrantedPosition?: boolean,
   returnToOriginalPosition?: boolean,
   initialValue?: { x: number, y: number },
-  canDrag?: boolean,
+  disabled?: boolean,
   vertical?: boolean,
   horizontal?: boolean,
   shouldApplyTransformStyles?: boolean,
@@ -160,6 +160,9 @@ export class DragGestureHandler extends PureComponent<
   }
 
   handleGrant(event: any, gesture: Gesture) {
+    if (this.props.disabled) {
+      return;
+    }
     this.pan.addListener(this.panListenerThrottled);
     this.setState({
       isDragging: true,

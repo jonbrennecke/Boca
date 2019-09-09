@@ -32,6 +32,7 @@ export type VideoReviewScreenState = {
   isFullScreenVideo: boolean,
   isExporting: boolean,
   isMediaModalVisible: boolean,
+  isSwipeGestureEnabled: boolean,
   toast: {
     isVisible: boolean,
     title: string,
@@ -65,6 +66,8 @@ export type VideoReviewScreenStateExtraProps = {
   scrollToAsset: (assetID: string) => void,
   hideToast: () => void,
   showFullScreenVideo: () => void,
+  onScrollDidBegin: () => void,
+  onScrollDidEnd: () => void,
 } & VideoReviewScreenState;
 
 export function wrapWithVideoReviewScreenState<
@@ -91,6 +94,7 @@ export function wrapWithVideoReviewScreenState<
       isFullScreenVideo: false,
       isExporting: false,
       isMediaModalVisible: false,
+      isSwipeGestureEnabled: false,
       toast: {
         isVisible: false,
         title: '',
@@ -324,6 +328,14 @@ export function wrapWithVideoReviewScreenState<
       });
     }
 
+    handleScrollDidBegin() {
+      this.setState({ isSwipeGestureEnabled: false });
+    }
+
+    handleScrollDidEnd() {
+      this.setState({ isSwipeGestureEnabled: true });
+    }
+
     render() {
       return (
         <WrappedComponent
@@ -350,6 +362,8 @@ export function wrapWithVideoReviewScreenState<
           setPlaybackProgressThrottled={this.setPlaybackProgressThrottled}
           scrollToAsset={this.scrollToAsset}
           hideToast={this.hideToast}
+          onScrollDidBegin={this.handleScrollDidBegin}
+          onScrollDidEnd={this.handleScrollDidEnd}
         />
       );
     }

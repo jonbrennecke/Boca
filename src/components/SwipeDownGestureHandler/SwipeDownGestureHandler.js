@@ -10,6 +10,7 @@ import type { SFC, Style, Children } from '../../types';
 export type SwipeDownGestureHandlerProps = {
   style?: ?Style,
   children?: ?Children,
+  isDisabled?: boolean,
   swipeGesture: Animated.Value,
   isSwipeGestureInProgress: boolean,
   verticalThreshold: number,
@@ -50,6 +51,7 @@ export const SwipeDownGestureHandler: SFC<SwipeDownGestureHandlerProps> = ({
   children,
   verticalThreshold,
   swipeGesture,
+  isDisabled = false,
   isSwipeGestureInProgress,
   onSwipeDownGestureStart,
   onSwipeDownGestureRelease,
@@ -58,6 +60,7 @@ export const SwipeDownGestureHandler: SFC<SwipeDownGestureHandlerProps> = ({
 }: SwipeDownGestureHandlerProps) => (
   <DragGestureHandler
     style={[styles.container(isSwipeGestureInProgress), style]}
+    disabled={isDisabled}
     clampToBounds={false}
     jumpToGrantedPosition={false}
     vertical={true}

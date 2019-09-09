@@ -145,6 +145,7 @@ export const VideoReviewScreen: ComponentType<
     isReviewScreenVisible,
     isDepthPreviewEnabled,
     isFullScreenVideo,
+    isSwipeGestureEnabled,
     toggleDepthPreview,
     toggleFullScreenVideo,
     exportProgress,
@@ -167,6 +168,8 @@ export const VideoReviewScreen: ComponentType<
     scrollToAsset,
     hideToast,
     showFullScreenVideo,
+    onScrollDidBegin,
+    onScrollDidEnd
   }) => (
     <>
       <Animated.View
@@ -187,6 +190,7 @@ export const VideoReviewScreen: ComponentType<
             style={styles.flex}
             verticalThreshold={300}
             swipeGesture={swipeGesture}
+            isDisabled={!isSwipeGestureEnabled}
             isSwipeGestureInProgress={isSwipeGestureInProgress}
             onSwipeDownGestureStart={onSwipeDownGestureStart}
             onSwipeDownGestureRelease={onSwipeDownGestureRelease}
@@ -199,6 +203,8 @@ export const VideoReviewScreen: ComponentType<
                 flatListRef={flatListRef}
                 style={styles.flex}
                 assets={assetsArray}
+                onScrollBegin={onScrollDidBegin}
+                onScrollEnd={onScrollDidEnd}
                 renderItem={asset => (
                   <>
                     <TouchableWithoutFeedback

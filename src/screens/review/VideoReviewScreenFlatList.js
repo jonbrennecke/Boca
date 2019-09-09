@@ -1,6 +1,7 @@
 // @flow
 import React, { createRef } from 'react';
 import { FlatList, View, Dimensions } from 'react-native';
+import noop from 'lodash/noop';
 
 import { Units } from '../../constants';
 
@@ -16,9 +17,8 @@ export type VideoReviewScreenFlatListProps = {
   onSelectAsset: (asset: MediaObject) => void,
   renderItem: (item: MediaObject) => ?Element<*>,
   onRequestLoadMore: () => void,
-  onRequestDismiss: () => void,
-  onSwipeDownGestureRelease: () => void,
-  onSwipeDownGestureMove: (event: any, gesture: any) => void,
+  onScrollBegin?: () => void,
+  onScrollEnd?: () => void,
 };
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
@@ -45,9 +45,11 @@ export const VideoReviewScreenFlatList: SFC<VideoReviewScreenFlatListProps> = ({
   flatListRef,
   assets,
   renderItem,
+  isScrollEnabled = true,
   onSelectAsset,
   onRequestLoadMore,
-  isScrollEnabled = true,
+  onScrollBegin = noop,
+  onScrollEnd = noop
 }: VideoReviewScreenFlatListProps) => (
   <FlatList
     ref={flatListRef}
@@ -74,6 +76,8 @@ export const VideoReviewScreenFlatList: SFC<VideoReviewScreenFlatListProps> = ({
         onSelectAsset(assets[index]);
       }
     }}
+    onScrollBeginDrag={onScrollBegin}
+    onMomentumScrollEnd={onScrollEnd}
     renderItem={({ item: asset }) => (
       <View style={styles.videoWrap}>{renderItem(asset)}</View>
     )}
