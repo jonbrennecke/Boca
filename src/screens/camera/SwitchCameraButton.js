@@ -59,7 +59,7 @@ export class SwitchCameraButton extends PureComponent<
       toValue: this.state.value,
       easing: Easing.inOut(Easing.quad),
       useNativeDriver: true,
-      duration: 200
+      duration: 200,
     }).start();
   }
 

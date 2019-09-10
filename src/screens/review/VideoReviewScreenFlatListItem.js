@@ -25,6 +25,7 @@ export type VideoReviewScreenFlatListItemProps = {
   setBlurAperture: (blurAperture: number) => any,
   setPlaybackProgress: (playbackProgress: number) => any,
   onPlayButtonPress: () => void,
+  onVideoDidPlayToEnd: () => void,
 };
 
 const styles = {
@@ -47,6 +48,7 @@ const styles = {
   },
 };
 
+// eslint-disable-next-line flowtype/generic-spacing
 export const VideoReviewScreenFlatListItem: SFC<
   VideoReviewScreenFlatListItemProps
 > = ({
@@ -62,6 +64,7 @@ export const VideoReviewScreenFlatListItem: SFC<
   setBlurAperture,
   setPlaybackProgress,
   onPlayButtonPress,
+  onVideoDidPlayToEnd,
 }: VideoReviewScreenFlatListItemProps) => (
   <>
     <TouchableWithoutFeedback onPress={toggleFullScreenVideo}>
@@ -85,6 +88,7 @@ export const VideoReviewScreenFlatListItem: SFC<
               setBlurAperture(metadata.blurAperture);
             }
           }}
+          onDidPlayToEnd={onVideoDidPlayToEnd}
         />
       </View>
     </TouchableWithoutFeedback>

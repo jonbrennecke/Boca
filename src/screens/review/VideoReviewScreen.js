@@ -206,6 +206,9 @@ export const VideoReviewScreen: ComponentType<
                       play();
                       showFullScreenVideo();
                     }}
+                    onVideoDidPlayToEnd={() => {
+                      seekToProgress(0);
+                    }}
                   />
                 )}
                 onRequestDismiss={onRequestDismiss}
