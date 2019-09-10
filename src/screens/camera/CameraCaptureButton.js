@@ -100,13 +100,13 @@ export class CameraCaptureButton extends PureComponent<Props> {
   animateIn() {
     Animated.spring(this.outerViewAnim, {
       toValue: 0,
-      duration: 200,
+      duration: 150,
       useNativeDriver: true,
       easing: Easing.out(Easing.quad),
     }).start();
     Animated.spring(this.centerViewAnim, {
       toValue: 0,
-      duration: 200,
+      duration: 150,
       easing: Easing.out(Easing.quad),
       useNativeDriver: true,
     }).start();
@@ -115,13 +115,13 @@ export class CameraCaptureButton extends PureComponent<Props> {
   animateOut() {
     Animated.spring(this.outerViewAnim, {
       toValue: 1.0,
-      duration: 200,
+      duration: 150,
       useNativeDriver: true,
       easing: Easing.out(Easing.quad),
     }).start();
     Animated.spring(this.centerViewAnim, {
       toValue: 1.0,
-      duration: 200,
+      duration: 150,
       easing: Easing.out(Easing.quad),
       useNativeDriver: true,
     }).start();
