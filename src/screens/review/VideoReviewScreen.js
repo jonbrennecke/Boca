@@ -198,7 +198,12 @@ export const VideoReviewScreen: ComponentType<
                     playbackState={playbackState(asset.assetID)}
                     isDepthPreviewEnabled={isDepthPreviewEnabled}
                     isFullScreenVideo={isFullScreenVideo}
-                    toggleFullScreenVideo={toggleFullScreenVideo}
+                    toggleFullScreenVideo={() => {
+                      toggleFullScreenVideo();
+                      if (playbackState(asset.assetID) === 'playing') {
+                        pause();
+                      }
+                    }}
                     setPlaybackState={setPlaybackState}
                     setBlurAperture={setBlurAperture}
                     onPlayButtonPress={() => {
