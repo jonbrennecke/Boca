@@ -5,32 +5,32 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: Switch to ios set_version_number lane" time="0.00128">
+      <testcase classname="fastlane.lanes" name="0: Switch to ios set_version_number lane" time="0.001069">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: cd ../ios &amp;&amp; xcrun agvtool new-version -all 0.0.9" time="0.712207">
+      <testcase classname="fastlane.lanes" name="1: cd ../ios &amp;&amp; xcrun agvtool new-version -all 0.0.11" time="0.780938">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="2: Switch to ios build lane" time="0.001819">
+      <testcase classname="fastlane.lanes" name="2: Switch to ios build lane" time="0.00107">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="3: match" time="5.267723">
+      <testcase classname="fastlane.lanes" name="3: match" time="13.762241">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="4: gym" time="230.694219">
+      <testcase classname="fastlane.lanes" name="4: gym" time="212.494057">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="5: pilot" time="533.384811">
+      <testcase classname="fastlane.lanes" name="5: pilot" time="448.645281">
         
       </testcase>
     
