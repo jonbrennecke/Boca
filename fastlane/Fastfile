@@ -44,6 +44,7 @@ platform :ios do |options|
     packageJson = JSON.parse(open('../package.json').read)
     version = packageJson['version']
     sh("cd ../ios && xcrun agvtool new-version -all #{version}")
+    sh("cd ../ios && xcrun agvtool new-marketing-version #{version}")
   end
 
   lane :deploy_testflight do |options|
