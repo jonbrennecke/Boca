@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>This app requires use of your location</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -48,6 +46,8 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app requires use of the media library to save videos</string>
 	<key>NSLocationAlwaysUsageDescription</key>
+	<string>This app requires use of your location</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app requires use of your location</string>
 	<key>UIAppFonts</key>
 	<array>
