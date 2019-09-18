@@ -13,7 +13,7 @@ import type { Style } from '../../types';
 export type SwitchCameraButtonProps = {
   style?: ?Style,
   isEnabled: boolean,
-  cameraPosition: CameraPosition,
+  cameraPosition: ?CameraPosition,
   onPress: () => void,
 };
 
