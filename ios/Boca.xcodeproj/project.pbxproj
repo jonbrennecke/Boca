@@ -64,6 +64,7 @@
 		FC74777B232D505000D3447C /* onboarding.mov in Resources */ = {isa = PBXBuildFile; fileRef = FC74777A232D505000D3447C /* onboarding.mov */; };
 		FC980B0E2301CAB400CFBFD4 /* libHSReactNativeMedia.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC5BAE0F22ECC4750077855E /* libHSReactNativeMedia.a */; };
 		FCC9E8702324533E00441517 /* BOCA LogoType@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCC9E86F2324533E00441517 /* BOCA LogoType@3x.png */; };
+		FCD64B2023333EF600E9112F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCD64AE523333EF600E9112F /* GoogleService-Info.plist */; };
 		FCE9B07E231897E1008A8407 /* High Street LogoType Black@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCE9B045231897E0008A8407 /* High Street LogoType Black@3x.png */; };
 /* End PBXBuildFile section */
 
@@ -571,6 +572,7 @@
 		FC7452F22305E49700436E62 /* Inter-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Inter-Black.ttf"; path = "../assets/fonts/Inter (TTF)/Inter-Black.ttf"; sourceTree = "<group>"; };
 		FC74777A232D505000D3447C /* onboarding.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = onboarding.mov; sourceTree = "<group>"; };
 		FCC9E86F2324533E00441517 /* BOCA LogoType@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BOCA LogoType@3x.png"; path = "../../assets/appstore/BOCA LogoType@3x.png"; sourceTree = "<group>"; };
+		FCD64AE523333EF600E9112F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FCE9B045231897E0008A8407 /* High Street LogoType Black@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "High Street LogoType Black@3x.png"; path = "../../assets/appstore/High Street LogoType Black@3x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -707,6 +709,7 @@
 		13B07FAE1A68108700A75B9A /* Boca */ = {
 			isa = PBXGroup;
 			children = (
+				FCD64AE523333EF600E9112F /* GoogleService-Info.plist */,
 				FC74777A232D505000D3447C /* onboarding.mov */,
 				FC419C812316E61200A5FA08 /* launchScreenAssets */,
 				FC6EA7D921CEA457007C3B3E /* fonts */,
@@ -1614,6 +1617,7 @@
 				FC7452F62305E49700436E62 /* Inter-Bold.ttf in Resources */,
 				FC7452F52305E49700436E62 /* Inter-ExtraBold.ttf in Resources */,
 				FC7452F72305E49700436E62 /* Inter-ExtraLight-BETA.ttf in Resources */,
+				FCD64B2023333EF600E9112F /* GoogleService-Info.plist in Resources */,
 				FCC9E8702324533E00441517 /* BOCA LogoType@3x.png in Resources */,
 				FC7452F92305E49700436E62 /* Inter-Black.ttf in Resources */,
 				FC6EA7D821CEA44D007C3B3E /* PT_Sans-Web-Regular.ttf in Resources */,
