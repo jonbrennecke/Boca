@@ -343,8 +343,13 @@ export function wrapWithCameraScreenState<
     dismissCameraFormatModal = () =>
       this.setState({ isFormatModalVisible: false });
 
-    presentReviewModal = () => this.setState({ isReviewModalVisible: true });
-    dismissReviewModal = () => this.setState({ isReviewModalVisible: false });
+    presentReviewModal = () => {
+      this.setState({ isReviewModalVisible: true }, () => this.removeVolumeButtonListener());
+    }
+
+    dismissReviewModal = () => {
+      this.setState({ isReviewModalVisible: false }, () => this.addVolumeButtonListener());
+    }
 
     enableDepthPreview = () => this.setState({ isDepthPreviewEnabled: true });
     disableDepthPreview = () => this.setState({ isDepthPreviewEnabled: false });
