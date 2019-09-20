@@ -14,6 +14,8 @@ import {
   exportComposition,
 } from '@jonbrennecke/react-native-camera';
 
+import { wrapWithAppState } from '../../utils/appStateHOC';
+
 import type { ComponentType } from 'react';
 import type {
   MediaObject,
@@ -21,6 +23,7 @@ import type {
 } from '@jonbrennecke/react-native-media';
 import type { CameraStateHOCProps } from '@jonbrennecke/react-native-camera';
 
+import type { AppStateHOCProps } from '../../utils/appStateHOC';
 import type { ReturnType } from '../../types';
 
 export type VideoReviewScreenState = {
@@ -76,13 +79,17 @@ export function wrapWithVideoReviewScreenState<
     VideoReviewScreenStateExtraProps &
       MediaStateHOCProps &
       CameraStateHOCProps &
+      AppStateHOCProps &
       PassThroughProps
   >
 >(WrappedComponent: C): ComponentType<PassThroughProps> {
   // $FlowFixMe
   @autobind
   class VideoReviewScreenStateContainer extends PureComponent<
-    MediaStateHOCProps & CameraStateHOCProps & PassThroughProps,
+    MediaStateHOCProps &
+      CameraStateHOCProps &
+      AppStateHOCProps &
+      PassThroughProps,
     VideoReviewScreenState
   > {
     state: $Exact<VideoReviewScreenState> = {
@@ -135,6 +142,32 @@ export function wrapWithVideoReviewScreenState<
       const assets = this.getAssetsAsArray();
       const asset = assets[0];
       this.selectVideo(asset?.assetID);
+    }
+
+    async componentDidUpdate(
+      prevProps: MediaStateHOCProps &
+        CameraStateHOCProps &
+        AppStateHOCProps &
+        PassThroughProps
+    ) {
+      if (this.props.appState !== prevProps.appState) {
+        if (
+          this.props.appState &&
+          /inactive|background/.test(this.props.appState)
+        ) {
+          this.handleAppWillEnterBackground();
+        } else {
+          this.handleAppWillEnterForeground();
+        }
+      }
+    }
+
+    handleAppWillEnterBackground() {
+      this.pause();
+    }
+
+    handleAppWillEnterForeground() {
+      // TODO
     }
 
     selectVideo = (assetID?: string) => {
@@ -376,8 +409,8 @@ export function wrapWithVideoReviewScreenState<
 
   const withMediaState = createMediaStateHOC(state => state.media);
   const withCameraState = createCameraStateHOC(state => state.camera);
-  const Component = withCameraState(
-    withMediaState(VideoReviewScreenStateContainer)
+  const Component = wrapWithAppState(
+    withCameraState(withMediaState(VideoReviewScreenStateContainer))
   );
   const WrappedWithVideoReviewScreenState = props => <Component {...props} />;
   return WrappedWithVideoReviewScreenState;

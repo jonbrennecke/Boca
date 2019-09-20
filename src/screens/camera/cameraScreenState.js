@@ -13,7 +13,7 @@ import { autobind } from 'core-decorators';
 import SplashScreen from 'react-native-splash-screen';
 import uniqBy from 'lodash/uniqBy';
 
-import { wrapWithAppState } from './appStateHOC';
+import { wrapWithAppState } from '../../utils/appStateHOC';
 import { BlurApertureRange } from '../../constants';
 
 import type { ComponentType } from 'react';
@@ -26,7 +26,7 @@ import type {
   AlbumObject,
   MediaStateHOCProps,
 } from '@jonbrennecke/react-native-media';
-import type { AppStateHOCProps } from './appStateHOC';
+import type { AppStateHOCProps } from '../../utils/appStateHOC';
 import type { ReturnType } from '../../types';
 
 export type InitializationStatus = 'loading' | 'loaded' | 'none';
@@ -174,7 +174,10 @@ export function wrapWithCameraScreenState<
     handleAppWillEnterForeground() {
       this.willEnterForegroundInteractionHandle = InteractionManager.runAfterInteractions(
         () => {
-          if (this.state.initializationStatus === 'loaded') {
+          if (
+            this.state.initializationStatus === 'loaded' &&
+            !this.state.isReviewModalVisible
+          ) {
             this.addVolumeButtonListener();
           }
         }
@@ -344,12 +347,16 @@ export function wrapWithCameraScreenState<
       this.setState({ isFormatModalVisible: false });
 
     presentReviewModal = () => {
-      this.setState({ isReviewModalVisible: true }, () => this.removeVolumeButtonListener());
-    }
+      this.setState({ isReviewModalVisible: true }, () =>
+        this.removeVolumeButtonListener()
+      );
+    };
 
     dismissReviewModal = () => {
-      this.setState({ isReviewModalVisible: false }, () => this.addVolumeButtonListener());
-    }
+      this.setState({ isReviewModalVisible: false }, () =>
+        this.addVolumeButtonListener()
+      );
+    };
 
     enableDepthPreview = () => this.setState({ isDepthPreviewEnabled: true });
     disableDepthPreview = () => this.setState({ isDepthPreviewEnabled: false });
