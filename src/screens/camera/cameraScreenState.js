@@ -366,8 +366,7 @@ export function wrapWithCameraScreenState<
         {
           cameraPosition:
             this.state.cameraPosition === 'front' ? 'back' : 'front',
-        },
-        () => {}
+        }
       );
 
     render() {
