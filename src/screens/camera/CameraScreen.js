@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { View, SafeAreaView, StyleSheet, StatusBar } from 'react-native';
+import { View, SafeAreaView, StyleSheet, StatusBar, InteractionManager } from 'react-native';
 import ReactNativeHaptic from 'react-native-haptic';
 
 import { Camera, HiddenVolume } from '@jonbrennecke/react-native-camera';
@@ -158,7 +158,9 @@ export const CameraScreen: ComponentType<
             <ThumbnailButton
               style={styles.cameraSideButton}
               assetID={thumbnailAssetID}
-              onPress={withHapticFeedback(presentReviewModal)}
+              onPress={withHapticFeedback(() => {
+                InteractionManager.runAfterInteractions(presentReviewModal);
+              })}
             />
             <CameraCaptureButton
               captureStatus={captureStatus}
