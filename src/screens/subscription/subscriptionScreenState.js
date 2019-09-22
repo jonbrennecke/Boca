@@ -23,6 +23,7 @@ export function wrapWithSubscriptionScreenState<
   > {
     async componentDidMount() {
       await this.props.loadProducts();
+      await this.props.loadPurchaseHistory();
     }
 
     render() {

@@ -8,7 +8,7 @@ import * as selectors from './iapSelectors';
 
 import type { ComponentType } from 'react';
 // eslint-disable-next-line import/named
-import type { Product } from 'react-native-iap';
+import type { Product, Purchase } from 'react-native-iap';
 
 import type { IInAppPurchasesState } from './iapState';
 import type { Dispatch, ReturnType } from '../../types';
@@ -19,10 +19,12 @@ type OwnProps = {};
 
 type StateProps = {
   products: Array<Product<string>>,
+  purchases: Array<Purchase>,
 };
 
 type DispatchProps = {
   loadProducts: ActionCreatorReturnType<typeof actionCreators.loadProducts>,
+  loadPurchaseHistory: ActionCreatorReturnType<typeof actionCreators.loadPurchaseHistory>,
 };
 
 export type InAppPurchasesStateHOCProps = OwnProps & StateProps & DispatchProps;
@@ -32,6 +34,7 @@ function mapInAppPurchasesStateToProps(
 ): $Exact<StateProps> {
   return {
     products: selectors.selectProducts(state),
+    purchases: selectors.selectPurchases(state),
   };
 }
 
@@ -40,6 +43,7 @@ function mapInAppPurchasesDispatchToProps(
 ): $Exact<DispatchProps> {
   return {
     loadProducts: () => dispatch(actionCreators.loadProducts()),
+    loadPurchaseHistory: () => dispatch(actionCreators.loadPurchaseHistory()),
   };
 }
 

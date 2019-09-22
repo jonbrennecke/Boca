@@ -15,10 +15,19 @@ export const actionCreators = {
         InAppPurchaseDetails.Unlimited.Yearly.sku,
       ]);
       dispatch(identityActionCreators.setProducts({ products }));
-      // dispatch();
     } catch (err) {
       // eslint-disable-next-line no-console
-      console.warn(err); // standardized err.code and err.message available
+      console.warn(err);
+    }
+  },
+
+  loadPurchaseHistory: () => async (dispatch: Dispatch<any>) => {
+    try {
+      const purchases = await RNIAP.getPurchaseHistory();
+      dispatch(identityActionCreators.setPurchases({ purchases }));
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.warn(err);
     }
   },
 };
