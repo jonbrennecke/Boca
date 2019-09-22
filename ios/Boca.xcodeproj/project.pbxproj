@@ -46,9 +46,9 @@
 		FC052608232065320045C2F3 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FC052607232065320045C2F3 /* libsqlite3.tbd */; };
 		FC05260A2320653A0045C2F3 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0526092320653A0045C2F3 /* libc++.tbd */; };
 		FC05260C232065550045C2F3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC05260B232065550045C2F3 /* SystemConfiguration.framework */; };
-		FC05260E232065630045C2F3 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC05260D232065620045C2F3 /* StoreKit.framework */; };
 		FC254DFF21CDB03800A9C901 /* libReactNativeNavigation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC983DD521CDAF6800063476 /* libReactNativeNavigation.a */; };
 		FC366D2E23008674002709A9 /* libRNBlur.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE471D822F3B431004F4A4C /* libRNBlur.a */; };
+		FC3F46322337CC7F004B7817 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC3F46312337CC7F004B7817 /* StoreKit.framework */; };
 		FC5BADCB22ECC3D10077855E /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5BADCA22ECC3D10077855E /* Empty.swift */; };
 		FC6D734123011C3100D07CD0 /* libHSReactNativeCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FCCA731E22F4B6FB00163C4E /* libHSReactNativeCamera.a */; };
 		FC6EA7D621CEA44D007C3B3E /* PassionOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC6EA7AC21CEA44D007C3B3E /* PassionOne-Regular.ttf */; };
@@ -556,7 +556,7 @@
 		FC052607232065320045C2F3 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		FC0526092320653A0045C2F3 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		FC05260B232065550045C2F3 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		FC05260D232065620045C2F3 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		FC3F46312337CC7F004B7817 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		FC5BADC922ECC3D00077855E /* Bombast-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bombast-Bridging-Header.h"; sourceTree = "<group>"; };
 		FC5BADCA22ECC3D10077855E /* Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
 		FC5BAE1022EE11DF0077855E /* HSCameraUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = HSCameraUtils.xcodeproj; path = "../../backflip-camera-utils/HSCameraUtils.xcodeproj"; sourceTree = "<group>"; };
@@ -581,7 +581,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC05260E232065630045C2F3 /* StoreKit.framework in Frameworks */,
 				FC05260C232065550045C2F3 /* SystemConfiguration.framework in Frameworks */,
 				FC05260A2320653A0045C2F3 /* libc++.tbd in Frameworks */,
 				FC052608232065320045C2F3 /* libsqlite3.tbd in Frameworks */,
@@ -609,6 +608,7 @@
 				FC0526002320646E0045C2F3 /* GoogleAppMeasurement.framework in Frameworks */,
 				4F8355BBACD74452BF972DE7 /* libReactNativeConfig.a in Frameworks */,
 				FC0526012320646E0045C2F3 /* FirebaseAnalytics.framework in Frameworks */,
+				FC3F46322337CC7F004B7817 /* StoreKit.framework in Frameworks */,
 				85BB55A0FE2D4A619258098E /* libHSAnimatedUI.a in Frameworks */,
 				FC0526022320646E0045C2F3 /* nanopb.framework in Frameworks */,
 				6162BF639C454225B3292EA3 /* libRNSVG.a in Frameworks */,
@@ -752,7 +752,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				FC05260D232065620045C2F3 /* StoreKit.framework */,
+				FC3F46312337CC7F004B7817 /* StoreKit.framework */,
 				FC05260B232065550045C2F3 /* SystemConfiguration.framework */,
 				FC0526092320653A0045C2F3 /* libc++.tbd */,
 				FC052607232065320045C2F3 /* libsqlite3.tbd */,
@@ -1066,6 +1066,11 @@
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 6DUV3UU8M8;
 						LastSwiftMigration = 1020;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
