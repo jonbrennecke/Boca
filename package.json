@@ -27,6 +27,7 @@
     "bluebird": "^3.5.3",
     "core-decorators": "0.20.0",
     "hex2rgb": "2.2.0",
+    "immutable": "4.0.0-rc.12",
     "isomorphic-fetch": "^2.2.1",
     "moment": "2.24.0",
     "querystring": "0.2.0",

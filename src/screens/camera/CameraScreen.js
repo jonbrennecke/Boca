@@ -19,6 +19,7 @@ import { CameraPreviewDimensions } from './CameraPreviewDimensions';
 import { ThumbnailButton } from './ThumbnailButton';
 import { VideoReviewModal } from '../review';
 import { BlurredSelectableButton, DepthInput } from '../../components';
+import { requireSubscription } from '../subscription/requireSubscription';
 
 import { SwitchCameraButton } from './SwitchCameraButton';
 import { Units, BlurApertureRange, Colors } from '../../constants';
@@ -87,115 +88,119 @@ function withHapticFeedback<R, T>(fn: T => R): T => R {
 // eslint-disable-next-line flowtype/generic-spacing
 export const CameraScreen: ComponentType<
   CameraScreenProps
-> = wrapWithCameraScreenState(
-  ({
-    style,
-    format,
-    thumbnailAssetID,
-    cameraRef,
-    isDepthPreviewEnabled,
-    isReviewModalVisible,
-    isSwitchCameraEnabled,
-    isAppInitializationComplete,
-    stopCapture,
-    startCapture,
-    captureStatus,
-    hasCameraPermissions,
-    requestCameraPermissions,
-    enableDepthPreview,
-    disableDepthPreview,
-    setBlurAperture,
-    blurAperture,
-    cameraPosition,
-    switchCameraPosition,
-    presentReviewModal,
-    dismissReviewModal,
-  }) => (
-    <CameraScreenOnboarding
-      style={styles.contentWrap}
-      isAppInitializationComplete={isAppInitializationComplete}
-      hasCameraPermissions={hasCameraPermissions}
-      onRequestCameraPermissions={requestCameraPermissions}
-    >
-      <SafeAreaView style={[styles.container, style]}>
-        <StatusBar barStyle="light-content" />
-        {isReviewModalVisible ? null : <HiddenVolume />}
-        <CameraPreviewDimensions
-          style={styles.cameraWrap}
-          cameraFormat={format}
-        >
-          {cameraPosition && isAppInitializationComplete ? (
-            <Camera
+> = requireSubscription(
+  wrapWithCameraScreenState(
+    ({
+      style,
+      format,
+      thumbnailAssetID,
+      cameraRef,
+      isDepthPreviewEnabled,
+      isReviewModalVisible,
+      isSwitchCameraEnabled,
+      isAppInitializationComplete,
+      stopCapture,
+      startCapture,
+      captureStatus,
+      hasCameraPermissions,
+      requestCameraPermissions,
+      enableDepthPreview,
+      disableDepthPreview,
+      setBlurAperture,
+      blurAperture,
+      cameraPosition,
+      switchCameraPosition,
+      presentReviewModal,
+      dismissReviewModal,
+    }) => (
+      <CameraScreenOnboarding
+        style={styles.contentWrap}
+        isAppInitializationComplete={isAppInitializationComplete}
+        hasCameraPermissions={hasCameraPermissions}
+        onRequestCameraPermissions={requestCameraPermissions}
+      >
+        <SafeAreaView style={[styles.container, style]}>
+          <StatusBar barStyle="light-content" />
+          {isReviewModalVisible ? null : <HiddenVolume />}
+          <CameraPreviewDimensions
+            style={styles.cameraWrap}
+            cameraFormat={format}
+          >
+            {cameraPosition && isAppInitializationComplete ? (
+              <Camera
+                style={styles.absoluteFill}
+                ref={cameraRef}
+                cameraPosition={cameraPosition}
+                previewMode={isDepthPreviewEnabled ? 'depth' : 'portraitMode'}
+                resizeMode="scaleAspectFill"
+                blurAperture={blurAperture}
+                isPaused={isReviewModalVisible}
+              />
+            ) : null}
+            <CameraScreenFocusArea
               style={styles.absoluteFill}
-              ref={cameraRef}
-              cameraPosition={cameraPosition}
-              previewMode={isDepthPreviewEnabled ? 'depth' : 'portraitMode'}
-              resizeMode="scaleAspectFill"
-              blurAperture={blurAperture}
-              isPaused={isReviewModalVisible}
+              onRequestFocus={point => {
+                if (cameraRef && cameraRef.current) {
+                  cameraRef.current.focusOnPoint(point);
+                }
+              }}
             />
-          ) : null}
-          <CameraScreenFocusArea
-            style={styles.absoluteFill}
-            onRequestFocus={point => {
-              if (cameraRef && cameraRef.current) {
-                cameraRef.current.focusOnPoint(point);
-              }
-            }}
+            <View style={styles.overCameraToolbar} pointerEvents="box-none">
+              <BlurredSelectableButton
+                text="Depth"
+                isSelected={isDepthPreviewEnabled}
+                onPress={withHapticFeedback(
+                  isDepthPreviewEnabled
+                    ? disableDepthPreview
+                    : enableDepthPreview
+                )}
+              />
+              <DepthInput
+                value={blurAperture || BlurApertureRange.initialValue}
+                min={BlurApertureRange.lowerBound}
+                max={BlurApertureRange.upperBound}
+                onSelectValue={setBlurAperture}
+              />
+            </View>
+          </CameraPreviewDimensions>
+          <View style={styles.bottomControls}>
+            <View style={styles.cameraControlsRow}>
+              <ThumbnailButton
+                style={styles.cameraSideButton}
+                assetID={thumbnailAssetID}
+                onPress={withHapticFeedback(() => {
+                  InteractionManager.runAfterInteractions(presentReviewModal);
+                })}
+              />
+              <CameraCaptureButton
+                captureStatus={captureStatus}
+                onRequestBeginCapture={() =>
+                  startCapture({
+                    metadata: {
+                      blurAperture,
+                    },
+                  })
+                }
+                onRequestEndCapture={() =>
+                  stopCapture({
+                    saveToCameraRoll: false,
+                  })
+                }
+              />
+              <SwitchCameraButton
+                style={styles.cameraSideButton}
+                isEnabled={isSwitchCameraEnabled}
+                cameraPosition={cameraPosition}
+                onPress={withHapticFeedback(switchCameraPosition)}
+              />
+            </View>
+          </View>
+          <VideoReviewModal
+            isVisible={isReviewModalVisible}
+            onRequestDismissModal={dismissReviewModal}
           />
-          <View style={styles.overCameraToolbar} pointerEvents="box-none">
-            <BlurredSelectableButton
-              text="Depth"
-              isSelected={isDepthPreviewEnabled}
-              onPress={withHapticFeedback(
-                isDepthPreviewEnabled ? disableDepthPreview : enableDepthPreview
-              )}
-            />
-            <DepthInput
-              value={blurAperture || BlurApertureRange.initialValue}
-              min={BlurApertureRange.lowerBound}
-              max={BlurApertureRange.upperBound}
-              onSelectValue={setBlurAperture}
-            />
-          </View>
-        </CameraPreviewDimensions>
-        <View style={styles.bottomControls}>
-          <View style={styles.cameraControlsRow}>
-            <ThumbnailButton
-              style={styles.cameraSideButton}
-              assetID={thumbnailAssetID}
-              onPress={withHapticFeedback(() => {
-                InteractionManager.runAfterInteractions(presentReviewModal);
-              })}
-            />
-            <CameraCaptureButton
-              captureStatus={captureStatus}
-              onRequestBeginCapture={() =>
-                startCapture({
-                  metadata: {
-                    blurAperture,
-                  },
-                })
-              }
-              onRequestEndCapture={() =>
-                stopCapture({
-                  saveToCameraRoll: false,
-                })
-              }
-            />
-            <SwitchCameraButton
-              style={styles.cameraSideButton}
-              isEnabled={isSwitchCameraEnabled}
-              cameraPosition={cameraPosition}
-              onPress={withHapticFeedback(switchCameraPosition)}
-            />
-          </View>
-        </View>
-        <VideoReviewModal
-          isVisible={isReviewModalVisible}
-          onRequestDismissModal={dismissReviewModal}
-        />
-      </SafeAreaView>
-    </CameraScreenOnboarding>
+        </SafeAreaView>
+      </CameraScreenOnboarding>
+    )
   )
 );
