@@ -19,7 +19,7 @@ const styles = {
     backgroundColor: Colors.backgrounds.white,
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
 };
 

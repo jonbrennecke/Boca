@@ -96,7 +96,7 @@ export const CameraScreen: ComponentType<
       thumbnailAssetID,
       cameraRef,
       isDepthPreviewEnabled,
-      isReviewModalVisible,  
+      isReviewModalVisible,
       isSwitchCameraEnabled,
       isAppInitializationComplete,
       stopCapture,
