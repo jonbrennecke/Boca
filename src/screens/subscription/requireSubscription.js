@@ -13,11 +13,9 @@ export const requireSubscription: <
   C
 ) => ComponentType<PassThroughProps> = WrappedComponent =>
   // $FlowFixMe
-  wrapWithSubscriptionScreenState(
-    props =>
-      props.isSubscribed ? (
-        <WrappedComponent {...props} />
-      ) : (
-        <SubscriptionScreen {...props} />
-      )
-  );
+  wrapWithSubscriptionScreenState(props => (
+    <>
+      <WrappedComponent {...props} />
+      <SubscriptionScreen isVisible={!props.isSubscribed} {...props} />
+    </>
+  ));
