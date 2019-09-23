@@ -24,7 +24,9 @@ type StateProps = {
 
 type DispatchProps = {
   loadProducts: ActionCreatorReturnType<typeof actionCreators.loadProducts>,
-  loadPurchaseHistory: ActionCreatorReturnType<typeof actionCreators.loadPurchaseHistory>,
+  loadPurchaseHistory: ActionCreatorReturnType<
+    typeof actionCreators.loadPurchaseHistory
+  >,
 };
 
 export type InAppPurchasesStateHOCProps = OwnProps & StateProps & DispatchProps;

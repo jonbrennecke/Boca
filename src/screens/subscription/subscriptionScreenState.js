@@ -1,6 +1,7 @@
 // @flow
 import React, { PureComponent } from 'react';
 import { autobind } from 'core-decorators';
+import SplashScreen from 'react-native-splash-screen';
 
 import { createInAppPurchasesStateHOC } from '../../redux/iap';
 
@@ -8,11 +9,18 @@ import type { ComponentType } from 'react';
 
 import type { InAppPurchasesStateHOCProps } from '../../redux/iap';
 
-export type SubscriptionScreenStateProps = {};
+export type SubscriptionScreenStateProps = {
+  isSubscribed: boolean,
+};
 
 export function wrapWithSubscriptionScreenState<
   PassThroughProps: Object,
-  C: ComponentType<InAppPurchasesStateHOCProps & PassThroughProps>
+  // eslint-disable-next-line flowtype/generic-spacing
+  C: ComponentType<
+    InAppPurchasesStateHOCProps &
+      SubscriptionScreenStateProps &
+      PassThroughProps
+  >
 >(WrappedComponent: C): ComponentType<PassThroughProps> {
   // $FlowFixMe
   @autobind
@@ -24,10 +32,18 @@ export function wrapWithSubscriptionScreenState<
     async componentDidMount() {
       await this.props.loadProducts();
       await this.props.loadPurchaseHistory();
+      SplashScreen.hide();
     }
 
     render() {
-      return <WrappedComponent {...this.props} {...this.state} />;
+      const isSubscribed = false; // FIXME
+      return (
+        <WrappedComponent
+          {...this.props}
+          {...this.state}
+          isSubscribed={isSubscribed}
+        />
+      );
     }
   }
 
