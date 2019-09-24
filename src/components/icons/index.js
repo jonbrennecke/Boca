@@ -1,6 +1,7 @@
 // @flow
 export * from './AlbumsIcon';
 export * from './CameraIcon';
+export * from './CheckMarkIcon';
 export * from './TrashIcon';
 export * from './ExitIcon';
 export * from './ExportIcon';

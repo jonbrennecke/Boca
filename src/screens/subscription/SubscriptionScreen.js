@@ -3,8 +3,8 @@ import React from 'react';
 import { Modal, View, Text, StyleSheet, SafeAreaView } from 'react-native';
 import { BlurView } from '@jonbrennecke/react-native-animated-ui';
 
-import { IconButton, SelectableButton } from '../../components';
-import { ExitIcon } from '../../components/icons';
+import { IconButton, SelectableButton, Heading } from '../../components';
+import { ExitIcon, CheckMarkIcon } from '../../components/icons';
 import { wrapWithSubscriptionScreenState } from './subscriptionScreenState';
 import { Colors, Units, ColorTheme } from '../../constants';
 
@@ -21,10 +21,17 @@ const styles = {
   },
   popupInner: {
     flex: 1,
-    marginVertical: Units.extraLarge * 2,
+    marginVertical: Units.extraLarge * 3,
     marginHorizontal: Units.extraLarge,
     backgroundColor: Colors.backgrounds.white,
     borderRadius: Units.small,
+    shadowColor: Colors.solid.black,
+    shadowOpacity: 0.5,
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowRadius: 25,
   },
   header: {
     width: '100%',
@@ -51,26 +58,67 @@ const styles = {
     fontFamily: 'Inter',
     fontWeight: 'bold',
     textAlign: 'center',
-    letterSpacing: 1.5,
   },
   headerSpacer: {
     flex: 1,
   },
-  list: {},
+  list: {
+    flex: 1,
+    paddingVertical: Units.medium,
+  },
   listItem: {
+    paddingVertical: Units.extraSmall,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  listWrap: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  listItemText: {
     color: Colors.text.dark,
-    fontSize: 15,
+    fontSize: 13,
     fontFamily: 'Inter',
-    textAlign: 'center',
-    letterSpacing: 1.5,
-    paddingVertical: Units.small,
+    textAlign: 'left',
   },
   body: {
     flex: 1,
     paddingVertical: Units.small,
-    paddingHorizontal: Units.small,
-    justifyContent: 'space-between',
+    paddingHorizontal: Units.large,
   },
+  legalLinks: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  legalLinkText: {
+    color: Colors.text.dark,
+    fontSize: 10,
+    fontWeight: 'bold',
+    fontFamily: 'Inter',
+    textAlign: 'center',
+    paddingVertical: Units.small,
+  },
+  buttonSubtext: {
+    color: Colors.text.dark,
+    fontSize: 12,
+    fontWeight: 'bold',
+    fontFamily: 'Inter',
+    textAlign: 'center',
+    paddingVertical: Units.small,
+  },
+  checkIcon: {
+    height: Units.extraLarge,
+    width: Units.extraLarge,
+  },
+  title: {
+    textAlign: 'center',
+    marginTop: Units.small
+  },
+  graphic: {
+    flex: 1,
+    backgroundColor: '#ccc',
+  }
 };
 
 // eslint-disable-next-line flowtype/generic-spacing
@@ -92,31 +140,50 @@ export const SubscriptionScreen: ComponentType<
                   onPress={() => {}}
                 />
               </View>
-              <Text style={styles.headerText}>Unlock!</Text>
+              <Text style={styles.headerText}>Upgrade</Text>
               <View style={styles.headerSpacer} />
             </View>
 
+            <View style={styles.graphic}>
+            </View>
+
             <View style={styles.body}>
-              <View style={styles.list}>
-                <Text style={styles.listItem}>No watermarks.</Text>
-                <Text style={styles.listItem}>Unlimited videos.</Text>
-                <Text style={styles.listItem}>14 day free trial</Text>
+
+              <Heading style={styles.title} text="Upgrade for complete access" />
+
+              <View style={styles.listWrap}>
+                <View style={styles.list}>
+                  <View style={styles.listItem}>
+                    <CheckMarkIcon style={styles.checkIcon} fillColor={Colors.solid.black} />
+                    <Text style={styles.listItemText}>No watermarks</Text>
+                  </View>
+                  <View style={styles.listItem}>
+                    <CheckMarkIcon style={styles.checkIcon} fillColor={Colors.solid.black} />
+                    <Text style={styles.listItemText}>Unlimited videos</Text>
+                  </View>
+                  <View style={styles.listItem}>
+                    <CheckMarkIcon style={styles.checkIcon} fillColor={Colors.solid.black} />
+                    <Text style={styles.listItemText}>One price</Text>
+                  </View>
+                </View>
               </View>
 
               <SelectableButton
-                text="Subscribe now"
+                text="Buy now"
+                subtitleText="One time purchase of $9.99" // TODO: local currency
                 onPress={() => {}}
                 colorTheme={
                   ColorTheme.dark.actionSheet.components.button.primary
                 }
               />
-            </View>
 
-            {/* <Text>Recurring billing. Cancel anytime.</Text>
-            <Text>Restore a Purchase</Text>
-            <Text>Privacy Policy</Text>
-            <Text>Terms & Conditions</Text>
-             */}
+              <View>
+                <View style={styles.legalLinks}>
+                  <Text style={styles.legalLinkText}>Restore a Purchase</Text>
+                </View>
+              </View>
+
+            </View>
           </View>
         </SafeAreaView>
       </View>

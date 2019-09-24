@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 
 import { Units, ColorTheme } from '../../constants';
 
@@ -12,6 +12,7 @@ import type { SFC, Style } from '../../types';
 export type SelectableButtonProps = {
   style?: ?Style,
   text: string,
+  subtitleText?: string,
   icon?: ComponentType<*>,
   isDisabled?: boolean,
   isSelected?: boolean,
@@ -35,6 +36,9 @@ const styles = {
     paddingHorizontal: Units.extraLarge,
     opacity: isDisabled ? 0.75 : 1,
   }),
+  buttonTextWrap: {
+    flexDirection: 'column',
+  },
   buttonText: (color: string) => ({
     color,
     fontSize: 14,
@@ -43,11 +47,18 @@ const styles = {
     textAlign: 'center',
     letterSpacing: 1.5,
   }),
+  buttonSubtitleText: (color: string) => ({
+    color,
+    fontSize: 10,
+    fontFamily: 'Inter',
+    textAlign: 'center',
+  }),
 };
 
 export const SelectableButton: SFC<SelectableButtonProps> = ({
   style,
   text,
+  subtitleText,
   colorTheme = ColorTheme.dark.default.components.button,
   isDisabled = false,
   isSelected = false,
@@ -77,12 +88,21 @@ export const SelectableButton: SFC<SelectableButtonProps> = ({
           : colorTheme.icon.default,
         style: styles.icon,
       })}
-    <Text
-      style={styles.buttonText(
-        isSelected ? colorTheme.text.selected : colorTheme.text.default
-      )}
-    >
-      {text.toLocaleUpperCase()}
-    </Text>
+    <View style={styles.buttonTextWrap}>
+      <Text
+        style={styles.buttonText(
+          isSelected ? colorTheme.text.selected : colorTheme.text.default
+        )}
+      >
+        {text.toLocaleUpperCase()}
+      </Text>
+      {subtitleText && <Text
+        style={styles.buttonSubtitleText(
+          isSelected ? colorTheme.text.selected : colorTheme.text.default
+        )}
+      >
+        {subtitleText}
+      </Text>}
+    </View>
   </TouchableOpacity>
 );
