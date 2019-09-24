@@ -30,9 +30,18 @@ export function wrapWithSubscriptionScreenState<
       PassThroughProps
   > {
     async componentDidMount() {
-      await this.props.loadProducts();
-      await this.props.loadPurchaseHistory();
-      SplashScreen.hide();
+      try {
+        await this.props.loadProducts();
+        await this.props.loadPurchaseHistory();
+        await this.props.loadReceipt();
+      }
+      catch (error) {
+        // eslint-disable-next-line no-console
+        console.warn(error);
+      }
+      finally {
+        SplashScreen.hide();
+      }
     }
 
     render() {

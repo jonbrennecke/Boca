@@ -6,11 +6,12 @@ import { createInAppPurchaseState } from './iapState';
 import type { Product, Purchase } from 'react-native-iap';
 
 import type { Action } from '../../types';
-import type { IInAppPurchasesState } from './iapState';
+import type { IInAppPurchasesState, ReceiptObject } from './iapState';
 
 const InAppPurchaseState = createInAppPurchaseState({
   products: [],
   purchases: [],
+  receipt: null,
 });
 
 export const initialState = new InAppPurchaseState();
@@ -35,6 +36,16 @@ const reducers = {
     }
     return state.setPurchases(payload.purchases);
   },
+
+  setReceipt: (
+    state,
+    { payload }: Action<{ receipt: ReceiptObject }>
+  ): IInAppPurchasesState => {
+    if (!payload) {
+      return state;
+    }
+    return state.setReceipt(payload.receipt);
+  }
 };
 
 export const {

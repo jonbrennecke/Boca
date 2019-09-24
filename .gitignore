@@ -58,3 +58,4 @@ buck-out/
 vendor/bundle/*
 ios/Firebase
 *.dSYM.zip
+.env

@@ -10,7 +10,7 @@ import type { ComponentType } from 'react';
 // eslint-disable-next-line import/named
 import type { Product, Purchase } from 'react-native-iap';
 
-import type { IInAppPurchasesState } from './iapState';
+import type { IInAppPurchasesState, ReceiptObject } from './iapState';
 import type { Dispatch, ReturnType } from '../../types';
 
 type ActionCreatorReturnType<T> = ReturnType<() => Dispatch<T>>;
@@ -20,13 +20,16 @@ type OwnProps = {};
 type StateProps = {
   products: Array<Product<string>>,
   purchases: Array<Purchase>,
+  receipt: ?ReceiptObject,
 };
 
 type DispatchProps = {
   loadProducts: ActionCreatorReturnType<typeof actionCreators.loadProducts>,
+  // eslint-disable-next-line flowtype/generic-spacing
   loadPurchaseHistory: ActionCreatorReturnType<
     typeof actionCreators.loadPurchaseHistory
   >,
+  loadReceipt: ActionCreatorReturnType<typeof actionCreators.loadReceipt>,
 };
 
 export type InAppPurchasesStateHOCProps = OwnProps & StateProps & DispatchProps;
@@ -37,6 +40,7 @@ function mapInAppPurchasesStateToProps(
   return {
     products: selectors.selectProducts(state),
     purchases: selectors.selectPurchases(state),
+    receipt: selectors.selectReceipt(state),
   };
 }
 
@@ -46,6 +50,7 @@ function mapInAppPurchasesDispatchToProps(
   return {
     loadProducts: () => dispatch(actionCreators.loadProducts()),
     loadPurchaseHistory: () => dispatch(actionCreators.loadPurchaseHistory()),
+    loadReceipt: () => dispatch(actionCreators.loadReceipt()),
   };
 }
 

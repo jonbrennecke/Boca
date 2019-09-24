@@ -6,3 +6,6 @@ export const selectProducts = (state: IInAppPurchasesState) =>
 
 export const selectPurchases = (state: IInAppPurchasesState) =>
   state.getPurchases();
+
+export const selectReceipt = (state: IInAppPurchasesState) =>
+  state.getReceipt();
