@@ -10,7 +10,7 @@ import { Colors, Units, ColorTheme } from '../../constants';
 
 import type { ComponentType } from 'react';
 
-export type SubscriptionScreenProps = {
+export type PurchasePromptProps = {
   isVisible: boolean,
 };
 
@@ -122,8 +122,8 @@ const styles = {
 };
 
 // eslint-disable-next-line flowtype/generic-spacing
-export const SubscriptionScreen: ComponentType<
-  SubscriptionScreenProps
+export const PurchasePrompt: ComponentType<
+  PurchasePromptProps
 > = wrapWithSubscriptionScreenState(({ isVisible }) => {
   return (
     <Modal isVisible={isVisible} transparent>

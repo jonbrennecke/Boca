@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 
-import { SubscriptionScreen } from './SubscriptionScreen';
+import { PurchasePrompt } from './PurchasePrompt';
 import { wrapWithSubscriptionScreenState } from './subscriptionScreenState';
 
 import type { ComponentType } from 'react';
@@ -16,6 +16,6 @@ export const requireSubscription: <
   wrapWithSubscriptionScreenState(props => (
     <>
       <WrappedComponent {...props} />
-      <SubscriptionScreen isVisible={!props.isSubscribed} {...props} />
+      <PurchasePrompt isVisible={!props.shouldDisplayPurchasePrompt} {...props} />
     </>
   ));

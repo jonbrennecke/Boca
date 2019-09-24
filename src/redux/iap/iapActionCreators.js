@@ -41,7 +41,7 @@ export const actionCreators = {
       // $FlowFixMe
       const receiptRequest = await RNIAP.requestReceiptIOS();
       const receiptData = await validateReceipt(receiptRequest);
-      dispatch(identityActionCreators.setReceipt(receiptData.receipt));
+      dispatch(identityActionCreators.setReceipt({ receipt: receiptData.receipt }));
     } catch (err) {
       // eslint-disable-next-line no-console
       console.warn(err);

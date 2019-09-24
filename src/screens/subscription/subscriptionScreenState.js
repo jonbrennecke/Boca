@@ -2,6 +2,7 @@
 import React, { PureComponent } from 'react';
 import { autobind } from 'core-decorators';
 import SplashScreen from 'react-native-splash-screen';
+import semver from 'semver';
 
 import { createInAppPurchasesStateHOC } from '../../redux/iap';
 
@@ -44,13 +45,29 @@ export function wrapWithSubscriptionScreenState<
       }
     }
 
+    // TODO: if validateOriginalReceiptVersion() is false, check purchaseHistory
+    validatePurchase() {
+      return this.validateOriginalReceiptVersion();
+    }
+
+    validateOriginalReceiptVersion() {
+      const { receipt } = this.props;
+      if (receipt) {
+        const { original_application_version  } = receipt;
+        const originalAppVersion = semver.coerce(original_application_version);
+        const mininumAppVersionWithInAppPurchases = '1.1.0';
+        return semver.lt(originalAppVersion, mininumAppVersionWithInAppPurchases);
+      }
+      return false;
+    }
+
     render() {
-      const isSubscribed = false; // FIXME
+      const hasValidPurchase = this.validatePurchase();
       return (
         <WrappedComponent
           {...this.props}
           {...this.state}
-          isSubscribed={isSubscribed}
+          shouldDisplayPurchasePrompt={hasValidPurchase}
         />
       );
     }
