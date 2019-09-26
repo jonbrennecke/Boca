@@ -1,14 +1,14 @@
 // @flow
 import * as RNIAP from 'react-native-iap';
 import iapReceiptValidator from 'iap-receipt-validator';
-import { IAP_SHARED_SECRET } from 'react-native-dotenv'
+import { IAP_SHARED_SECRET } from 'react-native-dotenv';
 
 import { identityActionCreators } from './iapReducer';
 import { InAppPurchaseDetails } from './iapConstants';
 
 import type { Dispatch } from '../../types';
 
-const isProduction = false; // true = prod, false = sandbox
+const isProduction = false; // TODO: true = prod, false = sandbox
 const validateReceipt = iapReceiptValidator(IAP_SHARED_SECRET, isProduction);
 
 export const actionCreators = {
@@ -41,7 +41,9 @@ export const actionCreators = {
       // $FlowFixMe
       const receiptRequest = await RNIAP.requestReceiptIOS();
       const receiptData = await validateReceipt(receiptRequest);
-      dispatch(identityActionCreators.setReceipt({ receipt: receiptData.receipt }));
+      dispatch(
+        identityActionCreators.setReceipt({ receipt: receiptData.receipt })
+      );
     } catch (err) {
       // eslint-disable-next-line no-console
       console.warn(err);

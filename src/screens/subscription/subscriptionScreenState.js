@@ -35,12 +35,10 @@ export function wrapWithSubscriptionScreenState<
         await this.props.loadProducts();
         await this.props.loadPurchaseHistory();
         await this.props.loadReceipt();
-      }
-      catch (error) {
+      } catch (error) {
         // eslint-disable-next-line no-console
         console.warn(error);
-      }
-      finally {
+      } finally {
         SplashScreen.hide();
       }
     }
@@ -53,10 +51,13 @@ export function wrapWithSubscriptionScreenState<
     validateOriginalReceiptVersion() {
       const { receipt } = this.props;
       if (receipt) {
-        const { original_application_version  } = receipt;
+        const { original_application_version } = receipt;
         const originalAppVersion = semver.coerce(original_application_version);
         const mininumAppVersionWithInAppPurchases = '1.1.0';
-        return semver.lt(originalAppVersion, mininumAppVersionWithInAppPurchases);
+        return !semver.lt(
+          originalAppVersion,
+          mininumAppVersionWithInAppPurchases
+        );
       }
       return false;
     }

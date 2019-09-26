@@ -96,13 +96,15 @@ export const SelectableButton: SFC<SelectableButtonProps> = ({
       >
         {text.toLocaleUpperCase()}
       </Text>
-      {subtitleText && <Text
-        style={styles.buttonSubtitleText(
-          isSelected ? colorTheme.text.selected : colorTheme.text.default
-        )}
-      >
-        {subtitleText}
-      </Text>}
+      {subtitleText && (
+        <Text
+          style={styles.buttonSubtitleText(
+            isSelected ? colorTheme.text.selected : colorTheme.text.default
+          )}
+        >
+          {subtitleText}
+        </Text>
+      )}
     </View>
   </TouchableOpacity>
 );

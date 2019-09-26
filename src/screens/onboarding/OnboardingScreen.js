@@ -3,7 +3,12 @@ import React from 'react';
 import { View, SafeAreaView, StyleSheet } from 'react-native';
 import clamp from 'lodash/clamp';
 
-import { Heading, Paragraph, SelectableButton, PagedScrollIndicator } from '../../components';
+import {
+  Heading,
+  Paragraph,
+  SelectableButton,
+  PagedScrollIndicator,
+} from '../../components';
 import { Colors, ColorTheme, Units, BlurApertureRange } from '../../constants';
 import { OnboardingScrollHandler } from './OnboardingScrollHandler';
 import { OnboardingAnimation } from './OnboardingAnimation';

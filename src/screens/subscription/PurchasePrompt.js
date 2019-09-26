@@ -113,12 +113,12 @@ const styles = {
   },
   title: {
     textAlign: 'center',
-    marginTop: Units.small
+    marginTop: Units.small,
   },
   graphic: {
     flex: 1,
     backgroundColor: '#ccc',
-  }
+  },
 };
 
 // eslint-disable-next-line flowtype/generic-spacing
@@ -126,7 +126,7 @@ export const PurchasePrompt: ComponentType<
   PurchasePromptProps
 > = wrapWithSubscriptionScreenState(({ isVisible }) => {
   return (
-    <Modal isVisible={isVisible} transparent>
+    <Modal visible={isVisible} transparent animationType="slide">
       <View style={styles.absoluteFill}>
         <BlurView style={styles.absoluteFill} />
         <SafeAreaView style={styles.popup}>
@@ -144,25 +144,35 @@ export const PurchasePrompt: ComponentType<
               <View style={styles.headerSpacer} />
             </View>
 
-            <View style={styles.graphic}>
-            </View>
+            <View style={styles.graphic} />
 
             <View style={styles.body}>
-
-              <Heading style={styles.title} text="Upgrade for complete access" />
+              <Heading
+                style={styles.title}
+                text="Upgrade for complete access"
+              />
 
               <View style={styles.listWrap}>
                 <View style={styles.list}>
                   <View style={styles.listItem}>
-                    <CheckMarkIcon style={styles.checkIcon} fillColor={Colors.solid.black} />
+                    <CheckMarkIcon
+                      style={styles.checkIcon}
+                      fillColor={Colors.solid.black}
+                    />
                     <Text style={styles.listItemText}>No watermarks</Text>
                   </View>
                   <View style={styles.listItem}>
-                    <CheckMarkIcon style={styles.checkIcon} fillColor={Colors.solid.black} />
+                    <CheckMarkIcon
+                      style={styles.checkIcon}
+                      fillColor={Colors.solid.black}
+                    />
                     <Text style={styles.listItemText}>Unlimited videos</Text>
                   </View>
                   <View style={styles.listItem}>
-                    <CheckMarkIcon style={styles.checkIcon} fillColor={Colors.solid.black} />
+                    <CheckMarkIcon
+                      style={styles.checkIcon}
+                      fillColor={Colors.solid.black}
+                    />
                     <Text style={styles.listItemText}>One price</Text>
                   </View>
                 </View>
@@ -182,7 +192,6 @@ export const PurchasePrompt: ComponentType<
                   <Text style={styles.legalLinkText}>Restore a Purchase</Text>
                 </View>
               </View>
-
             </View>
           </View>
         </SafeAreaView>

@@ -16,6 +16,9 @@ export const requireSubscription: <
   wrapWithSubscriptionScreenState(props => (
     <>
       <WrappedComponent {...props} />
-      <PurchasePrompt isVisible={!props.shouldDisplayPurchasePrompt} {...props} />
+      <PurchasePrompt
+        isVisible={props.shouldDisplayPurchasePrompt}
+        {...props}
+      />
     </>
   ));

@@ -45,7 +45,7 @@ const reducers = {
       return state;
     }
     return state.setReceipt(payload.receipt);
-  }
+  },
 };
 
 export const {
