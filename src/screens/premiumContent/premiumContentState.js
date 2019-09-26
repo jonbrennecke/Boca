@@ -63,7 +63,6 @@ export function wrapWithPremiumContentState<
 
     async logDebugAnalyticsEvents() {
       const originalAppVersion = this.getOriginallyPurchasedAppVersion();
-      alert(`version: ${originalAppVersion || 'undefined'}`);
       // console.log(`logging event: original_application_version = ${originalAppVersion}`);
       // await analytics().logEvent('original_application_version', {
       //   version: originalAppVersion

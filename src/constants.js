@@ -71,6 +71,7 @@ export const Colors = {
     lightGray: '#E0E0E0',
     mediumGray: '#BCBCBC',
     darkGray: '#838282',
+    extraDarkGray: '#464545',
     black: '#2B2A2A',
     trueBlack: '#000',
     peach: '#F67E53',

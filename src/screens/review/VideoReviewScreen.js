@@ -27,6 +27,7 @@ import { Units, Colors, BlurApertureRange } from '../../constants';
 import { wrapWithVideoReviewScreenState } from './videoReviewScreenState';
 import { wrapWithVideoReviewScreenGestureState } from './videoReviewScreenGestureState';
 import { VideoReviewScreenFlatListItem } from './VideoReviewScreenFlatListItem';
+import { UnlockButton } from './UnlockButton';
 
 import type { ComponentType } from 'react';
 
@@ -66,7 +67,20 @@ const styles = {
     right: 0,
     height: 100,
   },
-  overCameraToolbar: (swipeGesture: Animated.Value) => ({
+  overCameraToolbarTop: (swipeGesture: Animated.Value) => ({
+    position: 'absolute',
+    top: Units.extraSmall,
+    left: 0,
+    right: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+    opacity: swipeGesture.interpolate({
+      inputRange: [-100, 0, 100],
+      outputRange: [0, 1, 0],
+      extrapolate: 'clamp',
+    }),
+  }),
+  overCameraToolbarBottom: (swipeGesture: Animated.Value) => ({
     position: 'absolute',
     bottom: Units.small,
     left: 0,
@@ -100,6 +114,9 @@ const styles = {
     borderTopStyle: 'solid',
     borderTopColor: Colors.borders.gray,
   },
+  unlockButton: {
+
+  }
 };
 
 const decorate = (component: ComponentType<*>) =>
@@ -224,7 +241,12 @@ export const VideoReviewScreen: ComponentType<
               />
             ) : null}
             {!isFullScreenVideo ? (
-              <Animated.View style={styles.overCameraToolbar(swipeGesture)}>
+              <Animated.View style={styles.overCameraToolbarTop(swipeGesture)}>
+                <UnlockButton/>
+              </Animated.View>
+            ) : null}
+            {!isFullScreenVideo ? (
+              <Animated.View style={styles.overCameraToolbarBottom(swipeGesture)}>
                 <BlurredSelectableButton
                   text="Depth"
                   isSelected={isDepthPreviewEnabled}
@@ -264,13 +286,18 @@ export const VideoReviewScreen: ComponentType<
               />
             </View>
             <View style={styles.toolbarCentered}>
-              <SelectableButton
-                isDisabled={isExporting}
-                text="Save"
-                isSelected
-                icon={isExporting ? ActivityIndicator : ExportIcon}
-                onPress={exportComposition}
-              />
+              <View style={styles.unlockButton}>
+                <SelectableButton
+                  isDisabled={isExporting}
+                  text="Save"
+                  isSelected
+                  icon={isExporting ? ActivityIndicator : ExportIcon}
+                  onPress={exportComposition}
+                />
+                {/* <View>
+                  <UnlockButton/>
+                </View> */}
+              </View>
             </View>
           </VideoReviewScreenToolbar>
         </View>
