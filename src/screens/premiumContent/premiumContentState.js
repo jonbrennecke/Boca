@@ -51,12 +51,23 @@ export function wrapWithPremiumContentState<
         this.setState({
           userHasUnlockedPremiumContent
         });
+
+        await this.logDebugAnalyticsEvents();
       } catch (error) {
         // eslint-disable-next-line no-console
         console.warn(error);
       } finally {
         // SplashScreen.hide();
       }
+    }
+
+    async logDebugAnalyticsEvents() {
+      const originalAppVersion = this.getOriginallyPurchasedAppVersion();
+      alert(`version: ${originalAppVersion || 'undefined'}`);
+      // console.log(`logging event: original_application_version = ${originalAppVersion}`);
+      // await analytics().logEvent('original_application_version', {
+      //   version: originalAppVersion
+      // });
     }
 
     originallyPurchasedAppVersionPrecedesInAppPurchases(): boolean {
