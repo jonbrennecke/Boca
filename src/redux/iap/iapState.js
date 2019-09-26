@@ -10,7 +10,6 @@ export type ReceiptObject = { [key: string]: any };
 export type InAppPurchasesStateObject = {
   products: Array<Product<string>>,
   purchases: Array<Purchase>,
-  purchases: Array<Purchase>,
   receipt: ?ReceiptObject,
 };
 
@@ -25,6 +24,8 @@ export interface IInAppPurchasesState {
 
   getReceipt(): ?ReceiptObject;
   setReceipt(receipt: ReceiptObject): IInAppPurchasesState;
+
+
 }
 
 // eslint-disable-next-line flowtype/generic-spacing

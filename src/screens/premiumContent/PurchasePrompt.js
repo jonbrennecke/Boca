@@ -5,7 +5,7 @@ import { BlurView } from '@jonbrennecke/react-native-animated-ui';
 
 import { IconButton, SelectableButton, Heading } from '../../components';
 import { ExitIcon, CheckMarkIcon } from '../../components/icons';
-import { wrapWithSubscriptionScreenState } from './subscriptionScreenState';
+import { wrapWithPremiumContentState } from './premiumContentState';
 import { Colors, Units, ColorTheme } from '../../constants';
 
 import type { ComponentType } from 'react';
@@ -124,7 +124,7 @@ const styles = {
 // eslint-disable-next-line flowtype/generic-spacing
 export const PurchasePrompt: ComponentType<
   PurchasePromptProps
-> = wrapWithSubscriptionScreenState(({ isVisible }) => {
+> = wrapWithPremiumContentState(({ isVisible }) => {
   return (
     <Modal visible={isVisible} transparent animationType="slide">
       <View style={styles.absoluteFill}>

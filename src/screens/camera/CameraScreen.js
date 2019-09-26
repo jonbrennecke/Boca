@@ -19,7 +19,7 @@ import { CameraPreviewDimensions } from './CameraPreviewDimensions';
 import { ThumbnailButton } from './ThumbnailButton';
 import { VideoReviewModal } from '../review';
 import { BlurredSelectableButton, DepthInput } from '../../components';
-import { requireSubscription } from '../subscription/requireSubscription';
+import { requireUnlockedContent } from '../premiumContent/requireUnlockedContent';
 
 import { SwitchCameraButton } from './SwitchCameraButton';
 import { Units, BlurApertureRange, Colors } from '../../constants';
@@ -88,7 +88,7 @@ function withHapticFeedback<R, T>(fn: T => R): T => R {
 // eslint-disable-next-line flowtype/generic-spacing
 export const CameraScreen: ComponentType<
   CameraScreenProps
-> = requireSubscription(
+> = requireUnlockedContent(
   wrapWithCameraScreenState(
     ({
       style,
