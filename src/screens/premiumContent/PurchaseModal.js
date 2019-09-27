@@ -21,7 +21,8 @@ const styles = {
   flex: {
     flex: 1,
   },
-  popup: { // TODO: rename to flex
+  popup: {
+    // TODO: rename to flex
     flex: 1,
   },
   popupInner: {
@@ -123,7 +124,7 @@ const styles = {
   graphic: {
     flex: 1,
     backgroundColor: Colors.solid.darkGray,
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
 };
 
