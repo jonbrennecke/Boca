@@ -3,7 +3,10 @@ import React, { PureComponent } from 'react';
 import { autobind } from 'core-decorators';
 import semver from 'semver';
 
-import { createInAppPurchasesStateHOC, InAppPurchaseDetails } from '../../redux/iap';
+import {
+  createInAppPurchasesStateHOC,
+  InAppPurchaseDetails,
+} from '../../redux/iap';
 
 import type { ComponentType } from 'react';
 
@@ -45,11 +48,14 @@ export function wrapWithPremiumContentState<
         await this.props.loadReceipt();
         const userHasBeenCreditedPremiumContent = this.originallyPurchasedAppVersionPrecedesInAppPurchases();
         const userHasPurchasedPremiumContent = !!this.props.purchases.find(
-          purchase => purchase.productId === InAppPurchaseDetails.RemoveWatermark.productID
+          purchase =>
+            purchase.productId ===
+            InAppPurchaseDetails.RemoveWatermark.productID
         );
         this.setState({
           userHasUnlockedPremiumContentLoadingStatus: 'loaded',
-          userHasUnlockedPremiumContent: userHasPurchasedPremiumContent || userHasBeenCreditedPremiumContent,
+          userHasUnlockedPremiumContent:
+            userHasPurchasedPremiumContent || userHasBeenCreditedPremiumContent,
         });
       } catch (error) {
         // eslint-disable-next-line no-console
