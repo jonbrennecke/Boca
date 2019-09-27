@@ -1,10 +1,9 @@
 // @flow
 import React, { PureComponent } from 'react';
 import { autobind } from 'core-decorators';
-// import SplashScreen from 'react-native-splash-screen';
 import semver from 'semver';
 
-import { createInAppPurchasesStateHOC } from '../../redux/iap';
+import { createInAppPurchasesStateHOC, InAppPurchaseDetails } from '../../redux/iap';
 
 import type { ComponentType } from 'react';
 
@@ -44,18 +43,17 @@ export function wrapWithPremiumContentState<
         await this.props.loadProducts();
         await this.props.loadPurchaseHistory();
         await this.props.loadReceipt();
-
-        // TODO: additionally, check if the user has purchased the app via `purchaseHistory`
-        const userHasUnlockedPremiumContent = this.originallyPurchasedAppVersionPrecedesInAppPurchases();
+        const userHasBeenCreditedPremiumContent = this.originallyPurchasedAppVersionPrecedesInAppPurchases();
+        const userHasPurchasedPremiumContent = !!this.props.purchases.find(
+          purchase => purchase.productId === InAppPurchaseDetails.RemoveWatermark.productID
+        );
         this.setState({
           userHasUnlockedPremiumContentLoadingStatus: 'loaded',
-          userHasUnlockedPremiumContent: false, // FIXME
+          userHasUnlockedPremiumContent: userHasPurchasedPremiumContent || userHasBeenCreditedPremiumContent,
         });
       } catch (error) {
         // eslint-disable-next-line no-console
         console.warn(error);
-      } finally {
-        // SplashScreen.hide();
       }
     }
 
