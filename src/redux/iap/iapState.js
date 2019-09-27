@@ -21,6 +21,7 @@ export interface IInAppPurchasesState {
 
   getPurchases(): Array<Purchase>;
   setPurchases(purchases: Array<Purchase>): IInAppPurchasesState;
+  appendPurchases(purchase: Array<Purchase>): IInAppPurchasesState;
 
   getReceipt(): ?ReceiptObject;
   setReceipt(receipt: ReceiptObject): IInAppPurchasesState;
@@ -46,6 +47,11 @@ export const createInAppPurchaseState: InAppPurchasesStateObject => Class<
 
     setPurchases(purchases: Array<Purchase>): IInAppPurchasesState {
       return this.set('purchases', purchases);
+    }
+
+    appendPurchases(purchases: Array<Purchase>): IInAppPurchasesState {
+      const oldPurchases = this.getPurchases();
+      return this.setPurchases([...oldPurchases, ...purchases]);
     }
 
     getReceipt(): ?ReceiptObject {

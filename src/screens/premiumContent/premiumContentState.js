@@ -10,9 +10,11 @@ import type { ComponentType } from 'react';
 
 import type { InAppPurchasesStateHOCProps } from '../../redux/iap';
 
-export type PremiumContentStateHOCProps = {
-  isSubscribed: boolean,
-};
+export type PremiumContentStateHOCOwnProps = {};
+
+export type PremiumContentStateHOCProps = InAppPurchasesStateHOCProps &
+  PremiumContentStateHOCProps &
+  PremiumContentStateHOCState;
 
 export type PremiumContentStateHOCState = {
   userHasUnlockedPremiumContentLoadingStatus: 'loading' | 'loaded',
@@ -22,12 +24,7 @@ export type PremiumContentStateHOCState = {
 export function wrapWithPremiumContentState<
   PassThroughProps: Object,
   // eslint-disable-next-line flowtype/generic-spacing
-  C: ComponentType<
-    InAppPurchasesStateHOCProps &
-      PremiumContentStateHOCProps &
-      PremiumContentStateHOCState &
-      PassThroughProps
-  >
+  C: ComponentType<PremiumContentStateHOCProps & PassThroughProps>
 >(WrappedComponent: C): ComponentType<PassThroughProps> {
   // $FlowFixMe
   @autobind

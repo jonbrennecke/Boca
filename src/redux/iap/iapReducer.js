@@ -37,6 +37,16 @@ const reducers = {
     return state.setPurchases(payload.purchases);
   },
 
+  appendPurchases: (
+    state,
+    { payload }: Action<{ purchases: Array<Purchase> }>
+  ): IInAppPurchasesState => {
+    if (!payload) {
+      return state;
+    }
+    return state.appendPurchases(payload.purchases);
+  },
+
   setReceipt: (
     state,
     { payload }: Action<{ receipt: ReceiptObject }>

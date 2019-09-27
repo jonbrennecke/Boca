@@ -180,6 +180,8 @@ export const VideoReviewScreen: ComponentType<
     showFullScreenVideo,
     onScrollDidBegin,
     onScrollDidEnd,
+    buyProduct,
+    restorePurchases,
   }) => (
     <>
       <Animated.View
@@ -332,6 +334,12 @@ export const VideoReviewScreen: ComponentType<
       <PurchaseModal
         isVisible={isPurchaseModalVisible}
         onRequestDismiss={hidePurchaseModal}
+        buyProduct={productID => {
+          buyProduct(productID);
+        }}
+        restorePurchases={() => {
+          restorePurchases();
+        }}
       />
     </>
   )

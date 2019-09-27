@@ -14,6 +14,7 @@ import {
   exportComposition,
 } from '@jonbrennecke/react-native-camera';
 
+import { wrapWithPremiumContentState } from '../premiumContent';
 import { wrapWithAppState } from '../../utils/appStateHOC';
 
 import type { ComponentType } from 'react';
@@ -24,6 +25,7 @@ import type {
 import type { CameraStateHOCProps } from '@jonbrennecke/react-native-camera';
 
 import type { AppStateHOCProps } from '../../utils/appStateHOC';
+import type { PremiumContentStateHOCProps } from '../premiumContent';
 import type { ReturnType } from '../../types';
 
 export type VideoReviewScreenState = {
@@ -82,6 +84,7 @@ export function wrapWithVideoReviewScreenState<
     VideoReviewScreenStateExtraProps &
       MediaStateHOCProps &
       CameraStateHOCProps &
+      PremiumContentStateHOCProps &
       AppStateHOCProps &
       PassThroughProps
   >
@@ -92,6 +95,7 @@ export function wrapWithVideoReviewScreenState<
     MediaStateHOCProps &
       CameraStateHOCProps &
       AppStateHOCProps &
+      PremiumContentStateHOCProps &
       PassThroughProps,
     VideoReviewScreenState
   > {
@@ -152,6 +156,7 @@ export function wrapWithVideoReviewScreenState<
       prevProps: MediaStateHOCProps &
         CameraStateHOCProps &
         AppStateHOCProps &
+        PremiumContentStateHOCProps &
         PassThroughProps
     ) {
       if (this.props.appState !== prevProps.appState) {
@@ -424,7 +429,9 @@ export function wrapWithVideoReviewScreenState<
   const withMediaState = createMediaStateHOC(state => state.media);
   const withCameraState = createCameraStateHOC(state => state.camera);
   const Component = wrapWithAppState(
-    withCameraState(withMediaState(VideoReviewScreenStateContainer))
+    wrapWithPremiumContentState(
+      withCameraState(withMediaState(VideoReviewScreenStateContainer))
+    )
   );
   const WrappedWithVideoReviewScreenState = props => <Component {...props} />;
   return WrappedWithVideoReviewScreenState;

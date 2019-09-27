@@ -11,9 +11,14 @@ import type { ComponentType } from 'react';
 import type { Product, Purchase } from 'react-native-iap';
 
 import type { IInAppPurchasesState, ReceiptObject } from './iapState';
-import type { Dispatch, ReturnType } from '../../types';
+import type {
+  Dispatch,
+  DispatchAction,
+  ReturnType,
+  Arguments,
+} from '../../types';
 
-type ActionCreatorReturnType<T> = ReturnType<() => Dispatch<T>>;
+type ActionCreator<F> = ReturnType<() => Dispatch<$Call<F, Arguments<F>>>>;
 
 type OwnProps = {};
 
@@ -24,12 +29,12 @@ type StateProps = {
 };
 
 type DispatchProps = {
-  loadProducts: ActionCreatorReturnType<typeof actionCreators.loadProducts>,
+  loadProducts: ActionCreator<typeof actionCreators.loadProducts>,
   // eslint-disable-next-line flowtype/generic-spacing
-  loadPurchaseHistory: ActionCreatorReturnType<
-    typeof actionCreators.loadPurchaseHistory
-  >,
-  loadReceipt: ActionCreatorReturnType<typeof actionCreators.loadReceipt>,
+  loadPurchaseHistory: ActionCreator<typeof actionCreators.loadPurchaseHistory>,
+  loadReceipt: ActionCreator<typeof actionCreators.loadReceipt>,
+  restorePurchases: ActionCreator<typeof actionCreators.restorePurchases>,
+  buyProduct: (productID: string) => DispatchAction<any>,
 };
 
 export type InAppPurchasesStateHOCProps = OwnProps & StateProps & DispatchProps;
@@ -51,6 +56,9 @@ function mapInAppPurchasesDispatchToProps(
     loadProducts: () => dispatch(actionCreators.loadProducts()),
     loadPurchaseHistory: () => dispatch(actionCreators.loadPurchaseHistory()),
     loadReceipt: () => dispatch(actionCreators.loadReceipt()),
+    buyProduct: (productID: string) =>
+      dispatch(actionCreators.buyProduct(productID)),
+    restorePurchases: () => dispatch(actionCreators.restorePurchases()),
   };
 }
 

@@ -1,9 +1,7 @@
 // @flow
 
 export const InAppPurchaseDetails = {
-  Unlimited: {
-    Yearly: {
-      sku: 'com.jonbrennecke.boca.fullSubscriptionYearly',
-    },
+  RemoveWatermark: {
+    productID: 'com.jonbrennecke.boca.removeWatermark',
   },
 };

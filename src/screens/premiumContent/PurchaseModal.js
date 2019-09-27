@@ -1,19 +1,28 @@
 // @flow
 import React from 'react';
-import { Modal, View, Text, StyleSheet, SafeAreaView } from 'react-native';
+import {
+  Modal,
+  View,
+  Text,
+  StyleSheet,
+  SafeAreaView,
+  TouchableOpacity,
+} from 'react-native';
 import { BlurView } from '@jonbrennecke/react-native-animated-ui';
 import { VideoCompositionImage } from '@jonbrennecke/react-native-camera';
 
 import { IconButton, SelectableButton, Heading } from '../../components';
 import { ExitIcon, CheckMarkIcon } from '../../components/icons';
-import { wrapWithPremiumContentState } from './premiumContentState';
 import { Colors, Units, ColorTheme, BlurApertureRange } from '../../constants';
+import { InAppPurchaseDetails } from '../../redux/iap/iapConstants';
 
-import type { ComponentType } from 'react';
+import type { SFC } from '../../types';
 
 export type PurchaseModalProps = {
   isVisible: boolean,
   onRequestDismiss: () => void,
+  buyProduct: (productID: string) => void,
+  restorePurchases: () => void,
 };
 
 const styles = {
@@ -129,9 +138,12 @@ const styles = {
 };
 
 // eslint-disable-next-line flowtype/generic-spacing
-export const PurchaseModal: ComponentType<
-  PurchaseModalProps
-> = wrapWithPremiumContentState(({ isVisible, onRequestDismiss }) => {
+export const PurchaseModal: SFC<PurchaseModalProps> = ({
+  isVisible,
+  onRequestDismiss,
+  buyProduct,
+  restorePurchases,
+}: PurchaseModalProps) => {
   return (
     <Modal
       visible={isVisible}
@@ -201,22 +213,25 @@ export const PurchaseModal: ComponentType<
 
               <SelectableButton
                 text="Buy now"
-                subtitleText="One time purchase of $9.99" // TODO: local currency
-                onPress={() => {}}
+                subtitleText="One time purchase of $9.99" // TODO: use local currency and correct price
+                onPress={() =>
+                  buyProduct(InAppPurchaseDetails.RemoveWatermark.productID)
+                }
                 colorTheme={
                   ColorTheme.dark.actionSheet.components.button.primary
                 }
               />
 
-              <View>
-                <View style={styles.legalLinks}>
-                  <Text style={styles.legalLinkText}>Restore a Purchase</Text>
-                </View>
-              </View>
+              <TouchableOpacity
+                style={styles.legalLinks}
+                onPress={restorePurchases}
+              >
+                <Text style={styles.legalLinkText}>Restore a Purchase</Text>
+              </TouchableOpacity>
             </View>
           </View>
         </SafeAreaView>
       </View>
     </Modal>
   );
-});
+};
