@@ -286,18 +286,13 @@ export const VideoReviewScreen: ComponentType<
               />
             </View>
             <View style={styles.toolbarCentered}>
-              <View style={styles.unlockButton}>
-                <SelectableButton
-                  isDisabled={isExporting}
-                  text="Save"
-                  isSelected
-                  icon={isExporting ? ActivityIndicator : ExportIcon}
-                  onPress={exportComposition}
-                />
-                {/* <View>
-                  <UnlockButton/>
-                </View> */}
-              </View>
+              <SelectableButton
+                isDisabled={isExporting}
+                text="Save"
+                isSelected
+                icon={isExporting ? ActivityIndicator : ExportIcon}
+                onPress={exportComposition}
+              />
             </View>
           </VideoReviewScreenToolbar>
         </View>
