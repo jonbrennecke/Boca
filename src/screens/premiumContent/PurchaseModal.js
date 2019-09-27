@@ -2,11 +2,12 @@
 import React from 'react';
 import { Modal, View, Text, StyleSheet, SafeAreaView } from 'react-native';
 import { BlurView } from '@jonbrennecke/react-native-animated-ui';
+import { VideoCompositionImage } from '@jonbrennecke/react-native-camera';
 
 import { IconButton, SelectableButton, Heading } from '../../components';
 import { ExitIcon, CheckMarkIcon } from '../../components/icons';
 import { wrapWithPremiumContentState } from './premiumContentState';
-import { Colors, Units, ColorTheme } from '../../constants';
+import { Colors, Units, ColorTheme, BlurApertureRange } from '../../constants';
 
 import type { ComponentType } from 'react';
 
@@ -17,7 +18,10 @@ export type PurchaseModalProps = {
 
 const styles = {
   absoluteFill: StyleSheet.absoluteFillObject,
-  popup: {
+  flex: {
+    flex: 1,
+  },
+  popup: { // TODO: rename to flex
     flex: 1,
   },
   popupInner: {
@@ -118,7 +122,8 @@ const styles = {
   },
   graphic: {
     flex: 1,
-    backgroundColor: '#ccc',
+    backgroundColor: Colors.solid.darkGray,
+    overflow: 'hidden'
   },
 };
 
@@ -150,7 +155,16 @@ export const PurchaseModal: ComponentType<
               <View style={styles.headerSpacer} />
             </View>
 
-            <View style={styles.graphic} />
+            <View style={styles.graphic}>
+              <VideoCompositionImage
+                style={styles.flex}
+                resourceNameWithExt="onboarding.mov"
+                previewMode="portraitMode"
+                resizeMode="scaleAspectFill"
+                blurAperture={BlurApertureRange.initialValue}
+                progress={0.5}
+              />
+            </View>
 
             <View style={styles.body}>
               <Heading
