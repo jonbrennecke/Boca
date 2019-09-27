@@ -35,6 +35,7 @@ export type VideoReviewScreenState = {
   isFullScreenVideo: boolean,
   isExporting: boolean,
   isMediaModalVisible: boolean,
+  isPurchaseModalVisible: boolean,
   isSwipeGestureEnabled: boolean,
   toast: {
     isVisible: boolean,
@@ -65,6 +66,8 @@ export type VideoReviewScreenStateExtraProps = {
   loadNextAssets: () => void,
   showMediaModal: () => void,
   hideMediaModal: () => void,
+  showPurchaseModal: () => void,
+  hidePurchaseModal: () => void,
   setPlaybackProgressThrottled: (progress: number) => void,
   scrollToAsset: (assetID: string) => void,
   hideToast: () => void,
@@ -101,6 +104,7 @@ export function wrapWithVideoReviewScreenState<
       isFullScreenVideo: false,
       isExporting: false,
       isMediaModalVisible: false,
+      isPurchaseModalVisible: false,
       isSwipeGestureEnabled: false,
       toast: {
         isVisible: false,
@@ -208,6 +212,14 @@ export function wrapWithVideoReviewScreenState<
 
     hideMediaModal() {
       this.setState({ isMediaModalVisible: false });
+    }
+
+    showPurchaseModal() {
+      this.setState({ isPurchaseModalVisible: true });
+    }
+
+    hidePurchaseModal() {
+      this.setState({ isPurchaseModalVisible: false });
     }
 
     async exportComposition() {
@@ -396,6 +408,8 @@ export function wrapWithVideoReviewScreenState<
           exportComposition={this.exportComposition}
           showMediaModal={this.showMediaModal}
           hideMediaModal={this.hideMediaModal}
+          showPurchaseModal={this.showPurchaseModal}
+          hidePurchaseModal={this.hidePurchaseModal}
           showFullScreenVideo={this.showFullScreenVideo}
           setPlaybackProgressThrottled={this.setPlaybackProgressThrottled}
           scrollToAsset={this.scrollToAsset}

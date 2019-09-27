@@ -28,7 +28,7 @@ import { wrapWithVideoReviewScreenState } from './videoReviewScreenState';
 import { wrapWithVideoReviewScreenGestureState } from './videoReviewScreenGestureState';
 import { VideoReviewScreenFlatListItem } from './VideoReviewScreenFlatListItem';
 import { UnlockButton } from './UnlockButton';
-import { wrapWithPremiumContentState } from '../premiumContent';
+import { wrapWithPremiumContentState, PurchaseModal } from '../premiumContent';
 
 import type { ComponentType } from 'react';
 
@@ -46,7 +46,7 @@ const UnlockButtonForNonPremiumUsers = wrapWithPremiumContentState(props => {
     return null;
   }
   return props.userHasUnlockedPremiumContent ? null : (
-    <UnlockButton {...props} />
+    <UnlockButton onPress={props.onPress} />
   );
 });
 
@@ -124,7 +124,6 @@ const styles = {
     borderTopStyle: 'solid',
     borderTopColor: Colors.borders.gray,
   },
-  unlockButton: {},
 };
 
 const decorate = (component: ComponentType<*>) =>
@@ -164,9 +163,12 @@ export const VideoReviewScreen: ComponentType<
     selectVideo,
     loadNextAssets,
     isMediaModalVisible,
+    isPurchaseModalVisible,
     isSwipeGestureInProgress,
     showMediaModal,
     hideMediaModal,
+    showPurchaseModal,
+    hidePurchaseModal,
     onRequestDismiss,
     onSwipeDownGestureStart,
     onSwipeDownGestureRelease,
@@ -250,7 +252,7 @@ export const VideoReviewScreen: ComponentType<
             ) : null}
             {!isFullScreenVideo ? (
               <Animated.View style={styles.overCameraToolbarTop(swipeGesture)}>
-                <UnlockButtonForNonPremiumUsers />
+                <UnlockButtonForNonPremiumUsers onPress={showPurchaseModal} />
               </Animated.View>
             ) : null}
             {!isFullScreenVideo ? (
@@ -326,6 +328,10 @@ export const VideoReviewScreen: ComponentType<
           scrollToAsset(assetID);
           hideMediaModal();
         }}
+      />
+      <PurchaseModal
+        isVisible={isPurchaseModalVisible}
+        onRequestDismiss={hidePurchaseModal}
       />
     </>
   )

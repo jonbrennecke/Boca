@@ -10,8 +10,9 @@ import { Colors, Units, ColorTheme } from '../../constants';
 
 import type { ComponentType } from 'react';
 
-export type PurchasePromptProps = {
+export type PurchaseModalProps = {
   isVisible: boolean,
+  onRequestDismiss: () => void,
 };
 
 const styles = {
@@ -122,11 +123,16 @@ const styles = {
 };
 
 // eslint-disable-next-line flowtype/generic-spacing
-export const PurchasePrompt: ComponentType<
-  PurchasePromptProps
-> = wrapWithPremiumContentState(({ isVisible }) => {
+export const PurchaseModal: ComponentType<
+  PurchaseModalProps
+> = wrapWithPremiumContentState(({ isVisible, onRequestDismiss }) => {
   return (
-    <Modal visible={isVisible} transparent animationType="slide">
+    <Modal
+      visible={isVisible}
+      transparent
+      animationType="slide"
+      onRequestDismiss={onRequestDismiss}
+    >
       <View style={styles.absoluteFill}>
         <BlurView style={styles.absoluteFill} />
         <SafeAreaView style={styles.popup}>
@@ -137,7 +143,7 @@ export const PurchasePrompt: ComponentType<
                   style={styles.exitButton}
                   icon={ExitIcon}
                   fillColor={Colors.solid.black}
-                  onPress={() => {}}
+                  onPress={onRequestDismiss}
                 />
               </View>
               <Text style={styles.headerText}>Upgrade</Text>

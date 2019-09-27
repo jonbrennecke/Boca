@@ -9,6 +9,7 @@ import type { SFC, Style } from '../../types';
 
 export type UnlockButtonProps = {
   style?: ?Style,
+  onPress: () => void,
 };
 
 const styles = {
@@ -51,8 +52,9 @@ const styles = {
 
 export const UnlockButton: SFC<UnlockButtonProps> = ({
   style,
+  onPress,
 }: UnlockButtonProps) => (
-  <TouchableOpacity>
+  <TouchableOpacity onPress={onPress}>
     <View style={[styles.container, style]}>
       <UnlockIcon style={styles.icon} fillColor={Colors.solid.black} />
       <View style={styles.textContainer}>
