@@ -24,8 +24,6 @@ export interface IInAppPurchasesState {
 
   getReceipt(): ?ReceiptObject;
   setReceipt(receipt: ReceiptObject): IInAppPurchasesState;
-
-
 }
 
 // eslint-disable-next-line flowtype/generic-spacing

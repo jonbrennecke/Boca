@@ -46,10 +46,12 @@ const styles = {
     flexDirection: 'column',
     alignItems: 'flex-start',
     marginHorizontal: Units.small,
-  }
+  },
 };
 
-export const UnlockButton: SFC<UnlockButtonProps> = ({ style }: UnlockButtonProps) => (
+export const UnlockButton: SFC<UnlockButtonProps> = ({
+  style,
+}: UnlockButtonProps) => (
   <TouchableOpacity>
     <View style={[styles.container, style]}>
       <UnlockIcon style={styles.icon} fillColor={Colors.solid.black} />
@@ -57,10 +59,8 @@ export const UnlockButton: SFC<UnlockButtonProps> = ({ style }: UnlockButtonProp
         <Text style={styles.titleText}>
           {'Unlock Premium Features'.toLocaleUpperCase()}
         </Text>
-        <Text style={styles.subtitleText}>
-          {'Remove watermark'}
-        </Text>
+        <Text style={styles.subtitleText}>{'Remove watermark'}</Text>
       </View>
     </View>
   </TouchableOpacity>
-)
+);

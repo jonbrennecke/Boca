@@ -28,6 +28,7 @@ import { wrapWithVideoReviewScreenState } from './videoReviewScreenState';
 import { wrapWithVideoReviewScreenGestureState } from './videoReviewScreenGestureState';
 import { VideoReviewScreenFlatListItem } from './VideoReviewScreenFlatListItem';
 import { UnlockButton } from './UnlockButton';
+import { wrapWithPremiumContentState } from '../premiumContent';
 
 import type { ComponentType } from 'react';
 
@@ -39,6 +40,15 @@ export type VideoReviewScreenProps = {
   isReviewScreenVisible: boolean,
   onRequestDismiss: () => void,
 };
+
+const UnlockButtonForNonPremiumUsers = wrapWithPremiumContentState(props => {
+  if (props.userHasUnlockedPremiumContentLoadingStatus !== 'loaded') {
+    return null;
+  }
+  return props.userHasUnlockedPremiumContent ? null : (
+    <UnlockButton {...props} />
+  );
+});
 
 const styles = {
   flex: {
@@ -114,9 +124,7 @@ const styles = {
     borderTopStyle: 'solid',
     borderTopColor: Colors.borders.gray,
   },
-  unlockButton: {
-
-  }
+  unlockButton: {},
 };
 
 const decorate = (component: ComponentType<*>) =>
@@ -242,11 +250,13 @@ export const VideoReviewScreen: ComponentType<
             ) : null}
             {!isFullScreenVideo ? (
               <Animated.View style={styles.overCameraToolbarTop(swipeGesture)}>
-                <UnlockButton/>
+                <UnlockButtonForNonPremiumUsers />
               </Animated.View>
             ) : null}
             {!isFullScreenVideo ? (
-              <Animated.View style={styles.overCameraToolbarBottom(swipeGesture)}>
+              <Animated.View
+                style={styles.overCameraToolbarBottom(swipeGesture)}
+              >
                 <BlurredSelectableButton
                   text="Depth"
                   isSelected={isDepthPreviewEnabled}

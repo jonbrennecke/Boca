@@ -15,7 +15,8 @@ export type PremiumContentStateHOCProps = {
 };
 
 export type PremiumContentStateHOCState = {
-  userHasUnlockedPremiumContent: boolean
+  userHasUnlockedPremiumContentLoadingStatus: 'loading' | 'loaded',
+  userHasUnlockedPremiumContent: boolean,
 };
 
 export function wrapWithPremiumContentState<
@@ -34,9 +35,10 @@ export function wrapWithPremiumContentState<
     InAppPurchasesStateHOCProps &
       PremiumContentStateHOCProps &
       PassThroughProps,
-      PremiumContentStateHOCState
+    PremiumContentStateHOCState
   > {
     state: $Exact<PremiumContentStateHOCState> = {
+      userHasUnlockedPremiumContentLoadingStatus: 'loading',
       userHasUnlockedPremiumContent: false,
     };
 
@@ -45,11 +47,12 @@ export function wrapWithPremiumContentState<
         await this.props.loadProducts();
         await this.props.loadPurchaseHistory();
         await this.props.loadReceipt();
-        
+
         // TODO: additionally, check if the user has purchased the app via `purchaseHistory`
         const userHasUnlockedPremiumContent = this.originallyPurchasedAppVersionPrecedesInAppPurchases();
         this.setState({
-          userHasUnlockedPremiumContent
+          userHasUnlockedPremiumContentLoadingStatus: 'loaded',
+          userHasUnlockedPremiumContent,
         });
 
         await this.logDebugAnalyticsEvents();
@@ -62,7 +65,7 @@ export function wrapWithPremiumContentState<
     }
 
     async logDebugAnalyticsEvents() {
-      const originalAppVersion = this.getOriginallyPurchasedAppVersion();
+      // const originalAppVersion = this.getOriginallyPurchasedAppVersion();
       // console.log(`logging event: original_application_version = ${originalAppVersion}`);
       // await analytics().logEvent('original_application_version', {
       //   version: originalAppVersion
@@ -75,10 +78,7 @@ export function wrapWithPremiumContentState<
         return false;
       }
       const mininumAppVersionWithInAppPurchases = '1.0.11';
-      return semver.lt(
-        originalAppVersion,
-        mininumAppVersionWithInAppPurchases
-      );
+      return semver.lt(originalAppVersion, mininumAppVersionWithInAppPurchases);
     }
 
     getOriginallyPurchasedAppVersion(): ?string {
@@ -91,12 +91,7 @@ export function wrapWithPremiumContentState<
     }
 
     render() {
-      return (
-        <WrappedComponent
-          {...this.props}
-          {...this.state}
-        />
-      );
+      return <WrappedComponent {...this.props} {...this.state} />;
     }
   }
 
