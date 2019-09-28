@@ -77,6 +77,10 @@ export const actionCreators = {
       );
 
       purchaseErrorSubscription = RNIAP.purchaseErrorListener(error => {
+        // $FlowFixMe
+        if (error.code === 'E_USER_CANCELLED') {
+          return;
+        }
         // eslint-disable-next-line no-console
         console.warn('IAP purchase error', error);
         cleanupSubscriptions();

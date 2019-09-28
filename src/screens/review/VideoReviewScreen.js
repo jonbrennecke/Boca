@@ -334,11 +334,13 @@ export const VideoReviewScreen: ComponentType<
       <PurchaseModal
         isVisible={isPurchaseModalVisible}
         onRequestDismiss={hidePurchaseModal}
-        buyProduct={productID => {
-          buyProduct(productID);
+        buyProduct={async productID => {
+          await buyProduct(productID);
+          hidePurchaseModal();
         }}
-        restorePurchases={() => {
-          restorePurchases();
+        restorePurchases={async () => {
+          await restorePurchases();
+          hidePurchaseModal();
         }}
       />
     </>
