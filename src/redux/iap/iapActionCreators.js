@@ -14,7 +14,7 @@ const validateReceipt = iapReceiptValidator(IAP_SHARED_SECRET, isProduction);
 export const actionCreators = {
   ...identityActionCreators,
 
-  loadProducts: () => async (dispatch: Dispatch<any>) => {
+  loadProducts: () => async (dispatch: Dispatch<*>) => {
     try {
       const products = await RNIAP.getProducts([
         InAppPurchaseDetails.RemoveWatermark.productID,
@@ -26,7 +26,7 @@ export const actionCreators = {
     }
   },
 
-  loadPurchaseHistory: () => async (dispatch: Dispatch<any>) => {
+  loadPurchaseHistory: () => async (dispatch: Dispatch<*>) => {
     try {
       const purchases = await RNIAP.getPurchaseHistory();
       dispatch(identityActionCreators.setPurchases({ purchases }));
@@ -36,7 +36,7 @@ export const actionCreators = {
     }
   },
 
-  loadReceipt: () => async (dispatch: Dispatch<any>) => {
+  loadReceipt: () => async (dispatch: Dispatch<*>) => {
     try {
       // $FlowFixMe
       const receiptRequest = await RNIAP.requestReceiptIOS();
@@ -50,7 +50,7 @@ export const actionCreators = {
     }
   },
 
-  buyProduct: (productID: string) => async (dispatch: Dispatch<any>) => {
+  buyProduct: (productID: string) => async (dispatch: Dispatch<*>) => {
     try {
       let purchaseSuccessSubscription, purchaseErrorSubscription;
       const cleanupSubscriptions = () => {
@@ -93,7 +93,7 @@ export const actionCreators = {
     }
   },
 
-  restorePurchases: () => async (dispatch: Dispatch<any>) => {
+  restorePurchases: () => async (dispatch: Dispatch<*>) => {
     try {
       const purchases = await RNIAP.getAvailablePurchases();
       dispatch(identityActionCreators.appendPurchases({ purchases }));

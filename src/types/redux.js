@@ -26,7 +26,7 @@ export type PromiseAction<Payload> = Promise<Action<Payload>>;
 export type DispatchAction<Payload> = Action<Payload> | PromiseAction<Payload>;
 
 export type Dispatch<Payload> = (
-  action: DispatchAction<Payload> | ((Dispatch<Payload>) => any)
+  action: DispatchAction<Payload> | ((Dispatch<Payload>) => any) | ((Dispatch<Payload>) => Promise<any>)
 ) => DispatchAction<Payload>;
 
 export type ActionCreator<State, Payload> = (
