@@ -1,6 +1,6 @@
 {
   "name": "Boca",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
