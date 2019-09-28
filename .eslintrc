@@ -7,7 +7,8 @@
     "globals": {
       "console": true,
       "process": true,
-      "module": true
+      "module": true,
+      "__DEV__": true
     },
     "extends": [
       "prettier",

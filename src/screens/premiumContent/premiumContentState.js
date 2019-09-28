@@ -46,21 +46,36 @@ export function wrapWithPremiumContentState<
         await this.props.loadProducts();
         await this.props.loadPurchaseHistory();
         await this.props.loadReceipt();
-        const userHasBeenCreditedPremiumContent = this.originallyPurchasedAppVersionPrecedesInAppPurchases();
-        const userHasPurchasedPremiumContent = !!this.props.purchases.find(
-          purchase =>
-            purchase.productId ===
-            InAppPurchaseDetails.RemoveWatermark.productID
-        );
-        this.setState({
-          userHasUnlockedPremiumContentLoadingStatus: 'loaded',
-          userHasUnlockedPremiumContent:
-            userHasPurchasedPremiumContent || userHasBeenCreditedPremiumContent,
-        });
+        this.updateUnlockedState();
       } catch (error) {
         // eslint-disable-next-line no-console
         console.warn(error);
       }
+    }
+
+    componentDidUpdate(
+      nextProps: InAppPurchasesStateHOCProps &
+        PremiumContentStateHOCProps &
+        PassThroughProps
+    ) {
+      if (this.props.purchases !== nextProps.purchases) {
+        this.updateUnlockedState();
+      }
+    }
+
+    updateUnlockedState() {
+      const userHasBeenCreditedPremiumContent = __DEV__
+        ? false
+        : this.originallyPurchasedAppVersionPrecedesInAppPurchases();
+      const userHasPurchasedPremiumContent = !!this.props.purchases.find(
+        purchase =>
+          purchase.productId === InAppPurchaseDetails.RemoveWatermark.productID
+      );
+      this.setState({
+        userHasUnlockedPremiumContentLoadingStatus: 'loaded',
+        userHasUnlockedPremiumContent:
+          userHasPurchasedPremiumContent || userHasBeenCreditedPremiumContent,
+      });
     }
 
     originallyPurchasedAppVersionPrecedesInAppPurchases(): boolean {
