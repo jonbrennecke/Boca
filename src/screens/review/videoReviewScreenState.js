@@ -244,6 +244,10 @@ export function wrapWithVideoReviewScreenState<
       );
       await exportComposition(selectedAssetID, {
         blurAperture: this.props.blurAperture,
+        watermarkImageNameWithExtension: this.props
+          .userHasUnlockedPremiumContent
+          ? 'Watermark.png'
+          : null,
       });
     }
 

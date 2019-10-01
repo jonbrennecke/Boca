@@ -51,6 +51,7 @@
 		FC366D2E23008674002709A9 /* libRNBlur.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE471D822F3B431004F4A4C /* libRNBlur.a */; };
 		FC3F46322337CC7F004B7817 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC3F46312337CC7F004B7817 /* StoreKit.framework */; };
 		FC5BADCB22ECC3D10077855E /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5BADCA22ECC3D10077855E /* Empty.swift */; };
+		FC6794D72343F97600483D2C /* Watermark.png in Resources */ = {isa = PBXBuildFile; fileRef = FC6794D62343F97600483D2C /* Watermark.png */; };
 		FC6D734123011C3100D07CD0 /* libHSReactNativeCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FCCA731E22F4B6FB00163C4E /* libHSReactNativeCamera.a */; };
 		FC6EA7D621CEA44D007C3B3E /* PassionOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC6EA7AC21CEA44D007C3B3E /* PassionOne-Regular.ttf */; };
 		FC6EA7D721CEA44D007C3B3E /* PT_Sans-Web-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC6EA7D421CEA44D007C3B3E /* PT_Sans-Web-Bold.ttf */; };
@@ -577,6 +578,7 @@
 		FC5BADC922ECC3D00077855E /* Bombast-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bombast-Bridging-Header.h"; sourceTree = "<group>"; };
 		FC5BADCA22ECC3D10077855E /* Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
 		FC5BAE1022EE11DF0077855E /* HSCameraUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = HSCameraUtils.xcodeproj; path = "../../backflip-camera-utils/HSCameraUtils.xcodeproj"; sourceTree = "<group>"; };
+		FC6794D62343F97600483D2C /* Watermark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Watermark.png; sourceTree = "<group>"; };
 		FC6EA7AC21CEA44D007C3B3E /* PassionOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PassionOne-Regular.ttf"; path = "../assets/fonts/PassionOne-Regular.ttf"; sourceTree = "<group>"; };
 		FC6EA7D421CEA44D007C3B3E /* PT_Sans-Web-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PT_Sans-Web-Bold.ttf"; path = "../assets/fonts/PT_Sans-Web-Bold.ttf"; sourceTree = "<group>"; };
 		FC6EA7D521CEA44D007C3B3E /* PT_Sans-Web-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PT_Sans-Web-Regular.ttf"; path = "../assets/fonts/PT_Sans-Web-Regular.ttf"; sourceTree = "<group>"; };
@@ -728,6 +730,7 @@
 			isa = PBXGroup;
 			children = (
 				FCD64AE523333EF600E9112F /* GoogleService-Info.plist */,
+				FC6794D62343F97600483D2C /* Watermark.png */,
 				FC74777A232D505000D3447C /* onboarding.mov */,
 				FC419C812316E61200A5FA08 /* launchScreenAssets */,
 				FC6EA7D921CEA457007C3B3E /* fonts */,
@@ -1676,6 +1679,7 @@
 				FC6EA7D621CEA44D007C3B3E /* PassionOne-Regular.ttf in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				FC7452F42305E49700436E62 /* Inter-Regular.ttf in Resources */,
+				FC6794D72343F97600483D2C /* Watermark.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
