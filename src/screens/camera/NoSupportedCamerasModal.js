@@ -52,34 +52,36 @@ const styles = {
     fontFamily: 'Inter',
     textAlign: 'center',
     marginVertical: Units.small,
-  }
+  },
 };
 
 // eslint-disable-next-line flowtype/generic-spacing
 export const NoSupportedCamerasModal: SFC<NoSupportedCamerasModalProps> = ({
   isVisible,
 }: NoSupportedCamerasModalProps) => (
-  <Modal
-    visible={isVisible}
-    transparent
-    animationType="slide"
-  >
+  <Modal visible={isVisible} transparent animationType="slide">
     <View style={styles.absoluteFill}>
       <BlurView style={styles.absoluteFill} />
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.popup}>
-          <Heading text={'BOCA requires a compatible device'.toLocaleUpperCase()} style={styles.titleText} />
+          <Heading
+            text={'BOCA requires a compatible device'.toLocaleUpperCase()}
+            style={styles.titleText}
+          />
           <Text style={styles.subtitleText}>
             Unfortunately, your device does not have any supported cameras
           </Text>
           <Text style={styles.paragraphText}>
-            Recording from both cameras is supported on iPhone X, iPhone XS and iPhone XS Max.
+            Recording from both cameras is supported on iPhone X, iPhone XS and
+            iPhone XS Max.
           </Text>
           <Text style={styles.paragraphText}>
-            The iPhone XR only supports the camera on the front of the phone (the selfie camera).
+            The iPhone XR only supports the camera on the front of the phone
+            (the selfie camera).
           </Text>
           <Text style={styles.paragraphText}>
-            The iPhone 7 Plus and iPhone 8 Plus only support the camera on the back of the phone.
+            The iPhone 7 Plus and iPhone 8 Plus only support the camera on the
+            back of the phone.
           </Text>
           <Text style={styles.paragraphText}>
             The iPhone 7 and iPhone 8 do not have compatible cameras.

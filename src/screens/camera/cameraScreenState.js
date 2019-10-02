@@ -226,13 +226,16 @@ export function wrapWithCameraScreenState<
           } finally {
             const cameraPosition = this.getInitialCameraPosition();
             if (!cameraPosition) {
-              this.setState({
-                initializationStatus: 'loaded',
-                cameraPosition: cameraPosition,
-                isSwitchCameraEnabled: false,
-              }, () => {
-                SplashScreen.hide();
-              });
+              this.setState(
+                {
+                  initializationStatus: 'loaded',
+                  cameraPosition: cameraPosition,
+                  isSwitchCameraEnabled: false,
+                },
+                () => {
+                  SplashScreen.hide();
+                }
+              );
             } else {
               this.setState(
                 {
