@@ -17,6 +17,7 @@ import { CameraScreenFocusArea } from './CameraScreenFocusArea';
 import { CameraCaptureButton } from './CameraCaptureButton';
 import { CameraPreviewDimensions } from './CameraPreviewDimensions';
 import { ThumbnailButton } from './ThumbnailButton';
+import { NoSupportedCamerasModal } from './NoSupportedCamerasModal';
 import { VideoReviewModal } from '../review';
 import { BlurredSelectableButton, DepthInput } from '../../components';
 import { requireUnlockedContent } from '../premiumContent/requireUnlockedContent';
@@ -198,6 +199,9 @@ export const CameraScreen: ComponentType<
           <VideoReviewModal
             isVisible={isReviewModalVisible}
             onRequestDismissModal={dismissReviewModal}
+          />
+          <NoSupportedCamerasModal
+            isVisible={isAppInitializationComplete && !cameraPosition}
           />
         </SafeAreaView>
       </CameraScreenOnboarding>

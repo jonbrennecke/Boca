@@ -226,8 +226,13 @@ export function wrapWithCameraScreenState<
           } finally {
             const cameraPosition = this.getInitialCameraPosition();
             if (!cameraPosition) {
-              SplashScreen.hide();
-              alert('Device has no supported cameras');
+              this.setState({
+                initializationStatus: 'loaded',
+                cameraPosition: cameraPosition,
+                isSwitchCameraEnabled: false,
+              }, () => {
+                SplashScreen.hide();
+              });
             } else {
               this.setState(
                 {
