@@ -8,7 +8,7 @@ import { InAppPurchaseDetails } from './iapConstants';
 
 import type { Dispatch } from '../../types';
 
-const isProduction = false; // TODO: true = prod, false = sandbox
+const isProduction = !__DEV__;
 const validateReceipt = iapReceiptValidator(IAP_SHARED_SECRET, isProduction);
 
 export const actionCreators = {
