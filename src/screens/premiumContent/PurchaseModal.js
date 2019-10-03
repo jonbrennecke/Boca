@@ -7,17 +7,17 @@ import {
   SafeAreaView,
   TouchableOpacity,
   TouchableWithoutFeedback,
+  Image,
 } from 'react-native';
 import {
   BlurView,
   FadeInOutAnimatedView,
   BottomSheetAnimatedView,
 } from '@jonbrennecke/react-native-animated-ui';
-import { VideoCompositionImage } from '@jonbrennecke/react-native-camera';
 
 import { IconButton, SelectableButton, Heading } from '../../components';
 import { ExitIcon, CheckMarkIcon } from '../../components/icons';
-import { Colors, Units, ColorTheme, BlurApertureRange } from '../../constants';
+import { Colors, Units, ColorTheme } from '../../constants';
 import { InAppPurchaseDetails } from '../../redux/iap/iapConstants';
 
 import type { SFC } from '../../types';
@@ -174,14 +174,15 @@ export const PurchaseModal: SFC<PurchaseModalProps> = ({
             </View>
 
             <View style={styles.graphic}>
-              <VideoCompositionImage
+              {/* <VideoCompositionImage
                 style={styles.flex}
                 resourceNameWithExt="onboarding.mov"
                 previewMode="portraitMode"
                 resizeMode="scaleAspectFill"
                 blurAperture={BlurApertureRange.initialValue}
                 progress={0.5}
-              />
+              /> */}
+              <Image style={styles.flex} resizeMode="cover" source={{ uri: 'InAppPurchaseImage.png' }} />
             </View>
 
             <View style={styles.body}>
