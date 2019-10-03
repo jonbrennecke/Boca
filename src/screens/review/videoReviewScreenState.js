@@ -246,8 +246,8 @@ export function wrapWithVideoReviewScreenState<
         blurAperture: this.props.blurAperture,
         watermarkImageNameWithExtension: this.props
           .userHasUnlockedPremiumContent
-          ? 'Watermark.png'
-          : null,
+          ? null
+          : 'Watermark.png',
       });
     }
 

@@ -16,3 +16,4 @@ export * from './DepthInput';
 export * from './AnimatedBlurView';
 export * from './ActionSheet';
 export * from './PagedScrollIndicator';
+export * from './WatermarkImage';

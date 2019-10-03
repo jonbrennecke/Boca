@@ -2,6 +2,7 @@
 import React, { PureComponent } from 'react';
 import { autobind } from 'core-decorators';
 import semver from 'semver';
+import isEqual from 'lodash/isEqual';
 
 import {
   createInAppPurchasesStateHOC,
@@ -58,7 +59,8 @@ export function wrapWithPremiumContentState<
         PremiumContentStateHOCProps &
         PassThroughProps
     ) {
-      if (this.props.purchases !== nextProps.purchases) {
+      // TODO: this should be comparing immutable List objects
+      if (!isEqual(this.props.purchases, nextProps.purchases)) {
         this.updateUnlockedState();
       }
     }

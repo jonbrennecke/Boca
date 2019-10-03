@@ -22,6 +22,7 @@ import { VideoReviewScreenToolbar } from './VideoReviewScreenToolbar';
 import { VideoReviewScreenNavbar } from './VideoReviewScreenNavbar';
 import { VideoReviewScreenFlatList } from './VideoReviewScreenFlatList';
 import { VideoReviewScreenPlaybackToolbar } from './VideoReviewScreenPlaybackToolbar';
+import { WatermarkImageButton } from './WatermarkImageButton';
 import { MediaExplorerModal } from '../mediaExplorer';
 import { Units, Colors, BlurApertureRange } from '../../constants';
 import { wrapWithVideoReviewScreenState } from './videoReviewScreenState';
@@ -95,8 +96,9 @@ const styles = {
     bottom: Units.small,
     left: 0,
     right: 0,
-    alignItems: 'flex-end',
-    justifyContent: 'center',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     paddingHorizontal: Units.small,
     paddingVertical: 2 * Units.extraSmall,
     opacity: swipeGesture.interpolate({
@@ -123,6 +125,12 @@ const styles = {
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopStyle: 'solid',
     borderTopColor: Colors.borders.gray,
+  },
+  watermark: {
+    position: 'absolute',
+    bottom: Units.small,
+    right: Units.small,
+    marginLeft: Units.medium,
   },
 };
 
@@ -218,32 +226,40 @@ export const VideoReviewScreen: ComponentType<
                 onScrollBegin={onScrollDidBegin}
                 onScrollEnd={onScrollDidEnd}
                 renderItem={asset => (
-                  <VideoReviewScreenFlatListItem
-                    asset={asset}
-                    setPlaybackProgress={setPlaybackProgressThrottled}
-                    blurAperture={blurAperture}
-                    videoCompositionRef={videoCompositionRef}
-                    selectedAssetID={selectedAssetID}
-                    playbackState={playbackState(asset.assetID)}
-                    isDepthPreviewEnabled={isDepthPreviewEnabled}
-                    isFullScreenVideo={isFullScreenVideo}
-                    toggleFullScreenVideo={() => {
-                      toggleFullScreenVideo();
-                      if (playbackState(asset.assetID) === 'playing') {
-                        pause();
-                      }
-                    }}
-                    setPlaybackState={setPlaybackState}
-                    setBlurAperture={setBlurAperture}
-                    onPlayButtonPress={() => {
-                      seekToProgress(0);
-                      play();
-                      showFullScreenVideo();
-                    }}
-                    onVideoDidPlayToEnd={() => {
-                      seekToProgress(0);
-                    }}
-                  />
+                  <>
+                    <VideoReviewScreenFlatListItem
+                      asset={asset}
+                      setPlaybackProgress={setPlaybackProgressThrottled}
+                      blurAperture={blurAperture}
+                      videoCompositionRef={videoCompositionRef}
+                      selectedAssetID={selectedAssetID}
+                      playbackState={playbackState(asset.assetID)}
+                      isDepthPreviewEnabled={isDepthPreviewEnabled}
+                      isFullScreenVideo={isFullScreenVideo}
+                      toggleFullScreenVideo={() => {
+                        toggleFullScreenVideo();
+                        if (playbackState(asset.assetID) === 'playing') {
+                          pause();
+                        }
+                      }}
+                      setPlaybackState={setPlaybackState}
+                      setBlurAperture={setBlurAperture}
+                      onPlayButtonPress={() => {
+                        seekToProgress(0);
+                        play();
+                        showFullScreenVideo();
+                      }}
+                      onVideoDidPlayToEnd={() => {
+                        seekToProgress(0);
+                      }}
+                    />
+                    {isFullScreenVideo ? (
+                      <WatermarkImageButton
+                        style={styles.watermark}
+                        onPress={showPurchaseModal}
+                      />
+                    ) : null}
+                  </>
                 )}
                 onRequestDismiss={onRequestDismiss}
                 onRequestLoadMore={loadNextAssets}
