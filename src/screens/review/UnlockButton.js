@@ -9,6 +9,8 @@ import type { SFC, Style } from '../../types';
 
 export type UnlockButtonProps = {
   style?: ?Style,
+  userHasUnlockedPremiumContent: boolean,
+  userHasUnlockedPremiumContentLoadingStatus: 'loading' | 'loaded',
   onPress: () => void,
 };
 
@@ -52,17 +54,27 @@ const styles = {
 
 export const UnlockButton: SFC<UnlockButtonProps> = ({
   style,
+  userHasUnlockedPremiumContent,
+  userHasUnlockedPremiumContentLoadingStatus,
   onPress,
-}: UnlockButtonProps) => (
-  <TouchableOpacity onPress={onPress}>
-    <View style={[styles.container, style]}>
-      <UnlockIcon style={styles.icon} fillColor={Colors.solid.black} />
-      <View style={styles.textContainer}>
-        <Text style={styles.titleText}>
-          {'Unlock Premium Features'.toLocaleUpperCase()}
-        </Text>
-        <Text style={styles.subtitleText}>{'Remove watermark'}</Text>
+}: UnlockButtonProps) => {
+  if (userHasUnlockedPremiumContentLoadingStatus !== 'loaded') {
+    return null;
+  }
+  if (userHasUnlockedPremiumContent) {
+    return null;
+  }
+  return (
+    <TouchableOpacity onPress={onPress}>
+      <View style={[styles.container, style]}>
+        <UnlockIcon style={styles.icon} fillColor={Colors.solid.black} />
+        <View style={styles.textContainer}>
+          <Text style={styles.titleText}>
+            {'Unlock Premium Features'.toLocaleUpperCase()}
+          </Text>
+          <Text style={styles.subtitleText}>{'Remove watermark'}</Text>
+        </View>
       </View>
-    </View>
-  </TouchableOpacity>
-);
+    </TouchableOpacity>
+  );
+}

@@ -42,15 +42,6 @@ export type VideoReviewScreenProps = {
   onRequestDismiss: () => void,
 };
 
-const UnlockButtonForNonPremiumUsers = wrapWithPremiumContentState(props => {
-  if (props.userHasUnlockedPremiumContentLoadingStatus !== 'loaded') {
-    return null;
-  }
-  return props.userHasUnlockedPremiumContent ? null : (
-    <UnlockButton onPress={props.onPress} />
-  );
-});
-
 const styles = {
   flex: {
     flex: 1,
@@ -190,6 +181,8 @@ export const VideoReviewScreen: ComponentType<
     onScrollDidEnd,
     buyProduct,
     restorePurchases,
+    userHasUnlockedPremiumContent,
+    userHasUnlockedPremiumContentLoadingStatus,
   }) => (
     <>
       <Animated.View
@@ -270,7 +263,11 @@ export const VideoReviewScreen: ComponentType<
             ) : null}
             {!isFullScreenVideo ? (
               <Animated.View style={styles.overCameraToolbarTop(swipeGesture)}>
-                <UnlockButtonForNonPremiumUsers onPress={showPurchaseModal} />
+                <UnlockButton
+                  userHasUnlockedPremiumContent={userHasUnlockedPremiumContent}
+                  userHasUnlockedPremiumContentLoadingStatus={userHasUnlockedPremiumContentLoadingStatus}
+                  onPress={showPurchaseModal}
+                />
               </Animated.View>
             ) : null}
             {!isFullScreenVideo ? (
