@@ -20,10 +20,14 @@ import { ExitIcon, CheckMarkIcon } from '../../components/icons';
 import { Colors, Units, ColorTheme } from '../../constants';
 import { InAppPurchaseDetails } from '../../redux/iap/iapConstants';
 
+// eslint-disable-next-line import/named
+import type { Product } from 'react-native-iap';
+
 import type { SFC } from '../../types';
 
 export type PurchaseModalProps = {
   isVisible: boolean,
+  products: Array<Product<string>>,
   onRequestDismiss: () => void,
   buyProduct: (productID: string) => void,
   restorePurchases: () => void,
@@ -144,10 +148,14 @@ const styles = {
 // eslint-disable-next-line flowtype/generic-spacing
 export const PurchaseModal: SFC<PurchaseModalProps> = ({
   isVisible,
+  products,
   onRequestDismiss,
   buyProduct,
   restorePurchases,
 }: PurchaseModalProps) => {
+  const product = products.find(
+    p => p.productId === InAppPurchaseDetails.RemoveWatermark.productID
+  );
   return (
     <FadeInOutAnimatedView isVisible={isVisible} style={styles.absoluteFill}>
       <TouchableWithoutFeedback onPress={onRequestDismiss}>
@@ -215,7 +223,9 @@ export const PurchaseModal: SFC<PurchaseModalProps> = ({
 
               <SelectableButton
                 text="Buy now"
-                subtitleText="One time purchase of $9.99" // TODO: use local currency and correct price
+                subtitleText={`One time purchase of ${
+                  product ? product.localizedPrice : '$4.99'
+                }`}
                 onPress={() =>
                   buyProduct(InAppPurchaseDetails.RemoveWatermark.productID)
                 }

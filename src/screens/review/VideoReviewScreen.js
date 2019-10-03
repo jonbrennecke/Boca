@@ -181,6 +181,7 @@ export const VideoReviewScreen: ComponentType<
     onScrollDidEnd,
     buyProduct,
     restorePurchases,
+    products,
     userHasUnlockedPremiumContent,
     userHasUnlockedPremiumContentLoadingStatus,
   }) => (
@@ -347,6 +348,7 @@ export const VideoReviewScreen: ComponentType<
         }}
       />
       <PurchaseModal
+        products={products}
         isVisible={isPurchaseModalVisible}
         onRequestDismiss={hidePurchaseModal}
         buyProduct={async productID => {
