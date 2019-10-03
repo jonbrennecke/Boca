@@ -77,4 +77,4 @@ export const UnlockButton: SFC<UnlockButtonProps> = ({
       </View>
     </TouchableOpacity>
   );
-}
+};

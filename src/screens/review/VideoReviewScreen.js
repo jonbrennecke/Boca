@@ -265,7 +265,9 @@ export const VideoReviewScreen: ComponentType<
               <Animated.View style={styles.overCameraToolbarTop(swipeGesture)}>
                 <UnlockButton
                   userHasUnlockedPremiumContent={userHasUnlockedPremiumContent}
-                  userHasUnlockedPremiumContentLoadingStatus={userHasUnlockedPremiumContentLoadingStatus}
+                  userHasUnlockedPremiumContentLoadingStatus={
+                    userHasUnlockedPremiumContentLoadingStatus
+                  }
                   onPress={showPurchaseModal}
                 />
               </Animated.View>
