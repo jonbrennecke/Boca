@@ -246,7 +246,7 @@ export const VideoReviewScreen: ComponentType<
                         seekToProgress(0);
                       }}
                     />
-                    {isFullScreenVideo ? (
+                    {isFullScreenVideo && !userHasUnlockedPremiumContent ? (
                       <WatermarkImageButton
                         style={styles.watermark}
                         onPress={showPurchaseModal}
