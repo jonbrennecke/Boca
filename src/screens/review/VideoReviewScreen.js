@@ -29,7 +29,7 @@ import { wrapWithVideoReviewScreenState } from './videoReviewScreenState';
 import { wrapWithVideoReviewScreenGestureState } from './videoReviewScreenGestureState';
 import { VideoReviewScreenFlatListItem } from './VideoReviewScreenFlatListItem';
 import { UnlockButton } from './UnlockButton';
-import { wrapWithPremiumContentState, PurchaseModal } from '../premiumContent';
+import { PurchaseModal } from '../premiumContent';
 
 import type { ComponentType } from 'react';
 
