@@ -89,7 +89,7 @@ const styles = {
     right: 0,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
     paddingHorizontal: Units.small,
     paddingVertical: 2 * Units.extraSmall,
     opacity: swipeGesture.interpolate({
