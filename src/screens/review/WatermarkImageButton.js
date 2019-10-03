@@ -19,11 +19,12 @@ const styles = {
   },
 };
 
+// TODO: enable button after fixing issues with touchable
 export const WatermarkImageButton: SFC<WatermarkImageButtonProps> = ({
   style,
   onPress,
 }: WatermarkImageButtonProps) => (
-  <TouchableOpacity onPress={onPress}>
+  <TouchableOpacity onPress={onPress} disabled>
     <WatermarkImage style={[styles.watermarkImage, style]} />
   </TouchableOpacity>
 );
