@@ -174,15 +174,11 @@ export const PurchaseModal: SFC<PurchaseModalProps> = ({
             </View>
 
             <View style={styles.graphic}>
-              {/* <VideoCompositionImage
+              <Image
                 style={styles.flex}
-                resourceNameWithExt="onboarding.mov"
-                previewMode="portraitMode"
-                resizeMode="scaleAspectFill"
-                blurAperture={BlurApertureRange.initialValue}
-                progress={0.5}
-              /> */}
-              <Image style={styles.flex} resizeMode="cover" source={{ uri: 'InAppPurchaseImage.png' }} />
+                resizeMode="cover"
+                source={{ uri: 'InAppPurchaseImage.png' }}
+              />
             </View>
 
             <View style={styles.body}>
