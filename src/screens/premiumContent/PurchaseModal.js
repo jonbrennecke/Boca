@@ -1,14 +1,18 @@
 // @flow
 import React from 'react';
 import {
-  Modal,
   View,
   Text,
   StyleSheet,
   SafeAreaView,
   TouchableOpacity,
+  TouchableWithoutFeedback,
 } from 'react-native';
-import { BlurView } from '@jonbrennecke/react-native-animated-ui';
+import {
+  BlurView,
+  FadeInOutAnimatedView,
+  BottomSheetAnimatedView,
+} from '@jonbrennecke/react-native-animated-ui';
 import { VideoCompositionImage } from '@jonbrennecke/react-native-camera';
 
 import { IconButton, SelectableButton, Heading } from '../../components';
@@ -145,14 +149,15 @@ export const PurchaseModal: SFC<PurchaseModalProps> = ({
   restorePurchases,
 }: PurchaseModalProps) => {
   return (
-    <Modal
-      visible={isVisible}
-      transparent
-      animationType="slide"
-      onRequestDismiss={onRequestDismiss}
-    >
-      <View style={styles.absoluteFill}>
-        <BlurView style={styles.absoluteFill} />
+    <FadeInOutAnimatedView isVisible={isVisible} style={styles.absoluteFill}>
+      <TouchableWithoutFeedback onPress={onRequestDismiss}>
+        <BlurView style={styles.absoluteFill} blurType="dark" blurAmount={5} />
+      </TouchableWithoutFeedback>
+      <BottomSheetAnimatedView
+        style={styles.absoluteFill}
+        isVisible={isVisible}
+        delay={400}
+      >
         <SafeAreaView style={styles.popup}>
           <View style={styles.popupInner}>
             <View style={styles.header}>
@@ -231,7 +236,7 @@ export const PurchaseModal: SFC<PurchaseModalProps> = ({
             </View>
           </View>
         </SafeAreaView>
-      </View>
-    </Modal>
+      </BottomSheetAnimatedView>
+    </FadeInOutAnimatedView>
   );
 };
