@@ -8,8 +8,8 @@ import { InAppPurchaseDetails } from './iapConstants';
 
 import type { Dispatch } from '../../types';
 
-const isProduction = !__DEV__;
-const validateReceipt = iapReceiptValidator(IAP_SHARED_SECRET, isProduction);
+const validateProdReceipt = iapReceiptValidator(IAP_SHARED_SECRET, true);
+const validateSandboxReceipt = iapReceiptValidator(IAP_SHARED_SECRET, false);
 
 export const actionCreators = {
   ...identityActionCreators,
@@ -40,13 +40,21 @@ export const actionCreators = {
     try {
       // $FlowFixMe
       const receiptRequest = await RNIAP.requestReceiptIOS();
-      const receiptData = await validateReceipt(receiptRequest);
-      dispatch(
-        identityActionCreators.setReceipt({ receipt: receiptData.receipt })
-      );
-    } catch (err) {
+      try {
+        const receiptData = await validateProdReceipt(receiptRequest);
+        return dispatch(
+          identityActionCreators.setReceipt({ receipt: receiptData.receipt })
+        );
+      }
+      catch (error) {
+        const receiptData = await validateSandboxReceipt(receiptRequest);
+        return dispatch(
+          identityActionCreators.setReceipt({ receipt: receiptData.receipt })
+        );
+      }
+    } catch (error) {
       // eslint-disable-next-line no-console
-      console.warn(err);
+      console.warn(error);
     }
   },
 
